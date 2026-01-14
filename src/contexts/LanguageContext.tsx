@@ -71,6 +71,33 @@ interface Translations {
     cta: string;
     phone: string;
   };
+  contact: {
+    headline: string;
+    intro: string;
+    name: string;
+    namePlaceholder: string;
+    company: string;
+    companyPlaceholder: string;
+    email: string;
+    emailPlaceholder: string;
+    projectType: string;
+    projectTypePlaceholder: string;
+    webApp: string;
+    internalTool: string;
+    saas: string;
+    other: string;
+    message: string;
+    messagePlaceholder: string;
+    submit: string;
+    sending: string;
+    success: string;
+    successMessage: string;
+    errorName: string;
+    errorEmail: string;
+    errorEmailInvalid: string;
+    errorProjectType: string;
+    errorMessage: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -143,6 +170,33 @@ const translations: Record<Language, Translations> = {
       cta: 'Redo att brygga din nästa stora idé?',
       phone: 'Inget satt',
     },
+    contact: {
+      headline: 'Starta din bryggning',
+      intro: 'Berätta om ditt projekt så hör vi av oss inom 24 timmar.',
+      name: 'Namn',
+      namePlaceholder: 'Ditt namn',
+      company: 'Företag',
+      companyPlaceholder: 'Ditt företagsnamn (valfritt)',
+      email: 'E-post',
+      emailPlaceholder: 'din@email.se',
+      projectType: 'Projekttyp',
+      projectTypePlaceholder: 'Välj projekttyp',
+      webApp: 'Webbapplikation',
+      internalTool: 'Internt verktyg',
+      saas: 'SaaS-plattform',
+      other: 'Annat',
+      message: 'Meddelande',
+      messagePlaceholder: 'Berätta kort om din vision och dina utmaningar...',
+      submit: 'Skicka förfrågan',
+      sending: 'Skickar...',
+      success: 'Tack för din förfrågan!',
+      successMessage: 'Vi har tagit emot ditt meddelande och återkommer inom 24 timmar.',
+      errorName: 'Namn krävs',
+      errorEmail: 'E-post krävs',
+      errorEmailInvalid: 'Ogiltig e-postadress',
+      errorProjectType: 'Välj en projekttyp',
+      errorMessage: 'Meddelande krävs',
+    },
   },
   en: {
     nav: {
@@ -212,6 +266,33 @@ const translations: Record<Language, Translations> = {
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',
       phone: 'Not set',
+    },
+    contact: {
+      headline: 'Start Your Brew',
+      intro: 'Tell us about your project and we\'ll get back to you within 24 hours.',
+      name: 'Name',
+      namePlaceholder: 'Your name',
+      company: 'Company',
+      companyPlaceholder: 'Your company name (optional)',
+      email: 'Email',
+      emailPlaceholder: 'you@email.com',
+      projectType: 'Project Type',
+      projectTypePlaceholder: 'Select project type',
+      webApp: 'Web Application',
+      internalTool: 'Internal Tool',
+      saas: 'SaaS Platform',
+      other: 'Other',
+      message: 'Message',
+      messagePlaceholder: 'Tell us briefly about your vision and challenges...',
+      submit: 'Send Request',
+      sending: 'Sending...',
+      success: 'Thank you for your request!',
+      successMessage: 'We have received your message and will get back to you within 24 hours.',
+      errorName: 'Name is required',
+      errorEmail: 'Email is required',
+      errorEmailInvalid: 'Invalid email address',
+      errorProjectType: 'Please select a project type',
+      errorMessage: 'Message is required',
     },
   },
 };
