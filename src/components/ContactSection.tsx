@@ -12,8 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Coffee, Send, CheckCircle } from 'lucide-react';
-
+import { Coffee, Send, CheckCircle, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 interface FormData {
   name: string;
   company: string;
@@ -45,6 +46,7 @@ const isValidEmail = (email: string): boolean => {
 
 export function ContactSection() {
   const { t } = useLanguage();
+  const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     company: '',
@@ -107,34 +109,58 @@ export function ContactSection() {
 
     setIsSubmitting(true);
 
-    // Simulate sending animation
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    // Construct mailto link with sanitized data
-    const subject = encodeURIComponent(
-      `New Project Inquiry: ${formData.projectType}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nCompany: ${formData.company || 'N/A'}\nEmail: ${formData.email}\nProject Type: ${formData.projectType}\n\nMessage:\n${formData.message}`
-    );
-
-    window.location.href = `mailto:CoffeeCodeStudios@gmail.com?subject=${subject}&body=${body}`;
-
-    setIsSubmitting(false);
-    setIsSuccess(true);
-
-    // Reset form after success
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        company: '',
-        email: '',
-        projectType: '',
-        message: '',
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          projectType: formData.projectType,
+          message: formData.message,
+        },
       });
-      setFillLevel(0);
-      setIsSuccess(false);
-    }, 3000);
+
+      if (error) {
+        console.error('Error sending email:', error);
+        toast({
+          title: 'Fel',
+          description: 'Kunde inte skicka meddelandet. Försök igen.',
+          variant: 'destructive',
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log('Email sent successfully:', data);
+      setIsSubmitting(false);
+      setIsSuccess(true);
+      
+      toast({
+        title: t.contact.success,
+        description: t.contact.successMessage,
+      });
+
+      // Reset form after success
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          projectType: '',
+          message: '',
+        });
+        setFillLevel(0);
+        setIsSuccess(false);
+      }, 3000);
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      toast({
+        title: 'Fel',
+        description: 'Kunde inte skicka meddelandet. Försök igen.',
+        variant: 'destructive',
+      });
+      setIsSubmitting(false);
+    }
   };
 
   const projectTypes = [
