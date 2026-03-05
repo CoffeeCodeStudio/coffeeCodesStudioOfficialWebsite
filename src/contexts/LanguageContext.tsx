@@ -98,6 +98,49 @@ interface Translations {
     errorProjectType: string;
     errorMessage: string;
   };
+  services: {
+    headline: string;
+    intro: string;
+    mvpTitle: string;
+    mvpDescription: string;
+    rapidTitle: string;
+    rapidDescription: string;
+    aiTitle: string;
+    aiDescription: string;
+    iterationTitle: string;
+    iterationDescription: string;
+    cta: string;
+  };
+  value: {
+    headline: string;
+    intro: string;
+    stat1: string;
+    stat1Label: string;
+    stat2: string;
+    stat2Label: string;
+    stat3: string;
+    stat3Label: string;
+    stat4: string;
+    stat4Label: string;
+    benefit1Title: string;
+    benefit1Text: string;
+    benefit2Title: string;
+    benefit2Text: string;
+    benefit3Title: string;
+    benefit3Text: string;
+    cta: string;
+  };
+  partnership: {
+    headline: string;
+    intro: string;
+    phase1Title: string;
+    phase1Text: string;
+    phase2Title: string;
+    phase2Text: string;
+    phase3Title: string;
+    phase3Text: string;
+    cta: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -197,6 +240,49 @@ const translations: Record<Language, Translations> = {
       errorProjectType: 'Välj en projekttyp',
       errorMessage: 'Meddelande krävs',
     },
+    services: {
+      headline: 'Våra Tjänster',
+      intro: 'Vi hjälper företag att snabbt gå från idé till fungerande produkt med hjälp av modern teknik och AI-driven utveckling.',
+      mvpTitle: 'MVP-utveckling',
+      mvpDescription: 'Vi bygger din första version snabbt och kostnadseffektivt, så att du kan testa din affärsidé på marknaden.',
+      rapidTitle: 'Snabb Prototypning',
+      rapidDescription: 'Från skiss till klickbar prototyp på dagar, inte månader. Testa idéer innan du investerar stort.',
+      aiTitle: 'AI-driven Utveckling',
+      aiDescription: 'Vi använder Lovable AI och moderna verktyg för att accelerera utvecklingen och leverera högkvalitativa resultat.',
+      iterationTitle: 'Iterativ Förfining',
+      iterationDescription: 'Kontinuerlig förbättring baserad på användarfeedback och data för att optimera din produkt.',
+      cta: 'Diskutera ditt projekt',
+    },
+    value: {
+      headline: 'Affärsvärde & ROI',
+      intro: 'Konkreta resultat som driver din verksamhet framåt.',
+      stat1: '3x',
+      stat1Label: 'Snabbare lansering',
+      stat2: '60%',
+      stat2Label: 'Lägre utvecklingskostnad',
+      stat3: '95%',
+      stat3Label: 'Kundnöjdhet',
+      stat4: '2v',
+      stat4Label: 'Till första prototyp',
+      benefit1Title: 'Minskad Risk',
+      benefit1Text: 'Testa din idé med en MVP innan du investerar stort. Validera marknaden med minimal insats.',
+      benefit2Title: 'Snabbare Time-to-Market',
+      benefit2Text: 'Gå från idé till lansering på veckor istället för månader med vår effektiva process.',
+      benefit3Title: 'Mätbara Resultat',
+      benefit3Text: 'Varje projekt levereras med tydliga KPI:er och mätbara affärsresultat.',
+      cta: 'Se vad vi kan göra för dig',
+    },
+    partnership: {
+      headline: 'Långsiktigt Partnerskap',
+      intro: 'Vi är med dig hela vägen – från första idé till skalning och vidareutveckling.',
+      phase1Title: 'Lansering',
+      phase1Text: 'Vi bygger och lanserar din MVP snabbt och effektivt med fokus på kärnfunktionalitet.',
+      phase2Title: 'Tillväxt',
+      phase2Text: 'Efter lansering hjälper vi dig att optimera, skala och lägga till nya funktioner baserat på data.',
+      phase3Title: 'Partnerskap',
+      phase3Text: 'Vi blir din långsiktiga teknikpartner och hjälper dig att kontinuerligt utveckla din produkt.',
+      cta: 'Bli vår partner',
+    },
   },
   en: {
     nav: {
@@ -293,6 +379,49 @@ const translations: Record<Language, Translations> = {
       errorEmailInvalid: 'Invalid email address',
       errorProjectType: 'Please select a project type',
       errorMessage: 'Message is required',
+    },
+    services: {
+      headline: 'Our Services',
+      intro: 'We help businesses quickly go from idea to working product using modern technology and AI-driven development.',
+      mvpTitle: 'MVP Development',
+      mvpDescription: 'We build your first version quickly and cost-effectively so you can test your business idea on the market.',
+      rapidTitle: 'Rapid Prototyping',
+      rapidDescription: 'From sketch to clickable prototype in days, not months. Test ideas before making a big investment.',
+      aiTitle: 'AI-Powered Development',
+      aiDescription: 'We use Lovable AI and modern tools to accelerate development and deliver high-quality results.',
+      iterationTitle: 'Iterative Refinement',
+      iterationDescription: 'Continuous improvement based on user feedback and data to optimize your product.',
+      cta: 'Discuss your project',
+    },
+    value: {
+      headline: 'Business Value & ROI',
+      intro: 'Concrete results that drive your business forward.',
+      stat1: '3x',
+      stat1Label: 'Faster launch',
+      stat2: '60%',
+      stat2Label: 'Lower development cost',
+      stat3: '95%',
+      stat3Label: 'Customer satisfaction',
+      stat4: '2w',
+      stat4Label: 'To first prototype',
+      benefit1Title: 'Reduced Risk',
+      benefit1Text: 'Test your idea with an MVP before investing heavily. Validate the market with minimal effort.',
+      benefit2Title: 'Faster Time-to-Market',
+      benefit2Text: 'Go from idea to launch in weeks instead of months with our efficient process.',
+      benefit3Title: 'Measurable Results',
+      benefit3Text: 'Every project is delivered with clear KPIs and measurable business outcomes.',
+      cta: 'See what we can do for you',
+    },
+    partnership: {
+      headline: 'Long-Term Partnership',
+      intro: 'We are with you every step of the way – from first idea to scaling and further development.',
+      phase1Title: 'Launch',
+      phase1Text: 'We build and launch your MVP quickly and efficiently, focusing on core functionality.',
+      phase2Title: 'Growth',
+      phase2Text: 'After launch, we help you optimize, scale, and add new features based on data.',
+      phase3Title: 'Partnership',
+      phase3Text: 'We become your long-term technology partner, helping you continuously develop your product.',
+      cta: 'Become our partner',
     },
   },
 };
