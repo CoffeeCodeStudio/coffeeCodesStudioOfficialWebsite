@@ -14,8 +14,8 @@ interface Project {
 const statusSteps = [
   { key: 'design', label: 'Design', icon: Paintbrush },
   { key: 'development', label: 'Utveckling', icon: Code2 },
-  { key: 'backup', label: 'Backup', icon: HardDrive },
-  { key: 'launch', label: 'Lansering', icon: Rocket },
+  { key: 'testing', label: 'Testning', icon: HardDrive },
+  { key: 'live', label: 'Live', icon: Rocket },
   { key: 'completed', label: 'Klart', icon: CheckCircle2 },
 ];
 
