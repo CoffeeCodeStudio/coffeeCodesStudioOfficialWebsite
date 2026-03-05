@@ -1,0 +1,83 @@
+import { useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
+import { UserPlus } from 'lucide-react';
+
+export function AdminOnboarding() {
+  const [form, setForm] = useState({
+    email: '', password: '', full_name: '', project_name: '', project_description: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const { data: { session } } = await supabase.auth.getSession();
+
+    const res = await supabase.functions.invoke('create-client', {
+      body: form,
+      headers: { Authorization: `Bearer ${session?.access_token}` },
+    });
+
+    setLoading(false);
+
+    if (res.error || res.data?.error) {
+      toast({ title: 'Fel', description: res.data?.error || res.error?.message, variant: 'destructive' });
+    } else {
+      toast({ title: 'Kund skapad!', description: `${form.email} har fått tillgång till ${form.project_name}` });
+      setForm({ email: '', password: '', full_name: '', project_name: '', project_description: '' });
+    }
+  };
+
+  const fieldClass = "bg-muted/50 border-border/50 focus:border-primary/50";
+
+  return (
+    <div className="space-y-6 max-w-lg">
+      <h2 className="text-2xl font-serif gradient-text">Ny kund</h2>
+
+      <form onSubmit={handleSubmit} className="glass-card cyber-border p-6 rounded-2xl space-y-5">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label className="text-muted-foreground text-sm">Namn</Label>
+            <Input value={form.full_name} onChange={e => setForm({ ...form, full_name: e.target.value })}
+              placeholder="Kundens namn" className={fieldClass} required />
+          </div>
+          <div className="space-y-2">
+            <Label className="text-muted-foreground text-sm">E-post</Label>
+            <Input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
+              placeholder="kund@email.se" className={fieldClass} required />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label className="text-muted-foreground text-sm">Lösenord</Label>
+          <Input type="password" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })}
+            placeholder="Starkt lösenord" className={fieldClass} required />
+        </div>
+
+        <div className="space-y-2">
+          <Label className="text-muted-foreground text-sm">Projektnamn</Label>
+          <Input value={form.project_name} onChange={e => setForm({ ...form, project_name: e.target.value })}
+            placeholder="Hemsida för ABC AB" className={fieldClass} required />
+        </div>
+
+        <div className="space-y-2">
+          <Label className="text-muted-foreground text-sm">Beskrivning</Label>
+          <Textarea value={form.project_description} onChange={e => setForm({ ...form, project_description: e.target.value })}
+            placeholder="Kort beskrivning av projektet..." className={fieldClass} rows={3} />
+        </div>
+
+        <Button type="submit" disabled={loading} className="w-full glow-button bg-primary text-primary-foreground">
+          <UserPlus className="w-4 h-4 mr-2" />
+          {loading ? 'Skapar...' : 'Skapa kund & projekt'}
+        </Button>
+      </form>
+    </div>
+  );
+}
