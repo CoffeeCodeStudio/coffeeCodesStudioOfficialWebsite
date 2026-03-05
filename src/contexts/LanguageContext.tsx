@@ -98,6 +98,49 @@ interface Translations {
     errorProjectType: string;
     errorMessage: string;
   };
+  services: {
+    headline: string;
+    intro: string;
+    mvpTitle: string;
+    mvpDescription: string;
+    rapidTitle: string;
+    rapidDescription: string;
+    aiTitle: string;
+    aiDescription: string;
+    iterationTitle: string;
+    iterationDescription: string;
+    cta: string;
+  };
+  value: {
+    headline: string;
+    intro: string;
+    stat1: string;
+    stat1Label: string;
+    stat2: string;
+    stat2Label: string;
+    stat3: string;
+    stat3Label: string;
+    stat4: string;
+    stat4Label: string;
+    benefit1Title: string;
+    benefit1Text: string;
+    benefit2Title: string;
+    benefit2Text: string;
+    benefit3Title: string;
+    benefit3Text: string;
+    cta: string;
+  };
+  partnership: {
+    headline: string;
+    intro: string;
+    phase1Title: string;
+    phase1Text: string;
+    phase2Title: string;
+    phase2Text: string;
+    phase3Title: string;
+    phase3Text: string;
+    cta: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
