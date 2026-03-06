@@ -127,6 +127,7 @@ export default function AdminDashboard() {
         <motion.div key={activeTab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
           {activeTab === 'onboarding' && <AdminOnboarding />}
           {activeTab === 'projects' && <AdminProjects />}
+          {activeTab === 'requests' && <AdminClientRequests />}
           {activeTab === 'files' && <AdminFileUpload />}
           {activeTab === 'logs' && <AdminStatusLog />}
           {activeTab === 'todos' && <AdminTodos />}
