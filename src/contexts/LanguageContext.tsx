@@ -293,6 +293,7 @@ const translations: Record<Language, Translations> = {
       process: 'Process',
       about: 'About Us',
       contact: 'Contact',
+      portal: 'Client Portal',
     },
     hero: {
       headline: 'Your Vision, Brewed to Perfection.',
