@@ -152,6 +152,7 @@ const translations: Record<Language, Translations> = {
       process: 'Process',
       about: 'Om oss',
       contact: 'Kontakt',
+      portal: 'Kundportal',
     },
     hero: {
       headline: 'Din vision, kodad till perfektion.',
