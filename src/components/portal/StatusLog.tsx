@@ -36,13 +36,25 @@ export function StatusLog() {
     });
   }, []);
 
+  // Realtime
+  useEffect(() => {
+    const channel = supabase
+      .channel('portal-status-logs-realtime')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'status_logs' }, (payload) => {
+        setLogs(prev => [payload.new as LogEntry, ...prev]);
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, []);
+
   if (loading) {
     return <div className="flex justify-center py-20"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>;
   }
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-serif gradient-text">Statuslogg</h2>
+      <h2 className="text-2xl font-serif gradient-text">Aktivitetsflöde</h2>
 
       {logs.length === 0 ? (
         <div className="glass-card p-12 rounded-2xl text-center">
@@ -51,7 +63,6 @@ export function StatusLog() {
         </div>
       ) : (
         <div className="relative">
-          {/* Timeline line */}
           <div className="absolute left-5 top-0 bottom-0 w-px bg-border/30" />
 
           <div className="space-y-4">
@@ -63,12 +74,10 @@ export function StatusLog() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
               >
-                {/* Dot */}
                 <div className="relative z-10 w-6 h-6 rounded-full bg-primary/20 border-2 border-primary/40 flex items-center justify-center flex-shrink-0 mt-1">
                   <div className="w-2 h-2 rounded-full bg-primary" />
                 </div>
 
-                {/* Content */}
                 <div className="glass-card p-4 rounded-xl flex-1">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">

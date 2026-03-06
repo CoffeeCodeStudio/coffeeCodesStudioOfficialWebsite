@@ -2,21 +2,23 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Coffee, LogOut, LayoutDashboard, FileArchive, MessageSquare, CheckSquare } from 'lucide-react';
+import { Coffee, LogOut, LayoutDashboard, FileArchive, MessageSquare, CheckSquare, MessageCirclePlus, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
-import { ProjectFiles } from '@/components/portal/ProjectFiles';
+import { ClientFileUpload } from '@/components/portal/ClientFileUpload';
 import { StatusLog } from '@/components/portal/StatusLog';
 import { TodoList } from '@/components/portal/TodoList';
+import { ClientRequests } from '@/components/portal/ClientRequests';
 import type { User } from '@supabase/supabase-js';
 
-type Tab = 'dashboard' | 'files' | 'log' | 'todos';
+type Tab = 'dashboard' | 'requests' | 'files' | 'log' | 'todos';
 
 const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
-  { id: 'dashboard', label: 'Projektstatus', icon: LayoutDashboard },
-  { id: 'files', label: 'Filer', icon: FileArchive },
-  { id: 'log', label: 'Statuslogg', icon: MessageSquare },
-  { id: 'todos', label: 'Att göra', icon: CheckSquare },
+  { id: 'dashboard', label: 'Status', icon: LayoutDashboard },
+  { id: 'requests', label: 'Önskemål', icon: MessageCirclePlus },
+  { id: 'files', label: 'Filer', icon: Upload },
+  { id: 'log', label: 'Aktivitet', icon: MessageSquare },
+  { id: 'todos', label: 'Uppgifter', icon: CheckSquare },
 ];
 
 export default function ClientPortal() {
@@ -60,7 +62,6 @@ export default function ClientPortal() {
     <div className="min-h-screen bg-background">
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 bottom-0 w-64 glass-card border-r border-border/50 z-50 hidden md:flex flex-col">
-        {/* Logo */}
         <div className="flex items-center gap-3 p-6 border-b border-border/30">
           <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
             <Coffee className="w-5 h-5 text-primary" />
@@ -71,7 +72,6 @@ export default function ClientPortal() {
           </div>
         </div>
 
-        {/* Nav */}
         <nav className="flex-1 p-4 space-y-1">
           {tabs.map(tab => {
             const Icon = tab.icon;
@@ -93,14 +93,9 @@ export default function ClientPortal() {
           })}
         </nav>
 
-        {/* Logout */}
         <div className="p-4 border-t border-border/30">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleLogout}
-            className="w-full justify-start text-muted-foreground hover:text-destructive"
-          >
+          <Button variant="ghost" size="sm" onClick={handleLogout}
+            className="w-full justify-start text-muted-foreground hover:text-destructive">
             <LogOut className="w-4 h-4 mr-2" />
             Logga ut
           </Button>
@@ -123,15 +118,10 @@ export default function ClientPortal() {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
             return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+              <button key={tab.id} onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
-                  active
-                    ? 'bg-primary/15 text-primary border border-primary/20'
-                    : 'text-muted-foreground'
-                }`}
-              >
+                  active ? 'bg-primary/15 text-primary border border-primary/20' : 'text-muted-foreground'
+                }`}>
                 <Icon className="w-3 h-3" />
                 {tab.label}
               </button>
@@ -149,7 +139,8 @@ export default function ClientPortal() {
           transition={{ duration: 0.3 }}
         >
           {activeTab === 'dashboard' && <ProjectStatus />}
-          {activeTab === 'files' && <ProjectFiles />}
+          {activeTab === 'requests' && <ClientRequests />}
+          {activeTab === 'files' && <ClientFileUpload />}
           {activeTab === 'log' && <StatusLog />}
           {activeTab === 'todos' && <TodoList />}
         </motion.div>

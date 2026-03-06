@@ -34,6 +34,18 @@ export function ProjectStatus() {
       });
   }, []);
 
+  // Realtime updates
+  useEffect(() => {
+    const channel = supabase
+      .channel('portal-projects-realtime')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'projects' }, (payload) => {
+        setProjects(prev => prev.map(p => p.id === (payload.new as Project).id ? { ...p, ...payload.new as Project } : p));
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, []);
+
   if (loading) {
     return <div className="flex justify-center py-20"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>;
   }
@@ -51,6 +63,8 @@ export function ProjectStatus() {
       <h2 className="text-2xl font-serif gradient-text">Projektstatus</h2>
       {projects.map((project, pi) => {
         const currentIndex = statusSteps.findIndex(s => s.key === project.status);
+        const progressPercent = currentIndex >= 0 ? ((currentIndex + 1) / statusSteps.length) * 100 : 0;
+
         return (
           <motion.div
             key={project.id}
@@ -64,6 +78,22 @@ export function ProjectStatus() {
               {project.description && (
                 <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
               )}
+            </div>
+
+            {/* Progress bar */}
+            <div className="mb-6">
+              <div className="flex justify-between text-xs text-muted-foreground mb-2">
+                <span>Framsteg</span>
+                <span>{Math.round(progressPercent)}%</span>
+              </div>
+              <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full rounded-full bg-gradient-to-r from-primary via-secondary to-accent"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progressPercent}%` }}
+                  transition={{ duration: 1, ease: 'easeOut' }}
+                />
+              </div>
             </div>
 
             {/* Progress steps */}
