@@ -132,7 +132,7 @@ export function Navbar() {
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleNavClick(item.href);
+                  handleNavClick(item);
                 }}
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
               >
