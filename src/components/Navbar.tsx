@@ -71,6 +71,7 @@ export function LanguageToggle() {
 export function Navbar() {
   const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navItems = [
     { label: t.nav.services, href: '#services' },
@@ -78,6 +79,7 @@ export function Navbar() {
     { label: t.nav.process, href: '#process' },
     { label: t.nav.about, href: '#about' },
     { label: t.nav.contact, href: '#contact' },
+    { label: t.nav.portal, href: '/portal/login', isRoute: true },
   ];
 
   // Close menu when clicking outside or pressing escape
@@ -99,11 +101,15 @@ export function Navbar() {
     };
   }, [isOpen]);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (item: { href: string; isRoute?: boolean }) => {
     setIsOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (item.isRoute) {
+      navigate(item.href);
+    } else {
+      const element = document.querySelector(item.href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
