@@ -9,6 +9,7 @@ interface Translations {
     process: string;
     about: string;
     contact: string;
+    portal: string;
   };
   hero: {
     headline: string;
@@ -151,6 +152,7 @@ const translations: Record<Language, Translations> = {
       process: 'Process',
       about: 'Om oss',
       contact: 'Kontakt',
+      portal: 'Kundportal',
     },
     hero: {
       headline: 'Din vision, kodad till perfektion.',
@@ -291,6 +293,7 @@ const translations: Record<Language, Translations> = {
       process: 'Process',
       about: 'About Us',
       contact: 'Contact',
+      portal: 'Client Portal',
     },
     hero: {
       headline: 'Your Vision, Brewed to Perfection.',

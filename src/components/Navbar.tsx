@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Menu, X } from 'lucide-react';
@@ -70,6 +71,7 @@ export function LanguageToggle() {
 export function Navbar() {
   const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navItems = [
     { label: t.nav.services, href: '#services' },
@@ -77,6 +79,7 @@ export function Navbar() {
     { label: t.nav.process, href: '#process' },
     { label: t.nav.about, href: '#about' },
     { label: t.nav.contact, href: '#contact' },
+    { label: t.nav.portal, href: '/portal/login', isRoute: true },
   ];
 
   // Close menu when clicking outside or pressing escape
@@ -98,11 +101,15 @@ export function Navbar() {
     };
   }, [isOpen]);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (item: { href: string; isRoute?: boolean }) => {
     setIsOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (item.isRoute) {
+      navigate(item.href);
+    } else {
+      const element = document.querySelector(item.href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -125,7 +132,7 @@ export function Navbar() {
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleNavClick(item.href);
+                  handleNavClick(item);
                 }}
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
               >
@@ -182,7 +189,7 @@ export function Navbar() {
                       href={item.href}
                       onClick={(e) => {
                         e.preventDefault();
-                        handleNavClick(item.href);
+                        handleNavClick(item);
                       }}
                       className="text-lg font-medium text-foreground hover:text-primary transition-colors py-3 border-b border-white/5 last:border-0"
                       initial={{ opacity: 0, x: -20 }}
