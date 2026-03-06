@@ -9,6 +9,7 @@ interface Translations {
     process: string;
     about: string;
     contact: string;
+    portal: string;
   };
   hero: {
     headline: string;
