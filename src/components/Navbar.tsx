@@ -189,7 +189,7 @@ export function Navbar() {
                       href={item.href}
                       onClick={(e) => {
                         e.preventDefault();
-                        handleNavClick(item.href);
+                        handleNavClick(item);
                       }}
                       className="text-lg font-medium text-foreground hover:text-primary transition-colors py-3 border-b border-white/5 last:border-0"
                       initial={{ opacity: 0, x: -20 }}
