@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '@/hooks/useAdmin';
 import { motion } from 'framer-motion';
-import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote } from 'lucide-react';
+import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { AdminOnboarding } from '@/components/admin/AdminOnboarding';
@@ -11,12 +11,14 @@ import { AdminFileUpload } from '@/components/admin/AdminFileUpload';
 import { AdminStatusLog } from '@/components/admin/AdminStatusLog';
 import { AdminTodos } from '@/components/admin/AdminTodos';
 import { AdminNotes } from '@/components/admin/AdminNotes';
+import { AdminClientRequests } from '@/components/admin/AdminClientRequests';
 
-type Tab = 'onboarding' | 'projects' | 'files' | 'logs' | 'todos' | 'notes';
+type Tab = 'onboarding' | 'projects' | 'requests' | 'files' | 'logs' | 'todos' | 'notes';
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'onboarding', label: 'Ny kund', icon: Users },
   { id: 'projects', label: 'Projekt', icon: FolderKanban },
+  { id: 'requests', label: 'Förfrågningar', icon: MessageCirclePlus },
   { id: 'files', label: 'Filer', icon: FileUp },
   { id: 'logs', label: 'Statuslogg', icon: MessageSquarePlus },
   { id: 'todos', label: 'Att göra', icon: ListTodo },
