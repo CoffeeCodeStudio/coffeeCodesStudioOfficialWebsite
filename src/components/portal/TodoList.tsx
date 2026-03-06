@@ -34,6 +34,24 @@ export function TodoList() {
     });
   }, []);
 
+  // Realtime
+  useEffect(() => {
+    const channel = supabase
+      .channel('portal-todos-realtime')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'project_todos' }, (payload) => {
+        if (payload.eventType === 'INSERT') {
+          setTodos(prev => [payload.new as Todo, ...prev]);
+        } else if (payload.eventType === 'UPDATE') {
+          setTodos(prev => prev.map(t => t.id === (payload.new as Todo).id ? payload.new as Todo : t));
+        } else if (payload.eventType === 'DELETE') {
+          setTodos(prev => prev.filter(t => t.id !== (payload.old as any).id));
+        }
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, []);
+
   const toggleTodo = async (todo: Todo) => {
     const { error } = await supabase
       .from('project_todos')
@@ -56,7 +74,7 @@ export function TodoList() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-serif gradient-text">Att göra</h2>
+      <h2 className="text-2xl font-serif gradient-text">Dina uppgifter</h2>
 
       {todos.length === 0 ? (
         <div className="glass-card p-12 rounded-2xl text-center">
@@ -65,7 +83,6 @@ export function TodoList() {
         </div>
       ) : (
         <div className="space-y-6">
-          {/* Pending */}
           {pending.length > 0 && (
             <div className="space-y-2">
               <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
@@ -92,7 +109,6 @@ export function TodoList() {
             </div>
           )}
 
-          {/* Done */}
           {done.length > 0 && (
             <div className="space-y-2">
               <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
