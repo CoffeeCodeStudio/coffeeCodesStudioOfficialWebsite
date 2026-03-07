@@ -244,7 +244,7 @@ const translations: Record<Language, Translations> = {
     },
     services: {
       headline: 'Våra Tjänster',
-      intro: 'Vi hjälper företag att snabbt gå från idé till fungerande produkt med hjälp av modern teknik och AI-driven utveckling.',
+      intro: 'Fullstack-utveckling med AI-verktyg. Vi bygger snabbt, levererar kvalitet och håller det enkelt.',
       mvpTitle: 'MVP-utveckling',
       mvpDescription: 'Vi bygger din första version snabbt och kostnadseffektivt, så att du kan testa din affärsidé på marknaden.',
       rapidTitle: 'Snabb Prototypning',
