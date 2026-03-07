@@ -36,11 +36,32 @@ const packageColors: Record<string, string> = {
   premium: 'bg-accent/10 text-accent',
 };
 
+const packages = [
+  { value: 'bas', label: 'Bas', quota: 3 },
+  { value: 'standard', label: 'Standard', quota: 5 },
+  { value: 'premium', label: 'Premium', quota: 10 },
+];
+
 export function AdminOverview() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [profiles, setProfiles] = useState<Record<string, Profile>>({});
   const [requests, setRequests] = useState<ClientRequest[]>([]);
   const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+
+  const updatePackage = async (projectId: string, newPackage: string) => {
+    const pkg = packages.find(p => p.value === newPackage);
+    const { error } = await supabase.from('projects').update({
+      package: newPackage,
+      monthly_quota: pkg?.quota ?? 3,
+    }).eq('id', projectId);
+    if (error) {
+      toast({ title: 'Fel', description: error.message, variant: 'destructive' });
+    } else {
+      setProjects(prev => prev.map(p => p.id === projectId ? { ...p, package: newPackage, monthly_quota: pkg?.quota ?? 3 } : p));
+      toast({ title: 'Paket uppdaterat', description: `Ändrat till ${pkg?.label}` });
+    }
+  };
 
   useEffect(() => {
     Promise.all([
