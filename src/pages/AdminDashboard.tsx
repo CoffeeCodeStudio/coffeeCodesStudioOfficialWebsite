@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '@/hooks/useAdmin';
 import { motion } from 'framer-motion';
-import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home } from 'lucide-react';
+import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
+import { AdminOverview } from '@/components/admin/AdminOverview';
 import { AdminOnboarding } from '@/components/admin/AdminOnboarding';
 import { AdminProjects } from '@/components/admin/AdminProjects';
 import { AdminFileUpload } from '@/components/admin/AdminFileUpload';
@@ -13,21 +14,22 @@ import { AdminTodos } from '@/components/admin/AdminTodos';
 import { AdminNotes } from '@/components/admin/AdminNotes';
 import { AdminClientRequests } from '@/components/admin/AdminClientRequests';
 
-type Tab = 'onboarding' | 'projects' | 'requests' | 'files' | 'logs' | 'todos' | 'notes';
+type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'files' | 'logs' | 'todos' | 'notes';
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
-  { id: 'onboarding', label: 'Ny kund', icon: Users },
+  { id: 'overview', label: 'Översikt', icon: BarChart3 },
+  { id: 'requests', label: 'Ärenden', icon: MessageCirclePlus },
   { id: 'projects', label: 'Projekt', icon: FolderKanban },
-  { id: 'requests', label: 'Förfrågningar', icon: MessageCirclePlus },
+  { id: 'todos', label: 'Att göra', icon: ListTodo },
+  { id: 'onboarding', label: 'Ny kund', icon: Users },
   { id: 'files', label: 'Filer', icon: FileUp },
   { id: 'logs', label: 'Statuslogg', icon: MessageSquarePlus },
-  { id: 'todos', label: 'Att göra', icon: ListTodo },
   { id: 'notes', label: 'Anteckningar', icon: StickyNote },
 ];
 
 export default function AdminDashboard() {
   const { user, isAdmin, loading } = useAdmin();
-  const [activeTab, setActiveTab] = useState<Tab>('projects');
+  const [activeTab, setActiveTab] = useState<Tab>('overview');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -135,6 +137,7 @@ export default function AdminDashboard() {
 
       <main className="md:ml-64 pt-28 md:pt-8 p-6 md:p-10">
         <motion.div key={activeTab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+          {activeTab === 'overview' && <AdminOverview />}
           {activeTab === 'onboarding' && <AdminOnboarding />}
           {activeTab === 'projects' && <AdminProjects />}
           {activeTab === 'requests' && <AdminClientRequests />}
