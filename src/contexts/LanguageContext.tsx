@@ -155,10 +155,10 @@ const translations: Record<Language, Translations> = {
       portal: 'Kundportal',
     },
     hero: {
-      headline: 'Din vision, kodad till perfektion.',
-      subheadline: 'Från kundportaler till interna verktyg. Vi skapar skräddarsydda webbapplikationer som effektiviserar och lyfter din digitala närvaro.',
+      headline: 'Webbutveckling med AI-precision.',
+      subheadline: 'Snabbare leverans, högre kvalitet. Vi bygger skräddarsydda webbappar med AI-driven utveckling — från idé till lansering.',
       cta: 'Boka en Digital Kaffe',
-      promo: 'Founding Partner Program: Just nu 20% rabatt för våra tre första kunder. Säkra din plats i kön!',
+      promo: 'Founding Partner Program: 20% rabatt för våra tre första kunder!',
       planning: 'Planering',
       solution: 'Lösning',
     },
@@ -208,8 +208,8 @@ const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      headline: 'Djupt fokus, levererat.',
-      body: 'Grundat på filosofin att djupt, oavbrutet arbete ger överlägsna resultat. På Coffee Code Studio samarbetar du direkt med hantverkaren. Min \'morgonrock och kod\'-filosofi handlar inte om att vara avslappnad; det handlar om att skapa den optimala miljön för intensivt fokus, vilket säkerställer att ditt projekt får dedikerad uppmärksamhet och oöverträffad kvalitet.',
+      headline: 'Fullstack AI-Assisted Developer',
+      body: 'Jag kombinerar traditionell webbutveckling med moderna AI-verktyg för att leverera snabbare och smartare. Varje projekt får dedikerat fokus — från arkitektur till lansering. Resultatet? Högre kvalitet, färre buggar och kortare leveranstider.',
     },
     footer: {
       cta: 'Redo att brygga din nästa stora idé?',
@@ -244,7 +244,7 @@ const translations: Record<Language, Translations> = {
     },
     services: {
       headline: 'Våra Tjänster',
-      intro: 'Vi hjälper företag att snabbt gå från idé till fungerande produkt med hjälp av modern teknik och AI-driven utveckling.',
+      intro: 'Fullstack-utveckling med AI-verktyg. Vi bygger snabbt, levererar kvalitet och håller det enkelt.',
       mvpTitle: 'MVP-utveckling',
       mvpDescription: 'Vi bygger din första version snabbt och kostnadseffektivt, så att du kan testa din affärsidé på marknaden.',
       rapidTitle: 'Snabb Prototypning',
@@ -296,10 +296,10 @@ const translations: Record<Language, Translations> = {
       portal: 'Client Portal',
     },
     hero: {
-      headline: 'Your Vision, Brewed to Perfection.',
-      subheadline: 'From client portals to internal tools. We craft bespoke web applications that streamline operations and elevate your digital presence.',
+      headline: 'Web Development with AI Precision.',
+      subheadline: 'Faster delivery, higher quality. We build custom web apps with AI-driven development — from idea to launch.',
       cta: 'Book a Digital Coffee',
-      promo: 'Founding Partner Program: Get 20% off for our first three clients. Secure your spot!',
+      promo: 'Founding Partner Program: 20% off for our first three clients!',
       planning: 'Planning',
       solution: 'Solution',
     },
@@ -349,8 +349,8 @@ const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      headline: 'Deep Focus, Delivered.',
-      body: 'Founded on the philosophy that deep, uninterrupted work yields superior results. At Coffee Code Studio, you partner directly with the craftsmen. My \'bathrobe and code\' philosophy isn\'t about being casual; it\'s about creating the optimal environment for intense focus, ensuring your project receives dedicated attention and unparalleled quality.',
+      headline: 'Fullstack AI-Assisted Developer',
+      body: 'I combine traditional web development with modern AI tools to deliver faster and smarter. Every project gets dedicated focus — from architecture to launch. The result? Higher quality, fewer bugs, and shorter delivery times.',
     },
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',

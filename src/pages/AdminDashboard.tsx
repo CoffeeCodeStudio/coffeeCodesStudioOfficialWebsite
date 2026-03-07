@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '@/hooks/useAdmin';
 import { motion } from 'framer-motion';
-import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus } from 'lucide-react';
+import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { AdminOnboarding } from '@/components/admin/AdminOnboarding';
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate('/admin/login');
+    navigate('/');
   };
 
   if (loading) {
@@ -86,7 +86,12 @@ export default function AdminDashboard() {
           })}
         </nav>
 
-        <div className="p-4 border-t border-border/30">
+        <div className="p-4 border-t border-border/30 space-y-1">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/')}
+            className="w-full justify-start text-muted-foreground hover:text-foreground">
+            <Home className="w-4 h-4 mr-2" />
+            Tillbaka till hemsidan
+          </Button>
           <Button variant="ghost" size="sm" onClick={handleLogout}
             className="w-full justify-start text-muted-foreground hover:text-destructive">
             <LogOut className="w-4 h-4 mr-2" />
@@ -102,9 +107,14 @@ export default function AdminDashboard() {
             <Shield className="w-5 h-5 text-primary" />
             <span className="font-serif text-sm">Admin</span>
           </div>
-          <Button variant="ghost" size="icon" onClick={handleLogout}>
-            <LogOut className="w-4 h-4" />
-          </Button>
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/')}>
+              <Home className="w-4 h-4" />
+            </Button>
+            <Button variant="ghost" size="icon" onClick={handleLogout}>
+              <LogOut className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
         <div className="flex gap-1 mt-3 overflow-x-auto pb-1">
           {tabs.map(tab => {

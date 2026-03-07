@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { motion } from 'framer-motion';
-import { Coffee, Lock, Mail } from 'lucide-react';
+import { Coffee, Lock, Mail, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export default function ClientLogin() {
@@ -29,10 +29,20 @@ export default function ClientLogin() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      {/* Background effects */}
       <div className="absolute inset-0 code-bg opacity-30" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+
+      {/* Back button */}
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => navigate('/')}
+        className="absolute top-6 left-6 z-20 text-muted-foreground hover:text-foreground"
+      >
+        <ArrowLeft className="w-4 h-4 mr-2" />
+        Tillbaka
+      </Button>
 
       <motion.div
         className="glass-card cyber-border p-8 md:p-12 w-full max-w-md relative z-10"
@@ -40,7 +50,6 @@ export default function ClientLogin() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        {/* Logo */}
         <div className="flex items-center justify-center gap-3 mb-8">
           <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
             <Coffee className="w-6 h-6 text-primary" />
@@ -57,9 +66,7 @@ export default function ClientLogin() {
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
-                id="email"
-                type="email"
-                value={email}
+                id="email" type="email" value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="din@email.se"
                 className="pl-10 bg-muted/50 border-border/50 focus:border-primary/50"
@@ -73,9 +80,7 @@ export default function ClientLogin() {
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
-                id="password"
-                type="password"
-                value={password}
+                id="password" type="password" value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
                 className="pl-10 bg-muted/50 border-border/50 focus:border-primary/50"
@@ -84,11 +89,8 @@ export default function ClientLogin() {
             </div>
           </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full glow-button bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
-          >
+          <Button type="submit" disabled={loading}
+            className="w-full glow-button bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
             {loading ? 'Loggar in...' : 'Logga in'}
           </Button>
         </form>
