@@ -9,13 +9,15 @@ import { ClientFileUpload } from '@/components/portal/ClientFileUpload';
 import { StatusLog } from '@/components/portal/StatusLog';
 import { TodoList } from '@/components/portal/TodoList';
 import { ClientRequests } from '@/components/portal/ClientRequests';
+import { ClientMessages } from '@/components/portal/ClientMessages';
 import type { User } from '@supabase/supabase-js';
 
-type Tab = 'dashboard' | 'requests' | 'files' | 'log' | 'todos';
+type Tab = 'dashboard' | 'requests' | 'messages' | 'files' | 'log' | 'todos';
 
 const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: 'dashboard', label: 'Status', icon: LayoutDashboard },
   { id: 'requests', label: 'Önskemål', icon: MessageCirclePlus },
+  { id: 'messages', label: 'Meddelanden', icon: MessageCircle },
   { id: 'files', label: 'Filer', icon: Upload },
   { id: 'log', label: 'Aktivitet', icon: MessageSquare },
   { id: 'todos', label: 'Uppgifter', icon: CheckSquare },
