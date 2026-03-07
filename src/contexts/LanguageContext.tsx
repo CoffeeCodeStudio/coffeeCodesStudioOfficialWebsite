@@ -208,8 +208,8 @@ const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      headline: 'Djupt fokus, levererat.',
-      body: 'Grundat på filosofin att djupt, oavbrutet arbete ger överlägsna resultat. På Coffee Code Studio samarbetar du direkt med hantverkaren. Min \'morgonrock och kod\'-filosofi handlar inte om att vara avslappnad; det handlar om att skapa den optimala miljön för intensivt fokus, vilket säkerställer att ditt projekt får dedikerad uppmärksamhet och oöverträffad kvalitet.',
+      headline: 'Fullstack AI-Assisted Developer',
+      body: 'Jag kombinerar traditionell webbutveckling med moderna AI-verktyg för att leverera snabbare och smartare. Varje projekt får dedikerat fokus — från arkitektur till lansering. Resultatet? Högre kvalitet, färre buggar och kortare leveranstider.',
     },
     footer: {
       cta: 'Redo att brygga din nästa stora idé?',
