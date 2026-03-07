@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
 import { Users, AlertTriangle, Flame, CalendarClock, Package, BarChart3 } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/hooks/use-toast';
 
 interface Project {
   id: string;
@@ -34,11 +36,32 @@ const packageColors: Record<string, string> = {
   premium: 'bg-accent/10 text-accent',
 };
 
+const packages = [
+  { value: 'bas', label: 'Bas', quota: 3 },
+  { value: 'standard', label: 'Standard', quota: 5 },
+  { value: 'premium', label: 'Premium', quota: 10 },
+];
+
 export function AdminOverview() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [profiles, setProfiles] = useState<Record<string, Profile>>({});
   const [requests, setRequests] = useState<ClientRequest[]>([]);
   const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+
+  const updatePackage = async (projectId: string, newPackage: string) => {
+    const pkg = packages.find(p => p.value === newPackage);
+    const { error } = await supabase.from('projects').update({
+      package: newPackage,
+      monthly_quota: pkg?.quota ?? 3,
+    }).eq('id', projectId);
+    if (error) {
+      toast({ title: 'Fel', description: error.message, variant: 'destructive' });
+    } else {
+      setProjects(prev => prev.map(p => p.id === projectId ? { ...p, package: newPackage, monthly_quota: pkg?.quota ?? 3 } : p));
+      toast({ title: 'Paket uppdaterat', description: `Ändrat till ${pkg?.label}` });
+    }
+  };
 
   useEffect(() => {
     Promise.all([
@@ -165,9 +188,16 @@ export function AdminOverview() {
                     </td>
                     <td className="py-3 px-4 text-foreground">{proj.name}</td>
                     <td className="py-3 px-4">
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${packageColors[proj.package] || packageColors.bas}`}>
-                        {packageLabels[proj.package] || proj.package}
-                      </span>
+                      <Select value={proj.package} onValueChange={v => updatePackage(proj.id, v)}>
+                        <SelectTrigger className={`h-8 w-28 text-xs border-0 ${packageColors[proj.package] || packageColors.bas}`}>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {packages.map(p => (
+                            <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </td>
                     <td className="py-3 px-4 text-center">
                       <span className={`font-mono text-sm ${remaining === 0 ? 'text-destructive' : 'text-foreground'}`}>

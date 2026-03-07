@@ -153,6 +153,18 @@ export function ClientRequests() {
     if (error) {
       toast({ title: 'Fel', description: error.message, variant: 'destructive' });
     } else {
+      // Notify admin via email (fire-and-forget)
+      const proj = projects.find(p => p.id === selectedProject);
+      supabase.functions.invoke('notify-admin-request', {
+        body: {
+          message: message.trim(),
+          category,
+          priority,
+          projectName: proj?.name || '',
+          clientEmail: user.email || '',
+        },
+      }).catch(console.error);
+
       setMessage('');
       setCategory('');
       setPriority('normal');
