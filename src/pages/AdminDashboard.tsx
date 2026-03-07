@@ -146,6 +146,7 @@ export default function AdminDashboard() {
           {activeTab === 'projects' && <AdminProjects />}
           {activeTab === 'requests' && <AdminClientRequests />}
           {activeTab === 'messages' && <AdminMessages />}
+          {activeTab === 'workflow' && <AdminWorkflow />}
           {activeTab === 'files' && <AdminFileUpload />}
           {activeTab === 'logs' && <AdminStatusLog />}
           {activeTab === 'todos' && <AdminTodos />}
