@@ -143,6 +143,7 @@ export default function AdminDashboard() {
           {activeTab === 'onboarding' && <AdminOnboarding />}
           {activeTab === 'projects' && <AdminProjects />}
           {activeTab === 'requests' && <AdminClientRequests />}
+          {activeTab === 'messages' && <AdminMessages />}
           {activeTab === 'files' && <AdminFileUpload />}
           {activeTab === 'logs' && <AdminStatusLog />}
           {activeTab === 'todos' && <AdminTodos />}
