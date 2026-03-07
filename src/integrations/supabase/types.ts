@@ -282,6 +282,41 @@ export type Database = {
         }
         Relationships: []
       }
+      workflow_checklists: {
+        Row: {
+          checked: boolean
+          checklist_type: string
+          created_at: string
+          id: string
+          item_index: number
+          project_id: string
+        }
+        Insert: {
+          checked?: boolean
+          checklist_type: string
+          created_at?: string
+          id?: string
+          item_index: number
+          project_id: string
+        }
+        Update: {
+          checked?: boolean
+          checklist_type?: string
+          created_at?: string
+          id?: string
+          item_index?: number
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workflow_checklists_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
