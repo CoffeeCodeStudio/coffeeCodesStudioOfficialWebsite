@@ -13,12 +13,14 @@ import { AdminStatusLog } from '@/components/admin/AdminStatusLog';
 import { AdminTodos } from '@/components/admin/AdminTodos';
 import { AdminNotes } from '@/components/admin/AdminNotes';
 import { AdminClientRequests } from '@/components/admin/AdminClientRequests';
+import { AdminMessages } from '@/components/admin/AdminMessages';
 
-type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'files' | 'logs' | 'todos' | 'notes';
+type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'files' | 'logs' | 'todos' | 'notes';
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'overview', label: 'Översikt', icon: BarChart3 },
   { id: 'requests', label: 'Ärenden', icon: MessageCirclePlus },
+  { id: 'messages', label: 'Meddelanden', icon: MessageCircle },
   { id: 'projects', label: 'Projekt', icon: FolderKanban },
   { id: 'todos', label: 'Att göra', icon: ListTodo },
   { id: 'onboarding', label: 'Ny kund', icon: Users },
