@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '@/hooks/useAdmin';
 import { motion } from 'framer-motion';
-import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home, BarChart3, MessageCircle } from 'lucide-react';
+import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home, BarChart3, MessageCircle, ClipboardCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { AdminOverview } from '@/components/admin/AdminOverview';
@@ -14,14 +14,16 @@ import { AdminTodos } from '@/components/admin/AdminTodos';
 import { AdminNotes } from '@/components/admin/AdminNotes';
 import { AdminClientRequests } from '@/components/admin/AdminClientRequests';
 import { AdminMessages } from '@/components/admin/AdminMessages';
+import { AdminWorkflow } from '@/components/admin/AdminWorkflow';
 
-type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'files' | 'logs' | 'todos' | 'notes';
+type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'workflow' | 'files' | 'logs' | 'todos' | 'notes';
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'overview', label: 'Översikt', icon: BarChart3 },
   { id: 'requests', label: 'Ärenden', icon: MessageCirclePlus },
   { id: 'messages', label: 'Meddelanden', icon: MessageCircle },
   { id: 'projects', label: 'Projekt', icon: FolderKanban },
+  { id: 'workflow', label: 'Arbetsflöde', icon: ClipboardCheck },
   { id: 'todos', label: 'Att göra', icon: ListTodo },
   { id: 'onboarding', label: 'Ny kund', icon: Users },
   { id: 'files', label: 'Filer', icon: FileUp },
@@ -144,6 +146,7 @@ export default function AdminDashboard() {
           {activeTab === 'projects' && <AdminProjects />}
           {activeTab === 'requests' && <AdminClientRequests />}
           {activeTab === 'messages' && <AdminMessages />}
+          {activeTab === 'workflow' && <AdminWorkflow />}
           {activeTab === 'files' && <AdminFileUpload />}
           {activeTab === 'logs' && <AdminStatusLog />}
           {activeTab === 'todos' && <AdminTodos />}
