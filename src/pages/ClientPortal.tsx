@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Coffee, LogOut, LayoutDashboard, FileArchive, MessageSquare, CheckSquare, MessageCirclePlus, Upload } from 'lucide-react';
+import { Coffee, LogOut, LayoutDashboard, Upload, MessageSquare, CheckSquare, MessageCirclePlus, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
 import { ClientFileUpload } from '@/components/portal/ClientFileUpload';
@@ -45,7 +45,7 @@ export default function ClientPortal() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate('/portal/login');
+    navigate('/');
   };
 
   if (loading) {
@@ -93,7 +93,12 @@ export default function ClientPortal() {
           })}
         </nav>
 
-        <div className="p-4 border-t border-border/30">
+        <div className="p-4 border-t border-border/30 space-y-1">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/')}
+            className="w-full justify-start text-muted-foreground hover:text-foreground">
+            <Home className="w-4 h-4 mr-2" />
+            Tillbaka till hemsidan
+          </Button>
           <Button variant="ghost" size="sm" onClick={handleLogout}
             className="w-full justify-start text-muted-foreground hover:text-destructive">
             <LogOut className="w-4 h-4 mr-2" />
@@ -109,9 +114,14 @@ export default function ClientPortal() {
             <Coffee className="w-5 h-5 text-primary" />
             <span className="font-serif text-sm">Kundportal</span>
           </div>
-          <Button variant="ghost" size="icon" onClick={handleLogout}>
-            <LogOut className="w-4 h-4" />
-          </Button>
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/')}>
+              <Home className="w-4 h-4" />
+            </Button>
+            <Button variant="ghost" size="icon" onClick={handleLogout}>
+              <LogOut className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
         <div className="flex gap-1 mt-3 overflow-x-auto pb-1">
           {tabs.map(tab => {
@@ -132,6 +142,20 @@ export default function ClientPortal() {
 
       {/* Main */}
       <main className="md:ml-64 pt-28 md:pt-8 p-6 md:p-10">
+        {/* Welcome banner on dashboard */}
+        {activeTab === 'dashboard' && (
+          <motion.div
+            className="glass-card cyber-border p-6 rounded-2xl mb-6"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h2 className="text-lg font-serif text-foreground mb-2">Välkommen till din projektportal</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Här ser du alltid aktuell status på ditt projekt. Vi använder AI för att bygga din lösning effektivt — det betyder snabbare uppdateringar och färre buggar. Skicka önskemål, ladda upp material och följ framstegen i realtid.
+            </p>
+          </motion.div>
+        )}
+
         <motion.div
           key={activeTab}
           initial={{ opacity: 0, y: 10 }}
