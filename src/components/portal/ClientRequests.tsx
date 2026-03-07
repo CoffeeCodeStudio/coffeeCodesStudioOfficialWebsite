@@ -16,6 +16,7 @@ interface ClientRequest {
   category: string;
   status: string;
   priority: string;
+  admin_response: string | null;
   created_at: string;
 }
 
