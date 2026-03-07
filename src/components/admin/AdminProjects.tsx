@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
@@ -14,6 +15,12 @@ const statuses = [
   { value: 'completed', label: 'Klart' },
 ];
 
+const packages = [
+  { value: 'bas', label: 'Bas' },
+  { value: 'standard', label: 'Standard' },
+  { value: 'premium', label: 'Premium' },
+];
+
 interface Project {
   id: string;
   name: string;
@@ -21,6 +28,9 @@ interface Project {
   description: string | null;
   client_user_id: string;
   price: number | null;
+  package: string;
+  monthly_quota: number;
+  renewal_date: string | null;
   created_at: string;
 }
 
@@ -37,20 +47,13 @@ export function AdminProjects() {
 
   useEffect(() => { fetchProjects(); }, []);
 
-  const updateStatus = async (id: string, status: string) => {
-    const { error } = await supabase.from('projects').update({ status }).eq('id', id);
+  const updateField = async (id: string, field: string, value: any) => {
+    const { error } = await supabase.from('projects').update({ [field]: value }).eq('id', id);
     if (error) {
       toast({ title: 'Fel', description: error.message, variant: 'destructive' });
     } else {
-      setProjects(prev => prev.map(p => p.id === id ? { ...p, status } : p));
-      toast({ title: 'Status uppdaterad' });
+      setProjects(prev => prev.map(p => p.id === id ? { ...p, [field]: value } : p));
     }
-  };
-
-  const updatePrice = async (id: string, price: string) => {
-    const numPrice = price ? parseFloat(price) : null;
-    await supabase.from('projects').update({ price: numPrice }).eq('id', id);
-    setProjects(prev => prev.map(p => p.id === id ? { ...p, price: numPrice } : p));
   };
 
   if (loading) {
@@ -76,7 +79,7 @@ export function AdminProjects() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex flex-col gap-4">
                 <div>
                   <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
                   {project.description && (
@@ -84,11 +87,11 @@ export function AdminProjects() {
                   )}
                 </div>
 
-                <div className="flex items-center gap-3 flex-shrink-0">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Status</span>
-                    <Select value={project.status} onValueChange={v => updateStatus(project.id, v)}>
-                      <SelectTrigger className="w-40 bg-muted/50 border-border/50">
+                    <Select value={project.status} onValueChange={v => updateField(project.id, 'status', v)}>
+                      <SelectTrigger className="bg-muted/50 border-border/50">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -100,13 +103,47 @@ export function AdminProjects() {
                   </div>
 
                   <div className="space-y-1">
+                    <span className="text-[10px] text-muted-foreground uppercase">Paket</span>
+                    <Select value={project.package} onValueChange={v => updateField(project.id, 'package', v)}>
+                      <SelectTrigger className="bg-muted/50 border-border/50">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {packages.map(p => (
+                          <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-muted-foreground uppercase">Kvot/månad</span>
+                    <Input
+                      type="number"
+                      value={project.monthly_quota}
+                      onChange={e => updateField(project.id, 'monthly_quota', parseInt(e.target.value) || 3)}
+                      className="bg-muted/50 border-border/50"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Pris (SEK)</span>
-                    <input
+                    <Input
                       type="number"
                       value={project.price ?? ''}
-                      onChange={e => updatePrice(project.id, e.target.value)}
+                      onChange={e => updateField(project.id, 'price', e.target.value ? parseFloat(e.target.value) : null)}
                       placeholder="0"
-                      className="w-28 h-10 rounded-md border border-border/50 bg-muted/50 px-3 text-sm text-foreground"
+                      className="bg-muted/50 border-border/50"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-muted-foreground uppercase">Förnyas</span>
+                    <Input
+                      type="date"
+                      value={project.renewal_date || ''}
+                      onChange={e => updateField(project.id, 'renewal_date', e.target.value || null)}
+                      className="bg-muted/50 border-border/50"
                     />
                   </div>
                 </div>

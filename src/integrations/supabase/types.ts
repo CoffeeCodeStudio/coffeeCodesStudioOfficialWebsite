@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       client_requests: {
         Row: {
+          admin_response: string | null
           category: string
           created_at: string
           id: string
@@ -26,6 +27,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          admin_response?: string | null
           category?: string
           created_at?: string
           id?: string
@@ -36,6 +38,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          admin_response?: string | null
           category?: string
           created_at?: string
           id?: string
@@ -157,6 +160,7 @@ export type Database = {
           name: string
           package: string
           price: number | null
+          renewal_date: string | null
           status: string
           updated_at: string
         }
@@ -170,6 +174,7 @@ export type Database = {
           name: string
           package?: string
           price?: number | null
+          renewal_date?: string | null
           status?: string
           updated_at?: string
         }
@@ -183,6 +188,7 @@ export type Database = {
           name?: string
           package?: string
           price?: number | null
+          renewal_date?: string | null
           status?: string
           updated_at?: string
         }
