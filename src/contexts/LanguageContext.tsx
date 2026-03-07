@@ -349,8 +349,8 @@ const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      headline: 'Deep Focus, Delivered.',
-      body: 'Founded on the philosophy that deep, uninterrupted work yields superior results. At Coffee Code Studio, you partner directly with the craftsmen. My \'bathrobe and code\' philosophy isn\'t about being casual; it\'s about creating the optimal environment for intense focus, ensuring your project receives dedicated attention and unparalleled quality.',
+      headline: 'Fullstack AI-Assisted Developer',
+      body: 'I combine traditional web development with modern AI tools to deliver faster and smarter. Every project gets dedicated focus — from architecture to launch. The result? Higher quality, fewer bugs, and shorter delivery times.',
     },
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',
