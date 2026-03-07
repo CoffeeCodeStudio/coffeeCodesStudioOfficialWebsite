@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
-import { MessageCirclePlus, Clock, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
+import { MessageCirclePlus, Clock, CheckCircle2, AlertCircle, ArrowRight, Zap, Bug, Sparkles, HelpCircle, Flame, Minus, ArrowUp } from 'lucide-react';
 import { format } from 'date-fns';
 import { sv } from 'date-fns/locale';
 
@@ -15,22 +15,46 @@ interface ClientRequest {
   message: string;
   category: string;
   status: string;
+  priority: string;
   created_at: string;
 }
 
 interface Project { id: string; name: string; }
 
 const statusOptions = [
-  { value: 'pending', label: 'Väntar', icon: Clock },
-  { value: 'in_progress', label: 'Pågår', icon: AlertCircle },
-  { value: 'done', label: 'Klar', icon: CheckCircle2 },
+  { value: 'pending', label: 'Inkommen', icon: Clock },
+  { value: 'reviewing', label: 'Granskas', icon: AlertCircle },
+  { value: 'in_progress', label: 'Pågår', icon: Zap },
+  { value: 'review_ready', label: 'Klar för granskning', icon: CheckCircle2 },
+  { value: 'delivered', label: 'Levererad', icon: CheckCircle2 },
 ];
 
+const categoryIcons: Record<string, typeof Bug> = {
+  bugfix: Bug,
+  upgrade: Zap,
+  new_feature: Sparkles,
+  other: HelpCircle,
+  general: HelpCircle,
+  change: Zap,
+  feedback: MessageCirclePlus,
+  asset: Sparkles,
+};
+
 const categoryLabels: Record<string, string> = {
+  bugfix: 'Bugfix',
+  upgrade: 'Uppgradering',
+  new_feature: 'Ny funktion',
+  other: 'Övrigt',
   general: 'Allmänt',
   change: 'Ändring',
   feedback: 'Feedback',
   asset: 'Logotyp/Material',
+};
+
+const priorityInfo: Record<string, { label: string; icon: typeof Flame; color: string }> = {
+  low: { label: 'Låg', icon: Minus, color: 'text-muted-foreground' },
+  normal: { label: 'Normal', icon: ArrowUp, color: 'text-primary' },
+  urgent: { label: 'Brådskande', icon: Flame, color: 'text-destructive' },
 };
 
 export function AdminClientRequests() {
@@ -51,7 +75,6 @@ export function AdminClientRequests() {
     });
   }, []);
 
-  // Realtime
   useEffect(() => {
     const channel = supabase
       .channel('admin-requests-realtime')
@@ -121,48 +144,63 @@ export function AdminClientRequests() {
         </div>
       ) : (
         <div className="space-y-3">
-          {filtered.map((req, i) => (
-            <motion.div
-              key={req.id}
-              className="glass-card p-5 rounded-xl"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.03 }}
-            >
-              <div className="flex items-start justify-between gap-4 mb-3">
-                <div className="flex items-center gap-2 text-xs flex-wrap">
-                  <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
-                    {categoryLabels[req.category] || req.category}
-                  </span>
-                  <span className="text-muted-foreground">{projectMap[req.project_id] || 'Projekt'}</span>
-                  <span className="text-muted-foreground">
-                    {format(new Date(req.created_at), 'd MMM HH:mm', { locale: sv })}
-                  </span>
+          {filtered.map((req, i) => {
+            const prio = priorityInfo[req.priority] || priorityInfo.normal;
+            const PrioIcon = prio.icon;
+            const CatIcon = categoryIcons[req.category] || HelpCircle;
+
+            return (
+              <motion.div
+                key={req.id}
+                className={`glass-card p-5 rounded-xl ${req.priority === 'urgent' ? 'border border-destructive/30' : ''}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.03 }}
+              >
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <div className="flex items-center gap-2 text-xs flex-wrap">
+                    <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                      <CatIcon className="w-3 h-3" />
+                      {categoryLabels[req.category] || req.category}
+                    </span>
+                    {req.priority && req.priority !== 'normal' && (
+                      <span className={`flex items-center gap-1 px-2 py-0.5 rounded-full font-medium ${
+                        req.priority === 'urgent' ? 'bg-destructive/10 text-destructive' : 'bg-muted/50 text-muted-foreground'
+                      }`}>
+                        <PrioIcon className="w-3 h-3" />
+                        {prio.label}
+                      </span>
+                    )}
+                    <span className="text-muted-foreground">{projectMap[req.project_id] || 'Projekt'}</span>
+                    <span className="text-muted-foreground">
+                      {format(new Date(req.created_at), 'd MMM HH:mm', { locale: sv })}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <Select value={req.status} onValueChange={v => updateStatus(req.id, v)}>
+                      <SelectTrigger className="w-44 h-8 text-xs bg-muted/50 border-border/50">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {statusOptions.map(s => (
+                          <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <Button variant="ghost" size="sm" onClick={() => convertToTodo(req)}
+                      className="text-xs text-secondary hover:bg-secondary/10" title="Konvertera till uppgift">
+                      <ArrowRight className="w-3 h-3 mr-1" />
+                      Todo
+                    </Button>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  <Select value={req.status} onValueChange={v => updateStatus(req.id, v)}>
-                    <SelectTrigger className="w-32 h-8 text-xs bg-muted/50 border-border/50">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {statusOptions.map(s => (
-                        <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <Button variant="ghost" size="sm" onClick={() => convertToTodo(req)}
-                    className="text-xs text-secondary hover:bg-secondary/10" title="Konvertera till uppgift">
-                    <ArrowRight className="w-3 h-3 mr-1" />
-                    Todo
-                  </Button>
-                </div>
-              </div>
-
-              <p className="text-sm text-foreground leading-relaxed">{req.message}</p>
-            </motion.div>
-          ))}
+                <p className="text-sm text-foreground leading-relaxed">{req.message}</p>
+              </motion.div>
+            );
+          })}
         </div>
       )}
     </div>
