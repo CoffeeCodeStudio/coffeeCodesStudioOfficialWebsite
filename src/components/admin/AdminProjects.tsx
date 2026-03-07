@@ -5,7 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
-import { FolderKanban } from 'lucide-react';
+import { FolderKanban, Trash2 } from 'lucide-react';
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 
 const statuses = [
   { value: 'design', label: 'Design' },
@@ -56,6 +60,16 @@ export function AdminProjects() {
     }
   };
 
+  const deleteProject = async (id: string) => {
+    const { error } = await supabase.from('projects').delete().eq('id', id);
+    if (error) {
+      toast({ title: 'Fel', description: error.message, variant: 'destructive' });
+    } else {
+      setProjects(prev => prev.filter(p => p.id !== id));
+      toast({ title: 'Projekt raderat' });
+    }
+  };
+
   if (loading) {
     return <div className="flex justify-center py-20"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>;
   }
@@ -80,71 +94,72 @@ export function AdminProjects() {
               transition={{ delay: i * 0.05 }}
             >
               <div className="flex flex-col gap-4">
-                <div>
-                  <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
-                  {project.description && (
-                    <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
-                  )}
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
+                    {project.description && (
+                      <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
+                    )}
+                  </div>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive shrink-0">
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Radera projekt?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          Detta raderar projektet "{project.name}" och all tillhörande data permanent. Åtgärden kan inte ångras.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Avbryt</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => deleteProject(project.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                          Radera
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Status</span>
                     <Select value={project.status} onValueChange={v => updateField(project.id, 'status', v)}>
-                      <SelectTrigger className="bg-muted/50 border-border/50">
-                        <SelectValue />
-                      </SelectTrigger>
+                      <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
                       <SelectContent>
-                        {statuses.map(s => (
-                          <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
-                        ))}
+                        {statuses.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
                       </SelectContent>
                     </Select>
                   </div>
-
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Paket</span>
                     <Select value={project.package} onValueChange={v => updateField(project.id, 'package', v)}>
-                      <SelectTrigger className="bg-muted/50 border-border/50">
-                        <SelectValue />
-                      </SelectTrigger>
+                      <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
                       <SelectContent>
-                        {packages.map(p => (
-                          <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>
-                        ))}
+                        {packages.map(p => <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>)}
                       </SelectContent>
                     </Select>
                   </div>
-
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Kvot/månad</span>
-                    <Input
-                      type="number"
-                      value={project.monthly_quota}
+                    <Input type="number" value={project.monthly_quota}
                       onChange={e => updateField(project.id, 'monthly_quota', parseInt(e.target.value) || 3)}
-                      className="bg-muted/50 border-border/50"
-                    />
+                      className="bg-muted/50 border-border/50" />
                   </div>
-
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Pris (SEK)</span>
-                    <Input
-                      type="number"
-                      value={project.price ?? ''}
+                    <Input type="number" value={project.price ?? ''}
                       onChange={e => updateField(project.id, 'price', e.target.value ? parseFloat(e.target.value) : null)}
-                      placeholder="0"
-                      className="bg-muted/50 border-border/50"
-                    />
+                      placeholder="0" className="bg-muted/50 border-border/50" />
                   </div>
-
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Förnyas</span>
-                    <Input
-                      type="date"
-                      value={project.renewal_date || ''}
+                    <Input type="date" value={project.renewal_date || ''}
                       onChange={e => updateField(project.id, 'renewal_date', e.target.value || null)}
-                      className="bg-muted/50 border-border/50"
-                    />
+                      className="bg-muted/50 border-border/50" />
                   </div>
                 </div>
               </div>
