@@ -59,7 +59,8 @@ export function StatusLog() {
       {logs.length === 0 ? (
         <div className="glass-card p-12 rounded-2xl text-center">
           <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-          <p className="text-muted-foreground">Inga uppdateringar ännu.</p>
+          <p className="text-muted-foreground mb-4">Inga uppdateringar ännu.</p>
+          <p className="text-xs text-muted-foreground">Aktiviteter visas här automatiskt när ditt projekt uppdateras.</p>
         </div>
       ) : (
         <div className="relative">

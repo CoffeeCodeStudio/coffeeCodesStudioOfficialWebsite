@@ -19,27 +19,53 @@ const statusSteps = [
   { key: 'completed', label: 'Klart', icon: CheckCircle2 },
 ];
 
+// Request-level timeline
+const requestTimeline = [
+  { key: 'pending', label: 'Inkommen' },
+  { key: 'reviewing', label: 'Granskas' },
+  { key: 'in_progress', label: 'Pågår' },
+  { key: 'review_ready', label: 'Klar för granskning' },
+  { key: 'delivered', label: 'Levererad' },
+];
+
+interface ClientRequest {
+  id: string;
+  message: string;
+  status: string;
+  category: string;
+  priority: string;
+  created_at: string;
+  project_id: string;
+}
+
 export function ProjectStatus() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [requests, setRequests] = useState<ClientRequest[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase
-      .from('projects')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .then(({ data }) => {
-        setProjects((data as Project[]) || []);
-        setLoading(false);
-      });
+    Promise.all([
+      supabase.from('projects').select('*').order('created_at', { ascending: false }),
+      supabase.from('client_requests').select('*').order('created_at', { ascending: false }),
+    ]).then(([projRes, reqRes]) => {
+      setProjects((projRes.data as Project[]) || []);
+      setRequests((reqRes.data as ClientRequest[]) || []);
+      setLoading(false);
+    });
   }, []);
 
-  // Realtime updates
   useEffect(() => {
     const channel = supabase
       .channel('portal-projects-realtime')
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'projects' }, (payload) => {
         setProjects(prev => prev.map(p => p.id === (payload.new as Project).id ? { ...p, ...payload.new as Project } : p));
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'client_requests' }, (payload) => {
+        if (payload.eventType === 'INSERT') {
+          setRequests(prev => [payload.new as ClientRequest, ...prev]);
+        } else if (payload.eventType === 'UPDATE') {
+          setRequests(prev => prev.map(r => r.id === (payload.new as ClientRequest).id ? payload.new as ClientRequest : r));
+        }
       })
       .subscribe();
 
@@ -52,8 +78,10 @@ export function ProjectStatus() {
 
   if (projects.length === 0) {
     return (
-      <div className="text-center py-20">
-        <p className="text-muted-foreground">Inga projekt ännu.</p>
+      <div className="glass-card p-12 rounded-2xl text-center">
+        <Rocket className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+        <p className="text-muted-foreground mb-4">Inga projekt ännu.</p>
+        <p className="text-xs text-muted-foreground">Ditt projekt visas här så snart det har skapats.</p>
       </div>
     );
   }
@@ -64,6 +92,7 @@ export function ProjectStatus() {
       {projects.map((project, pi) => {
         const currentIndex = statusSteps.findIndex(s => s.key === project.status);
         const progressPercent = currentIndex >= 0 ? ((currentIndex + 1) / statusSteps.length) * 100 : 0;
+        const projectRequests = requests.filter(r => r.project_id === project.id && r.status !== 'delivered');
 
         return (
           <motion.div
@@ -125,6 +154,45 @@ export function ProjectStatus() {
                 );
               })}
             </div>
+
+            {/* Active request timelines */}
+            {projectRequests.length > 0 && (
+              <div className="mt-6 pt-6 border-t border-border/20">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-4">
+                  Aktiva ärenden ({projectRequests.length})
+                </p>
+                <div className="space-y-3">
+                  {projectRequests.slice(0, 5).map(req => {
+                    const reqIndex = requestTimeline.findIndex(s => s.key === req.status);
+                    return (
+                      <div key={req.id} className="bg-muted/20 rounded-lg p-3">
+                        <p className="text-xs text-foreground mb-2 line-clamp-1">{req.message}</p>
+                        <div className="flex items-center gap-1">
+                          {requestTimeline.map((step, si) => {
+                            const isDone = si <= reqIndex;
+                            const isCurrent = si === reqIndex;
+                            return (
+                              <div key={step.key} className="flex items-center gap-1 flex-1">
+                                <div className={`h-1.5 flex-1 rounded-full transition-all ${
+                                  isCurrent ? 'bg-primary' : isDone ? 'bg-accent/60' : 'bg-border/30'
+                                }`} />
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="flex justify-between mt-1">
+                          <span className="text-[9px] text-muted-foreground">{requestTimeline[0].label}</span>
+                          <span className={`text-[9px] font-medium ${reqIndex >= 0 ? 'text-primary' : 'text-muted-foreground'}`}>
+                            {requestTimeline[reqIndex]?.label || 'Inkommen'}
+                          </span>
+                          <span className="text-[9px] text-muted-foreground">{requestTimeline[requestTimeline.length - 1].label}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </motion.div>
         );
       })}

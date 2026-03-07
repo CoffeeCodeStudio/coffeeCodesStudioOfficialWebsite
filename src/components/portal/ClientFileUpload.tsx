@@ -169,7 +169,11 @@ export function ClientFileUpload() {
       {files.length === 0 ? (
         <div className="glass-card p-12 rounded-2xl text-center">
           <FileArchive className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-          <p className="text-muted-foreground">Inga filer ännu.</p>
+          <p className="text-muted-foreground mb-4">Inga filer ännu.</p>
+          <Button variant="outline" className="border-primary/30 text-primary" onClick={() => fileRef.current?.click()}>
+            <Upload className="w-4 h-4 mr-2" />
+            Ladda upp din första fil
+          </Button>
         </div>
       ) : (
         <div className="space-y-3">

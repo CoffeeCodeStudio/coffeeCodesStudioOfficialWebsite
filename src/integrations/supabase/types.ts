@@ -20,6 +20,7 @@ export type Database = {
           created_at: string
           id: string
           message: string
+          priority: string
           project_id: string
           status: string
           user_id: string
@@ -29,6 +30,7 @@ export type Database = {
           created_at?: string
           id?: string
           message: string
+          priority?: string
           project_id: string
           status?: string
           user_id: string
@@ -38,6 +40,7 @@ export type Database = {
           created_at?: string
           id?: string
           message?: string
+          priority?: string
           project_id?: string
           status?: string
           user_id?: string
@@ -150,7 +153,9 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
+          monthly_quota: number
           name: string
+          package: string
           price: number | null
           status: string
           updated_at: string
@@ -161,7 +166,9 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          monthly_quota?: number
           name: string
+          package?: string
           price?: number | null
           status?: string
           updated_at?: string
@@ -172,7 +179,9 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          monthly_quota?: number
           name?: string
+          package?: string
           price?: number | null
           status?: string
           updated_at?: string
