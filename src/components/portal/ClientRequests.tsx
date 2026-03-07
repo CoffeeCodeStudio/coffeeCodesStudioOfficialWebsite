@@ -341,6 +341,12 @@ export function ClientRequests() {
                     </div>
                   </div>
                   <p className="text-sm text-foreground leading-relaxed">{req.message}</p>
+                  {req.admin_response && (
+                    <div className="bg-primary/5 border border-primary/10 rounded-lg p-3 mt-2">
+                      <p className="text-[10px] text-primary font-medium mb-1">Svar från oss:</p>
+                      <p className="text-sm text-foreground">{req.admin_response}</p>
+                    </div>
+                  )}
                   <p className="text-[10px] text-muted-foreground mt-2">
                     {format(new Date(req.created_at), 'd MMM yyyy HH:mm', { locale: sv })}
                   </p>
