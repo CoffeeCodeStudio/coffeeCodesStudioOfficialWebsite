@@ -155,10 +155,10 @@ const translations: Record<Language, Translations> = {
       portal: 'Kundportal',
     },
     hero: {
-      headline: 'Din vision, kodad till perfektion.',
-      subheadline: 'Från kundportaler till interna verktyg. Vi skapar skräddarsydda webbapplikationer som effektiviserar och lyfter din digitala närvaro.',
+      headline: 'Webbutveckling med AI-precision.',
+      subheadline: 'Snabbare leverans, högre kvalitet. Vi bygger skräddarsydda webbappar med AI-driven utveckling — från idé till lansering.',
       cta: 'Boka en Digital Kaffe',
-      promo: 'Founding Partner Program: Just nu 20% rabatt för våra tre första kunder. Säkra din plats i kön!',
+      promo: 'Founding Partner Program: 20% rabatt för våra tre första kunder!',
       planning: 'Planering',
       solution: 'Lösning',
     },
