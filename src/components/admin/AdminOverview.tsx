@@ -188,9 +188,16 @@ export function AdminOverview() {
                     </td>
                     <td className="py-3 px-4 text-foreground">{proj.name}</td>
                     <td className="py-3 px-4">
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${packageColors[proj.package] || packageColors.bas}`}>
-                        {packageLabels[proj.package] || proj.package}
-                      </span>
+                      <Select value={proj.package} onValueChange={v => updatePackage(proj.id, v)}>
+                        <SelectTrigger className={`h-8 w-28 text-xs border-0 ${packageColors[proj.package] || packageColors.bas}`}>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {packages.map(p => (
+                            <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </td>
                     <td className="py-3 px-4 text-center">
                       <span className={`font-mono text-sm ${remaining === 0 ? 'text-destructive' : 'text-foreground'}`}>
