@@ -233,6 +233,7 @@ export type Database = {
         Row: {
           author_name: string
           created_at: string
+          event_type: string
           id: string
           message: string
           project_id: string
@@ -240,6 +241,7 @@ export type Database = {
         Insert: {
           author_name?: string
           created_at?: string
+          event_type?: string
           id?: string
           message: string
           project_id: string
@@ -247,6 +249,7 @@ export type Database = {
         Update: {
           author_name?: string
           created_at?: string
+          event_type?: string
           id?: string
           message?: string
           project_id?: string
