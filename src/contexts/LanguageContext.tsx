@@ -83,9 +83,10 @@ interface Translations {
     emailPlaceholder: string;
     projectType: string;
     projectTypePlaceholder: string;
+    website: string;
+    webshop: string;
+    booking: string;
     webApp: string;
-    internalTool: string;
-    saas: string;
     other: string;
     message: string;
     messagePlaceholder: string;
