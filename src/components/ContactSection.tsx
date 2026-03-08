@@ -164,9 +164,10 @@ export function ContactSection() {
   };
 
   const projectTypes = [
+    { value: 'website', label: t.contact.website },
+    { value: 'webshop', label: t.contact.webshop },
+    { value: 'booking', label: t.contact.booking },
     { value: 'webapp', label: t.contact.webApp },
-    { value: 'internal', label: t.contact.internalTool },
-    { value: 'saas', label: t.contact.saas },
     { value: 'other', label: t.contact.other },
   ];
 

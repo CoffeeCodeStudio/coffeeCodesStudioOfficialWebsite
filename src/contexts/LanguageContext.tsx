@@ -83,9 +83,10 @@ interface Translations {
     emailPlaceholder: string;
     projectType: string;
     projectTypePlaceholder: string;
+    website: string;
+    webshop: string;
+    booking: string;
     webApp: string;
-    internalTool: string;
-    saas: string;
     other: string;
     message: string;
     messagePlaceholder: string;
@@ -226,9 +227,10 @@ const translations: Record<Language, Translations> = {
       emailPlaceholder: 'din@email.se',
       projectType: 'Projekttyp',
       projectTypePlaceholder: 'Välj projekttyp',
+      website: 'Hemsida / Landningssida',
+      webshop: 'Webbshop',
+      booking: 'Bokningssystem',
       webApp: 'Webbapplikation',
-      internalTool: 'Internt verktyg',
-      saas: 'SaaS-plattform',
       other: 'Annat',
       message: 'Meddelande',
       messagePlaceholder: 'Berätta kort om din vision och dina utmaningar...',
@@ -367,9 +369,10 @@ const translations: Record<Language, Translations> = {
       emailPlaceholder: 'you@email.com',
       projectType: 'Project Type',
       projectTypePlaceholder: 'Select project type',
+      website: 'Website / Landing Page',
+      webshop: 'Webshop',
+      booking: 'Booking System',
       webApp: 'Web Application',
-      internalTool: 'Internal Tool',
-      saas: 'SaaS Platform',
       other: 'Other',
       message: 'Message',
       messagePlaceholder: 'Tell us briefly about your vision and challenges...',
