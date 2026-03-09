@@ -327,7 +327,14 @@ export default function ClientPortal() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          {activeTab === 'dashboard' && <ProjectStatus />}
+          {activeTab === 'dashboard' && (
+            <>
+              {projectId && <ClientAgreement projectId={projectId} projectName={projectName} />}
+              <div className="mt-6">
+                <ProjectStatus />
+              </div>
+            </>
+          )}
           {activeTab === 'requests' && <ClientRequests />}
           {activeTab === 'messages' && <ClientMessages />}
           {activeTab === 'ai' && projectId && <AIAssistant projectId={projectId} />}
