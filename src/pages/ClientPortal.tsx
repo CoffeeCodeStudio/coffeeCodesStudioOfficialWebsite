@@ -51,6 +51,21 @@ export default function ClientPortal() {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
+  // Fetch client's project ID
+  useEffect(() => {
+    if (!user) return;
+    const fetchProject = async () => {
+      const { data } = await supabase
+        .from('projects')
+        .select('id')
+        .eq('client_user_id', user.id)
+        .limit(1)
+        .single();
+      if (data) setProjectId(data.id);
+    };
+    fetchProject();
+  }, [user]);
+
   // Load last seen timestamp and count unread admin messages
   useEffect(() => {
     if (!user) return;
