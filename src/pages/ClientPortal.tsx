@@ -11,6 +11,7 @@ import { StatusLog } from '@/components/portal/StatusLog';
 import { TodoList } from '@/components/portal/TodoList';
 import { ClientRequests } from '@/components/portal/ClientRequests';
 import { ClientMessages } from '@/components/portal/ClientMessages';
+import { AIAssistant } from '@/components/portal/AIAssistant';
 import type { User } from '@supabase/supabase-js';
 
 type Tab = 'dashboard' | 'requests' | 'messages' | 'files' | 'log' | 'todos';
