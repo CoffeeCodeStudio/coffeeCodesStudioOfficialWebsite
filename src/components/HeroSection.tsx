@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import { FileText, Monitor } from 'lucide-react';
 
 export function HeroSection() {
   const { t } = useLanguage();

@@ -301,7 +301,7 @@ const translations: Record<Language, Translations> = {
       headline: 'Web Development with AI Precision.',
       subheadline: 'Faster delivery, higher quality. We build custom web apps with AI-driven development — from idea to launch.',
       cta: 'Book a Digital Coffee',
-      promo: 'Founding Partner Program: 20% off for our first three clients!',
+      promo: 'We\'re now accepting new clients — book a free consultation today',
       planning: 'Planning',
       solution: 'Solution',
     },
