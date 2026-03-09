@@ -533,6 +533,14 @@ const translations: Record<Language, Translations> = {
           features: ['Unlimited requests', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Real-time chat & file sharing', 'Monthly status report'],
         },
       },
+      oneTime: {
+        title: 'One-time Project',
+        price: '4,900',
+        note: 'Starting from 4,900 SEK — complex projects are quoted individually after consultation.',
+        description: 'Custom web applications built from scratch, with a fixed price and clear delivery.',
+        features: ['Responsive design', 'SEO-optimized', 'Client portal included', 'Follow-up support available'],
+        cta: 'Book consultation',
+      },
       paymentMethods: {
         invoice: { name: 'Invoice / Cash' },
         card: { name: 'Card' },
