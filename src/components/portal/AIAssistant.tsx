@@ -2,8 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Send, Bot, User, Sparkles } from 'lucide-react';
+import { Send, Bot, User, Sparkles, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useToast } from '@/hooks/use-toast';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -18,11 +19,62 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+
+  // Load chat history on mount
+  useEffect(() => {
+    const loadHistory = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('ai_chat_messages')
+        .select('role, content')
+        .eq('project_id', projectId)
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: true });
+
+      if (!error && data) {
+        setMessages(data.map(m => ({ role: m.role as 'user' | 'assistant', content: m.content })));
+      }
+      setIsLoadingHistory(false);
+    };
+    loadHistory();
+  }, [projectId]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages]);
+
+  const saveMessage = async (role: 'user' | 'assistant', content: string) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    await supabase.from('ai_chat_messages').insert({
+      project_id: projectId,
+      user_id: user.id,
+      role,
+      content,
+    });
+  };
+
+  const clearHistory = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { error } = await supabase
+      .from('ai_chat_messages')
+      .delete()
+      .eq('project_id', projectId)
+      .eq('user_id', user.id);
+
+    if (!error) {
+      setMessages([]);
+      toast({ title: 'Historik rensad', description: 'Chatthistoriken har tagits bort.' });
+    }
+  };
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
@@ -31,6 +83,9 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsLoading(true);
+
+    // Save user message
+    await saveMessage('user', userMsg.content);
 
     let assistantContent = '';
 
@@ -99,12 +154,19 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
           }
         }
       }
+
+      // Save assistant message after streaming completes
+      if (assistantContent) {
+        await saveMessage('assistant', assistantContent);
+      }
     } catch (error) {
       console.error('AI chat error:', error);
+      const errorMsg = 'Något gick fel. Kontakta Coffee Code Studio för hjälp.';
       setMessages(prev => [
         ...prev.filter(m => m.content !== ''),
-        { role: 'assistant', content: 'Något gick fel. Kontakta Coffee Code Studio för hjälp.' },
+        { role: 'assistant', content: errorMsg },
       ]);
+      await saveMessage('assistant', errorMsg);
     } finally {
       setIsLoading(false);
     }
@@ -112,19 +174,40 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-          <Sparkles className="w-5 h-5 text-primary" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+            <Sparkles className="w-5 h-5 text-primary" />
+          </div>
+          <div>
+            <h2 className="text-lg font-serif text-foreground">AI-assistent</h2>
+            <p className="text-xs text-muted-foreground">Ställ frågor om ditt projekt</p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-lg font-serif text-foreground">AI-assistent</h2>
-          <p className="text-xs text-muted-foreground">Ställ frågor om ditt projekt</p>
-        </div>
+        {messages.length > 0 && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={clearHistory}
+            className="text-muted-foreground hover:text-destructive"
+          >
+            <Trash2 className="w-4 h-4 mr-1" />
+            Rensa historik
+          </Button>
+        )}
       </div>
 
       <div className="glass-card cyber-border rounded-2xl overflow-hidden">
         <div ref={scrollRef} className="h-[400px] overflow-y-auto p-4 space-y-4">
-          {messages.length === 0 && (
+          {isLoadingHistory ? (
+            <div className="flex items-center justify-center h-full">
+              <div className="flex gap-1">
+                <span className="w-2 h-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <span className="w-2 h-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <span className="w-2 h-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+              </div>
+            </div>
+          ) : messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <Bot className="w-12 h-12 text-muted-foreground/30 mb-3" />
               <p className="text-muted-foreground text-sm">
@@ -155,36 +238,38 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
                 ))}
               </div>
             </div>
+          ) : (
+            <>
+              {messages.map((msg, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  {msg.role === 'assistant' && (
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                      <Bot className="w-4 h-4 text-primary" />
+                    </div>
+                  )}
+                  <div
+                    className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                      msg.role === 'user'
+                        ? 'bg-primary/20 text-foreground border border-primary/20'
+                        : 'bg-muted/50 text-foreground border border-border/30'
+                    }`}
+                  >
+                    <p className="text-sm whitespace-pre-wrap">{msg.content || '...'}</p>
+                  </div>
+                  {msg.role === 'user' && (
+                    <div className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center shrink-0">
+                      <User className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </>
           )}
-
-          {messages.map((msg, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              {msg.role === 'assistant' && (
-                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                  <Bot className="w-4 h-4 text-primary" />
-                </div>
-              )}
-              <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                  msg.role === 'user'
-                    ? 'bg-primary/20 text-foreground border border-primary/20'
-                    : 'bg-muted/50 text-foreground border border-border/30'
-                }`}
-              >
-                <p className="text-sm whitespace-pre-wrap">{msg.content || '...'}</p>
-              </div>
-              {msg.role === 'user' && (
-                <div className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center shrink-0">
-                  <User className="w-4 h-4 text-muted-foreground" />
-                </div>
-              )}
-            </motion.div>
-          ))}
 
           {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
             <motion.div
