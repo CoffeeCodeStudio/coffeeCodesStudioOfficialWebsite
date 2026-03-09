@@ -157,6 +157,14 @@ interface Translations {
       standard: { name: string; price: string; description: string; features: string[] };
       premium: { name: string; price: string; description: string; features: string[] };
     };
+    oneTime: {
+      title: string;
+      price: string;
+      note: string;
+      description: string;
+      features: string[];
+      cta: string;
+    };
     paymentMethods: {
       invoice: { name: string };
       card: { name: string };
@@ -338,6 +346,14 @@ const translations: Record<Language, Translations> = {
           features: ['Obegränsade ärenden', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Realtidschat & fildelning', 'Månatlig statusrapport'],
         },
       },
+      oneTime: {
+        title: 'Engångsprojekt',
+        price: '4 900',
+        note: 'Pris från 4 900 kr — komplexa projekt offereras individuellt efter konsultation.',
+        description: 'Skräddarsydda webbapplikationer från grunden, med fast pris och tydlig leverans.',
+        features: ['Responsiv design', 'SEO-optimerad', 'Kundportal ingår', 'Efterföljande support tillgänglig'],
+        cta: 'Boka konsultation',
+      },
       paymentMethods: {
         invoice: { name: 'Kontant / Faktura' },
         card: { name: 'Kort' },
@@ -516,6 +532,14 @@ const translations: Record<Language, Translations> = {
           description: 'Full access to development resources with highest priority.',
           features: ['Unlimited requests', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Real-time chat & file sharing', 'Monthly status report'],
         },
+      },
+      oneTime: {
+        title: 'One-time Project',
+        price: '4,900',
+        note: 'Starting from 4,900 SEK — complex projects are quoted individually after consultation.',
+        description: 'Custom web applications built from scratch, with a fixed price and clear delivery.',
+        features: ['Responsive design', 'SEO-optimized', 'Client portal included', 'Follow-up support available'],
+        cta: 'Book consultation',
       },
       paymentMethods: {
         invoice: { name: 'Invoice / Cash' },
