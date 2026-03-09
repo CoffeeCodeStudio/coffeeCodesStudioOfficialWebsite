@@ -370,22 +370,22 @@ const translations: Record<Language, Translations> = {
       body: 'Off-the-shelf solutions often fall short. At Coffee Code Studio, we believe your business deserves a digital platform as unique and dynamic as your vision. We build custom web applications designed to solve your specific challenges, scale with your growth, and integrate seamlessly into your workflow.',
     },
     process: {
-      headline: 'From Concept to Click: Our Focused Development Process.',
-      intro: 'Our unique \'Deep Brew\' methodology ensures clarity, efficiency, and exceptional results, turning your ideas into fully functional web applications.',
+      headline: 'How we work — from idea to live in days.',
+      intro: '',
       step1: {
-        title: 'The Strategy Session',
-        subtitle: 'The Roast',
-        text: 'We start with a thorough conversation to understand your vision, challenges, and goals. This is where we define the blueprint for success.',
+        title: 'Digital Coffee',
+        subtitle: '',
+        text: 'We start with a short conversation to understand your vision and goals.',
       },
       step2: {
-        title: 'The Deep Flow',
-        subtitle: 'The Brew',
-        text: 'From detailed wireframing to pixel-perfect coding, we immerse ourselves in building your custom web application with precision and passion.',
+        title: 'We build',
+        subtitle: '',
+        text: 'With AI-powered development, we deliver fast and cost-effectively.',
       },
       step3: {
-        title: 'Launch & Refine',
-        subtitle: 'The Perfect Pour',
-        text: 'Your application goes live! We ensure a smooth deployment and provide ongoing support and iterative refinements to guarantee long-term success.',
+        title: 'You approve',
+        subtitle: '',
+        text: 'You review the result and we fine-tune until you\'re happy.',
       },
     },
     portfolio: {
