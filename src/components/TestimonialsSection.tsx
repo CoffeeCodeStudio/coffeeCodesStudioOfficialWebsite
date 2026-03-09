@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Quote } from 'lucide-react';
-import testimonialDjLobo from '@/assets/testimonial-djlobo.jpg';
+import testimonialDjLobo from '@/assets/testimonial-djlobo.webp';
 
 // Update this array to add more testimonials
 const testimonials = [
