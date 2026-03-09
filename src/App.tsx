@@ -11,6 +11,10 @@ import ClientPortal from "./pages/ClientPortal";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import SetPassword from "./pages/SetPassword";
+import Integritetspolicy from "./pages/Integritetspolicy";
+import Cookiepolicy from "./pages/Cookiepolicy";
+import Anvandardvillkor from "./pages/Anvandardvillkor";
+import { CookieConsent } from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +23,6 @@ function AuthRedirectHandler() {
   const location = useLocation();
 
   useEffect(() => {
-    // Check URL hash for invite/recovery tokens on any page
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
     const type = hashParams.get('type');
     const accessToken = hashParams.get('access_token');
@@ -46,9 +49,13 @@ const App = () => (
           <Route path="/set-password" element={<SetPassword />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/integritetspolicy" element={<Integritetspolicy />} />
+          <Route path="/cookiepolicy" element={<Cookiepolicy />} />
+          <Route path="/anvandardvillkor" element={<Anvandardvillkor />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <CookieConsent />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
