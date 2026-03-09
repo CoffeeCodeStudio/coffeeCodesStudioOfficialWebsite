@@ -321,21 +321,21 @@ const translations: Record<Language, Translations> = {
       packages: {
         bas: {
           name: 'Bas',
-          price: '500',
-          description: 'Perfekt för mindre underhåll och enstaka justeringar.',
-          features: ['1 ärende åt gången', 'Svar inom 48 timmar', 'E-postsupport', 'Grundläggande underhåll'],
+          price: '499',
+          description: 'Perfekt för mindre underhåll och löpande justeringar.',
+          features: ['3 ärenden per månad', 'Svar inom 48 timmar', 'E-postsupport', 'Grundläggande underhåll'],
         },
         standard: {
           name: 'Standard',
-          price: '1 000',
+          price: '999',
           description: 'För företag som behöver löpande utveckling och snabbare respons.',
-          features: ['3 ärenden åt gången', 'Svar inom 24 timmar', 'Prioriterad support', 'Kundportal med projektöversikt'],
+          features: ['6 ärenden per månad', 'Svar inom 24 timmar', 'Prioriterad support', 'Kundportal med projektöversikt'],
         },
         premium: {
           name: 'Premium',
-          price: '2 500',
+          price: '1 999',
           description: 'Full tillgång till utvecklingsresurser med högsta prioritet.',
-          features: ['Obegränsade ärenden', 'Prioriterad köhantering', 'Dedikerad kontaktperson', 'Realtidschat & fildelning', 'Månatlig statusrapport'],
+          features: ['Obegränsade ärenden', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Realtidschat & fildelning', 'Månatlig statusrapport'],
         },
       },
       paymentMethods: {
@@ -500,21 +500,21 @@ const translations: Record<Language, Translations> = {
       packages: {
         bas: {
           name: 'Basic',
-          price: '500',
-          description: 'Perfect for minor maintenance and occasional adjustments.',
-          features: ['1 request at a time', 'Response within 48 hours', 'Email support', 'Basic maintenance'],
+          price: '499',
+          description: 'Perfect for minor maintenance and ongoing adjustments.',
+          features: ['3 requests per month', 'Response within 48 hours', 'Email support', 'Basic maintenance'],
         },
         standard: {
           name: 'Standard',
-          price: '1,000',
+          price: '999',
           description: 'For businesses needing ongoing development and faster response.',
-          features: ['3 requests at a time', 'Response within 24 hours', 'Priority support', 'Client portal with project overview'],
+          features: ['6 requests per month', 'Response within 24 hours', 'Priority support', 'Client portal with project overview'],
         },
         premium: {
           name: 'Premium',
-          price: '2,500',
+          price: '1,999',
           description: 'Full access to development resources with highest priority.',
-          features: ['Unlimited requests', 'Priority queue handling', 'Dedicated contact person', 'Real-time chat & file sharing', 'Monthly status report'],
+          features: ['Unlimited requests', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Real-time chat & file sharing', 'Monthly status report'],
         },
       },
       paymentMethods: {
