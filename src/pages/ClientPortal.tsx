@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History, Sparkles } from 'lucide-react';
+import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History, Sparkles, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
