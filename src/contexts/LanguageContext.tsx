@@ -210,25 +210,25 @@ const translations: Record<Language, Translations> = {
       },
     },
     portfolio: {
-      headline: 'Projekt vi har bryggt: Verkliga lösningar, verklig inverkan.',
-      intro: 'Utforska ett urval av våra senaste webbapplikationsprojekt, som visar vår mångsidighet och vårt engagemang för att leverera påtagliga resultat.',
-      viewDemo: 'Visa Live Demo',
+      headline: 'Projekt',
+      intro: 'Verkliga lösningar vi har levererat.',
+      viewDemo: 'Besök sajten',
       explorePrototype: 'Utforska Prototypen',
       seeDesign: 'Se Designkoncept',
       project1: {
-        name: 'SnapRecipe',
-        category: 'AI-driven Måltidsplanering',
-        description: 'Utvecklade en komplett webbapplikation för att effektivisera kundinteraktioner, projekthantering och automatiserad rapportering, vilket avsevärt förbättrade drifts effektiviteten.',
+        name: 'djloboproducciones.com',
+        category: 'Webbkonsolidering',
+        description: 'Konsoliderade två separata sajter till en — enklare för besökaren och billigare att driva.',
       },
       project2: {
         name: 'FlowState FM',
         category: 'Fokusmusik Dashboard',
-        description: 'Arkitekterade och byggde en skalbar prototyp för en nästa generations SaaS-plattform, med fokus på intuitiv UX och högpresterande datavisualisering.',
+        description: 'Arkitekterade och byggde en skalbar prototyp för en nästa generations SaaS-plattform.',
       },
       project3: {
         name: 'SnapCode CMS',
         category: 'Innehållshanteringssystem',
-        description: 'Designade och utvecklade en intern webbapplikation för att optimera innehållshantering, vilket minskade manuellt arbete och förbättrade datanoggrannheten.',
+        description: 'Designade och utvecklade en intern webbapplikation för att optimera innehållshantering.',
       },
     },
     about: {
