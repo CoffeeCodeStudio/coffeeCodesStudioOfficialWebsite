@@ -1,0 +1,207 @@
+import { useState, useRef, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Send, Bot, User, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+interface AIAssistantProps {
+  projectId: string;
+}
+
+export function AIAssistant({ projectId }: AIAssistantProps) {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
+  }, [messages]);
+
+  const sendMessage = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userMsg: Message = { role: 'user', content: input.trim() };
+    setMessages(prev => [...prev, userMsg]);
+    setInput('');
+    setIsLoading(true);
+
+    let assistantContent = '';
+
+    try {
+      const resp = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/project-ai-chat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({
+          messages: [...messages, userMsg],
+          projectId,
+        }),
+      });
+
+      if (!resp.ok || !resp.body) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error || 'Något gick fel');
+      }
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      // Add empty assistant message to start streaming into
+      setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+
+        let newlineIndex: number;
+        while ((newlineIndex = buffer.indexOf('\n')) !== -1) {
+          let line = buffer.slice(0, newlineIndex);
+          buffer = buffer.slice(newlineIndex + 1);
+
+          if (line.endsWith('\r')) line = line.slice(0, -1);
+          if (line.startsWith(':') || line.trim() === '') continue;
+          if (!line.startsWith('data: ')) continue;
+
+          const jsonStr = line.slice(6).trim();
+          if (jsonStr === '[DONE]') break;
+
+          try {
+            const parsed = JSON.parse(jsonStr);
+            const content = parsed.choices?.[0]?.delta?.content;
+            if (content) {
+              assistantContent += content;
+              setMessages(prev => {
+                const updated = [...prev];
+                updated[updated.length - 1] = { role: 'assistant', content: assistantContent };
+                return updated;
+              });
+            }
+          } catch {
+            // Incomplete JSON, will be handled in next chunk
+          }
+        }
+      }
+    } catch (error) {
+      console.error('AI chat error:', error);
+      setMessages(prev => [
+        ...prev.filter(m => m.content !== ''),
+        { role: 'assistant', content: 'Något gick fel. Kontakta Coffee Code Studio för hjälp.' },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+          <Sparkles className="w-5 h-5 text-primary" />
+        </div>
+        <div>
+          <h2 className="text-lg font-serif text-foreground">AI-assistent</h2>
+          <p className="text-xs text-muted-foreground">Ställ frågor om ditt projekt</p>
+        </div>
+      </div>
+
+      <div className="glass-card cyber-border rounded-2xl overflow-hidden">
+        <div ref={scrollRef} className="h-[400px] overflow-y-auto p-4 space-y-4">
+          {messages.length === 0 && (
+            <div className="flex flex-col items-center justify-center h-full text-center">
+              <Bot className="w-12 h-12 text-muted-foreground/30 mb-3" />
+              <p className="text-muted-foreground text-sm">
+                Hej! Jag kan hjälpa dig med frågor om ditt projekt.
+              </p>
+              <p className="text-muted-foreground/70 text-xs mt-1">
+                Skriv din fråga nedan för att komma igång.
+              </p>
+            </div>
+          )}
+
+          {messages.map((msg, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              {msg.role === 'assistant' && (
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                  <Bot className="w-4 h-4 text-primary" />
+                </div>
+              )}
+              <div
+                className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+                  msg.role === 'user'
+                    ? 'bg-primary/20 text-foreground border border-primary/20'
+                    : 'bg-muted/50 text-foreground border border-border/30'
+                }`}
+              >
+                <p className="text-sm whitespace-pre-wrap">{msg.content || '...'}</p>
+              </div>
+              {msg.role === 'user' && (
+                <div className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center shrink-0">
+                  <User className="w-4 h-4 text-muted-foreground" />
+                </div>
+              )}
+            </motion.div>
+          ))}
+
+          {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex gap-3"
+            >
+              <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                <Bot className="w-4 h-4 text-primary" />
+              </div>
+              <div className="bg-muted/50 border border-border/30 rounded-2xl px-4 py-3">
+                <div className="flex gap-1">
+                  <span className="w-2 h-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <span className="w-2 h-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <span className="w-2 h-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </div>
+
+        <div className="border-t border-border/30 p-3 flex gap-2">
+          <Textarea
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            placeholder="Ställ en fråga..."
+            className="bg-muted/50 border-border/50 min-h-[44px] max-h-[100px] resize-none"
+            rows={1}
+            onKeyDown={e => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+              }
+            }}
+          />
+          <Button
+            onClick={sendMessage}
+            disabled={isLoading || !input.trim()}
+            size="icon"
+            className="shrink-0 bg-primary text-primary-foreground"
+          >
+            <Send className="w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}

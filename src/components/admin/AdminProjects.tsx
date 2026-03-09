@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
@@ -35,6 +36,7 @@ interface Project {
   package: string;
   monthly_quota: number;
   renewal_date: string | null;
+  system_prompt: string | null;
   created_at: string;
 }
 
@@ -122,6 +124,17 @@ export function AdminProjects() {
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
+                </div>
+
+                <div className="space-y-1 mb-4">
+                  <span className="text-[10px] text-muted-foreground uppercase">AI-assistentens systempromt</span>
+                  <Textarea
+                    value={project.system_prompt || ''}
+                    onChange={e => updateField(project.id, 'system_prompt', e.target.value || null)}
+                    placeholder="Beskriv projektet för AI-assistenten, t.ex. 'Detta är en e-handelssite för...'"
+                    className="bg-muted/50 border-border/50 min-h-[60px] text-sm"
+                    rows={2}
+                  />
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">

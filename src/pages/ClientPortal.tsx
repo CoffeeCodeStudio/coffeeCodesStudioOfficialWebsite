@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Coffee, LogOut, LayoutDashboard, Upload, MessageSquare, CheckSquare, MessageCirclePlus, Home, MessageCircle } from 'lucide-react';
+import { Coffee, LogOut, LayoutDashboard, Upload, MessageSquare, CheckSquare, MessageCirclePlus, Home, MessageCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
@@ -11,14 +11,16 @@ import { StatusLog } from '@/components/portal/StatusLog';
 import { TodoList } from '@/components/portal/TodoList';
 import { ClientRequests } from '@/components/portal/ClientRequests';
 import { ClientMessages } from '@/components/portal/ClientMessages';
+import { AIAssistant } from '@/components/portal/AIAssistant';
 import type { User } from '@supabase/supabase-js';
 
-type Tab = 'dashboard' | 'requests' | 'messages' | 'files' | 'log' | 'todos';
+type Tab = 'dashboard' | 'requests' | 'messages' | 'files' | 'log' | 'todos' | 'ai';
 
 const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: 'dashboard', label: 'Status', icon: LayoutDashboard },
   { id: 'requests', label: 'Önskemål', icon: MessageCirclePlus },
   { id: 'messages', label: 'Meddelanden', icon: MessageCircle },
+  { id: 'ai', label: 'AI-hjälp', icon: Sparkles },
   { id: 'files', label: 'Filer', icon: Upload },
   { id: 'log', label: 'Aktivitet', icon: MessageSquare },
   { id: 'todos', label: 'Uppgifter', icon: CheckSquare },
@@ -30,6 +32,7 @@ export default function ClientPortal() {
   const [loading, setLoading] = useState(true);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [lastSeenMessages, setLastSeenMessages] = useState<string | null>(null);
+  const [projectId, setProjectId] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +50,21 @@ export default function ClientPortal() {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Fetch client's project ID
+  useEffect(() => {
+    if (!user) return;
+    const fetchProject = async () => {
+      const { data } = await supabase
+        .from('projects')
+        .select('id')
+        .eq('client_user_id', user.id)
+        .limit(1)
+        .single();
+      if (data) setProjectId(data.id);
+    };
+    fetchProject();
+  }, [user]);
 
   // Load last seen timestamp and count unread admin messages
   useEffect(() => {
@@ -245,6 +263,7 @@ export default function ClientPortal() {
           {activeTab === 'dashboard' && <ProjectStatus />}
           {activeTab === 'requests' && <ClientRequests />}
           {activeTab === 'messages' && <ClientMessages />}
+          {activeTab === 'ai' && projectId && <AIAssistant projectId={projectId} />}
           {activeTab === 'files' && <ClientFileUpload />}
           {activeTab === 'log' && <StatusLog />}
           {activeTab === 'todos' && <TodoList />}

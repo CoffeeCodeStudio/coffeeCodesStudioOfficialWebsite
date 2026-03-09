@@ -197,6 +197,7 @@ export type Database = {
           price: number | null
           renewal_date: string | null
           status: string
+          system_prompt: string | null
           updated_at: string
         }
         Insert: {
@@ -211,6 +212,7 @@ export type Database = {
           price?: number | null
           renewal_date?: string | null
           status?: string
+          system_prompt?: string | null
           updated_at?: string
         }
         Update: {
@@ -225,6 +227,7 @@ export type Database = {
           price?: number | null
           renewal_date?: string | null
           status?: string
+          system_prompt?: string | null
           updated_at?: string
         }
         Relationships: []
