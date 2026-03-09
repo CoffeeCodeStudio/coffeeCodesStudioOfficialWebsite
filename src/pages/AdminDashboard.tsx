@@ -4,6 +4,7 @@ import { useAdmin } from '@/hooks/useAdmin';
 import { motion } from 'framer-motion';
 import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home, BarChart3, MessageCircle, ClipboardCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { AdminOverview } from '@/components/admin/AdminOverview';
 import { AdminOnboarding } from '@/components/admin/AdminOnboarding';
@@ -34,6 +35,7 @@ const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
 export default function AdminDashboard() {
   const { user, isAdmin, loading } = useAdmin();
   const [activeTab, setActiveTab] = useState<Tab>('overview');
+  const [pendingRequests, setPendingRequests] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +43,34 @@ export default function AdminDashboard() {
       navigate('/admin/login');
     }
   }, [user, isAdmin, loading, navigate]);
+
+  // Fetch and subscribe to pending requests count
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    const fetchPending = async () => {
+      const { count } = await supabase
+        .from('client_requests')
+        .select('id', { count: 'exact', head: true })
+        .eq('status', 'pending');
+      setPendingRequests(count || 0);
+    };
+
+    fetchPending();
+
+    const channel = supabase
+      .channel('admin-pending-requests')
+      .on('postgres_changes', { 
+        event: '*', 
+        schema: 'public', 
+        table: 'client_requests'
+      }, () => {
+        fetchPending();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [isAdmin]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
