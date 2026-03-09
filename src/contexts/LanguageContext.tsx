@@ -218,7 +218,7 @@ const translations: Record<Language, Translations> = {
       project1: {
         name: 'djloboproducciones.com',
         category: 'Webbkonsolidering',
-        description: 'En komplett plattform för DJ Lobo — bokningssystem, live radio och mixar på ett ställe. Från idé till live på under en vecka.',
+        description: 'En komplett plattform för DJ Lobo — bokningssystem, live radio och mixar på ett ställe. Från idé till live på under en veckFrån idé till live på under en vecka.',
       },
       project2: {
         name: 'FlowState FM',
@@ -396,8 +396,7 @@ const translations: Record<Language, Translations> = {
       seeDesign: 'See Design Concepts',
       project1: {
         name: 'djloboproducciones.com',
-        category: 'Web Consolidation',
-        description: 'Consolidated two separate sites into one — simpler for visitors and cheaper to maintain.',
+        category: 'Web A complete platform for DJ Lobo — booking system, live radio and mixes in one place. From idea to live in under a weekr for visitors and cheaper to maintain.',
       },
       project2: {
         name: 'FlowState FM',
