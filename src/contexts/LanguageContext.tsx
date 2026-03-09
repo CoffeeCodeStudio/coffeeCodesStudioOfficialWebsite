@@ -144,6 +144,27 @@ interface Translations {
     phase3Text: string;
     cta: string;
   };
+  pricing: {
+    headline: string;
+    intro: string;
+    popular: string;
+    perMonth: string;
+    cta: string;
+    comingSoon: string;
+    paymentTitle: string;
+    packages: {
+      bas: { name: string; price: string; description: string; features: string[] };
+      standard: { name: string; price: string; description: string; features: string[] };
+      premium: { name: string; price: string; description: string; features: string[] };
+    };
+    paymentMethods: {
+      invoice: { name: string };
+      card: { name: string };
+      swish: { name: string };
+      paypal: { name: string };
+      crypto: { name: string };
+    };
+  };
 }
 
 const translations: Record<Language, Translations> = {
