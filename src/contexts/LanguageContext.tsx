@@ -191,22 +191,22 @@ const translations: Record<Language, Translations> = {
       body: 'Standardlösningar räcker ofta inte till. På Coffee Code Studio anser vi att ditt företag förtjänar en digital plattform som är lika unik och dynamisk som din vision. Vi bygger skräddarsydda webbapplikationer utformade för att lösa dina specifika utmaningar, skala med din tillväxt och integreras sömlöst i dina arbetsflöden.',
     },
     process: {
-      headline: 'Från Idé till Lansering: Vår Fokuserade Utvecklingsprocess.',
-      intro: 'Vår unika \'Deep Brew\'-metod garanterar klarhet, effektivitet och exceptionella resultat, och förvandlar dina idéer till fullt fungerande webbapplikationer.',
+      headline: 'Så här jobbar vi — från idé till live på dagar.',
+      intro: '',
       step1: {
-        title: 'Strategisessionen',
-        subtitle: 'The Roast',
-        text: 'Vi börjar med ett grundligt samtal för att förstå din vision, dina utmaningar och mål. Detta är där vi definierar ritningen för framgång.',
+        title: 'Digital Kaffe',
+        subtitle: '',
+        text: 'Vi börjar med ett kort samtal för att förstå din vision och dina mål.',
       },
       step2: {
-        title: 'Deep Flow',
-        subtitle: 'The Brew',
-        text: 'Från detaljerad wireframing till pixelperfekt kodning, vi fördjupar oss i att bygga din anpassade webbapplikation med precision och passion.',
+        title: 'Vi bygger',
+        subtitle: '',
+        text: 'Med AI-driven utveckling levererar vi snabbt och kostnadseffektivt.',
       },
       step3: {
-        title: 'Lansering & Förfining',
-        subtitle: 'The Perfect Pour',
-        text: 'Din applikation går live! Vi säkerställer en smidig driftsättning och erbjuder löpande support samt iterativa förfiningar för att garantera långsiktig framgång.',
+        title: 'Du godkänner',
+        subtitle: '',
+        text: 'Du granskar resultatet och vi finjusterar tills du är nöjd.',
       },
     },
     portfolio: {
