@@ -69,6 +69,7 @@ export function ProjectStatus() {
   const [approvingId, setApprovingId] = useState<string | null>(null);
   const [filesOpen, setFilesOpen] = useState(false);
   const [todosOpen, setTodosOpen] = useState(false);
+  const [previewFile, setPreviewFile] = useState<ProjectFile | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
