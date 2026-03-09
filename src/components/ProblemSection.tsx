@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { BarChart3, ArrowRight, Rocket } from 'lucide-react';
 
 export function ProblemSection() {
   const { t } = useLanguage();
@@ -9,8 +10,8 @@ export function ProblemSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="py-24 relative" ref={ref}>
-      <div className="container mx-auto px-6">
+    <section id="services" className="py-16 sm:py-24 relative" ref={ref}>
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="max-w-4xl mx-auto text-center"
           initial={{ opacity: 0, y: 40 }}
@@ -28,35 +29,34 @@ export function ProblemSection() {
 
         {/* Animated visual */}
         <motion.div
-          className="mt-16 flex justify-center"
+          className="mt-12 sm:mt-16 flex justify-center"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <div className="relative">
-            {/* Breaking apart icons */}
-            <div className="flex gap-8 items-center">
+            <div className="flex gap-6 sm:gap-8 items-center">
               <motion.div
-                className="glass-card p-6 rounded-xl opacity-40"
+                className="glass-card p-5 sm:p-6 rounded-xl opacity-40"
                 animate={isInView ? {
                   rotate: [-5, 5, -5],
                   opacity: [0.4, 0.2, 0.4]
                 } : {}}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <span className="text-4xl">📊</span>
+                <BarChart3 className="w-8 h-8 sm:w-10 sm:h-10 text-muted-foreground" />
               </motion.div>
               
               <motion.div
-                className="text-4xl text-primary"
+                className="text-primary"
                 animate={isInView ? { scale: [1, 1.2, 1] } : {}}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                →
+                <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8" />
               </motion.div>
               
               <motion.div
-                className="glass-card cyber-border p-6 rounded-xl"
+                className="glass-card cyber-border p-5 sm:p-6 rounded-xl"
                 animate={isInView ? { 
                   boxShadow: [
                     '0 0 20px hsl(43 96% 56% / 0.2)',
@@ -66,7 +66,7 @@ export function ProblemSection() {
                 } : {}}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <span className="text-4xl">🚀</span>
+                <Rocket className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
               </motion.div>
             </div>
           </div>
