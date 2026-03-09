@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
 import { Coffee, LogOut, LayoutDashboard, Upload, MessageSquare, CheckSquare, MessageCirclePlus, Home, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
 import { ClientFileUpload } from '@/components/portal/ClientFileUpload';
 import { StatusLog } from '@/components/portal/StatusLog';
@@ -27,6 +28,8 @@ export default function ClientPortal() {
   const [user, setUser] = useState<User | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [loading, setLoading] = useState(true);
+  const [unreadMessages, setUnreadMessages] = useState(0);
+  const [lastSeenMessages, setLastSeenMessages] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,6 +47,67 @@ export default function ClientPortal() {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Load last seen timestamp and count unread admin messages
+  useEffect(() => {
+    if (!user) return;
+    
+    const stored = localStorage.getItem(`lastSeenMessages_${user.id}`);
+    setLastSeenMessages(stored);
+
+    const fetchUnread = async () => {
+      // Get client's projects
+      const { data: projects } = await supabase
+        .from('projects')
+        .select('id')
+        .eq('client_user_id', user.id);
+      
+      if (!projects?.length) return;
+      
+      const projectIds = projects.map(p => p.id);
+      
+      // Count admin messages newer than last seen
+      let query = supabase
+        .from('project_messages')
+        .select('id', { count: 'exact', head: true })
+        .in('project_id', projectIds)
+        .eq('is_admin', true);
+      
+      if (stored) {
+        query = query.gt('created_at', stored);
+      }
+      
+      const { count } = await query;
+      setUnreadMessages(count || 0);
+    };
+
+    fetchUnread();
+
+    // Subscribe to new messages
+    const channel = supabase
+      .channel('client-unread-messages')
+      .on('postgres_changes', { 
+        event: 'INSERT', 
+        schema: 'public', 
+        table: 'project_messages',
+        filter: 'is_admin=eq.true'
+      }, () => {
+        fetchUnread();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [user]);
+
+  // Mark messages as read when viewing messages tab
+  useEffect(() => {
+    if (activeTab === 'messages' && user) {
+      const now = new Date().toISOString();
+      localStorage.setItem(`lastSeenMessages_${user.id}`, now);
+      setLastSeenMessages(now);
+      setUnreadMessages(0);
+    }
+  }, [activeTab, user]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -78,18 +142,26 @@ export default function ClientPortal() {
           {tabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
+            const showBadge = tab.id === 'messages' && unreadMessages > 0;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all ${
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm transition-all ${
                   active
                     ? 'bg-primary/15 text-primary border border-primary/20'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                 }`}
               >
-                <Icon className="w-4 h-4" />
-                {tab.label}
+                <span className="flex items-center gap-3">
+                  <Icon className="w-4 h-4" />
+                  {tab.label}
+                </span>
+                {showBadge && (
+                  <Badge variant="destructive" className="h-5 min-w-5 px-1.5 text-[10px]">
+                    {unreadMessages > 9 ? '9+' : unreadMessages}
+                  </Badge>
+                )}
               </button>
             );
           })}
@@ -129,13 +201,19 @@ export default function ClientPortal() {
           {tabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
+            const showBadge = tab.id === 'messages' && unreadMessages > 0;
             return (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
+                className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
                   active ? 'bg-primary/15 text-primary border border-primary/20' : 'text-muted-foreground'
                 }`}>
                 <Icon className="w-3 h-3" />
                 {tab.label}
+                {showBadge && (
+                  <span className="absolute -top-1 -right-1 h-4 min-w-4 px-1 rounded-full bg-destructive text-destructive-foreground text-[9px] flex items-center justify-center">
+                    {unreadMessages > 9 ? '9+' : unreadMessages}
+                  </span>
+                )}
               </button>
             );
           })}

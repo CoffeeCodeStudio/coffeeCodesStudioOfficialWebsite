@@ -4,6 +4,7 @@ import { useAdmin } from '@/hooks/useAdmin';
 import { motion } from 'framer-motion';
 import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home, BarChart3, MessageCircle, ClipboardCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { AdminOverview } from '@/components/admin/AdminOverview';
 import { AdminOnboarding } from '@/components/admin/AdminOnboarding';
@@ -34,6 +35,7 @@ const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
 export default function AdminDashboard() {
   const { user, isAdmin, loading } = useAdmin();
   const [activeTab, setActiveTab] = useState<Tab>('overview');
+  const [pendingRequests, setPendingRequests] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,6 +43,34 @@ export default function AdminDashboard() {
       navigate('/admin/login');
     }
   }, [user, isAdmin, loading, navigate]);
+
+  // Fetch and subscribe to pending requests count
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    const fetchPending = async () => {
+      const { count } = await supabase
+        .from('client_requests')
+        .select('id', { count: 'exact', head: true })
+        .eq('status', 'pending');
+      setPendingRequests(count || 0);
+    };
+
+    fetchPending();
+
+    const channel = supabase
+      .channel('admin-pending-requests')
+      .on('postgres_changes', { 
+        event: '*', 
+        schema: 'public', 
+        table: 'client_requests'
+      }, () => {
+        fetchPending();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [isAdmin]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -75,18 +105,26 @@ export default function AdminDashboard() {
           {tabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
+            const showBadge = tab.id === 'requests' && pendingRequests > 0;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all ${
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm transition-all ${
                   active
                     ? 'bg-primary/15 text-primary border border-primary/20'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                 }`}
               >
-                <Icon className="w-4 h-4" />
-                {tab.label}
+                <span className="flex items-center gap-3">
+                  <Icon className="w-4 h-4" />
+                  {tab.label}
+                </span>
+                {showBadge && (
+                  <Badge variant="destructive" className="h-5 min-w-5 px-1.5 text-[10px]">
+                    {pendingRequests > 9 ? '9+' : pendingRequests}
+                  </Badge>
+                )}
               </button>
             );
           })}
@@ -126,13 +164,19 @@ export default function AdminDashboard() {
           {tabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
+            const showBadge = tab.id === 'requests' && pendingRequests > 0;
             return (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
+                className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
                   active ? 'bg-primary/15 text-primary border border-primary/20' : 'text-muted-foreground'
                 }`}>
                 <Icon className="w-3 h-3" />
                 {tab.label}
+                {showBadge && (
+                  <span className="absolute -top-1 -right-1 h-4 min-w-4 px-1 rounded-full bg-destructive text-destructive-foreground text-[9px] flex items-center justify-center">
+                    {pendingRequests > 9 ? '9+' : pendingRequests}
+                  </span>
+                )}
               </button>
             );
           })}
