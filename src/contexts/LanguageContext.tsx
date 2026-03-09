@@ -310,6 +310,42 @@ const translations: Record<Language, Translations> = {
       phase3Text: 'Vi blir din långsiktiga teknikpartner och hjälper dig att kontinuerligt utveckla din produkt.',
       cta: 'Bli vår partner',
     },
+    pricing: {
+      headline: 'Välj ditt paket',
+      intro: 'Flexibla månadspaket anpassade efter dina behov. Ingen bindningstid.',
+      popular: 'Populärast',
+      perMonth: 'kr/mån',
+      cta: 'Kom igång',
+      comingSoon: 'Kommer snart',
+      paymentTitle: 'Betalningsmetoder',
+      packages: {
+        bas: {
+          name: 'Bas',
+          price: '500',
+          description: 'Perfekt för mindre underhåll och enstaka justeringar.',
+          features: ['1 ärende åt gången', 'Svar inom 48 timmar', 'E-postsupport', 'Grundläggande underhåll'],
+        },
+        standard: {
+          name: 'Standard',
+          price: '1 000',
+          description: 'För företag som behöver löpande utveckling och snabbare respons.',
+          features: ['3 ärenden åt gången', 'Svar inom 24 timmar', 'Prioriterad support', 'Kundportal med projektöversikt'],
+        },
+        premium: {
+          name: 'Premium',
+          price: '2 500',
+          description: 'Full tillgång till utvecklingsresurser med högsta prioritet.',
+          features: ['Obegränsade ärenden', 'Prioriterad köhantering', 'Dedikerad kontaktperson', 'Realtidschat & fildelning', 'Månatlig statusrapport'],
+        },
+      },
+      paymentMethods: {
+        invoice: { name: 'Kontant / Faktura' },
+        card: { name: 'Kort' },
+        swish: { name: 'Swish' },
+        paypal: { name: 'PayPal' },
+        crypto: { name: 'Krypto' },
+      },
+    },
   },
   en: {
     nav: {
