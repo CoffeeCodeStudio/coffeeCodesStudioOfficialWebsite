@@ -84,6 +84,9 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
     setInput('');
     setIsLoading(true);
 
+    // Save user message
+    await saveMessage('user', userMsg.content);
+
     let assistantContent = '';
 
     try {
@@ -151,12 +154,19 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
           }
         }
       }
+
+      // Save assistant message after streaming completes
+      if (assistantContent) {
+        await saveMessage('assistant', assistantContent);
+      }
     } catch (error) {
       console.error('AI chat error:', error);
+      const errorMsg = 'Något gick fel. Kontakta Coffee Code Studio för hjälp.';
       setMessages(prev => [
         ...prev.filter(m => m.content !== ''),
-        { role: 'assistant', content: 'Något gick fel. Kontakta Coffee Code Studio för hjälp.' },
+        { role: 'assistant', content: errorMsg },
       ]);
+      await saveMessage('assistant', errorMsg);
     } finally {
       setIsLoading(false);
     }
