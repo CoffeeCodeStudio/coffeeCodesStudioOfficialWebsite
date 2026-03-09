@@ -500,21 +500,21 @@ const translations: Record<Language, Translations> = {
       packages: {
         bas: {
           name: 'Basic',
-          price: '500',
-          description: 'Perfect for minor maintenance and occasional adjustments.',
-          features: ['1 request at a time', 'Response within 48 hours', 'Email support', 'Basic maintenance'],
+          price: '499',
+          description: 'Perfect for minor maintenance and ongoing adjustments.',
+          features: ['3 requests per month', 'Response within 48 hours', 'Email support', 'Basic maintenance'],
         },
         standard: {
           name: 'Standard',
-          price: '1,000',
+          price: '999',
           description: 'For businesses needing ongoing development and faster response.',
-          features: ['3 requests at a time', 'Response within 24 hours', 'Priority support', 'Client portal with project overview'],
+          features: ['6 requests per month', 'Response within 24 hours', 'Priority support', 'Client portal with project overview'],
         },
         premium: {
           name: 'Premium',
-          price: '2,500',
+          price: '1,999',
           description: 'Full access to development resources with highest priority.',
-          features: ['Unlimited requests', 'Priority queue handling', 'Dedicated contact person', 'Real-time chat & file sharing', 'Monthly status report'],
+          features: ['Unlimited requests', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Real-time chat & file sharing', 'Monthly status report'],
         },
       },
       paymentMethods: {
