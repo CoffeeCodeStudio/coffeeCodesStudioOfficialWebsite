@@ -441,6 +441,15 @@ export function ProjectStatus() {
           </motion.div>
         );
       })}
+
+      {previewFile && (
+        <FilePreviewModal
+          open={!!previewFile}
+          onOpenChange={(open) => { if (!open) setPreviewFile(null); }}
+          fileName={previewFile.file_name}
+          filePath={previewFile.file_path}
+        />
+      )}
     </div>
   );
 }
