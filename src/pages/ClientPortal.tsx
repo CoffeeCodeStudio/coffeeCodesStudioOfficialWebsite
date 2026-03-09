@@ -14,12 +14,13 @@ import { ClientMessages } from '@/components/portal/ClientMessages';
 import { AIAssistant } from '@/components/portal/AIAssistant';
 import type { User } from '@supabase/supabase-js';
 
-type Tab = 'dashboard' | 'requests' | 'messages' | 'files' | 'log' | 'todos';
+type Tab = 'dashboard' | 'requests' | 'messages' | 'files' | 'log' | 'todos' | 'ai';
 
 const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: 'dashboard', label: 'Status', icon: LayoutDashboard },
   { id: 'requests', label: 'Önskemål', icon: MessageCirclePlus },
   { id: 'messages', label: 'Meddelanden', icon: MessageCircle },
+  { id: 'ai', label: 'AI-hjälp', icon: Sparkles },
   { id: 'files', label: 'Filer', icon: Upload },
   { id: 'log', label: 'Aktivitet', icon: MessageSquare },
   { id: 'todos', label: 'Uppgifter', icon: CheckSquare },
