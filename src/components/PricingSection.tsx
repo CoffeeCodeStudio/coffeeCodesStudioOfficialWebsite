@@ -118,6 +118,48 @@ export function PricingSection() {
           })}
         </div>
 
+        {/* One-time Project Card */}
+        <motion.div
+          className="max-w-2xl mx-auto mb-20 glass-card rounded-2xl p-8 border border-primary/20 hover:border-primary/40 transition-all"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+            <div className="w-14 h-14 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
+              <Rocket className="w-7 h-7 text-primary" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-serif text-foreground mb-1">{p.oneTime.title}</h3>
+              <div className="flex items-baseline gap-1 mb-1">
+                <span className="text-3xl font-bold text-primary">{p.oneTime.price}</span>
+                <span className="text-muted-foreground text-sm">kr</span>
+              </div>
+              <p className="text-muted-foreground text-sm mb-4">{p.oneTime.description}</p>
+              <ul className="grid grid-cols-2 gap-2 mb-4">
+                {p.oneTime.features.map((feature: string, i: number) => (
+                  <li key={i} className="flex items-center gap-2 text-sm">
+                    <Check className="w-4 h-4 text-primary shrink-0" />
+                    <span className="text-foreground/80">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs text-muted-foreground italic mb-4">{p.oneTime.note}</p>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-block text-center py-2.5 px-6 rounded-xl font-medium text-sm bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20 transition-all"
+              >
+                {p.oneTime.cta}
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Payment Methods */}
         <motion.div
           className="max-w-3xl mx-auto"
