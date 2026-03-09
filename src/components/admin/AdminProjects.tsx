@@ -11,6 +11,7 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { AdminAgreement } from './AdminAgreement';
 
 const statuses = [
   { value: 'design', label: 'Design' },
@@ -96,13 +97,15 @@ export function AdminProjects() {
               transition={{ delay: i * 0.05 }}
             >
               <div className="flex flex-col gap-4">
-                <div className="flex items-start justify-between">
-                  <div>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
                     <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
                     {project.description && (
                       <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
                     )}
                   </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <AdminAgreement projectId={project.id} projectName={project.name} />
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
                       <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive shrink-0">
@@ -124,6 +127,7 @@ export function AdminProjects() {
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
+                  </div>
                 </div>
 
                 <div className="space-y-1 mb-4">

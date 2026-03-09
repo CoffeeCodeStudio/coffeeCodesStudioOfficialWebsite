@@ -11,6 +11,7 @@ import { ClientMessages } from '@/components/portal/ClientMessages';
 import { StatusLog } from '@/components/portal/StatusLog';
 import { AIAssistant } from '@/components/portal/AIAssistant';
 import { ClientSettings } from '@/components/portal/ClientSettings';
+import { ClientAgreement } from '@/components/portal/ClientAgreement';
 import type { User } from '@supabase/supabase-js';
 
 type Tab = 'dashboard' | 'requests' | 'messages' | 'ai' | 'log' | 'settings';
@@ -33,6 +34,7 @@ export default function ClientPortal() {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [projectId, setProjectId] = useState<string | null>(null);
+  const [projectName, setProjectName] = useState<string>('');
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [loading, setLoading] = useState(true);
   const [unreadMessages, setUnreadMessages] = useState(0);
@@ -75,11 +77,14 @@ export default function ClientPortal() {
     const fetchProjectId = async () => {
       const { data } = await supabase
         .from('projects')
-        .select('id')
+        .select('id, name')
         .eq('client_user_id', user.id)
         .limit(1)
         .single();
-      if (data) setProjectId(data.id);
+      if (data) {
+        setProjectId(data.id);
+        setProjectName(data.name);
+      }
     };
     fetchProjectId();
   }, [user]);
@@ -322,7 +327,14 @@ export default function ClientPortal() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          {activeTab === 'dashboard' && <ProjectStatus />}
+          {activeTab === 'dashboard' && (
+            <>
+              {projectId && <ClientAgreement projectId={projectId} projectName={projectName} />}
+              <div className="mt-6">
+                <ProjectStatus />
+              </div>
+            </>
+          )}
           {activeTab === 'requests' && <ClientRequests />}
           {activeTab === 'messages' && <ClientMessages />}
           {activeTab === 'ai' && projectId && <AIAssistant projectId={projectId} />}
