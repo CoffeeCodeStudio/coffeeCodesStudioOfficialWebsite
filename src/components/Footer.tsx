@@ -1,5 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Instagram, Linkedin, Facebook, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Logo } from './Navbar';
 import {
   Tooltip,
@@ -29,6 +30,12 @@ const socialLinks = [
   { icon: Linkedin, label: 'LinkedIn' },
   { icon: TikTokIcon, label: 'TikTok' },
   { icon: Facebook, label: 'Facebook' },
+];
+
+const legalLinks = [
+  { to: '/integritetspolicy', label: 'Integritetspolicy' },
+  { to: '/cookiepolicy', label: 'Cookiepolicy' },
+  { to: '/anvandardvillkor', label: 'Användarvillkor' },
 ];
 
 export function Footer() {
@@ -92,8 +99,21 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Legal links */}
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-10">
+          {legalLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
         {/* Bottom row */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-12 sm:mt-14 pt-6 border-t border-white/5">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-8 pt-6 border-t border-white/5">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Coffee Code Studio. All rights reserved.
           </p>
