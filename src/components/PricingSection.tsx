@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Check, Star, Zap, Crown, CreditCard, Banknote, Smartphone, Globe, Bitcoin } from 'lucide-react';
+import { Check, Star, Zap, Crown, CreditCard, Banknote, Smartphone, Globe, Bitcoin, Rocket } from 'lucide-react';
 
 const packages = [
   {
