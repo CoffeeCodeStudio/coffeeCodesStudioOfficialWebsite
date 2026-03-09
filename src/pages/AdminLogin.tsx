@@ -38,6 +38,7 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
+      <SEOHead title="Admin Login | Coffee Code Studio" description="Admin login for Coffee Code Studio." noindex />
       <div className="absolute inset-0 code-bg opacity-30" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 

@@ -39,9 +39,11 @@ export function ProjektSection() {
           <div className="relative">
             <img
               src={djloboScreenshot}
-              alt="djloboproducciones.com - DJ Lobo Producciones website screenshot"
+              alt="djloboproducciones.com - DJ Lobo Producciones webbplats med bokningssystem och live radio"
               className="w-full h-auto object-cover"
               loading="lazy"
+              width="768"
+              height="576"
             />
           </div>
 

@@ -30,6 +30,7 @@ export default function ClientLogin() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
+      <SEOHead title="Kundportal Login | Coffee Code Studio" description="Logga in på din kundportal hos Coffee Code Studio." noindex />
       <div className="absolute inset-0 code-bg opacity-30" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
