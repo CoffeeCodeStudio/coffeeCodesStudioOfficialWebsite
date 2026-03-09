@@ -263,6 +263,7 @@ export default function ClientPortal() {
           {activeTab === 'dashboard' && <ProjectStatus />}
           {activeTab === 'requests' && <ClientRequests />}
           {activeTab === 'messages' && <ClientMessages />}
+          {activeTab === 'ai' && projectId && <AIAssistant projectId={projectId} />}
           {activeTab === 'files' && <ClientFileUpload />}
           {activeTab === 'log' && <StatusLog />}
           {activeTab === 'todos' && <TodoList />}

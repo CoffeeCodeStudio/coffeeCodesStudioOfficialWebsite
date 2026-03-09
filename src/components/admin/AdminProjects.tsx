@@ -36,6 +36,7 @@ interface Project {
   package: string;
   monthly_quota: number;
   renewal_date: string | null;
+  system_prompt: string | null;
   created_at: string;
 }
 
