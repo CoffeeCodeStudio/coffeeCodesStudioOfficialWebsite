@@ -127,6 +127,7 @@ export function AdminProjects() {
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
+                  </div>
                 </div>
 
                 <div className="space-y-1 mb-4">
