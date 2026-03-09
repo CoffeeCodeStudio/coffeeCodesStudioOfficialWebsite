@@ -130,9 +130,30 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
               <p className="text-muted-foreground text-sm">
                 Hej! Jag kan hjälpa dig med frågor om ditt projekt.
               </p>
-              <p className="text-muted-foreground/70 text-xs mt-1">
-                Skriv din fråga nedan för att komma igång.
+              <p className="text-muted-foreground/70 text-xs mt-1 mb-4">
+                Klicka på ett förslag eller skriv din egen fråga.
               </p>
+              <div className="flex flex-wrap gap-2 justify-center max-w-md">
+                {[
+                  'Vad ingår i mitt paket?',
+                  'Hur lång tid tar det?',
+                  'Hur skickar jag feedback?',
+                  'Kan jag ändra något efteråt?',
+                  'Vad händer nu?',
+                ].map((suggestion) => (
+                  <Button
+                    key={suggestion}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs bg-muted/30 border-border/50 hover:bg-primary/10 hover:border-primary/30"
+                    onClick={() => {
+                      setInput(suggestion);
+                    }}
+                  >
+                    {suggestion}
+                  </Button>
+                ))}
+              </div>
             </div>
           )}
 
