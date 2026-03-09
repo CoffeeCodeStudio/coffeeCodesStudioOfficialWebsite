@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Steam lines -->
+  <path d="M80 55 Q82 40 78 25" stroke="#C8A44E" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M100 50 Q102 35 98 20" stroke="#C8A44E" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M120 55 Q122 40 118 25" stroke="#C8A44E" stroke-width="4" stroke-linecap="round" fill="none"/>
+  
+  <!-- Cup body -->
+  <path d="M55 70 L55 140 Q55 165 80 165 L130 165 Q155 165 155 140 L155 70 Z" fill="white"/>
+  
+  <!-- Cup handle -->
+  <path d="M155 85 Q180 85 180 110 Q180 135 155 135" stroke="white" stroke-width="10" fill="none" stroke-linecap="round"/>
+  
+  <!-- Code brackets < / > -->
+  <path d="M82 105 L68 120 L82 135" stroke="#C8A44E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M100 100 L108 145" stroke="#C8A44E" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M125 105 L139 120 L125 135" stroke="#C8A44E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Glow effect -->
+  <ellipse cx="105" cy="120" rx="55" ry="50" fill="white" opacity="0.08"/>
+</svg>
