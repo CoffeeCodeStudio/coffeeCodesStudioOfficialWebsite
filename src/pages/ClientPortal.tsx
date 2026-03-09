@@ -323,6 +323,7 @@ export default function ClientPortal() {
           {activeTab === 'dashboard' && <ProjectStatus />}
           {activeTab === 'requests' && <ClientRequests />}
           {activeTab === 'messages' && <ClientMessages />}
+          {activeTab === 'ai' && projectId && <AIAssistant projectId={projectId} />}
           {activeTab === 'log' && <StatusLog />}
         </motion.div>
       </main>
