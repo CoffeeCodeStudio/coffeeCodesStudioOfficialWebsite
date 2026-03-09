@@ -120,7 +120,7 @@ export function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           <Logo />
           
@@ -142,13 +142,13 @@ export function Navbar() {
             ))}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <LanguageToggle />
             
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden w-10 h-10 flex items-center justify-center text-foreground hover:text-primary transition-colors"
+              className="md:hidden w-11 h-11 flex items-center justify-center text-foreground hover:text-primary transition-colors rounded-lg active:bg-muted/50"
               aria-label={isOpen ? 'Stäng meny' : 'Öppna meny'}
               aria-expanded={isOpen}
             >
@@ -164,25 +164,25 @@ export function Navbar() {
           <>
             {/* Backdrop */}
             <motion.div
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 bg-background/90 backdrop-blur-md md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              style={{ top: '72px' }}
+              style={{ top: '62px' }}
             />
             
             {/* Menu Panel */}
             <motion.div
-              className="fixed left-0 right-0 bg-card border-b border-white/10 md:hidden"
-              style={{ top: '72px' }}
+              className="fixed left-0 right-0 bg-card/95 backdrop-blur-xl border-b border-white/10 md:hidden shadow-2xl"
+              style={{ top: '62px' }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="container mx-auto px-6 py-6">
-                <div className="flex flex-col gap-4">
+              <div className="container mx-auto px-4 py-4">
+                <div className="flex flex-col gap-1">
                   {navItems.map((item, index) => (
                     <motion.a
                       key={item.href}
@@ -191,7 +191,7 @@ export function Navbar() {
                         e.preventDefault();
                         handleNavClick(item);
                       }}
-                      className="text-lg font-medium text-foreground hover:text-primary transition-colors py-3 border-b border-white/5 last:border-0"
+                      className="text-base font-medium text-foreground hover:text-primary active:bg-primary/10 transition-colors py-4 px-4 rounded-xl border-b border-white/5 last:border-0"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}

@@ -172,31 +172,31 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-24 relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 code-bg opacity-50" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-serif mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-3 sm:mb-4">
             <span className="gradient-text">{t.contact.headline}</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto px-2">
             {t.contact.intro}
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto grid md:grid-cols-5 gap-8 items-start">
-          {/* Coffee Cup Animation */}
+        <div className="max-w-4xl mx-auto grid md:grid-cols-5 gap-6 sm:gap-8 items-start">
+          {/* Coffee Cup Animation - Hidden on mobile */}
           <motion.div
-            className="md:col-span-2 flex justify-center"
+            className="hidden md:flex md:col-span-2 justify-center"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -264,17 +264,17 @@ export function ContactSection() {
 
           {/* Contact Form */}
           <motion.form
-            className="md:col-span-3 glass-card p-8 rounded-2xl space-y-6"
+            className="md:col-span-3 glass-card p-5 sm:p-8 rounded-2xl space-y-4 sm:space-y-6"
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Name */}
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-foreground font-medium">
+                <Label htmlFor="name" className="text-foreground font-medium text-sm sm:text-base">
                   {t.contact.name} <span className="text-destructive">*</span>
                 </Label>
                 <Input
@@ -283,7 +283,7 @@ export function ContactSection() {
                   value={formData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
                   placeholder={t.contact.namePlaceholder}
-                  className="glass-card border-white/10 bg-input/50 focus:border-primary/50 placeholder:text-muted-foreground/60"
+                  className="glass-card border-white/10 bg-input/50 focus:border-primary/50 placeholder:text-muted-foreground/60 h-11 sm:h-10 text-base sm:text-sm"
                   maxLength={100}
                   required
                 />
@@ -294,7 +294,7 @@ export function ContactSection() {
 
               {/* Company */}
               <div className="space-y-2">
-                <Label htmlFor="company" className="text-foreground font-medium">
+                <Label htmlFor="company" className="text-foreground font-medium text-sm sm:text-base">
                   {t.contact.company}
                 </Label>
                 <Input
@@ -303,16 +303,16 @@ export function ContactSection() {
                   value={formData.company}
                   onChange={(e) => handleInputChange('company', e.target.value)}
                   placeholder={t.contact.companyPlaceholder}
-                  className="glass-card border-white/10 bg-input/50 focus:border-primary/50 placeholder:text-muted-foreground/60"
+                  className="glass-card border-white/10 bg-input/50 focus:border-primary/50 placeholder:text-muted-foreground/60 h-11 sm:h-10 text-base sm:text-sm"
                   maxLength={100}
                 />
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-foreground font-medium">
+                <Label htmlFor="email" className="text-foreground font-medium text-sm sm:text-base">
                   {t.contact.email} <span className="text-destructive">*</span>
                 </Label>
                 <Input
@@ -321,7 +321,7 @@ export function ContactSection() {
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
                   placeholder={t.contact.emailPlaceholder}
-                  className="glass-card border-white/10 bg-input/50 focus:border-primary/50 placeholder:text-muted-foreground/60"
+                  className="glass-card border-white/10 bg-input/50 focus:border-primary/50 placeholder:text-muted-foreground/60 h-11 sm:h-10 text-base sm:text-sm"
                   maxLength={255}
                   required
                 />
@@ -332,19 +332,19 @@ export function ContactSection() {
 
               {/* Project Type */}
               <div className="space-y-2">
-                <Label htmlFor="projectType" className="text-foreground font-medium">
+                <Label htmlFor="projectType" className="text-foreground font-medium text-sm sm:text-base">
                   {t.contact.projectType} <span className="text-destructive">*</span>
                 </Label>
                 <Select
                   value={formData.projectType}
                   onValueChange={(value) => handleInputChange('projectType', value)}
                 >
-                  <SelectTrigger className="glass-card border-white/10 bg-input/50 focus:border-primary/50">
+                  <SelectTrigger className="glass-card border-white/10 bg-input/50 focus:border-primary/50 h-11 sm:h-10 text-base sm:text-sm">
                     <SelectValue placeholder={t.contact.projectTypePlaceholder} />
                   </SelectTrigger>
                   <SelectContent className="glass-card border-white/10 bg-card z-[9999]">
                     {projectTypes.map((type) => (
-                      <SelectItem key={type.value} value={type.value}>
+                      <SelectItem key={type.value} value={type.value} className="text-base sm:text-sm">
                         {type.label}
                       </SelectItem>
                     ))}
@@ -358,7 +358,7 @@ export function ContactSection() {
 
             {/* Message */}
             <div className="space-y-2">
-              <Label htmlFor="message" className="text-foreground font-medium">
+              <Label htmlFor="message" className="text-foreground font-medium text-sm sm:text-base">
                 {t.contact.message} <span className="text-destructive">*</span>
               </Label>
               <Textarea
@@ -366,7 +366,7 @@ export function ContactSection() {
                 value={formData.message}
                 onChange={(e) => handleInputChange('message', e.target.value)}
                 placeholder={t.contact.messagePlaceholder}
-                className="glass-card border-white/10 bg-input/50 focus:border-primary/50 min-h-[120px] placeholder:text-muted-foreground/60"
+                className="glass-card border-white/10 bg-input/50 focus:border-primary/50 min-h-[100px] sm:min-h-[120px] placeholder:text-muted-foreground/60 text-base sm:text-sm"
                 maxLength={1000}
                 required
               />
@@ -380,7 +380,7 @@ export function ContactSection() {
               type="submit"
               size="lg"
               disabled={isSubmitting || isSuccess}
-              className="w-full glow-button bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-6 rounded-xl font-medium"
+              className="w-full glow-button bg-primary text-primary-foreground hover:bg-primary/90 text-base sm:text-lg py-5 sm:py-6 rounded-xl font-medium"
             >
               {isSubmitting ? (
                 <motion.div
@@ -408,7 +408,7 @@ export function ContactSection() {
             <AnimatePresence>
               {isSuccess && (
                 <motion.p
-                  className="text-center text-accent"
+                  className="text-center text-accent text-sm sm:text-base"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
