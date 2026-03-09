@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import { FileText, Monitor } from 'lucide-react';
 
 export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden">
+    <section className="relative min-h-[calc(100vh-2rem)] flex flex-col items-center justify-center pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 code-bg" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
@@ -101,7 +102,7 @@ export function HeroSection() {
             <div className="relative aspect-[4/3] sm:aspect-[4/3] bg-gradient-to-br from-amber-glow/10 to-primary/5 rounded-xl overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center p-6 sm:p-8">
-                  <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">📋</div>
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-3 sm:mb-4"><FileText className="w-7 h-7 sm:w-8 sm:h-8 text-primary" /></div>
                   <div className="glass-card px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg inline-block">
                     <span className="text-xs sm:text-sm font-mono text-primary">wireframe.tsx</span>
                   </div>
@@ -127,7 +128,7 @@ export function HeroSection() {
             <div className="relative aspect-[4/3] sm:aspect-[4/3] bg-gradient-to-br from-secondary/10 to-cyber-blue/5 rounded-xl overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center p-6 sm:p-8">
-                  <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">💻</div>
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-secondary/20 flex items-center justify-center mx-auto mb-3 sm:mb-4"><Monitor className="w-7 h-7 sm:w-8 sm:h-8 text-secondary" /></div>
                   <div className="glass-card px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg inline-block">
                     <span className="text-xs sm:text-sm font-mono text-secondary">dashboard.tsx</span>
                   </div>
