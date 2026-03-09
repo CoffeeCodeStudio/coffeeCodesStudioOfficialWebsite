@@ -32,6 +32,7 @@ export default function ClientPortal() {
   const [loading, setLoading] = useState(true);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [lastSeenMessages, setLastSeenMessages] = useState<string | null>(null);
+  const [projectId, setProjectId] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
