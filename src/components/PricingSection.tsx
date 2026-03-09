@@ -118,6 +118,10 @@ export function PricingSection() {
           })}
         </div>
 
+        <p className="text-xs text-muted-foreground italic text-center max-w-2xl mx-auto mt-6 mb-16">
+          Underhållspaketen gäller i första hand projekt byggda av Coffee Code Studio. Har du en befintlig sajt? Hör av dig så ser vi vad vi kan göra.
+        </p>
+
         {/* One-time Project Card */}
         <motion.div
           className="max-w-2xl mx-auto mb-20 glass-card rounded-2xl p-8 border border-primary/20 hover:border-primary/40 transition-all"
