@@ -2,8 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Send, Bot, User, Sparkles } from 'lucide-react';
+import { Send, Bot, User, Sparkles, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useToast } from '@/hooks/use-toast';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -18,11 +19,62 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+
+  // Load chat history on mount
+  useEffect(() => {
+    const loadHistory = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('ai_chat_messages')
+        .select('role, content')
+        .eq('project_id', projectId)
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: true });
+
+      if (!error && data) {
+        setMessages(data.map(m => ({ role: m.role as 'user' | 'assistant', content: m.content })));
+      }
+      setIsLoadingHistory(false);
+    };
+    loadHistory();
+  }, [projectId]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages]);
+
+  const saveMessage = async (role: 'user' | 'assistant', content: string) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    await supabase.from('ai_chat_messages').insert({
+      project_id: projectId,
+      user_id: user.id,
+      role,
+      content,
+    });
+  };
+
+  const clearHistory = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const { error } = await supabase
+      .from('ai_chat_messages')
+      .delete()
+      .eq('project_id', projectId)
+      .eq('user_id', user.id);
+
+    if (!error) {
+      setMessages([]);
+      toast({ title: 'Historik rensad', description: 'Chatthistoriken har tagits bort.' });
+    }
+  };
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
