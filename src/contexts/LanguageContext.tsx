@@ -7,6 +7,7 @@ interface Translations {
     services: string;
     projects: string;
     process: string;
+    pricing: string;
     about: string;
     contact: string;
     portal: string;
