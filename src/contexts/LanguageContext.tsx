@@ -321,21 +321,21 @@ const translations: Record<Language, Translations> = {
       packages: {
         bas: {
           name: 'Bas',
-          price: '500',
-          description: 'Perfekt för mindre underhåll och enstaka justeringar.',
-          features: ['1 ärende åt gången', 'Svar inom 48 timmar', 'E-postsupport', 'Grundläggande underhåll'],
+          price: '499',
+          description: 'Perfekt för mindre underhåll och löpande justeringar.',
+          features: ['3 ärenden per månad', 'Svar inom 48 timmar', 'E-postsupport', 'Grundläggande underhåll'],
         },
         standard: {
           name: 'Standard',
-          price: '1 000',
+          price: '999',
           description: 'För företag som behöver löpande utveckling och snabbare respons.',
-          features: ['3 ärenden åt gången', 'Svar inom 24 timmar', 'Prioriterad support', 'Kundportal med projektöversikt'],
+          features: ['6 ärenden per månad', 'Svar inom 24 timmar', 'Prioriterad support', 'Kundportal med projektöversikt'],
         },
         premium: {
           name: 'Premium',
-          price: '2 500',
+          price: '1 999',
           description: 'Full tillgång till utvecklingsresurser med högsta prioritet.',
-          features: ['Obegränsade ärenden', 'Prioriterad köhantering', 'Dedikerad kontaktperson', 'Realtidschat & fildelning', 'Månatlig statusrapport'],
+          features: ['Obegränsade ärenden', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Realtidschat & fildelning', 'Månatlig statusrapport'],
         },
       },
       paymentMethods: {
