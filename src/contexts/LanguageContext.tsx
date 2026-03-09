@@ -343,7 +343,7 @@ const translations: Record<Language, Translations> = {
           name: 'Premium',
           price: '1 999',
           description: 'Full tillgång till utvecklingsresurser med högsta prioritet.',
-          features: ['Obegränsade ärenden', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Direktlinje — svarar inom 4 timmar även kvällar', 'Månatlig statusrapport'],
+          features: ['Obegränsade ärenden', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Direktlinje — svarar inom 4 timmar även kvällarom 4 timmar även kvällar', 'Månatlig statusrapport'],
         },
       },
       oneTime: {
@@ -530,7 +530,7 @@ const translations: Record<Language, Translations> = {
           name: 'Premium',
           price: '1,999',
           description: 'Full access to development resources with highest priority.',
-          features: ['Unlimited requests', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Real-time chat & file sharing', 'Monthly status report'],
+          features: ['Unlimited requests', 'Response within 4 hours', 'Priority support', 'DeDirect line — responds within 4 hours even eveningsl-time chat & file sharing', 'Monthly status report'],
         },
       },
       oneTime: {
