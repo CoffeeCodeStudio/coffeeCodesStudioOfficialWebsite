@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Menu, X } from 'lucide-react';
 
-export function Logo() {
+export const Logo = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <motion.div
+      ref={ref}
       className="flex items-center gap-2 text-primary"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -34,7 +35,8 @@ export function Logo() {
       </motion.span>
     </motion.div>
   );
-}
+});
+Logo.displayName = 'Logo';
 
 export function LanguageToggle() {
   const { language, setLanguage } = useLanguage();

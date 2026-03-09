@@ -43,6 +43,15 @@ Deno.serve(async (req) => {
 
     if (userError) throw userError;
 
+    // Assign 'user' role
+    const { error: roleError } = await supabaseAdmin
+      .from("user_roles")
+      .insert({ user_id: newUser.user.id, role: "user" });
+
+    if (roleError) {
+      console.error("Failed to assign user role:", roleError.message);
+    }
+
     // Create project linked to user
     const { data: project, error: projError } = await supabaseAdmin
       .from("projects")

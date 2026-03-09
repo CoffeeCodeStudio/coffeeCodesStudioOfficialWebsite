@@ -20,9 +20,9 @@ const statuses = [
 ];
 
 const packages = [
-  { value: 'bas', label: 'Bas' },
-  { value: 'standard', label: 'Standard' },
-  { value: 'premium', label: 'Premium' },
+  { value: 'bas', label: 'Bas', quota: 3 },
+  { value: 'standard', label: 'Standard', quota: 5 },
+  { value: 'premium', label: 'Premium', quota: 10 },
 ];
 
 interface Project {
@@ -136,7 +136,11 @@ export function AdminProjects() {
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Paket</span>
-                    <Select value={project.package} onValueChange={v => updateField(project.id, 'package', v)}>
+                    <Select value={project.package} onValueChange={v => {
+                      const pkg = packages.find(p => p.value === v);
+                      updateField(project.id, 'package', v);
+                      if (pkg) updateField(project.id, 'monthly_quota', pkg.quota);
+                    }}>
                       <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
                       <SelectContent>
                         {packages.map(p => <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>)}
