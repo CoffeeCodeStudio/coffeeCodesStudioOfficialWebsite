@@ -17,7 +17,9 @@ Deno.serve(async (req) => {
     );
 
     // Verify caller is admin
-    const authHeader = req.headers.get("Authorization")!;
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) throw new Error("Unauthorized");
+    
     const token = authHeader.replace("Bearer ", "");
     const { data: { user: caller } } = await supabaseAdmin.auth.getUser(token);
     if (!caller) throw new Error("Unauthorized");
@@ -31,32 +33,52 @@ Deno.serve(async (req) => {
 
     if (!roleCheck) throw new Error("Not an admin");
 
-    const { email, password, full_name, project_name, project_description } = await req.json();
+    const { email, full_name, project_name, project_description } = await req.json();
 
-    // Create user
-    const { data: newUser, error: userError } = await supabaseAdmin.auth.admin.createUser({
-      email,
-      password,
-      email_confirm: true,
-      user_metadata: { full_name },
+    if (!email || !project_name) {
+      throw new Error("Email and project name are required");
+    }
+
+    // Use inviteUserByEmail instead of createUser
+    // This sends an invite email with a link to set password
+    const redirectUrl = Deno.env.get("SUPABASE_URL")?.replace('.supabase.co', '.lovable.app') || 'https://coffeecodestudio.lovable.app';
+    
+    const { data: inviteData, error: inviteError } = await supabaseAdmin.auth.admin.inviteUserByEmail(email, {
+      data: { full_name },
+      redirectTo: `${redirectUrl}/set-password`,
     });
 
-    if (userError) throw userError;
+    if (inviteError) throw inviteError;
+
+    const newUserId = inviteData.user.id;
 
     // Assign 'user' role
     const { error: roleError } = await supabaseAdmin
       .from("user_roles")
-      .insert({ user_id: newUser.user.id, role: "user" });
+      .insert({ user_id: newUserId, role: "user" });
 
     if (roleError) {
       console.error("Failed to assign user role:", roleError.message);
+    }
+
+    // Create profile
+    const { error: profileError } = await supabaseAdmin
+      .from("profiles")
+      .upsert({ 
+        id: newUserId, 
+        email, 
+        full_name: full_name || null 
+      });
+
+    if (profileError) {
+      console.error("Failed to create profile:", profileError.message);
     }
 
     // Create project linked to user
     const { data: project, error: projError } = await supabaseAdmin
       .from("projects")
       .insert({
-        client_user_id: newUser.user.id,
+        client_user_id: newUserId,
         name: project_name,
         description: project_description || null,
         status: "design",
@@ -66,7 +88,11 @@ Deno.serve(async (req) => {
 
     if (projError) throw projError;
 
-    return new Response(JSON.stringify({ user: newUser.user, project }), {
+    return new Response(JSON.stringify({ 
+      user: inviteData.user, 
+      project,
+      message: "Invitation sent successfully" 
+    }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
