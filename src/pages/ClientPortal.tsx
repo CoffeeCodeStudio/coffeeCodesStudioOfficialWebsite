@@ -327,6 +327,7 @@ export default function ClientPortal() {
           {activeTab === 'messages' && <ClientMessages />}
           {activeTab === 'ai' && projectId && <AIAssistant projectId={projectId} />}
           {activeTab === 'log' && <StatusLog />}
+          {activeTab === 'settings' && <ClientSettings user={user} profile={profile} onProfileUpdate={setProfile} />}
         </motion.div>
       </main>
     </div>
