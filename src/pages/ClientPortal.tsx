@@ -2,21 +2,23 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History } from 'lucide-react';
+import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
 import { ClientRequests } from '@/components/portal/ClientRequests';
 import { ClientMessages } from '@/components/portal/ClientMessages';
 import { StatusLog } from '@/components/portal/StatusLog';
+import { AIAssistant } from '@/components/portal/AIAssistant';
 import type { User } from '@supabase/supabase-js';
 
-type Tab = 'dashboard' | 'requests' | 'messages' | 'log';
+type Tab = 'dashboard' | 'requests' | 'messages' | 'ai' | 'log';
 
 const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard; prominent?: boolean }[] = [
   { id: 'dashboard', label: 'Status', icon: LayoutDashboard, prominent: true },
   { id: 'requests', label: 'Önskemål', icon: MessageCirclePlus, prominent: true },
   { id: 'messages', label: 'Meddelanden', icon: MessageCircle, prominent: true },
+  { id: 'ai', label: 'AI-hjälp', icon: Sparkles, prominent: true },
   { id: 'log', label: 'Aktivitet', icon: History, prominent: false },
 ];
 
