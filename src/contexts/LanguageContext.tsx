@@ -323,7 +323,7 @@ const translations: Record<Language, Translations> = {
           name: 'Bas',
           price: '499',
           description: 'Perfekt för mindre underhåll och löpande justeringar.',
-          features: ['3 ärenden per månad', 'Svar inom 48 timmar', 'E-postsupport', 'Grundläggande underhåll'],
+          features: ['3 ärenden per månad', 'Svar inom 48 timmar', 'E-postsupport', 'Kundportal med projektöversikt'],
         },
         standard: {
           name: 'Standard',
