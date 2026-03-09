@@ -36,21 +36,13 @@ export function ProjektSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           whileHover={{ y: -5 }}
         >
-          {/* Preview Header */}
-          <div className="relative bg-gradient-to-br from-primary/10 to-secondary/5 p-8 sm:p-12">
-            <div className="absolute top-4 left-4 flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-destructive/50" />
-              <div className="w-3 h-3 rounded-full bg-primary/50" />
-              <div className="w-3 h-3 rounded-full bg-accent/50" />
-            </div>
-            <div className="flex items-center justify-center">
-              <motion.div
-                className="w-20 h-20 rounded-2xl bg-primary/20 flex items-center justify-center"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-              >
-                <Globe className="w-10 h-10 text-primary" />
-              </motion.div>
-            </div>
+          <div className="relative">
+            <img
+              src={djloboMockup}
+              alt="djloboproducciones.com - DJ Lobo Producciones website screenshot"
+              className="w-full h-auto object-cover"
+              loading="lazy"
+            />
           </div>
 
           {/* Project Info */}
