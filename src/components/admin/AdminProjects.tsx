@@ -20,9 +20,9 @@ const statuses = [
 ];
 
 const packages = [
-  { value: 'bas', label: 'Bas' },
-  { value: 'standard', label: 'Standard' },
-  { value: 'premium', label: 'Premium' },
+  { value: 'bas', label: 'Bas', quota: 3 },
+  { value: 'standard', label: 'Standard', quota: 5 },
+  { value: 'premium', label: 'Premium', quota: 10 },
 ];
 
 interface Project {
