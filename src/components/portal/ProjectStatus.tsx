@@ -375,7 +375,7 @@ export function ProjectStatus() {
                       projectFiles.slice(0, 5).map(file => {
                         const FileIcon = getFileIcon(file.file_name);
                         return (
-                          <div key={file.id} className="flex items-center justify-between gap-3 p-2 rounded-lg bg-muted/10">
+                          <button key={file.id} onClick={() => setPreviewFile(file)} className="w-full flex items-center justify-between gap-3 p-2 rounded-lg bg-muted/10 hover:bg-muted/20 transition-colors text-left">
                             <div className="flex items-center gap-3 min-w-0">
                               <FileIcon className="w-4 h-4 text-primary shrink-0" />
                               <div className="min-w-0">
@@ -383,10 +383,8 @@ export function ProjectStatus() {
                                 <p className="text-[10px] text-muted-foreground">{formatSize(file.file_size)}</p>
                               </div>
                             </div>
-                            <Button variant="ghost" size="icon" onClick={() => handleDownload(file)} className="h-7 w-7 text-primary hover:bg-primary/10 shrink-0">
-                              <Download className="w-3.5 h-3.5" />
-                            </Button>
-                          </div>
+                            <Download className="w-3.5 h-3.5 text-primary shrink-0" />
+                          </button>
                         );
                       })
                     )}
