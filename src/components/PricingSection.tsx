@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Check, Star, Zap, Crown, CreditCard, Banknote, Smartphone, Globe, Bitcoin, Rocket } from 'lucide-react';
+import { Check, Star, Zap, Crown, CreditCard, Banknote, Smartphone, Globe, Bitcoin, Rocket, Info } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
   {
