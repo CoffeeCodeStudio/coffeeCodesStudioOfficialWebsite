@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
 import { Coffee, LogOut, LayoutDashboard, Upload, MessageSquare, CheckSquare, MessageCirclePlus, Home, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
 import { ClientFileUpload } from '@/components/portal/ClientFileUpload';
 import { StatusLog } from '@/components/portal/StatusLog';
@@ -27,6 +28,8 @@ export default function ClientPortal() {
   const [user, setUser] = useState<User | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [loading, setLoading] = useState(true);
+  const [unreadMessages, setUnreadMessages] = useState(0);
+  const [lastSeenMessages, setLastSeenMessages] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,6 +47,67 @@ export default function ClientPortal() {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Load last seen timestamp and count unread admin messages
+  useEffect(() => {
+    if (!user) return;
+    
+    const stored = localStorage.getItem(`lastSeenMessages_${user.id}`);
+    setLastSeenMessages(stored);
+
+    const fetchUnread = async () => {
+      // Get client's projects
+      const { data: projects } = await supabase
+        .from('projects')
+        .select('id')
+        .eq('client_user_id', user.id);
+      
+      if (!projects?.length) return;
+      
+      const projectIds = projects.map(p => p.id);
+      
+      // Count admin messages newer than last seen
+      let query = supabase
+        .from('project_messages')
+        .select('id', { count: 'exact', head: true })
+        .in('project_id', projectIds)
+        .eq('is_admin', true);
+      
+      if (stored) {
+        query = query.gt('created_at', stored);
+      }
+      
+      const { count } = await query;
+      setUnreadMessages(count || 0);
+    };
+
+    fetchUnread();
+
+    // Subscribe to new messages
+    const channel = supabase
+      .channel('client-unread-messages')
+      .on('postgres_changes', { 
+        event: 'INSERT', 
+        schema: 'public', 
+        table: 'project_messages',
+        filter: 'is_admin=eq.true'
+      }, () => {
+        fetchUnread();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [user]);
+
+  // Mark messages as read when viewing messages tab
+  useEffect(() => {
+    if (activeTab === 'messages' && user) {
+      const now = new Date().toISOString();
+      localStorage.setItem(`lastSeenMessages_${user.id}`, now);
+      setLastSeenMessages(now);
+      setUnreadMessages(0);
+    }
+  }, [activeTab, user]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
