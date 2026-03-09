@@ -218,7 +218,7 @@ const translations: Record<Language, Translations> = {
       project1: {
         name: 'djloboproducciones.com',
         category: 'Webbkonsolidering',
-        description: 'Konsoliderade två separata sajter till en — enklare för besökaren och billigare att driva.',
+        description: 'En komplett plattform för DJ Lobo — bokningssystem, live radio och mixar på ett ställe. Från idé till live på under en vecka.',
       },
       project2: {
         name: 'FlowState FM',
