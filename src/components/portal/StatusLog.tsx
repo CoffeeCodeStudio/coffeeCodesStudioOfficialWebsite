@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { MessageSquare, User, RefreshCw, FileUp, MessageCircle, ClipboardList, PenLine } from 'lucide-react';
-import { format } from 'date-fns';
+import { MessageSquare, User, RefreshCw, FileUp, MessageCircle, ClipboardList, PenLine, Search, CalendarIcon, X } from 'lucide-react';
+import { format, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
 import { sv } from 'date-fns/locale';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
 
 interface LogEntry {
   id: string;
@@ -31,6 +36,8 @@ export function StatusLog() {
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [projects, setProjects] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({ from: undefined, to: undefined });
 
   useEffect(() => {
     Promise.all([
@@ -55,6 +62,32 @@ export function StatusLog() {
     return () => { supabase.removeChannel(channel); };
   }, []);
 
+  const filteredLogs = useMemo(() => {
+    return logs.filter(log => {
+      // Search filter
+      const query = searchQuery.toLowerCase();
+      const matchesSearch = !query || 
+        log.message.toLowerCase().includes(query) ||
+        log.author_name.toLowerCase().includes(query) ||
+        (projects[log.project_id] || '').toLowerCase().includes(query) ||
+        (eventConfig[log.event_type]?.label || '').toLowerCase().includes(query);
+      
+      // Date filter
+      const logDate = new Date(log.created_at);
+      const matchesDate = (!dateRange.from || !dateRange.to) ||
+        isWithinInterval(logDate, { start: startOfDay(dateRange.from), end: endOfDay(dateRange.to) });
+      
+      return matchesSearch && matchesDate;
+    });
+  }, [logs, searchQuery, dateRange, projects]);
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setDateRange({ from: undefined, to: undefined });
+  };
+
+  const hasFilters = searchQuery || dateRange.from || dateRange.to;
+
   if (loading) {
     return <div className="flex justify-center py-20"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>;
   }
@@ -63,17 +96,84 @@ export function StatusLog() {
     <div className="space-y-6">
       <h2 className="text-2xl font-serif gradient-text">Aktivitetshistorik</h2>
 
-      {logs.length === 0 ? (
+      {/* Search and Date Filter */}
+      <div className="glass-card cyber-border p-4 rounded-2xl">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              placeholder="Sök i aktiviteter..."
+              className="pl-10 bg-muted/50 border-border/50"
+            />
+          </div>
+          
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className={cn(
+                "justify-start text-left font-normal bg-muted/50 border-border/50 min-w-[200px]",
+                !dateRange.from && "text-muted-foreground"
+              )}>
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {dateRange.from ? (
+                  dateRange.to ? (
+                    <>
+                      {format(dateRange.from, "d MMM", { locale: sv })} - {format(dateRange.to, "d MMM", { locale: sv })}
+                    </>
+                  ) : (
+                    format(dateRange.from, "d MMM yyyy", { locale: sv })
+                  )
+                ) : (
+                  <span>Välj datumintervall</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                initialFocus
+                mode="range"
+                defaultMonth={dateRange.from}
+                selected={{ from: dateRange.from, to: dateRange.to }}
+                onSelect={(range) => setDateRange({ from: range?.from, to: range?.to })}
+                numberOfMonths={1}
+                className="p-3 pointer-events-auto"
+              />
+            </PopoverContent>
+          </Popover>
+
+          {hasFilters && (
+            <Button variant="ghost" size="sm" onClick={clearFilters} className="text-muted-foreground hover:text-foreground">
+              <X className="w-4 h-4 mr-1" />
+              Rensa
+            </Button>
+          )}
+        </div>
+        
+        {hasFilters && (
+          <p className="text-xs text-muted-foreground mt-3">
+            Visar {filteredLogs.length} av {logs.length} aktiviteter
+          </p>
+        )}
+      </div>
+
+      {filteredLogs.length === 0 ? (
         <div className="glass-card p-12 rounded-2xl text-center">
           <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-          <p className="text-muted-foreground mb-4">Inga uppdateringar ännu.</p>
-          <p className="text-xs text-muted-foreground">Aktiviteter loggas automatiskt här.</p>
+          <p className="text-muted-foreground mb-4">
+            {hasFilters ? 'Inga aktiviteter matchar din sökning.' : 'Inga uppdateringar ännu.'}
+          </p>
+          {hasFilters && (
+            <Button variant="outline" size="sm" onClick={clearFilters}>
+              Rensa filter
+            </Button>
+          )}
         </div>
       ) : (
         <div className="relative">
           <div className="absolute left-5 top-0 bottom-0 w-px bg-border/30" />
           <div className="space-y-4">
-            {logs.map((log, i) => {
+            {filteredLogs.map((log, i) => {
               const cfg = eventConfig[log.event_type] || eventConfig.manual;
               const Icon = cfg.icon;
               return (
