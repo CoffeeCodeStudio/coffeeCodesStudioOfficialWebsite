@@ -2,8 +2,9 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, Globe } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import djloboMockup from '@/assets/djlobo-mockup.jpg';
 
 export function ProjektSection() {
   const { t } = useLanguage();
