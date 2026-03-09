@@ -114,6 +114,59 @@ export type Database = {
         }
         Relationships: []
       }
+      project_agreements: {
+        Row: {
+          created_at: string
+          estimated_delivery: string
+          id: string
+          payment_terms: string
+          project_id: string
+          scope_description: string
+          sent_at: string | null
+          signed_at: string | null
+          signed_by_ip: string | null
+          signed_by_name: string | null
+          status: string
+          total_price: number
+        }
+        Insert: {
+          created_at?: string
+          estimated_delivery: string
+          id?: string
+          payment_terms?: string
+          project_id: string
+          scope_description: string
+          sent_at?: string | null
+          signed_at?: string | null
+          signed_by_ip?: string | null
+          signed_by_name?: string | null
+          status?: string
+          total_price: number
+        }
+        Update: {
+          created_at?: string
+          estimated_delivery?: string
+          id?: string
+          payment_terms?: string
+          project_id?: string
+          scope_description?: string
+          sent_at?: string | null
+          signed_at?: string | null
+          signed_by_ip?: string | null
+          signed_by_name?: string | null
+          status?: string
+          total_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_agreements_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_files: {
         Row: {
           created_at: string
