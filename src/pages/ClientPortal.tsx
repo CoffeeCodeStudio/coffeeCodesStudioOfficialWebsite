@@ -2,37 +2,36 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Coffee, LogOut, LayoutDashboard, Upload, MessageSquare, CheckSquare, MessageCirclePlus, Home, MessageCircle, Sparkles } from 'lucide-react';
+import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
-import { ClientFileUpload } from '@/components/portal/ClientFileUpload';
-import { StatusLog } from '@/components/portal/StatusLog';
-import { TodoList } from '@/components/portal/TodoList';
 import { ClientRequests } from '@/components/portal/ClientRequests';
 import { ClientMessages } from '@/components/portal/ClientMessages';
-import { AIAssistant } from '@/components/portal/AIAssistant';
+import { StatusLog } from '@/components/portal/StatusLog';
 import type { User } from '@supabase/supabase-js';
 
-type Tab = 'dashboard' | 'requests' | 'messages' | 'files' | 'log' | 'todos' | 'ai';
+type Tab = 'dashboard' | 'requests' | 'messages' | 'log';
 
-const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
-  { id: 'dashboard', label: 'Status', icon: LayoutDashboard },
-  { id: 'requests', label: 'Önskemål', icon: MessageCirclePlus },
-  { id: 'messages', label: 'Meddelanden', icon: MessageCircle },
-  { id: 'ai', label: 'AI-hjälp', icon: Sparkles },
-  { id: 'files', label: 'Filer', icon: Upload },
-  { id: 'log', label: 'Aktivitet', icon: MessageSquare },
-  { id: 'todos', label: 'Uppgifter', icon: CheckSquare },
+const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard; prominent?: boolean }[] = [
+  { id: 'dashboard', label: 'Status', icon: LayoutDashboard, prominent: true },
+  { id: 'requests', label: 'Önskemål', icon: MessageCirclePlus, prominent: true },
+  { id: 'messages', label: 'Meddelanden', icon: MessageCircle, prominent: true },
+  { id: 'log', label: 'Aktivitet', icon: History, prominent: false },
 ];
+
+interface Profile {
+  full_name: string | null;
+  email: string | null;
+}
 
 export default function ClientPortal() {
   const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [loading, setLoading] = useState(true);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [lastSeenMessages, setLastSeenMessages] = useState<string | null>(null);
-  const [projectId, setProjectId] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,19 +50,18 @@ export default function ClientPortal() {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  // Fetch client's project ID
+  // Fetch profile for personalized welcome
   useEffect(() => {
     if (!user) return;
-    const fetchProject = async () => {
+    const fetchProfile = async () => {
       const { data } = await supabase
-        .from('projects')
-        .select('id')
-        .eq('client_user_id', user.id)
-        .limit(1)
+        .from('profiles')
+        .select('full_name, email')
+        .eq('id', user.id)
         .single();
-      if (data) setProjectId(data.id);
+      if (data) setProfile(data);
     };
-    fetchProject();
+    fetchProfile();
   }, [user]);
 
   // Load last seen timestamp and count unread admin messages
@@ -74,7 +72,6 @@ export default function ClientPortal() {
     setLastSeenMessages(stored);
 
     const fetchUnread = async () => {
-      // Get client's projects
       const { data: projects } = await supabase
         .from('projects')
         .select('id')
@@ -84,7 +81,6 @@ export default function ClientPortal() {
       
       const projectIds = projects.map(p => p.id);
       
-      // Count admin messages newer than last seen
       let query = supabase
         .from('project_messages')
         .select('id', { count: 'exact', head: true })
@@ -101,7 +97,6 @@ export default function ClientPortal() {
 
     fetchUnread();
 
-    // Subscribe to new messages
     const channel = supabase
       .channel('client-unread-messages')
       .on('postgres_changes', { 
@@ -132,6 +127,12 @@ export default function ClientPortal() {
     navigate('/');
   };
 
+  const getDisplayName = () => {
+    if (profile?.full_name) return profile.full_name.split(' ')[0];
+    if (user?.email) return user.email.split('@')[0];
+    return 'kund';
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -141,6 +142,9 @@ export default function ClientPortal() {
   }
 
   if (!user) return null;
+
+  const prominentTabs = tabs.filter(t => t.prominent);
+  const secondaryTabs = tabs.filter(t => !t.prominent);
 
   return (
     <div className="min-h-screen bg-background">
@@ -157,7 +161,7 @@ export default function ClientPortal() {
         </div>
 
         <nav className="flex-1 p-4 space-y-1">
-          {tabs.map(tab => {
+          {prominentTabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
             const showBadge = tab.id === 'messages' && unreadMessages > 0;
@@ -183,6 +187,29 @@ export default function ClientPortal() {
               </button>
             );
           })}
+
+          {/* Secondary tabs - less prominent */}
+          <div className="pt-4 mt-4 border-t border-border/20">
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wider px-4 mb-2">Övrigt</p>
+            {secondaryTabs.map(tab => {
+              const Icon = tab.icon;
+              const active = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-xs transition-all ${
+                    active
+                      ? 'bg-muted/50 text-foreground'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
         </nav>
 
         <div className="p-4 border-t border-border/30 space-y-1">
@@ -216,7 +243,7 @@ export default function ClientPortal() {
           </div>
         </div>
         <div className="flex gap-1 mt-3 overflow-x-auto pb-1">
-          {tabs.map(tab => {
+          {prominentTabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
             const showBadge = tab.id === 'messages' && unreadMessages > 0;
@@ -235,6 +262,19 @@ export default function ClientPortal() {
               </button>
             );
           })}
+          {secondaryTabs.map(tab => {
+            const Icon = tab.icon;
+            const active = activeTab === tab.id;
+            return (
+              <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
+                  active ? 'bg-muted/50 text-foreground' : 'text-muted-foreground/70'
+                }`}>
+                <Icon className="w-3 h-3" />
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
       </header>
 
@@ -247,9 +287,11 @@ export default function ClientPortal() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h2 className="text-lg font-serif text-foreground mb-2">Välkommen till din projektportal</h2>
+            <h2 className="text-lg font-serif text-foreground mb-2">
+              Välkommen, {getDisplayName()}.
+            </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Här ser du alltid aktuell status på ditt projekt. Vi använder AI för att bygga din lösning effektivt — det betyder snabbare uppdateringar och färre buggar. Skicka önskemål, ladda upp material och följ framstegen i realtid.
+              Ditt projekt är igång — följ framstegen nedan och skicka önskemål direkt.
             </p>
           </motion.div>
         )}
@@ -263,10 +305,7 @@ export default function ClientPortal() {
           {activeTab === 'dashboard' && <ProjectStatus />}
           {activeTab === 'requests' && <ClientRequests />}
           {activeTab === 'messages' && <ClientMessages />}
-          {activeTab === 'ai' && projectId && <AIAssistant projectId={projectId} />}
-          {activeTab === 'files' && <ClientFileUpload />}
           {activeTab === 'log' && <StatusLog />}
-          {activeTab === 'todos' && <TodoList />}
         </motion.div>
       </main>
     </div>
