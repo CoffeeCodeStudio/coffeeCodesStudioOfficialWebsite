@@ -4,7 +4,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import djloboMockup from '@/assets/djlobo-mockup.jpg';
+import djloboScreenshot from '@/assets/djlobo-screenshot.png';
 
 export function ProjektSection() {
   const { t } = useLanguage();
