@@ -1,13 +1,24 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, MessageCirclePlus, Clock, CheckCircle2, AlertCircle, Bug, Zap, Sparkles, HelpCircle, ArrowUp, Minus, Flame } from 'lucide-react';
+import { Send, MessageCirclePlus, Clock, CheckCircle2, AlertCircle, Bug, Zap, Sparkles, HelpCircle, ArrowUp, Minus, Flame, X, Ban } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 import { sv } from 'date-fns/locale';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface ClientRequest {
   id: string;
@@ -46,6 +57,7 @@ const statusIcons: Record<string, typeof Clock> = {
   in_progress: Zap,
   review_ready: CheckCircle2,
   delivered: CheckCircle2,
+  cancelled: Ban,
 };
 
 const statusLabels: Record<string, string> = {
@@ -54,6 +66,7 @@ const statusLabels: Record<string, string> = {
   in_progress: 'Pågår',
   review_ready: 'Klar för granskning',
   delivered: 'Levererad',
+  cancelled: 'Avbruten',
 };
 
 const statusColors: Record<string, string> = {
@@ -62,6 +75,7 @@ const statusColors: Record<string, string> = {
   in_progress: 'text-primary',
   review_ready: 'text-accent',
   delivered: 'text-accent',
+  cancelled: 'text-destructive/60',
 };
 
 const packageLabels: Record<string, string> = {
@@ -111,7 +125,7 @@ export function ClientRequests() {
     return () => { supabase.removeChannel(channel); };
   }, []);
 
-  // Calculate quota for current month
+  // Calculate quota for current month (excluding cancelled)
   const getQuotaInfo = () => {
     const now = new Date();
     const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -119,7 +133,9 @@ export function ClientRequests() {
     if (!proj) return { used: 0, total: 3, remaining: 3, packageName: 'Bas' };
 
     const used = requests.filter(r =>
-      r.project_id === proj.id && new Date(r.created_at) >= monthStart
+      r.project_id === proj.id && 
+      new Date(r.created_at) >= monthStart &&
+      r.status !== 'cancelled'
     ).length;
 
     return {
@@ -172,11 +188,117 @@ export function ClientRequests() {
     }
   };
 
+  const handleCancel = async (requestId: string) => {
+    const { error } = await supabase
+      .from('client_requests')
+      .update({ status: 'cancelled' })
+      .eq('id', requestId);
+
+    if (error) {
+      toast({ title: 'Fel', description: error.message, variant: 'destructive' });
+    } else {
+      setRequests(prev => prev.map(r => r.id === requestId ? { ...r, status: 'cancelled' } : r));
+      toast({ title: 'Ärendet avbrutet', description: 'Ditt önskemål har dragits tillbaka.' });
+    }
+  };
+
   const projectMap = Object.fromEntries(projects.map(p => [p.id, p.name]));
+
+  // Separate active and cancelled requests
+  const activeRequests = requests.filter(r => r.status !== 'cancelled');
+  const cancelledRequests = requests.filter(r => r.status === 'cancelled');
 
   if (loading) {
     return <div className="flex justify-center py-20"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>;
   }
+
+  const RequestCard = ({ req, index, showCancelButton = false }: { req: ClientRequest; index: number; showCancelButton?: boolean }) => {
+    const StatusIcon = statusIcons[req.status] || Clock;
+    const catInfo = categories.find(c => c.value === req.category);
+    const CatIcon = catInfo?.icon || HelpCircle;
+    const prioInfo = priorities.find(p => p.value === req.priority);
+    const isCancelled = req.status === 'cancelled';
+
+    return (
+      <motion.div
+        key={req.id}
+        className={`glass-card p-4 rounded-xl ${isCancelled ? 'opacity-60' : ''}`}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.04 }}
+        layout
+      >
+        <div className="flex items-start justify-between gap-3 mb-2">
+          <div className="flex items-center gap-2 text-xs flex-wrap">
+            <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+              <CatIcon className="w-3 h-3" />
+              {catInfo?.label || req.category}
+            </span>
+            {prioInfo && req.priority !== 'normal' && (
+              <span className={`flex items-center gap-1 px-2 py-0.5 rounded-full font-medium ${
+                req.priority === 'urgent' ? 'bg-destructive/10 text-destructive' : 'bg-muted/50 text-muted-foreground'
+              }`}>
+                <prioInfo.icon className="w-3 h-3" />
+                {prioInfo.label}
+              </span>
+            )}
+            <span className="text-muted-foreground">{projectMap[req.project_id] || 'Projekt'}</span>
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex items-center gap-1.5 text-xs">
+              <StatusIcon className={`w-3 h-3 ${statusColors[req.status] || 'text-muted-foreground'}`} />
+              <span className={statusColors[req.status] || 'text-muted-foreground'}>
+                {statusLabels[req.status] || req.status}
+              </span>
+            </div>
+            {showCancelButton && req.status === 'pending' && (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 px-2 text-xs text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                  >
+                    <X className="w-3 h-3 mr-1" />
+                    Avbryt
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Avbryta önskemål?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Är du säker på att du vill dra tillbaka detta önskemål? Det kommer flyttas till avbrutna ärenden och räknas inte mot din kvot.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Behåll</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => handleCancel(req.id)}
+                      className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                    >
+                      Avbryt önskemål
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
+          </div>
+        </div>
+        <p className={`text-sm leading-relaxed ${isCancelled ? 'text-muted-foreground line-through' : 'text-foreground'}`}>
+          {req.message}
+        </p>
+        {req.admin_response && (
+          <div className="bg-primary/5 border border-primary/10 rounded-lg p-3 mt-2">
+            <p className="text-[10px] text-primary font-medium mb-1">Svar från oss:</p>
+            <p className="text-sm text-foreground">{req.admin_response}</p>
+          </div>
+        )}
+        <p className="text-[10px] text-muted-foreground mt-2">
+          {format(new Date(req.created_at), 'd MMM yyyy HH:mm', { locale: sv })}
+        </p>
+      </motion.div>
+    );
+  };
 
   return (
     <div className="space-y-6">
@@ -301,8 +423,8 @@ export function ClientRequests() {
         </Button>
       </div>
 
-      {/* Requests list */}
-      {requests.length === 0 ? (
+      {/* Active Requests list */}
+      {activeRequests.length === 0 && cancelledRequests.length === 0 ? (
         <div className="glass-card p-12 rounded-2xl text-center">
           <MessageCirclePlus className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
           <p className="text-muted-foreground mb-4">Du har inte skickat några önskemål ännu.</p>
@@ -312,61 +434,32 @@ export function ClientRequests() {
           </Button>
         </div>
       ) : (
-        <div className="space-y-3">
-          <AnimatePresence>
-            {requests.map((req, i) => {
-              const StatusIcon = statusIcons[req.status] || Clock;
-              const catInfo = categories.find(c => c.value === req.category);
-              const CatIcon = catInfo?.icon || HelpCircle;
-              const prioInfo = priorities.find(p => p.value === req.priority);
+        <>
+          {activeRequests.length > 0 && (
+            <div className="space-y-3">
+              <h3 className="text-sm font-medium text-muted-foreground">Aktiva ärenden ({activeRequests.length})</h3>
+              <AnimatePresence>
+                {activeRequests.map((req, i) => (
+                  <RequestCard key={req.id} req={req} index={i} showCancelButton={true} />
+                ))}
+              </AnimatePresence>
+            </div>
+          )}
 
-              return (
-                <motion.div
-                  key={req.id}
-                  className="glass-card p-4 rounded-xl"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.04 }}
-                  layout
-                >
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <div className="flex items-center gap-2 text-xs flex-wrap">
-                      <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
-                        <CatIcon className="w-3 h-3" />
-                        {catInfo?.label || req.category}
-                      </span>
-                      {prioInfo && req.priority !== 'normal' && (
-                        <span className={`flex items-center gap-1 px-2 py-0.5 rounded-full font-medium ${
-                          req.priority === 'urgent' ? 'bg-destructive/10 text-destructive' : 'bg-muted/50 text-muted-foreground'
-                        }`}>
-                          <prioInfo.icon className="w-3 h-3" />
-                          {prioInfo.label}
-                        </span>
-                      )}
-                      <span className="text-muted-foreground">{projectMap[req.project_id] || 'Projekt'}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs flex-shrink-0">
-                      <StatusIcon className={`w-3 h-3 ${statusColors[req.status] || 'text-muted-foreground'}`} />
-                      <span className={statusColors[req.status] || 'text-muted-foreground'}>
-                        {statusLabels[req.status] || req.status}
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-foreground leading-relaxed">{req.message}</p>
-                  {req.admin_response && (
-                    <div className="bg-primary/5 border border-primary/10 rounded-lg p-3 mt-2">
-                      <p className="text-[10px] text-primary font-medium mb-1">Svar från oss:</p>
-                      <p className="text-sm text-foreground">{req.admin_response}</p>
-                    </div>
-                  )}
-                  <p className="text-[10px] text-muted-foreground mt-2">
-                    {format(new Date(req.created_at), 'd MMM yyyy HH:mm', { locale: sv })}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </div>
+          {cancelledRequests.length > 0 && (
+            <div className="space-y-3 pt-4 border-t border-border/20">
+              <h3 className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                <Ban className="w-4 h-4" />
+                Avbrutna ärenden ({cancelledRequests.length})
+              </h3>
+              <AnimatePresence>
+                {cancelledRequests.map((req, i) => (
+                  <RequestCard key={req.id} req={req} index={i} showCancelButton={false} />
+                ))}
+              </AnimatePresence>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
