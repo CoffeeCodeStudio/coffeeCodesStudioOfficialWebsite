@@ -4,7 +4,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import djloboMockup from '@/assets/djlobo-mockup.jpg';
+import djloboScreenshot from '@/assets/djlobo-screenshot.png';
 
 export function ProjektSection() {
   const { t } = useLanguage();
@@ -38,7 +38,7 @@ export function ProjektSection() {
         >
           <div className="relative">
             <img
-              src={djloboMockup}
+              src={djloboScreenshot}
               alt="djloboproducciones.com - DJ Lobo Producciones website screenshot"
               className="w-full h-auto object-cover"
               loading="lazy"
