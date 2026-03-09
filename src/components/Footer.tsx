@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Linkedin, Github } from 'lucide-react';
 import { Logo } from './Navbar';
 
 export function Footer() {
@@ -14,37 +13,12 @@ export function Footer() {
 
           <div className="flex items-center">
             <a 
-              href="mailto:CoffeeCodeStudios@gmail.com"
+              href="mailto:hej@coffeecodestudio.se"
               className="text-muted-foreground hover:text-primary transition-colors text-sm text-center"
               rel="noopener noreferrer"
             >
-              CoffeeCodeStudios@gmail.com
+              hej@coffeecodestudio.se
             </a>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <motion.a
-              href="#"
-              className="w-11 h-11 sm:w-10 sm:h-10 glass-card rounded-full flex items-center justify-center text-muted-foreground hover:text-primary active:bg-primary/10 transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              rel="noopener noreferrer"
-              target="_blank"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              href="#"
-              className="w-11 h-11 sm:w-10 sm:h-10 glass-card rounded-full flex items-center justify-center text-muted-foreground hover:text-primary active:bg-primary/10 transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              rel="noopener noreferrer"
-              target="_blank"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5" />
-            </motion.a>
           </div>
         </div>
 
