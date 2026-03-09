@@ -1,9 +1,8 @@
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/HeroSection';
-import { ProblemSection } from '@/components/ProblemSection';
-import { ProcessSection } from '@/components/ProcessSection';
-import { PortfolioSection } from '@/components/PortfolioSection';
+import { TjansterSection } from '@/components/TjansterSection';
+import { ProjektSection } from '@/components/ProjektSection';
 import { PricingSection } from '@/components/PricingSection';
 import { AboutSection } from '@/components/AboutSection';
 import { ContactSection } from '@/components/ContactSection';
@@ -16,9 +15,8 @@ const Index = () => {
         <Navbar />
         <main>
           <HeroSection />
-          <ProblemSection />
-          <ProcessSection />
-          <PortfolioSection />
+          <TjansterSection />
+          <ProjektSection />
           <PricingSection />
           <AboutSection />
           <ContactSection />
