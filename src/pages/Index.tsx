@@ -3,6 +3,7 @@ import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/HeroSection';
 import { TjansterSection } from '@/components/TjansterSection';
 import { ProjektSection } from '@/components/ProjektSection';
+import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { PricingSection } from '@/components/PricingSection';
 import { AboutSection } from '@/components/AboutSection';
 import { ContactSection } from '@/components/ContactSection';
