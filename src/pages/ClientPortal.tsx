@@ -201,13 +201,19 @@ export default function ClientPortal() {
           {tabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
+            const showBadge = tab.id === 'messages' && unreadMessages > 0;
             return (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
+                className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
                   active ? 'bg-primary/15 text-primary border border-primary/20' : 'text-muted-foreground'
                 }`}>
                 <Icon className="w-3 h-3" />
                 {tab.label}
+                {showBadge && (
+                  <span className="absolute -top-1 -right-1 h-4 min-w-4 px-1 rounded-full bg-destructive text-destructive-foreground text-[9px] flex items-center justify-center">
+                    {unreadMessages > 9 ? '9+' : unreadMessages}
+                  </span>
+                )}
               </button>
             );
           })}
