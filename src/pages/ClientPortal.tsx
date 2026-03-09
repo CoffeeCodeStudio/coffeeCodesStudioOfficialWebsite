@@ -13,7 +13,7 @@ import { AIAssistant } from '@/components/portal/AIAssistant';
 import { ClientSettings } from '@/components/portal/ClientSettings';
 import type { User } from '@supabase/supabase-js';
 
-type Tab = 'dashboard' | 'requests' | 'messages' | 'ai' | 'log';
+type Tab = 'dashboard' | 'requests' | 'messages' | 'ai' | 'log' | 'settings';
 
 const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard; prominent?: boolean }[] = [
   { id: 'dashboard', label: 'Status', icon: LayoutDashboard, prominent: true },
