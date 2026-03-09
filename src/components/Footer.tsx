@@ -7,7 +7,7 @@ export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="py-8 sm:py-12 border-t border-white/5">
+    <footer className="py-8 sm:py-12 border-t border-white/5" role="contentinfo">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col items-center gap-6 sm:gap-8 md:flex-row md:justify-between">
           <Logo />
