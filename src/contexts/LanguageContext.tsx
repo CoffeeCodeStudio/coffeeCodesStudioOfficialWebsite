@@ -159,7 +159,7 @@ const translations: Record<Language, Translations> = {
       headline: 'Webbutveckling med AI-precision.',
       subheadline: 'Snabbare leverans, högre kvalitet. Vi bygger skräddarsydda webbappar med AI-driven utveckling — från idé till lansering.',
       cta: 'Boka en Digital Kaffe',
-      promo: 'Founding Partner Program: 20% rabatt för våra tre första kunder!',
+      promo: 'Nu tar vi emot nya kunder — boka ett kostnadsfritt samtal idag',
       planning: 'Planering',
       solution: 'Lösning',
     },
