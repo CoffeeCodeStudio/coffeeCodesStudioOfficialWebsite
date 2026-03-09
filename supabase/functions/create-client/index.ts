@@ -41,11 +41,9 @@ Deno.serve(async (req) => {
 
     // Use inviteUserByEmail instead of createUser
     // This sends an invite email with a link to set password
-    const redirectUrl = Deno.env.get("SUPABASE_URL")?.replace('.supabase.co', '.lovable.app') || 'https://coffeecodestudio.lovable.app';
-    
     const { data: inviteData, error: inviteError } = await supabaseAdmin.auth.admin.inviteUserByEmail(email, {
       data: { full_name },
-      redirectTo: `${redirectUrl}/set-password`,
+      redirectTo: 'https://coffeecodestudio.lovable.app/set-password',
     });
 
     if (inviteError) throw inviteError;
