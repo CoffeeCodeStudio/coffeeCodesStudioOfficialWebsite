@@ -7,7 +7,7 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-[calc(100vh-2rem)] flex flex-col items-center justify-center pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden">
+    <section className="relative min-h-[calc(100vh-2rem)] flex flex-col items-center justify-center pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden" aria-label="Hero">
       {/* Animated background */}
       <div className="absolute inset-0 code-bg" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />

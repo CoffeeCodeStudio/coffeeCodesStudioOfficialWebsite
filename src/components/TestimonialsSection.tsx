@@ -40,8 +40,11 @@ export function TestimonialsSection() {
               >
                 <img
                   src={t.image}
-                  alt={t.name}
+                  alt={`Kundomdöme från ${t.name}`}
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  width="80"
+                  height="80"
                 />
               </motion.div>
 
