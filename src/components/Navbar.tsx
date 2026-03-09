@@ -78,11 +78,9 @@ export function Navbar() {
   const navItems = [
     { label: t.nav.services, href: '#services' },
     { label: t.nav.projects, href: '#projects' },
-    { label: t.nav.process, href: '#process' },
     { label: t.nav.pricing, href: '#pricing' },
     { label: t.nav.about, href: '#about' },
     { label: t.nav.contact, href: '#contact' },
-    { label: t.nav.portal, href: '/portal/login', isRoute: true },
   ];
 
   // Close menu when clicking outside or pressing escape

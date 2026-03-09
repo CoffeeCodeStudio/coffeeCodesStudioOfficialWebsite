@@ -389,25 +389,25 @@ const translations: Record<Language, Translations> = {
       },
     },
     portfolio: {
-      headline: 'Projects We\'ve Brewed: Real Solutions, Real Impact.',
-      intro: 'Explore a selection of our recent web application projects, showcasing our versatility and commitment to delivering tangible results.',
-      viewDemo: 'View Live Demo',
+      headline: 'Projects',
+      intro: 'Real solutions we have delivered.',
+      viewDemo: 'Visit Site',
       explorePrototype: 'Explore the Prototype',
       seeDesign: 'See Design Concepts',
       project1: {
-        name: 'SnapRecipe',
-        category: 'AI Powered Meal Planning',
-        description: 'Developed a fully-featured web application to streamline client interactions, project tracking, and automated reporting, significantly enhancing operational efficiency.',
+        name: 'djloboproducciones.com',
+        category: 'Web Consolidation',
+        description: 'Consolidated two separate sites into one — simpler for visitors and cheaper to maintain.',
       },
       project2: {
         name: 'FlowState FM',
         category: 'Focus Music Dashboard',
-        description: 'Architected and built a scalable prototype for a next-generation SaaS platform, focusing on intuitive UX and high-performance data visualization.',
+        description: 'Architected and built a scalable prototype for a next-generation SaaS platform.',
       },
       project3: {
         name: 'SnapCode CMS',
         category: 'Content Management System',
-        description: 'Designed and developed an internal web application to optimize content management, reducing manual effort and improving data accuracy.',
+        description: 'Designed and developed an internal web application to optimize content management.',
       },
     },
     about: {
