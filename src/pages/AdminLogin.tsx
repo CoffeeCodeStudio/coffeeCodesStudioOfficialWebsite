@@ -18,10 +18,18 @@ export default function AdminLogin() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
+      setLoading(false);
       toast({ title: 'Inloggning misslyckades', description: error.message, variant: 'destructive' });
+      return;
+    }
+    // Verify admin role before redirect
+    const { data: isAdmin } = await supabase.rpc('has_role', { _user_id: data.user.id, _role: 'admin' });
+    setLoading(false);
+    if (!isAdmin) {
+      await supabase.auth.signOut();
+      toast({ title: 'Åtkomst nekad', description: 'Det här kontot har inte adminbehörighet.', variant: 'destructive' });
     } else {
       navigate('/admin');
     }
