@@ -502,7 +502,7 @@ const translations: Record<Language, Translations> = {
           name: 'Basic',
           price: '499',
           description: 'Perfect for minor maintenance and ongoing adjustments.',
-          features: ['3 requests per month', 'Response within 48 hours', 'Email support', 'Basic maintenance'],
+          features: ['3 requests per month', 'Response within 48 hours', 'Email support', 'Client portal with project overview'],
         },
         standard: {
           name: 'Standard',
