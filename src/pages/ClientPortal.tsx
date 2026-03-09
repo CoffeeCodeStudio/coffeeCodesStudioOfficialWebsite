@@ -10,6 +10,7 @@ import { ClientRequests } from '@/components/portal/ClientRequests';
 import { ClientMessages } from '@/components/portal/ClientMessages';
 import { StatusLog } from '@/components/portal/StatusLog';
 import { AIAssistant } from '@/components/portal/AIAssistant';
+import { ClientSettings } from '@/components/portal/ClientSettings';
 import type { User } from '@supabase/supabase-js';
 
 type Tab = 'dashboard' | 'requests' | 'messages' | 'ai' | 'log';
