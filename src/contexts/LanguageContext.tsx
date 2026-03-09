@@ -346,6 +346,14 @@ const translations: Record<Language, Translations> = {
           features: ['Obegränsade ärenden', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Realtidschat & fildelning', 'Månatlig statusrapport'],
         },
       },
+      oneTime: {
+        title: 'Engångsprojekt',
+        price: '4 900',
+        note: 'Pris från 4 900 kr — komplexa projekt offereras individuellt efter konsultation.',
+        description: 'Skräddarsydda webbapplikationer från grunden, med fast pris och tydlig leverans.',
+        features: ['Responsiv design', 'SEO-optimerad', 'Kundportal ingår', 'Efterföljande support tillgänglig'],
+        cta: 'Boka konsultation',
+      },
       paymentMethods: {
         invoice: { name: 'Kontant / Faktura' },
         card: { name: 'Kort' },
