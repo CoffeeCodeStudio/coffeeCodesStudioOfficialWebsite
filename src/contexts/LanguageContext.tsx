@@ -173,6 +173,7 @@ const translations: Record<Language, Translations> = {
       services: 'Tjänster',
       projects: 'Projekt',
       process: 'Process',
+      pricing: 'Priser',
       about: 'Om oss',
       contact: 'Kontakt',
       portal: 'Kundportal',
