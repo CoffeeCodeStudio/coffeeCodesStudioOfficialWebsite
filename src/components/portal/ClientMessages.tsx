@@ -31,7 +31,8 @@ export function ClientMessages() {
       {projects.length === 0 ? (
         <div className="glass-card p-12 rounded-2xl text-center">
           <MessageCircle className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-          <p className="text-muted-foreground">Inga projekt ännu.</p>
+          <p className="text-muted-foreground mb-4">Inga projekt ännu.</p>
+          <p className="text-xs text-muted-foreground">När ditt projekt har skapats kan du chatta direkt med oss här.</p>
         </div>
       ) : (
         <div className="space-y-6">

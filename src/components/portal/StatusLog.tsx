@@ -163,6 +163,9 @@ export function StatusLog() {
           <p className="text-muted-foreground mb-4">
             {hasFilters ? 'Inga aktiviteter matchar din sökning.' : 'Inga uppdateringar ännu.'}
           </p>
+          <p className="text-xs text-muted-foreground mb-4">
+            {hasFilters ? '' : 'Aktiviteter loggas automatiskt när saker händer i ditt projekt.'}
+          </p>
           {hasFilters && (
             <Button variant="outline" size="sm" onClick={clearFilters}>
               Rensa filter
