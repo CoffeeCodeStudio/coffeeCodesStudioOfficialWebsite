@@ -21,6 +21,7 @@ const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard; prominent?: 
   { id: 'messages', label: 'Meddelanden', icon: MessageCircle, prominent: true },
   { id: 'ai', label: 'AI-hjälp', icon: Sparkles, prominent: true },
   { id: 'log', label: 'Aktivitet', icon: History, prominent: false },
+  { id: 'settings', label: 'Inställningar', icon: Settings, prominent: false },
 ];
 
 interface Profile {
