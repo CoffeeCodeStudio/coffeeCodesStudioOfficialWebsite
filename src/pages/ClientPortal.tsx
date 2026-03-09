@@ -67,6 +67,21 @@ export default function ClientPortal() {
     fetchProfile();
   }, [user]);
 
+  // Fetch the client's project ID for AI assistant
+  useEffect(() => {
+    if (!user) return;
+    const fetchProjectId = async () => {
+      const { data } = await supabase
+        .from('projects')
+        .select('id')
+        .eq('client_user_id', user.id)
+        .limit(1)
+        .single();
+      if (data) setProjectId(data.id);
+    };
+    fetchProjectId();
+  }, [user]);
+
   // Load last seen timestamp and count unread admin messages
   useEffect(() => {
     if (!user) return;
