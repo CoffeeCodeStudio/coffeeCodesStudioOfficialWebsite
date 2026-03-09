@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
-import { Send, MessageSquare, RefreshCw, FileUp, MessageCircle, ClipboardList, PenLine } from 'lucide-react';
-import { format } from 'date-fns';
+import { Send, MessageSquare, RefreshCw, FileUp, MessageCircle, ClipboardList, PenLine, Search, CalendarIcon, X } from 'lucide-react';
+import { format, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
 import { sv } from 'date-fns/locale';
+import { cn } from '@/lib/utils';
 
 interface Project { id: string; name: string; }
 interface LogEntry { id: string; message: string; author_name: string; created_at: string; project_id: string; event_type: string; }
@@ -27,6 +30,8 @@ export function AdminStatusLog() {
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
   const [filterType, setFilterType] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({ from: undefined, to: undefined });
   const { toast } = useToast();
 
   useEffect(() => {
@@ -39,7 +44,6 @@ export function AdminStatusLog() {
     });
   }, []);
 
-  // Realtime
   useEffect(() => {
     const channel = supabase
       .channel('admin-status-logs-realtime')
@@ -53,7 +57,7 @@ export function AdminStatusLog() {
   const handleSend = async () => {
     if (!message.trim() || !selectedProject) return;
     setSending(true);
-    const { data, error } = await supabase.from('status_logs').insert({
+    const { error } = await supabase.from('status_logs').insert({
       project_id: selectedProject,
       message: message.trim(),
       author_name: 'Admin',
@@ -69,7 +73,35 @@ export function AdminStatusLog() {
   };
 
   const projectMap = Object.fromEntries(projects.map(p => [p.id, p.name]));
-  const filteredLogs = filterType === 'all' ? logs : logs.filter(l => l.event_type === filterType);
+
+  const filteredLogs = useMemo(() => {
+    return logs.filter(log => {
+      // Event type filter
+      if (filterType !== 'all' && log.event_type !== filterType) return false;
+      
+      // Search filter
+      const query = searchQuery.toLowerCase();
+      const matchesSearch = !query || 
+        log.message.toLowerCase().includes(query) ||
+        log.author_name.toLowerCase().includes(query) ||
+        (projectMap[log.project_id] || '').toLowerCase().includes(query);
+      
+      // Date filter
+      const logDate = new Date(log.created_at);
+      const matchesDate = (!dateRange.from || !dateRange.to) ||
+        isWithinInterval(logDate, { start: startOfDay(dateRange.from), end: endOfDay(dateRange.to) });
+      
+      return matchesSearch && matchesDate;
+    });
+  }, [logs, filterType, searchQuery, dateRange, projectMap]);
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setFilterType('all');
+    setDateRange({ from: undefined, to: undefined });
+  };
+
+  const hasFilters = searchQuery || filterType !== 'all' || dateRange.from || dateRange.to;
 
   return (
     <div className="space-y-6">
@@ -96,8 +128,63 @@ export function AdminStatusLog() {
         </div>
       </div>
 
-      {/* Filter */}
-      <div className="flex gap-2 flex-wrap">
+      {/* Search and Date Filter */}
+      <div className="glass-card p-4 rounded-2xl">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              placeholder="Sök i aktiviteter..."
+              className="pl-10 bg-muted/50 border-border/50"
+            />
+          </div>
+          
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className={cn(
+                "justify-start text-left font-normal bg-muted/50 border-border/50 min-w-[200px]",
+                !dateRange.from && "text-muted-foreground"
+              )}>
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {dateRange.from ? (
+                  dateRange.to ? (
+                    <>
+                      {format(dateRange.from, "d MMM", { locale: sv })} - {format(dateRange.to, "d MMM", { locale: sv })}
+                    </>
+                  ) : (
+                    format(dateRange.from, "d MMM yyyy", { locale: sv })
+                  )
+                ) : (
+                  <span>Välj datumintervall</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                initialFocus
+                mode="range"
+                defaultMonth={dateRange.from}
+                selected={{ from: dateRange.from, to: dateRange.to }}
+                onSelect={(range) => setDateRange({ from: range?.from, to: range?.to })}
+                numberOfMonths={1}
+                className="p-3 pointer-events-auto"
+              />
+            </PopoverContent>
+          </Popover>
+
+          {hasFilters && (
+            <Button variant="ghost" size="sm" onClick={clearFilters} className="text-muted-foreground hover:text-foreground">
+              <X className="w-4 h-4 mr-1" />
+              Rensa
+            </Button>
+          )}
+        </div>
+      </div>
+
+      {/* Event type filter */}
+      <div className="flex gap-2 flex-wrap items-center">
         {[{ value: 'all', label: 'Alla' }, ...Object.entries(eventConfig).map(([k, v]) => ({ value: k, label: v.label }))].map(f => (
           <button key={f.value} onClick={() => setFilterType(f.value)}
             className={`px-3 py-1.5 rounded-full text-xs transition-all border ${
@@ -108,6 +195,12 @@ export function AdminStatusLog() {
             {f.label}
           </button>
         ))}
+        
+        {hasFilters && (
+          <span className="text-xs text-muted-foreground ml-2">
+            {filteredLogs.length} av {logs.length}
+          </span>
+        )}
       </div>
 
       {/* Log entries */}
@@ -136,7 +229,14 @@ export function AdminStatusLog() {
           );
         })}
         {filteredLogs.length === 0 && (
-          <div className="text-center text-muted-foreground py-8 text-sm">Inga aktiviteter att visa.</div>
+          <div className="text-center text-muted-foreground py-8 text-sm">
+            {hasFilters ? 'Inga aktiviteter matchar filtren.' : 'Inga aktiviteter att visa.'}
+            {hasFilters && (
+              <Button variant="link" size="sm" onClick={clearFilters} className="ml-2">
+                Rensa filter
+              </Button>
+            )}
+          </div>
         )}
       </div>
     </div>
