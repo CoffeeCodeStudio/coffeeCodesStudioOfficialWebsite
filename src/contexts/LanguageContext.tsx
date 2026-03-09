@@ -7,6 +7,7 @@ interface Translations {
     services: string;
     projects: string;
     process: string;
+    pricing: string;
     about: string;
     contact: string;
     portal: string;
@@ -143,6 +144,27 @@ interface Translations {
     phase3Text: string;
     cta: string;
   };
+  pricing: {
+    headline: string;
+    intro: string;
+    popular: string;
+    perMonth: string;
+    cta: string;
+    comingSoon: string;
+    paymentTitle: string;
+    packages: {
+      bas: { name: string; price: string; description: string; features: string[] };
+      standard: { name: string; price: string; description: string; features: string[] };
+      premium: { name: string; price: string; description: string; features: string[] };
+    };
+    paymentMethods: {
+      invoice: { name: string };
+      card: { name: string };
+      swish: { name: string };
+      paypal: { name: string };
+      crypto: { name: string };
+    };
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -151,6 +173,7 @@ const translations: Record<Language, Translations> = {
       services: 'Tjänster',
       projects: 'Projekt',
       process: 'Process',
+      pricing: 'Priser',
       about: 'Om oss',
       contact: 'Kontakt',
       portal: 'Kundportal',
@@ -287,12 +310,49 @@ const translations: Record<Language, Translations> = {
       phase3Text: 'Vi blir din långsiktiga teknikpartner och hjälper dig att kontinuerligt utveckla din produkt.',
       cta: 'Bli vår partner',
     },
+    pricing: {
+      headline: 'Välj ditt paket',
+      intro: 'Flexibla månadspaket anpassade efter dina behov. Ingen bindningstid.',
+      popular: 'Populärast',
+      perMonth: 'kr/mån',
+      cta: 'Kom igång',
+      comingSoon: 'Kommer snart',
+      paymentTitle: 'Betalningsmetoder',
+      packages: {
+        bas: {
+          name: 'Bas',
+          price: '500',
+          description: 'Perfekt för mindre underhåll och enstaka justeringar.',
+          features: ['1 ärende åt gången', 'Svar inom 48 timmar', 'E-postsupport', 'Grundläggande underhåll'],
+        },
+        standard: {
+          name: 'Standard',
+          price: '1 000',
+          description: 'För företag som behöver löpande utveckling och snabbare respons.',
+          features: ['3 ärenden åt gången', 'Svar inom 24 timmar', 'Prioriterad support', 'Kundportal med projektöversikt'],
+        },
+        premium: {
+          name: 'Premium',
+          price: '2 500',
+          description: 'Full tillgång till utvecklingsresurser med högsta prioritet.',
+          features: ['Obegränsade ärenden', 'Prioriterad köhantering', 'Dedikerad kontaktperson', 'Realtidschat & fildelning', 'Månatlig statusrapport'],
+        },
+      },
+      paymentMethods: {
+        invoice: { name: 'Kontant / Faktura' },
+        card: { name: 'Kort' },
+        swish: { name: 'Swish' },
+        paypal: { name: 'PayPal' },
+        crypto: { name: 'Krypto' },
+      },
+    },
   },
   en: {
     nav: {
       services: 'Services',
       projects: 'Projects',
       process: 'Process',
+      pricing: 'Pricing',
       about: 'About Us',
       contact: 'Contact',
       portal: 'Client Portal',
@@ -428,6 +488,42 @@ const translations: Record<Language, Translations> = {
       phase3Title: 'Partnership',
       phase3Text: 'We become your long-term technology partner, helping you continuously develop your product.',
       cta: 'Become our partner',
+    },
+    pricing: {
+      headline: 'Choose your plan',
+      intro: 'Flexible monthly packages tailored to your needs. No lock-in.',
+      popular: 'Most Popular',
+      perMonth: 'SEK/mo',
+      cta: 'Get started',
+      comingSoon: 'Coming soon',
+      paymentTitle: 'Payment Methods',
+      packages: {
+        bas: {
+          name: 'Basic',
+          price: '500',
+          description: 'Perfect for minor maintenance and occasional adjustments.',
+          features: ['1 request at a time', 'Response within 48 hours', 'Email support', 'Basic maintenance'],
+        },
+        standard: {
+          name: 'Standard',
+          price: '1,000',
+          description: 'For businesses needing ongoing development and faster response.',
+          features: ['3 requests at a time', 'Response within 24 hours', 'Priority support', 'Client portal with project overview'],
+        },
+        premium: {
+          name: 'Premium',
+          price: '2,500',
+          description: 'Full access to development resources with highest priority.',
+          features: ['Unlimited requests', 'Priority queue handling', 'Dedicated contact person', 'Real-time chat & file sharing', 'Monthly status report'],
+        },
+      },
+      paymentMethods: {
+        invoice: { name: 'Invoice / Cash' },
+        card: { name: 'Card' },
+        swish: { name: 'Swish' },
+        paypal: { name: 'PayPal' },
+        crypto: { name: 'Crypto' },
+      },
     },
   },
 };
