@@ -11,6 +11,7 @@ import { ClientMessages } from '@/components/portal/ClientMessages';
 import { StatusLog } from '@/components/portal/StatusLog';
 import { AIAssistant } from '@/components/portal/AIAssistant';
 import { ClientSettings } from '@/components/portal/ClientSettings';
+import { ClientAgreement } from '@/components/portal/ClientAgreement';
 import type { User } from '@supabase/supabase-js';
 
 type Tab = 'dashboard' | 'requests' | 'messages' | 'ai' | 'log' | 'settings';
