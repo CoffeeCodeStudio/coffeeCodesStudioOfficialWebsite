@@ -157,6 +157,14 @@ interface Translations {
       standard: { name: string; price: string; description: string; features: string[] };
       premium: { name: string; price: string; description: string; features: string[] };
     };
+    oneTime: {
+      title: string;
+      price: string;
+      note: string;
+      description: string;
+      features: string[];
+      cta: string;
+    };
     paymentMethods: {
       invoice: { name: string };
       card: { name: string };
