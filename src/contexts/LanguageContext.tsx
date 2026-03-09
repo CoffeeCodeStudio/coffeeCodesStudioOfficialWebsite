@@ -489,6 +489,42 @@ const translations: Record<Language, Translations> = {
       phase3Text: 'We become your long-term technology partner, helping you continuously develop your product.',
       cta: 'Become our partner',
     },
+    pricing: {
+      headline: 'Choose your plan',
+      intro: 'Flexible monthly packages tailored to your needs. No lock-in.',
+      popular: 'Most Popular',
+      perMonth: 'SEK/mo',
+      cta: 'Get started',
+      comingSoon: 'Coming soon',
+      paymentTitle: 'Payment Methods',
+      packages: {
+        bas: {
+          name: 'Basic',
+          price: '500',
+          description: 'Perfect for minor maintenance and occasional adjustments.',
+          features: ['1 request at a time', 'Response within 48 hours', 'Email support', 'Basic maintenance'],
+        },
+        standard: {
+          name: 'Standard',
+          price: '1,000',
+          description: 'For businesses needing ongoing development and faster response.',
+          features: ['3 requests at a time', 'Response within 24 hours', 'Priority support', 'Client portal with project overview'],
+        },
+        premium: {
+          name: 'Premium',
+          price: '2,500',
+          description: 'Full access to development resources with highest priority.',
+          features: ['Unlimited requests', 'Priority queue handling', 'Dedicated contact person', 'Real-time chat & file sharing', 'Monthly status report'],
+        },
+      },
+      paymentMethods: {
+        invoice: { name: 'Invoice / Cash' },
+        card: { name: 'Card' },
+        swish: { name: 'Swish' },
+        paypal: { name: 'PayPal' },
+        crypto: { name: 'Crypto' },
+      },
+    },
   },
 };
 
