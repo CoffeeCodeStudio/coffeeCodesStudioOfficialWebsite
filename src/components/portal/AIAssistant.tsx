@@ -174,19 +174,40 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-          <Sparkles className="w-5 h-5 text-primary" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+            <Sparkles className="w-5 h-5 text-primary" />
+          </div>
+          <div>
+            <h2 className="text-lg font-serif text-foreground">AI-assistent</h2>
+            <p className="text-xs text-muted-foreground">Ställ frågor om ditt projekt</p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-lg font-serif text-foreground">AI-assistent</h2>
-          <p className="text-xs text-muted-foreground">Ställ frågor om ditt projekt</p>
-        </div>
+        {messages.length > 0 && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={clearHistory}
+            className="text-muted-foreground hover:text-destructive"
+          >
+            <Trash2 className="w-4 h-4 mr-1" />
+            Rensa historik
+          </Button>
+        )}
       </div>
 
       <div className="glass-card cyber-border rounded-2xl overflow-hidden">
         <div ref={scrollRef} className="h-[400px] overflow-y-auto p-4 space-y-4">
-          {messages.length === 0 && (
+          {isLoadingHistory ? (
+            <div className="flex items-center justify-center h-full">
+              <div className="flex gap-1">
+                <span className="w-2 h-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <span className="w-2 h-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <span className="w-2 h-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+              </div>
+            </div>
+          ) : messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <Bot className="w-12 h-12 text-muted-foreground/30 mb-3" />
               <p className="text-muted-foreground text-sm">
