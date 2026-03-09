@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Check, Star, Zap, Crown, CreditCard, Banknote, Smartphone, Globe, Bitcoin, Rocket } from 'lucide-react';
+import { Check, Star, Zap, Crown, CreditCard, Banknote, Smartphone, Globe, Bitcoin, Rocket, Info } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
   {
@@ -83,7 +84,19 @@ export function PricingSection() {
                   <Icon className={`w-6 h-6 ${pkg.popular ? 'text-primary' : 'text-muted-foreground'}`} />
                 </div>
 
-                <h3 className="text-xl font-serif text-foreground mb-1">{pkgData.name}</h3>
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-xl font-serif text-foreground">{pkgData.name}</h3>
+                  <TooltipProvider delayDuration={200}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info className="w-4 h-4 text-muted-foreground/60 hover:text-primary cursor-help transition-colors" />
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-[220px] text-xs">
+                        Paketet gäller för webbprojekt byggda av Coffee Code Studio.
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
                 <div className="flex items-baseline gap-1 mb-1">
                   <span className="text-3xl font-bold text-primary">{pkgData.price}</span>
                   <span className="text-muted-foreground text-sm">{p.perMonth}</span>
