@@ -40,16 +40,16 @@ export function HeroSection() {
         )}
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 relative z-10">
         {/* Promo Banner */}
         <motion.div
-          className="flex justify-center mb-6 sm:mb-8"
+          className="flex justify-center mb-5 sm:mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}>
           
-          <div className="glass-card px-4 sm:px-6 py-2.5 sm:py-3 border border-primary/30 rounded-full">
-            <span className="text-xs sm:text-sm text-primary font-medium">
+          <div className="glass-card px-4 sm:px-6 py-2 sm:py-3 border border-primary/30 rounded-full">
+            <span className="text-xs sm:text-sm text-primary font-medium leading-tight">
               ✨ {t.hero.promo}
             </span>
           </div>
@@ -57,7 +57,7 @@ export function HeroSection() {
 
         {/* Main Headline */}
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif text-center max-w-4xl mx-auto leading-tight mb-4 sm:mb-6"
+          className="text-[1.75rem] sm:text-4xl md:text-6xl lg:text-7xl font-serif text-center max-w-4xl mx-auto leading-tight mb-3 sm:mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}>
@@ -67,7 +67,7 @@ export function HeroSection() {
 
         {/* Subheadline */}
         <motion.p
-          className="text-base sm:text-lg md:text-xl text-muted-foreground text-center max-w-2xl mx-auto mb-8 sm:mb-10 px-2"
+          className="text-[0.95rem] sm:text-lg md:text-xl text-muted-foreground text-center max-w-2xl mx-auto mb-7 sm:mb-10 px-1"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}>
@@ -77,7 +77,7 @@ export function HeroSection() {
 
         {/* CTA Button */}
         <motion.div
-          className="flex justify-center mb-12 sm:mb-16"
+          className="flex justify-center mb-10 sm:mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}>
