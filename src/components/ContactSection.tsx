@@ -339,7 +339,10 @@ export function ContactSection() {
                   value={formData.projectType}
                   onValueChange={(value) => handleInputChange('projectType', value)}
                 >
-                  <SelectTrigger className="glass-card border-white/10 bg-input/50 focus:border-primary/50 h-11 sm:h-10 text-base sm:text-sm">
+                  <SelectTrigger
+                    className="glass-card border-white/10 bg-input/50 focus:border-primary/50 h-11 sm:h-10 text-base sm:text-sm"
+                    aria-label={t.contact.projectTypePlaceholder}
+                  >
                     <SelectValue placeholder={t.contact.projectTypePlaceholder} />
                   </SelectTrigger>
                   <SelectContent className="glass-card border-white/10 bg-card z-[9999]">

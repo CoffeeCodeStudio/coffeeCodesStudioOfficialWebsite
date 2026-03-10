@@ -69,6 +69,7 @@ export function Footer() {
                   <Tooltip key={social.label}>
                     <TooltipTrigger asChild>
                       <span
+                        role="img"
                         className="w-10 h-10 rounded-full border border-border/30 bg-muted/30 flex items-center justify-center text-muted-foreground cursor-default transition-all duration-300 hover:border-primary/50 hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_12px_hsl(var(--primary)/0.15)]"
                         aria-label={social.label}
                       >
