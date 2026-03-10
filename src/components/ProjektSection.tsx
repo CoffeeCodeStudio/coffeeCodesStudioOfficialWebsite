@@ -101,6 +101,14 @@ export function ProjektSection() {
               <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
                 {t.portfolio.project2.description}
               </p>
+              <Button
+                variant="outline"
+                className="border-primary/30 text-primary hover:bg-primary/10 w-fit"
+                onClick={() => window.open('https://echo2000.lovable.app/', '_blank')}
+              >
+                {t.portfolio.viewDemo}
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
             </div>
           </motion.div>
         </div>
