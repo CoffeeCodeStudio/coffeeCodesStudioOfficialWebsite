@@ -187,7 +187,7 @@ const translations: Record<Language, Translations> = {
       portal: 'Kundportal',
     },
     hero: {
-      headline: 'Webbutveckling med AI-precision.',
+      headline: 'Din webbsajt på en vecka. På riktigt.',
       subheadline: 'Snabbare leverans, högre kvalitet. Vi bygger skräddarsydda webbappar med AI-driven utveckling — från idé till lansering.',
       cta: 'Boka en Digital Kaffe',
       promo: 'Nu tar vi emot nya kunder — boka ett kostnadsfritt samtal idag',
