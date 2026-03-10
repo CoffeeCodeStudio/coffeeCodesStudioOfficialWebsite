@@ -7,35 +7,35 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-[calc(100vh-2rem)] flex flex-col items-center justify-center pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden" aria-label="Hero">
+    <section className="relative min-h-[calc(100vh-2rem)] flex-col pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden flex items-center justify-center" aria-label="Hero">
       {/* Animated background */}
       <div className="absolute inset-0 code-bg" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+      
       
       {/* Floating code particles - reduced on mobile */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-primary/20 font-mono text-sm hidden sm:block"
-            initial={{ 
-              x: Math.random() * 100 + '%',
-              y: -20,
-              opacity: 0 
-            }}
-            animate={{ 
-              y: '120vh',
-              opacity: [0, 0.5, 0]
-            }}
-            transition={{ 
-              duration: 10 + Math.random() * 10,
-              repeat: Infinity,
-              delay: Math.random() * 5
-            }}
-          >
+        {[...Array(12)].map((_, i) =>
+        <motion.div
+          key={i}
+          className="absolute text-primary/20 font-mono text-sm hidden sm:block"
+          initial={{
+            x: Math.random() * 100 + '%',
+            y: -20,
+            opacity: 0
+          }}
+          animate={{
+            y: '120vh',
+            opacity: [0, 0.5, 0]
+          }}
+          transition={{
+            duration: 10 + Math.random() * 10,
+            repeat: Infinity,
+            delay: Math.random() * 5
+          }}>
+          
             {['{ }', '< />', '( )', '[ ]', '=> ', '...'][Math.floor(Math.random() * 6)]}
           </motion.div>
-        ))}
+        )}
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -44,8 +44,8 @@ export function HeroSection() {
           className="flex justify-center mb-6 sm:mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
+          transition={{ delay: 0.2 }}>
+          
           <div className="glass-card px-4 sm:px-6 py-2.5 sm:py-3 border border-primary/30 rounded-full">
             <span className="text-xs sm:text-sm text-primary font-medium">
               ✨ {t.hero.promo}
@@ -58,8 +58,8 @@ export function HeroSection() {
           className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif text-center max-w-4xl mx-auto leading-tight mb-4 sm:mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
+          transition={{ delay: 0.3 }}>
+          
           <span className="gradient-text">{t.hero.headline}</span>
         </motion.h1>
 
@@ -68,8 +68,8 @@ export function HeroSection() {
           className="text-base sm:text-lg md:text-xl text-muted-foreground text-center max-w-2xl mx-auto mb-8 sm:mb-10 px-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
+          transition={{ delay: 0.4 }}>
+          
           {t.hero.subheadline}
         </motion.p>
 
@@ -78,17 +78,17 @@ export function HeroSection() {
           className="flex justify-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <Button 
-            size="lg" 
+          transition={{ delay: 0.5 }}>
+          
+          <Button
+            size="lg"
             className="glow-button bg-primary text-primary-foreground hover:bg-primary/90 text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full font-medium"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          >
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+            
             {t.hero.cta}
           </Button>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 }
