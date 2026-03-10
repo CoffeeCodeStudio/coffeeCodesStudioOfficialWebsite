@@ -21,13 +21,6 @@ const packages = [
   },
 ];
 
-const paymentMethods = [
-  { key: 'invoice' as const, icon: Banknote, active: true },
-  { key: 'card' as const, icon: CreditCard, active: false },
-  { key: 'swish' as const, icon: Smartphone, active: false },
-  { key: 'paypal' as const, icon: Globe, active: false },
-  { key: 'crypto' as const, icon: Bitcoin, active: false },
-];
 
 export function PricingSection() {
   const { t } = useLanguage();
