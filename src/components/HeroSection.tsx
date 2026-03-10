@@ -10,6 +10,8 @@ export function HeroSection() {
     <section className="relative min-h-[calc(100vh-2rem)] flex-col pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden flex items-center justify-center" aria-label="Hero">
       {/* Animated background */}
       <div className="absolute inset-0 code-bg" />
+      {/* Bottom fade for seamless transition */}
+      <div className="hero-fade-bottom" />
       
       
       {/* Floating code particles - reduced on mobile */}
