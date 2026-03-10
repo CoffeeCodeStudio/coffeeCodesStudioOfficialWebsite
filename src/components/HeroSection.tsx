@@ -88,64 +88,6 @@ export function HeroSection() {
             {t.hero.cta}
           </Button>
         </motion.div>
-
-        {/* Visual Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 max-w-5xl mx-auto">
-          {/* Planning Card */}
-          <motion.div
-            className="glass-card cyber-border p-1 rounded-2xl overflow-hidden"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.6 }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <div className="relative aspect-[4/3] sm:aspect-[4/3] bg-gradient-to-br from-amber-glow/10 to-primary/5 rounded-xl overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center p-6 sm:p-8">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-3 sm:mb-4"><FileText className="w-7 h-7 sm:w-8 sm:h-8 text-primary" /></div>
-                  <div className="glass-card px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg inline-block">
-                    <span className="text-xs sm:text-sm font-mono text-primary">wireframe.tsx</span>
-                  </div>
-                </div>
-              </div>
-              {/* Decorative elements */}
-              <div className="absolute top-3 sm:top-4 left-3 sm:left-4 w-16 sm:w-24 h-16 sm:h-24 border border-primary/20 rounded-lg" />
-              <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 w-12 sm:w-16 h-12 sm:h-16 border border-secondary/20 rounded-full" />
-            </div>
-            <div className="p-3 sm:p-4 text-center">
-              <span className="text-base sm:text-lg font-medium text-foreground">{t.hero.planning}</span>
-            </div>
-          </motion.div>
-
-          {/* Solution Card */}
-          <motion.div
-            className="glass-card cyber-border p-1 rounded-2xl overflow-hidden"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.7 }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <div className="relative aspect-[4/3] sm:aspect-[4/3] bg-gradient-to-br from-secondary/10 to-cyber-blue/5 rounded-xl overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center p-6 sm:p-8">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-secondary/20 flex items-center justify-center mx-auto mb-3 sm:mb-4"><Monitor className="w-7 h-7 sm:w-8 sm:h-8 text-secondary" /></div>
-                  <div className="glass-card px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg inline-block">
-                    <span className="text-xs sm:text-sm font-mono text-secondary">dashboard.tsx</span>
-                  </div>
-                </div>
-              </div>
-              {/* Code lines decoration */}
-              <div className="absolute top-3 sm:top-4 left-3 sm:left-4 space-y-1.5 sm:space-y-2">
-                <div className="w-14 sm:w-20 h-1 bg-accent/30 rounded" />
-                <div className="w-10 sm:w-16 h-1 bg-accent/20 rounded" />
-                <div className="w-16 sm:w-24 h-1 bg-accent/10 rounded" />
-              </div>
-            </div>
-            <div className="p-3 sm:p-4 text-center">
-              <span className="text-base sm:text-lg font-medium text-foreground">{t.hero.solution}</span>
-            </div>
-          </motion.div>
-        </div>
       </div>
     </section>
   );
