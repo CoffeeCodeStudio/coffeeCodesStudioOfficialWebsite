@@ -229,9 +229,9 @@ const translations: Record<Language, Translations> = {
         description: 'En komplett plattform för DJ Lobo — bokningssystem, live radio och mixar på ett ställe. Från idé till live på under en veckFrån idé till live på under en vecka.',
       },
       project2: {
-        name: 'FlowState FM',
-        category: 'Fokusmusik Dashboard',
-        description: 'Arkitekterade och byggde en skalbar prototyp för en nästa generations SaaS-plattform.',
+        name: 'Echo2000',
+        category: 'Personligt projekt',
+        description: 'En nostalgisk svensk community inspirerad av LunarStorm och MSN Messenger — med chatt, profiler, klotterplank och retro-spel.',
       },
       project3: {
         name: 'SnapCode CMS',
@@ -416,9 +416,9 @@ const translations: Record<Language, Translations> = {
         description: 'A complete platform for DJ Lobo — booking system, live radio and mixes in one place. From idea to live in under a week.',
       },
       project2: {
-        name: 'FlowState FM',
-        category: 'Focus Music Dashboard',
-        description: 'Architected and built a scalable prototype for a next-generation SaaS platform.',
+        name: 'Echo2000',
+        category: 'Personal Project',
+        description: 'A nostalgic Swedish community inspired by LunarStorm and MSN Messenger — with chat, profiles, guestbooks, and retro games.',
       },
       project3: {
         name: 'SnapCode CMS',

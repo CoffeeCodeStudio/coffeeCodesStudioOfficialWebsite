@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import djloboScreenshot from '@/assets/djlobo-screenshot.webp';
+import echo2000Screenshot from '@/assets/echo2000-screenshot.png';
 
 export function ProjektSection() {
   const { t } = useLanguage();
@@ -28,48 +29,81 @@ export function ProjektSection() {
           </p>
         </motion.div>
 
-        {/* Case Study Card */}
-        <motion.div
-          className="max-w-3xl mx-auto glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20"
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          whileHover={{ y: -5 }}
-        >
-          <div className="relative">
-            <img
-              src={djloboScreenshot}
-              alt="djloboproducciones.com - DJ Lobo Producciones webbplats med bokningssystem och live radio"
-              className="w-full h-auto object-cover"
-              loading="lazy"
-              width="768"
-              height="576"
-            />
-          </div>
-
-          {/* Project Info */}
-          <div className="p-6 sm:p-8">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
-                {t.portfolio.project1.category}
-              </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Project 1 - DJ Lobo */}
+          <motion.div
+            className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col"
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ y: -5 }}
+          >
+            <div className="relative">
+              <img
+                src={djloboScreenshot}
+                alt="djloboproducciones.com - DJ Lobo Producciones webbplats med bokningssystem och live radio"
+                className="w-full h-48 sm:h-56 object-cover"
+                loading="lazy"
+                width="768"
+                height="576"
+              />
             </div>
-            <h3 className="text-xl sm:text-2xl font-serif text-foreground mb-3">
-              {t.portfolio.project1.name}
-            </h3>
-            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6">
-              {t.portfolio.project1.description}
-            </p>
-            <Button
-              variant="outline"
-              className="border-primary/30 text-primary hover:bg-primary/10"
-              onClick={() => window.open('https://djloboproducciones.com', '_blank')}
-            >
-              {t.portfolio.viewDemo}
-              <ExternalLink className="w-4 h-4 ml-2" />
-            </Button>
-          </div>
-        </motion.div>
+            <div className="p-5 sm:p-6 flex flex-col flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
+                  {t.portfolio.project1.category}
+                </span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
+                {t.portfolio.project1.name}
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
+                {t.portfolio.project1.description}
+              </p>
+              <Button
+                variant="outline"
+                className="border-primary/30 text-primary hover:bg-primary/10 w-fit"
+                onClick={() => window.open('https://djloboproducciones.com', '_blank')}
+              >
+                {t.portfolio.viewDemo}
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Project 2 - Echo2000 */}
+          <motion.div
+            className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col"
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            whileHover={{ y: -5 }}
+          >
+            <div className="relative">
+              <img
+                src={echo2000Screenshot}
+                alt="Echo2000 - Nostalgisk svensk community inspirerad av LunarStorm och MSN Messenger"
+                className="w-full h-48 sm:h-56 object-cover"
+                loading="lazy"
+                width="768"
+                height="576"
+              />
+            </div>
+            <div className="p-5 sm:p-6 flex flex-col flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
+                  {t.portfolio.project2.category}
+                </span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
+                {t.portfolio.project2.name}
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
+                {t.portfolio.project2.description}
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
