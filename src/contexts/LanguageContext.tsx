@@ -225,7 +225,7 @@ const translations: Record<Language, Translations> = {
       seeDesign: 'Se Designkoncept',
       project1: {
         name: 'djloboproducciones.com',
-        category: 'Webbkonsolidering',
+        category: 'Kundprojekt',
         description: 'En komplett plattform för DJ Lobo — bokningssystem, live radio och mixar på ett ställe. Från idé till live på under en veckFrån idé till live på under en vecka.',
       },
       project2: {
@@ -412,7 +412,7 @@ const translations: Record<Language, Translations> = {
       seeDesign: 'See Design Concepts',
       project1: {
         name: 'djloboproducciones.com',
-        category: 'Web Consolidation',
+        category: 'Client Project',
         description: 'A complete platform for DJ Lobo — booking system, live radio and mixes in one place. From idea to live in under a week.',
       },
       project2: {
