@@ -240,8 +240,8 @@ const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      headline: 'Fullstack AI-Assisted Developer',
-      body: 'Jag kombinerar traditionell webbutveckling med moderna AI-verktyg för att leverera snabbare och smartare. Varje projekt får dedikerat fokus — från arkitektur till lansering. Resultatet? Högre kvalitet, färre buggar och kortare leveranstider.',
+      headline: 'Vi bygger snabbare. Du lanserar tidigare.',
+      body: 'Coffee Code Studio kombinerar modern webbutveckling med AI-verktyg för att leverera proffsiga sajter på dagar — inte månader. Dedikerat fokus, transparent process och en kundportal där du följer varje steg.',
     },
     footer: {
       cta: 'Redo att brygga din nästa stora idé?',
@@ -427,8 +427,8 @@ const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      headline: 'Fullstack AI-Assisted Developer',
-      body: 'I combine traditional web development with modern AI tools to deliver faster and smarter. Every project gets dedicated focus — from architecture to launch. The result? Higher quality, fewer bugs, and shorter delivery times.',
+      headline: 'We Build Faster. You Launch Sooner.',
+      body: 'Coffee Code Studio combines modern web development with AI tools to deliver professional sites in days — not months. Dedicated focus, transparent process, and a client portal where you follow every step.',
     },
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',
