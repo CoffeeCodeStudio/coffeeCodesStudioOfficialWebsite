@@ -416,9 +416,9 @@ const translations: Record<Language, Translations> = {
         description: 'A complete platform for DJ Lobo — booking system, live radio and mixes in one place. From idea to live in under a week.',
       },
       project2: {
-        name: 'FlowState FM',
-        category: 'Focus Music Dashboard',
-        description: 'Architected and built a scalable prototype for a next-generation SaaS platform.',
+        name: 'Echo2000',
+        category: 'Personal Project',
+        description: 'A nostalgic Swedish community inspired by LunarStorm and MSN Messenger — with chat, profiles, guestbooks, and retro games.',
       },
       project3: {
         name: 'SnapCode CMS',
