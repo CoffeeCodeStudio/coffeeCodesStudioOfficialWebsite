@@ -427,8 +427,8 @@ const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      headline: 'Fullstack AI-Assisted Developer',
-      body: 'I combine traditional web development with modern AI tools to deliver faster and smarter. Every project gets dedicated focus — from architecture to launch. The result? Higher quality, fewer bugs, and shorter delivery times.',
+      headline: 'We Build Faster. You Launch Sooner.',
+      body: 'Coffee Code Studio combines modern web development with AI tools to deliver professional sites in days — not months. Dedicated focus, transparent process, and a client portal where you follow every step.',
     },
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',
