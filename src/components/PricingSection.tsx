@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Check, Star, Zap, Crown, CreditCard, Banknote, Smartphone, Globe, Bitcoin, Rocket, Info } from 'lucide-react';
+import { Check, Star, Zap, Crown, Rocket, Info } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
@@ -21,13 +21,6 @@ const packages = [
   },
 ];
 
-const paymentMethods = [
-  { key: 'invoice' as const, icon: Banknote, active: true },
-  { key: 'card' as const, icon: CreditCard, active: false },
-  { key: 'swish' as const, icon: Smartphone, active: false },
-  { key: 'paypal' as const, icon: Globe, active: false },
-  { key: 'crypto' as const, icon: Bitcoin, active: false },
-];
 
 export function PricingSection() {
   const { t } = useLanguage();
@@ -179,41 +172,15 @@ export function PricingSection() {
 
         {/* Payment Methods */}
         <motion.div
-          className="max-w-3xl mx-auto"
+          className="max-w-3xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <h3 className="text-xl font-serif text-foreground text-center mb-8">
-            {p.paymentTitle}
-          </h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {paymentMethods.map((method) => {
-              const methodData = p.paymentMethods[method.key];
-              const Icon = method.icon;
-              return (
-                <div
-                  key={method.key}
-                  className={`flex items-center gap-3 px-5 py-3.5 rounded-xl border transition-all ${
-                    method.active
-                      ? 'glass-card border-primary/30 bg-primary/5'
-                      : 'border-border/20 bg-muted/30 opacity-50 cursor-default'
-                  }`}
-                >
-                  <Icon className={`w-5 h-5 ${method.active ? 'text-primary' : 'text-muted-foreground'}`} />
-                  <div>
-                    <p className={`text-sm font-medium ${method.active ? 'text-foreground' : 'text-muted-foreground'}`}>
-                      {methodData.name}
-                    </p>
-                    {!method.active && (
-                      <p className="text-xs text-muted-foreground">{p.comingSoon}</p>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <p className="text-sm text-muted-foreground">
+            Betalning via faktura. Fler betalningsalternativ kommer snart.
+          </p>
         </motion.div>
       </div>
     </section>
