@@ -16,7 +16,7 @@ const Index = () => {
       <SEOHead
         title="Coffee Code Studio | Skräddarsydda Webbapplikationer"
         description="Din vision, kodad till perfektion. Vi skapar skräddarsydda webbapplikationer med AI-driven utveckling i Göteborg."
-        canonical="https://coffeecodestudio.lovable.app/"
+        canonical="https://coffeecodestudio.se/"
         ogImage="https://lovable.dev/opengraph-image-p98pqg.png"
       />
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md">
