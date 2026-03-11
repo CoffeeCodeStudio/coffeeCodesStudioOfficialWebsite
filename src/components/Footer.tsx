@@ -57,32 +57,27 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Center: Social icons - hidden until accounts are active */}
-          <div className="hidden flex-col items-center gap-3">
+          {/* Center: Navigation */}
+          <div className="flex flex-col items-center gap-3">
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-1">
-              Sociala medier
+              Navigering
             </p>
-            <div className="flex gap-3">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <Tooltip key={social.label}>
-                    <TooltipTrigger asChild>
-                      <span
-                        role="img"
-                        className="w-10 h-10 rounded-full border border-border/30 bg-muted/30 flex items-center justify-center text-muted-foreground cursor-default transition-all duration-300 hover:border-primary/50 hover:text-primary hover:bg-primary/10 hover:shadow-[0_0_12px_hsl(var(--primary)/0.15)]"
-                        aria-label={social.label}
-                      >
-                        <Icon className="w-4 h-4" />
-                      </span>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom" className="text-xs">
-                      Kommer snart
-                    </TooltipContent>
-                  </Tooltip>
-                );
-              })}
-            </div>
+            <nav className="flex flex-col items-center gap-2" aria-label="Footer-navigering">
+              {[
+                { label: 'Tjänster', href: '#tjanster' },
+                { label: 'Projekt', href: '#projekt' },
+                { label: 'Priser', href: '#priser' },
+                { label: 'Kontakt', href: '#kontakt' },
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
           </div>
 
           {/* Right: Email */}
