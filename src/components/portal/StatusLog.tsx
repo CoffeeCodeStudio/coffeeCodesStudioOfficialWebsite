@@ -40,16 +40,33 @@ export function StatusLog() {
   const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({ from: undefined, to: undefined });
 
   useEffect(() => {
-    Promise.all([
-      supabase.from('status_logs').select('*').order('created_at', { ascending: false }),
-      supabase.from('projects').select('id, name'),
-    ]).then(([logsRes, projRes]) => {
-      setLogs((logsRes.data as LogEntry[]) || []);
+    const fetchData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data: userProjects } = await supabase
+        .from('projects')
+        .select('id, name')
+        .eq('client_user_id', user.id);
+
+      const projs = (userProjects as Project[]) || [];
       const map: Record<string, string> = {};
-      ((projRes.data as Project[]) || []).forEach(p => { map[p.id] = p.name; });
+      projs.forEach(p => { map[p.id] = p.name; });
       setProjects(map);
+
+      if (projs.length > 0) {
+        const projectIds = projs.map(p => p.id);
+        const { data: logsData } = await supabase
+          .from('status_logs')
+          .select('*')
+          .in('project_id', projectIds)
+          .order('created_at', { ascending: false });
+        setLogs((logsData as LogEntry[]) || []);
+      }
+
       setLoading(false);
-    });
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {

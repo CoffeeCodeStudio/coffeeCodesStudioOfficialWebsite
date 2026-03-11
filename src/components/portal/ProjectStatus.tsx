@@ -73,18 +73,39 @@ export function ProjectStatus() {
   const { toast } = useToast();
 
   useEffect(() => {
-    Promise.all([
-      supabase.from('projects').select('*').order('created_at', { ascending: false }),
-      supabase.from('client_requests').select('*').order('created_at', { ascending: false }),
-      supabase.from('project_todos').select('*').order('completed').order('created_at', { ascending: false }),
-      supabase.from('project_files').select('*').order('created_at', { ascending: false }),
-    ]).then(([projRes, reqRes, todosRes, filesRes]) => {
-      setProjects((projRes.data as Project[]) || []);
+    const fetchData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // First get user's projects
+      const { data: userProjects } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('client_user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      const projs = (userProjects as Project[]) || [];
+      setProjects(projs);
+
+      if (projs.length === 0) {
+        setLoading(false);
+        return;
+      }
+
+      const projectIds = projs.map(p => p.id);
+
+      const [reqRes, todosRes, filesRes] = await Promise.all([
+        supabase.from('client_requests').select('*').in('project_id', projectIds).order('created_at', { ascending: false }),
+        supabase.from('project_todos').select('*').in('project_id', projectIds).order('completed').order('created_at', { ascending: false }),
+        supabase.from('project_files').select('*').in('project_id', projectIds).order('created_at', { ascending: false }),
+      ]);
+
       setRequests((reqRes.data as ClientRequest[]) || []);
       setTodos((todosRes.data as Todo[]) || []);
       setFiles((filesRes.data as ProjectFile[]) || []);
       setLoading(false);
-    });
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
