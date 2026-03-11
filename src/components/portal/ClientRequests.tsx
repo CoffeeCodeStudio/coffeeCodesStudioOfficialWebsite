@@ -166,7 +166,15 @@ export function ClientRequests() {
   const quotaExceeded = quota.remaining <= 0;
 
   const handleSend = async () => {
-    if (!message.trim() || !selectedProject || !category) return;
+    if (!category) {
+      toast({ title: 'Välj kategori', description: 'Vänligen ange vad ärendet gäller innan du skickar.', variant: 'destructive' });
+      return;
+    }
+    if (!message.trim()) {
+      toast({ title: 'Skriv ett meddelande', description: 'Beskriv ditt önskemål innan du skickar.', variant: 'destructive' });
+      return;
+    }
+    if (!selectedProject) return;
     setSending(true);
 
     const { data: { user } } = await supabase.auth.getUser();
