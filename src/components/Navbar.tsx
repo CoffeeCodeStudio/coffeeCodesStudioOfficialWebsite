@@ -142,6 +142,12 @@ export function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
+            <button
+              onClick={() => navigate('/portal/login')}
+              className="text-sm font-medium px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors border border-primary/20"
+            >
+              {t.nav.portal}
+            </button>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4">
@@ -201,6 +207,15 @@ export function Navbar() {
                       {item.label}
                     </motion.a>
                   ))}
+                  <motion.button
+                    onClick={() => { setIsOpen(false); navigate('/portal/login'); }}
+                    className="text-base font-medium text-primary bg-primary/10 hover:bg-primary/20 transition-colors py-4 px-4 rounded-xl border border-primary/20 mt-2 text-center"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: navItems.length * 0.05 }}
+                  >
+                    {t.nav.portal}
+                  </motion.button>
                 </div>
               </div>
             </motion.div>
