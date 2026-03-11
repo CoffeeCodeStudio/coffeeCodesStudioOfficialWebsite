@@ -207,6 +207,15 @@ export function Navbar() {
                       {item.label}
                     </motion.a>
                   ))}
+                  <motion.button
+                    onClick={() => { setIsOpen(false); navigate('/portal/login'); }}
+                    className="text-base font-medium text-primary bg-primary/10 hover:bg-primary/20 transition-colors py-4 px-4 rounded-xl border border-primary/20 mt-2 text-center"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: navItems.length * 0.05 }}
+                  >
+                    {t.nav.portal}
+                  </motion.button>
                 </div>
               </div>
             </motion.div>
