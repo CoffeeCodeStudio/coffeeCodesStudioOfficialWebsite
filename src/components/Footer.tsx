@@ -59,9 +59,6 @@ export function Footer() {
 
           {/* Center: Navigation */}
           <div className="flex flex-col items-center gap-3">
-            <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-1">
-              Navigering
-            </p>
             <nav className="flex flex-col items-center gap-2" aria-label="Footer-navigering">
               {[
                 { label: 'Tjänster', href: '#tjanster' },
