@@ -96,16 +96,32 @@ export function ClientRequests() {
   const { toast } = useToast();
 
   useEffect(() => {
-    Promise.all([
-      supabase.from('client_requests').select('*').order('created_at', { ascending: false }),
-      supabase.from('projects').select('id, name, package, monthly_quota'),
-    ]).then(([reqRes, projRes]) => {
-      setRequests((reqRes.data as ClientRequest[]) || []);
-      const projs = (projRes.data as Project[]) || [];
+    const fetchData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data: userProjects } = await supabase
+        .from('projects')
+        .select('id, name, package, monthly_quota')
+        .eq('client_user_id', user.id);
+
+      const projs = (userProjects as Project[]) || [];
       setProjects(projs);
       if (projs.length === 1) setSelectedProject(projs[0].id);
+
+      if (projs.length > 0) {
+        const projectIds = projs.map(p => p.id);
+        const { data: reqData } = await supabase
+          .from('client_requests')
+          .select('*')
+          .in('project_id', projectIds)
+          .order('created_at', { ascending: false });
+        setRequests((reqData as ClientRequest[]) || []);
+      }
+
       setLoading(false);
-    });
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
