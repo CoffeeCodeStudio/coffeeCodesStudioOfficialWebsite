@@ -157,10 +157,10 @@ export function PricingSection() {
               </ul>
               <p className="text-xs text-muted-foreground italic mb-4">{p.oneTime.note}</p>
               <a
-                href="#contact"
+                href="#kontakt"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                  document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className="inline-block text-center py-2.5 px-6 rounded-xl font-medium text-sm bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20 transition-all"
               >

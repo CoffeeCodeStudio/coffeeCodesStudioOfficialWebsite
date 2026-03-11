@@ -193,11 +193,11 @@ export function ProjectStatus() {
           variant="outline"
           className="border-primary/30 text-primary"
           onClick={() => {
-            const contactSection = document.getElementById('contact');
+            const contactSection = document.getElementById('kontakt');
             if (contactSection) {
-              window.location.href = '/#contact';
+              window.location.href = '/#kontakt';
             } else {
-              window.location.href = '/#contact';
+              window.location.href = '/#kontakt';
             }
           }}
         >
