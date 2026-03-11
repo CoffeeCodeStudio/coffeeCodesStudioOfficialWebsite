@@ -57,8 +57,8 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Center: Social icons */}
-          <div className="flex flex-col items-center gap-3">
+          {/* Center: Social icons - hidden until accounts are active */}
+          <div className="hidden flex-col items-center gap-3">
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-1">
               Sociala medier
             </p>
