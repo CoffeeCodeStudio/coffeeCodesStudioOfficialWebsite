@@ -142,6 +142,12 @@ export function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
+            <button
+              onClick={() => navigate('/portal/login')}
+              className="text-sm font-medium px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors border border-primary/20"
+            >
+              {t.nav.portal}
+            </button>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4">
