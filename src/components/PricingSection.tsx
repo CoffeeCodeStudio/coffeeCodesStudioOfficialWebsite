@@ -106,10 +106,10 @@ export function PricingSection() {
                 </ul>
 
                 <a
-                  href="#contact"
+                  href="#kontakt"
                   onClick={(e) => {
                     e.preventDefault();
-                    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                   className={`block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all ${
                     pkg.popular
