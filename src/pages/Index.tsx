@@ -7,6 +7,7 @@ import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { PricingSection } from '@/components/PricingSection';
 import { AboutSection } from '@/components/AboutSection';
 import { ContactSection } from '@/components/ContactSection';
+import { FAQSection } from '@/components/FAQSection';
 import { Footer } from '@/components/Footer';
 import { SEOHead } from '@/components/SEOHead';
 
