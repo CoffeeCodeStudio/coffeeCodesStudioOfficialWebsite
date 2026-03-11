@@ -85,7 +85,7 @@ export function HeroSection() {
           <Button
             size="lg"
             className="glow-button bg-primary text-primary-foreground hover:bg-primary/90 text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full font-medium"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+            onClick={() => document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' })}>
             
             {t.hero.cta}
           </Button>

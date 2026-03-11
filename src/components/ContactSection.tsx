@@ -172,7 +172,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-16 sm:py-24 relative overflow-hidden" aria-label="Kontaktformulär">
+    <section id="kontakt" className="py-16 sm:py-24 relative overflow-hidden" aria-label="Kontaktformulär">
       {/* Background effects */}
       <div className="absolute inset-0 code-bg opacity-50" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background" />

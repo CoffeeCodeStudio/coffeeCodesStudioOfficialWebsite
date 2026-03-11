@@ -13,7 +13,7 @@ export function ProjektSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="projects" className="py-16 sm:py-24 relative" ref={ref}>
+    <section id="projekt" className="py-16 sm:py-24 relative" ref={ref}>
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="text-center mb-12 sm:mb-16"

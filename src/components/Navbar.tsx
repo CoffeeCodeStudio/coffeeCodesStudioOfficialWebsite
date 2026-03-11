@@ -76,11 +76,11 @@ export function Navbar() {
   const navigate = useNavigate();
 
   const navItems = [
-    { label: t.nav.services, href: '#services' },
-    { label: t.nav.projects, href: '#projects' },
-    { label: t.nav.pricing, href: '#pricing' },
+    { label: t.nav.services, href: '#tjanster' },
+    { label: t.nav.projects, href: '#projekt' },
+    { label: t.nav.pricing, href: '#priser' },
     { label: t.nav.about, href: '#about' },
-    { label: t.nav.contact, href: '#contact' },
+    { label: t.nav.contact, href: '#kontakt' },
   ];
 
   // Close menu when clicking outside or pressing escape

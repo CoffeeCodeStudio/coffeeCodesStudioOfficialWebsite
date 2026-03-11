@@ -27,7 +27,7 @@ export function PricingSection() {
   const p = t.pricing;
 
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden">
+    <section id="priser" className="py-24 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -106,10 +106,10 @@ export function PricingSection() {
                 </ul>
 
                 <a
-                  href="#contact"
+                  href="#kontakt"
                   onClick={(e) => {
                     e.preventDefault();
-                    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                   className={`block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all ${
                     pkg.popular
@@ -157,10 +157,10 @@ export function PricingSection() {
               </ul>
               <p className="text-xs text-muted-foreground italic mb-4">{p.oneTime.note}</p>
               <a
-                href="#contact"
+                href="#kontakt"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                  document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className="inline-block text-center py-2.5 px-6 rounded-xl font-medium text-sm bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20 transition-all"
               >
