@@ -7,7 +7,7 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-0 sm:min-h-[calc(100vh-2rem)] flex-col pt-28 sm:pt-32 pb-6 sm:pb-12 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
+    <section className="relative min-h-0 sm:min-h-[calc(100vh-2rem)] flex-col pt-28 sm:pt-32 pb-2 sm:pb-4 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
       {/* Animated background */}
       <div className="absolute inset-0 code-bg" />
       {/* Bottom fade for seamless transition */}
