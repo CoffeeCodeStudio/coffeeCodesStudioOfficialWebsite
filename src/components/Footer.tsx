@@ -57,25 +57,8 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Center: Navigation */}
-          <div className="flex flex-col items-center gap-3">
-            <nav className="flex flex-col items-center gap-2" aria-label="Footer-navigering">
-              {[
-                { label: 'Tjänster', href: '#tjanster' },
-                { label: 'Projekt', href: '#projekt' },
-                { label: 'Priser', href: '#priser' },
-                { label: 'Kontakt', href: '#kontakt' },
-              ].map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-          </div>
+          {/* Center: Empty for layout balance */}
+          <div className="hidden md:block" />
 
           {/* Right: Email */}
           <div className="flex flex-col items-center md:items-end gap-3">
