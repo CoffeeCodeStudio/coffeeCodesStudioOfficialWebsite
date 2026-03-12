@@ -98,14 +98,17 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-background">
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 bottom-0 w-64 glass-card border-r border-border/50 z-50 hidden md:flex flex-col">
-        <div className="flex items-center gap-3 p-6 border-b border-border/30">
-          <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-            <Shield className="w-5 h-5 text-primary" />
+        <div className="flex items-center justify-between p-6 border-b border-border/30">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+              <Shield className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <p className="font-serif text-sm text-foreground">Admin Panel</p>
+              <p className="text-[10px] text-muted-foreground truncate max-w-[110px]">{user.email}</p>
+            </div>
           </div>
-          <div>
-            <p className="font-serif text-sm text-foreground">Admin Panel</p>
-            <p className="text-[10px] text-muted-foreground truncate max-w-[140px]">{user.email}</p>
-          </div>
+          <NotificationBell onNavigate={handleNotificationNavigate} />
         </div>
 
         <nav className="flex-1 p-4 space-y-1">
