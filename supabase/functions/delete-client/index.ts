@@ -16,30 +16,38 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
+    const supabaseAuth = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_ANON_KEY")!,
+      { global: { headers: { Authorization: req.headers.get("Authorization")! } } }
+    );
+
     // Parse body first
     const body = await req.json();
     const { user_id } = body;
     if (!user_id) throw new Error("user_id is required");
 
-    // Verify caller is admin
+    // Verify caller is admin via getClaims
     const authHeader = req.headers.get("Authorization");
-    if (!authHeader) throw new Error("Unauthorized");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) throw new Error("Unauthorized");
 
     const token = authHeader.replace("Bearer ", "");
-    const { data: { user: caller } } = await supabaseAdmin.auth.getUser(token);
-    if (!caller) throw new Error("Unauthorized");
+    const { data: claimsData, error: claimsError } = await supabaseAuth.auth.getClaims(token);
+    if (claimsError || !claimsData?.claims) throw new Error("Unauthorized - invalid token");
+
+    const callerId = claimsData.claims.sub as string;
 
     const { data: roleCheck } = await supabaseAdmin
       .from("user_roles")
       .select("role")
-      .eq("user_id", caller.id)
+      .eq("user_id", callerId)
       .eq("role", "admin")
       .single();
 
     if (!roleCheck) throw new Error("Not an admin");
 
     // Prevent deleting yourself
-    if (user_id === caller.id) {
+    if (user_id === callerId) {
       throw new Error("Cannot delete your own account");
     }
 

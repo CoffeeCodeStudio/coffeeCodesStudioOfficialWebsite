@@ -101,20 +101,34 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // Verify caller is admin
-    const authHeader = req.headers.get("Authorization");
-    console.log("Auth header present:", !!authHeader);
-    if (!authHeader || !authHeader.startsWith("Bearer ")) throw new Error("Unauthorized - no valid auth header");
-    
-    const token = authHeader.replace("Bearer ", "");
-    const { data: { user: caller }, error: userError } = await supabaseAdmin.auth.getUser(token);
-    console.log("getUser result:", caller?.id, "error:", userError?.message);
-    if (userError || !caller) throw new Error("Unauthorized - invalid token");
+    // Create a client scoped to the caller for auth validation
+    const supabaseAuth = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_ANON_KEY")!,
+      { global: { headers: { Authorization: req.headers.get("Authorization")! } } }
+    );
 
+    // Verify caller identity
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      throw new Error("Unauthorized - no valid auth header");
+    }
+
+    const token = authHeader.replace("Bearer ", "");
+    const { data: claimsData, error: claimsError } = await supabaseAuth.auth.getClaims(token);
+    if (claimsError || !claimsData?.claims) {
+      console.error("getClaims error:", claimsError?.message);
+      throw new Error("Unauthorized - invalid token");
+    }
+
+    const callerId = claimsData.claims.sub as string;
+    console.log("Caller ID:", callerId);
+
+    // Verify admin role using service role client
     const { data: roleCheck } = await supabaseAdmin
       .from("user_roles")
       .select("role")
-      .eq("user_id", caller.id)
+      .eq("user_id", callerId)
       .eq("role", "admin")
       .single();
 
