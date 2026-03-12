@@ -162,6 +162,7 @@ export default function AdminDashboard() {
             <span className="font-serif text-sm">Admin</span>
           </div>
           <div className="flex items-center gap-1">
+            <NotificationBell onNavigate={handleNotificationNavigate} />
             <Button variant="ghost" size="icon" onClick={() => navigate('/')}>
               <Home className="w-4 h-4" />
             </Button>
