@@ -16,6 +16,11 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
+    // Parse body first
+    const body = await req.json();
+    const { user_id } = body;
+    if (!user_id) throw new Error("user_id is required");
+
     // Verify caller is admin
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) throw new Error("Unauthorized");
@@ -33,9 +38,6 @@ Deno.serve(async (req) => {
 
     if (!roleCheck) throw new Error("Not an admin");
 
-    const { user_id } = await req.json();
-    if (!user_id) throw new Error("user_id is required");
-
     // Prevent deleting yourself
     if (user_id === caller.id) {
       throw new Error("Cannot delete your own account");
@@ -47,11 +49,10 @@ Deno.serve(async (req) => {
       .select("id")
       .eq("client_user_id", user_id);
 
-    const projectIds = (projects || []).map(p => p.id);
+    const projectIds = (projects || []).map((p: { id: string }) => p.id);
 
-    // Delete all related data for each project
+    // Delete all related data for each project (order matters for FK constraints)
     if (projectIds.length > 0) {
-      // Delete in order to respect foreign keys
       await supabaseAdmin.from("workflow_checklists").delete().in("project_id", projectIds);
       await supabaseAdmin.from("ai_chat_messages").delete().in("project_id", projectIds);
       await supabaseAdmin.from("client_requests").delete().in("project_id", projectIds);
@@ -75,6 +76,7 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.error("delete-client error:", error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 400,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
