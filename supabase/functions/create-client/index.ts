@@ -103,11 +103,13 @@ Deno.serve(async (req) => {
 
     // Verify caller is admin
     const authHeader = req.headers.get("Authorization");
-    if (!authHeader) throw new Error("Unauthorized");
+    console.log("Auth header present:", !!authHeader);
+    if (!authHeader || !authHeader.startsWith("Bearer ")) throw new Error("Unauthorized - no valid auth header");
     
     const token = authHeader.replace("Bearer ", "");
-    const { data: { user: caller } } = await supabaseAdmin.auth.getUser(token);
-    if (!caller) throw new Error("Unauthorized");
+    const { data: { user: caller }, error: userError } = await supabaseAdmin.auth.getUser(token);
+    console.log("getUser result:", caller?.id, "error:", userError?.message);
+    if (userError || !caller) throw new Error("Unauthorized - invalid token");
 
     const { data: roleCheck } = await supabaseAdmin
       .from("user_roles")
