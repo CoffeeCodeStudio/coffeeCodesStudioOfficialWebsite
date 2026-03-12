@@ -17,6 +17,7 @@ import { AdminClientRequests } from '@/components/admin/AdminClientRequests';
 import { AdminMessages } from '@/components/admin/AdminMessages';
 import { AdminWorkflow } from '@/components/admin/AdminWorkflow';
 import { AdminClients } from '@/components/admin/AdminClients';
+import { NotificationBell } from '@/components/admin/NotificationBell';
 
 type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'workflow' | 'files' | 'logs' | 'todos' | 'notes' | 'clients';
 
