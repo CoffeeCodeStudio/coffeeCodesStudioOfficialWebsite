@@ -1,1 +1,19 @@
 project_id = "uasauatewyepgkuxhgoj"
+
+[functions.create-client]
+verify_jwt = false
+
+[functions.delete-client]
+verify_jwt = false
+
+[functions.send-contact-email]
+verify_jwt = false
+
+[functions.notify-admin-request]
+verify_jwt = false
+
+[functions.project-ai-chat]
+verify_jwt = false
+
+[functions.sign-agreement]
+verify_jwt = false
