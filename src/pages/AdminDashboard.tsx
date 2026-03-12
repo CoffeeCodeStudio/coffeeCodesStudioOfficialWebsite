@@ -80,6 +80,10 @@ export default function AdminDashboard() {
     navigate('/');
   };
 
+  const handleNotificationNavigate = (tab: string) => {
+    setActiveTab(tab as Tab);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
