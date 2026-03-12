@@ -77,7 +77,7 @@ Deno.serve(async (req: Request) => {
       },
       body: JSON.stringify({
         from: "Coffee Code Studio <onboarding@resend.dev>",
-        to: ["CoffeeCodeStudios@gmail.com"],
+        to: ["hej@coffeecodestudios.se"],
         reply_to: email,
         subject: `Ny kontaktförfrågan från ${safeName}`,
         html: `
