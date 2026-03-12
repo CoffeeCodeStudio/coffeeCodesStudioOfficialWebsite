@@ -197,6 +197,7 @@ export default function AdminDashboard() {
           {activeTab === 'logs' && <AdminStatusLog />}
           {activeTab === 'todos' && <AdminTodos />}
           {activeTab === 'notes' && <AdminNotes />}
+          {activeTab === 'clients' && <AdminClients />}
         </motion.div>
       </main>
     </div>
