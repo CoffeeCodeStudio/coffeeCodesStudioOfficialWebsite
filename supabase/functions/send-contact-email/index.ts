@@ -1,5 +1,8 @@
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
+const PRIMARY_FROM = "Coffee Code Studio <hej@coffeecodestudio.se>";
+const FALLBACK_FROM = "Coffee Code Studio <onboarding@resend.dev>";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -8,11 +11,11 @@ const corsHeaders = {
 
 function escapeHtml(str: string): string {
   return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 interface ContactEmailRequest {
@@ -23,6 +26,12 @@ interface ContactEmailRequest {
   message: string;
 }
 
+interface ResendResult {
+  ok: boolean;
+  status: number;
+  data: Record<string, unknown>;
+}
+
 const projectTypeLabels: Record<string, string> = {
   webapp: "Webbapplikation",
   internal: "Internt verktyg",
@@ -30,36 +39,73 @@ const projectTypeLabels: Record<string, string> = {
   other: "Annat",
 };
 
+async function sendEmailViaResend(
+  payload: {
+    to: string[];
+    reply_to: string;
+    subject: string;
+    html: string;
+  },
+  from: string,
+): Promise<ResendResult> {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+    },
+    body: JSON.stringify({ ...payload, from }),
+  });
+
+  const rawBody = await response.text();
+  let data: Record<string, unknown> = {};
+
+  try {
+    data = rawBody ? JSON.parse(rawBody) : {};
+  } catch {
+    data = { message: rawBody };
+  }
+
+  return { ok: response.ok, status: response.status, data };
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { name, company, email, projectType, message }: ContactEmailRequest = await req.json();
-
-    // Validate required fields
-    if (!name || !email || !projectType || !message) {
+    if (!RESEND_API_KEY) {
       return new Response(
-        JSON.stringify({ error: "Alla obligatoriska fält måste fyllas i" }),
-        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        JSON.stringify({ error: "RESEND_API_KEY saknas i Secrets" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        },
       );
     }
 
-    // Validate email format
+    const { name, company, email, projectType, message }: ContactEmailRequest = await req.json();
+
+    if (!name || !email || !projectType || !message) {
+      return new Response(
+        JSON.stringify({ error: "Alla obligatoriska fält måste fyllas i" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } },
+      );
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return new Response(
         JSON.stringify({ error: "Ogiltig e-postadress" }),
-        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } },
       );
     }
 
-    // Validate input lengths
     if (name.length > 100 || email.length > 255 || message.length > 5000) {
       return new Response(
         JSON.stringify({ error: "Fälten överskrider maxlängd" }),
-        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } },
       );
     }
 
@@ -69,18 +115,11 @@ Deno.serve(async (req: Request) => {
     const safeMessage = escapeHtml(message);
     const projectTypeLabel = projectTypeLabels[projectType] || escapeHtml(projectType);
 
-    const emailResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: "Coffee Code Studio <hej@coffeecodestudio.se>",
-        to: ["hej@coffeecodestudio.se"],
-        reply_to: email,
-        subject: `Ny kontaktförfrågan från ${safeName}`,
-        html: `
+    const payload = {
+      to: ["hej@coffeecodestudio.se"],
+      reply_to: email,
+      subject: `Ny kontaktförfrågan från ${safeName}`,
+      html: `
           <!DOCTYPE html>
           <html>
           <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -112,24 +151,50 @@ Deno.serve(async (req: Request) => {
           </body>
           </html>
         `,
-      }),
-    });
+    };
 
-    if (!emailResponse.ok) {
-      const errorData = await emailResponse.json();
-      console.error("Resend API error:", errorData);
-      throw new Error(errorData.message || "Failed to send email");
+    const primarySend = await sendEmailViaResend(payload, PRIMARY_FROM);
+
+    if (!primarySend.ok) {
+      console.error("Resend API error (primary):", primarySend.data);
+
+      const resendMessage = String(primarySend.data?.message || "");
+      const isDomainNotVerified =
+        primarySend.status === 403 && /domain is not verified/i.test(resendMessage);
+
+      if (isDomainNotVerified) {
+        const fallbackSend = await sendEmailViaResend(payload, FALLBACK_FROM);
+
+        if (fallbackSend.ok) {
+          return new Response(
+            JSON.stringify({
+              success: true,
+              message: "E-post skickad via tillfällig avsändare (onboarding@resend.dev)",
+              sender: "fallback",
+            }),
+            {
+              status: 200,
+              headers: { "Content-Type": "application/json", ...corsHeaders },
+            },
+          );
+        }
+
+        console.error("Resend API error (fallback):", fallbackSend.data);
+        throw new Error(String(fallbackSend.data?.message || resendMessage || "Failed to send email"));
+      }
+
+      throw new Error(resendMessage || "Failed to send email");
     }
 
     return new Response(
-      JSON.stringify({ success: true, message: "E-post skickad!" }),
-      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      JSON.stringify({ success: true, message: "E-post skickad!", sender: "primary" }),
+      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
     );
   } catch (error: any) {
     console.error("Error sending email:", error);
     return new Response(
       JSON.stringify({ error: error.message || "Kunde inte skicka e-post" }),
-      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } },
     );
   }
 });
