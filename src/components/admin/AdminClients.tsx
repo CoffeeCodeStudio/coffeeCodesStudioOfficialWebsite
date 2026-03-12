@@ -52,15 +52,18 @@ export function AdminClients() {
     setDeleting(userId);
     const { data: { session } } = await supabase.auth.getSession();
 
+    console.log('delete-client request body:', { user_id: userId });
     const res = await supabase.functions.invoke('delete-client', {
       body: { user_id: userId },
       headers: { Authorization: `Bearer ${session?.access_token}` },
     });
 
+    console.log('delete-client response:', res);
     setDeleting(null);
 
+    const errorMsg = res.data?.error || res.error?.message;
     if (res.error || res.data?.error) {
-      toast({ title: 'Fel', description: res.data?.error || res.error?.message, variant: 'destructive' });
+      toast({ title: 'Fel', description: errorMsg || 'Okänt fel vid radering', variant: 'destructive' });
     } else {
       toast({ title: 'Konto raderat', description: `${name || 'Användaren'} har raderats permanent.` });
       setClients(prev => prev.filter(c => c.id !== userId));
