@@ -76,8 +76,8 @@ Deno.serve(async (req: Request) => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Coffee Code Studio <onboarding@resend.dev>",
-        to: ["hej@coffeecodestudios.se"],
+        from: "Coffee Code Studio <hej@coffeecodestudio.se>",
+        to: ["hej@coffeecodestudio.se"],
         reply_to: email,
         subject: `Ny kontaktförfrågan från ${safeName}`,
         html: `
