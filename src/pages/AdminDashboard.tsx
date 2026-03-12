@@ -16,8 +16,9 @@ import { AdminNotes } from '@/components/admin/AdminNotes';
 import { AdminClientRequests } from '@/components/admin/AdminClientRequests';
 import { AdminMessages } from '@/components/admin/AdminMessages';
 import { AdminWorkflow } from '@/components/admin/AdminWorkflow';
+import { AdminClients } from '@/components/admin/AdminClients';
 
-type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'workflow' | 'files' | 'logs' | 'todos' | 'notes';
+type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'workflow' | 'files' | 'logs' | 'todos' | 'notes' | 'clients';
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'overview', label: 'Översikt', icon: BarChart3 },
