@@ -17,11 +17,11 @@ import {
 import { AdminAgreement } from './AdminAgreement';
 
 const statuses = [
+  { value: 'questionnaire', label: 'Projektfrågor' },
   { value: 'design', label: 'Design' },
   { value: 'development', label: 'Utveckling' },
   { value: 'testing', label: 'Testning' },
   { value: 'live', label: 'Live' },
-  { value: 'completed', label: 'Klart' },
 ];
 
 const packages = [
