@@ -180,6 +180,7 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
             transition={{ duration: 0.15 }}
+            style={panelStyle}
             className="fixed overflow-hidden rounded-xl border border-border/50 bg-card shadow-xl z-[120] flex flex-col"
           >
             {/* Header */}
