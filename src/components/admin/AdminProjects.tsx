@@ -16,13 +16,7 @@ import {
 } from '@/components/ui/dialog';
 import { AdminAgreement } from './AdminAgreement';
 
-const statuses = [
-  { value: 'questionnaire', label: 'Projektfrågor' },
-  { value: 'design', label: 'Design' },
-  { value: 'development', label: 'Utveckling' },
-  { value: 'testing', label: 'Testning' },
-  { value: 'live', label: 'Live' },
-];
+import { PROJECT_STATUSES } from '@/lib/projectStatuses';
 
 const packages = [
   { value: 'bas', label: 'Bas', quota: 3 },
