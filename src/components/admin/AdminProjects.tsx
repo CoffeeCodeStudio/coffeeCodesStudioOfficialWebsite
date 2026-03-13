@@ -142,14 +142,19 @@ export function AdminProjects() {
 
   const confirmChange = async () => {
     if (!pendingChange) return;
+
     const { projectId, field, newValue, extraUpdates } = pendingChange;
-    await updateField(projectId, field, newValue);
-    if (extraUpdates) {
-      for (const [k, v] of Object.entries(extraUpdates)) {
-        await updateField(projectId, k, v);
-      }
+    const updates = { [field]: newValue, ...(extraUpdates || {}) };
+    const updated = await updateProject(projectId, updates);
+
+    if (!updated) {
+      return;
     }
-    toast({ title: 'Ändring sparad', description: `${pendingChange.projectName}: ${pendingChange.oldLabel} → ${pendingChange.newLabel}` });
+
+    toast({
+      title: 'Ändring sparad',
+      description: `${pendingChange.projectName}: ${pendingChange.oldLabel} → ${pendingChange.newLabel}`,
+    });
     setPendingChange(null);
   };
 
