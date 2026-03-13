@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback, type CSSProperties } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Bell, MessageCircle, MessageCirclePlus, FileUp, Check, CheckCheck } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
