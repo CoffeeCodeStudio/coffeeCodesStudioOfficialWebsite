@@ -162,7 +162,10 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
     <div ref={ref} className="relative">
       <button
         ref={triggerRef}
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          if (!open) updatePanelPosition();
+          setOpen(!open);
+        }}
         className="relative p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
       >
         <Bell className="w-5 h-5" />
