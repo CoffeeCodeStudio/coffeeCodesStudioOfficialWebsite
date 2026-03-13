@@ -161,6 +161,7 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
   return (
     <div ref={ref} className="relative">
       <button
+        ref={triggerRef}
         onClick={() => setOpen(!open)}
         className="relative p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
       >
