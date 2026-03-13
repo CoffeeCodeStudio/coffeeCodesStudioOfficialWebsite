@@ -16,13 +16,7 @@ import {
 } from '@/components/ui/dialog';
 import { AdminAgreement } from './AdminAgreement';
 
-const statuses = [
-  { value: 'questionnaire', label: 'Projektfrågor' },
-  { value: 'design', label: 'Design' },
-  { value: 'development', label: 'Utveckling' },
-  { value: 'testing', label: 'Testning' },
-  { value: 'live', label: 'Live' },
-];
+import { PROJECT_STATUSES } from '@/lib/projectStatuses';
 
 const packages = [
   { value: 'bas', label: 'Bas', quota: 3 },
@@ -113,8 +107,8 @@ export function AdminProjects() {
   };
 
   const handleStatusChange = (project: Project, newValue: string) => {
-    const oldLabel = statuses.find(s => s.value === project.status)?.label || project.status;
-    const newLabel = statuses.find(s => s.value === newValue)?.label || newValue;
+    const oldLabel = PROJECT_STATUSES.find(s => s.value === project.status)?.label || project.status;
+    const newLabel = PROJECT_STATUSES.find(s => s.value === newValue)?.label || newValue;
     setPendingChange({
       projectId: project.id,
       projectName: project.name,
@@ -249,7 +243,7 @@ export function AdminProjects() {
                     <Select value={project.status} onValueChange={v => handleStatusChange(project, v)}>
                       <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
                       <SelectContent>
-                        {statuses.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
+                        {PROJECT_STATUSES.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
                       </SelectContent>
                     </Select>
                   </div>
