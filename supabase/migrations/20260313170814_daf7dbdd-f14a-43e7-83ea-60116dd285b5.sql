@@ -1,0 +1,1 @@
+ALTER TABLE public.projects ADD COLUMN questionnaire_reminded_at timestamptz DEFAULT NULL;
