@@ -243,7 +243,7 @@ export function AdminProjects() {
                     <Select value={project.status} onValueChange={v => handleStatusChange(project, v)}>
                       <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
                       <SelectContent>
-                        {statuses.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
+                        {PROJECT_STATUSES.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
                       </SelectContent>
                     </Select>
                   </div>
