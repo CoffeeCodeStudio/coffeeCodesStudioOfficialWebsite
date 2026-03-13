@@ -13,6 +13,7 @@ interface Project {
   monthly_quota: number;
   renewal_date: string | null;
   client_user_id: string;
+  created_at: string;
 }
 
 interface Profile {
