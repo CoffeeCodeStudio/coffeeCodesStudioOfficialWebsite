@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Users, AlertTriangle, Flame, CalendarClock, Package, BarChart3 } from 'lucide-react';
+import { Users, AlertTriangle, Flame, CalendarClock, Package, BarChart3, Clock } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 
@@ -13,6 +13,7 @@ interface Project {
   monthly_quota: number;
   renewal_date: string | null;
   client_user_id: string;
+  created_at: string;
 }
 
 interface Profile {
@@ -90,7 +91,9 @@ export function AdminOverview() {
   const urgentRequests = requests.filter(r => r.priority === 'urgent' && r.status !== 'delivered');
   const pendingRequests = requests.filter(r => r.status === 'pending');
   const renewingSoon = projects.filter(p => p.renewal_date && new Date(p.renewal_date) <= weekFromNow && new Date(p.renewal_date) >= now);
-
+  const questionnaireOverdue = projects.filter(p => 
+    p.status === 'questionnaire' && (now.getTime() - new Date(p.created_at).getTime()) > 24 * 60 * 60 * 1000
+  );
   // Stats
   const activeProjects = projects.filter(p => p.status !== 'completed');
   const uniqueClients = new Set(projects.map(p => p.client_user_id)).size;
@@ -125,7 +128,7 @@ export function AdminOverview() {
       </div>
 
       {/* Urgent this week */}
-      {(urgentRequests.length > 0 || renewingSoon.length > 0) && (
+      {(urgentRequests.length > 0 || renewingSoon.length > 0 || questionnaireOverdue.length > 0) && (
         <div className="glass-card cyber-border p-6 rounded-2xl border-destructive/20">
           <div className="flex items-center gap-2 mb-4">
             <AlertTriangle className="w-5 h-5 text-destructive" />
@@ -150,6 +153,15 @@ export function AdminOverview() {
                 <div className="min-w-0">
                   <p className="text-sm text-foreground">{proj.name}</p>
                   <p className="text-xs text-muted-foreground">Förnyas {proj.renewal_date}</p>
+                </div>
+              </div>
+            ))}
+            {questionnaireOverdue.map(proj => (
+              <div key={`q-${proj.id}`} className="flex items-center gap-3 p-3 bg-yellow-500/5 rounded-lg border border-yellow-500/20">
+                <Clock className="w-4 h-4 text-yellow-500 flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-sm text-foreground">{proj.name}</p>
+                  <p className="text-xs text-muted-foreground">Väntar på svar på projektfrågor i mer än 24h</p>
                 </div>
               </div>
             ))}

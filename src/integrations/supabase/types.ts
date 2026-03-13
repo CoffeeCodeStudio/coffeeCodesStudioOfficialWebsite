@@ -313,6 +313,7 @@ export type Database = {
           name: string
           package: string
           price: number | null
+          questionnaire_reminded_at: string | null
           renewal_date: string | null
           status: string
           system_prompt: string | null
@@ -328,6 +329,7 @@ export type Database = {
           name: string
           package?: string
           price?: number | null
+          questionnaire_reminded_at?: string | null
           renewal_date?: string | null
           status?: string
           system_prompt?: string | null
@@ -343,6 +345,7 @@ export type Database = {
           name?: string
           package?: string
           price?: number | null
+          questionnaire_reminded_at?: string | null
           renewal_date?: string | null
           status?: string
           system_prompt?: string | null

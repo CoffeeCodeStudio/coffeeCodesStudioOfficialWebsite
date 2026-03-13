@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
-import { FolderKanban, Trash2 } from 'lucide-react';
+import { FolderKanban, Trash2, AlertCircle } from 'lucide-react';
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -17,11 +17,11 @@ import {
 import { AdminAgreement } from './AdminAgreement';
 
 const statuses = [
+  { value: 'questionnaire', label: 'Projektfrågor' },
   { value: 'design', label: 'Design' },
   { value: 'development', label: 'Utveckling' },
   { value: 'testing', label: 'Testning' },
   { value: 'live', label: 'Live' },
-  { value: 'completed', label: 'Klart' },
 ];
 
 const packages = [
@@ -42,7 +42,14 @@ interface Project {
   renewal_date: string | null;
   system_prompt: string | null;
   created_at: string;
+  questionnaire_reminded_at: string | null;
 }
+
+const isQuestionnaireOverdue = (project: Project) => {
+  if (project.status !== 'questionnaire') return false;
+  const created = new Date(project.created_at).getTime();
+  return Date.now() - created > 24 * 60 * 60 * 1000;
+};
 
 interface PendingChange {
   projectId: string;
@@ -154,7 +161,14 @@ export function AdminProjects() {
               <div className="flex flex-col gap-4">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
+                      {isQuestionnaireOverdue(project) && (
+                        <span title="Väntar på svar i mer än 24 timmar">
+                          <AlertCircle className="w-5 h-5 text-yellow-500 animate-pulse" />
+                        </span>
+                      )}
+                    </div>
                     {project.description && (
                       <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
                     )}
