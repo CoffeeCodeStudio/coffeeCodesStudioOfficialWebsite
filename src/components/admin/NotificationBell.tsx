@@ -140,7 +140,7 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full mt-2 w-96 max-h-[28rem] overflow-hidden rounded-xl border border-border/50 bg-card shadow-xl z-[100] flex flex-col"
+            className="absolute right-0 top-full mt-2 w-[min(24rem,calc(100vw-2rem))] max-h-[min(28rem,calc(100vh-6rem))] overflow-hidden rounded-xl border border-border/50 bg-card shadow-xl z-[100] flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-border/30">
