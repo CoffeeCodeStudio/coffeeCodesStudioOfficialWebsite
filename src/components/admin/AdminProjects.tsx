@@ -107,8 +107,8 @@ export function AdminProjects() {
   };
 
   const handleStatusChange = (project: Project, newValue: string) => {
-    const oldLabel = statuses.find(s => s.value === project.status)?.label || project.status;
-    const newLabel = statuses.find(s => s.value === newValue)?.label || newValue;
+    const oldLabel = PROJECT_STATUSES.find(s => s.value === project.status)?.label || project.status;
+    const newLabel = PROJECT_STATUSES.find(s => s.value === newValue)?.label || newValue;
     setPendingChange({
       projectId: project.id,
       projectName: project.name,
