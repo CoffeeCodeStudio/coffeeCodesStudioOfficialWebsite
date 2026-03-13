@@ -35,11 +35,11 @@ interface ProjectFile {
 }
 
 const statusSteps = [
+  { key: 'questionnaire', label: 'Projektfrågor', icon: FileText, statusLabel: 'Väntar på svar' },
   { key: 'design', label: 'Design', icon: Paintbrush },
   { key: 'development', label: 'Utveckling', icon: Code2 },
   { key: 'testing', label: 'Testning', icon: HardDrive },
   { key: 'live', label: 'Live', icon: Rocket },
-  { key: 'completed', label: 'Klart', icon: CheckCircle2 },
 ];
 
 const requestTimeline = [
