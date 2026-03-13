@@ -128,7 +128,7 @@ export function AdminOverview() {
       </div>
 
       {/* Urgent this week */}
-      {(urgentRequests.length > 0 || renewingSoon.length > 0) && (
+      {(urgentRequests.length > 0 || renewingSoon.length > 0 || questionnaireOverdue.length > 0) && (
         <div className="glass-card cyber-border p-6 rounded-2xl border-destructive/20">
           <div className="flex items-center gap-2 mb-4">
             <AlertTriangle className="w-5 h-5 text-destructive" />
