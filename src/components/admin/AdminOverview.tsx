@@ -156,6 +156,15 @@ export function AdminOverview() {
                 </div>
               </div>
             ))}
+            {questionnaireOverdue.map(proj => (
+              <div key={`q-${proj.id}`} className="flex items-center gap-3 p-3 bg-yellow-500/5 rounded-lg border border-yellow-500/20">
+                <Clock className="w-4 h-4 text-yellow-500 flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-sm text-foreground">{proj.name}</p>
+                  <p className="text-xs text-muted-foreground">Väntar på svar på projektfrågor i mer än 24h</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
