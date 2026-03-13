@@ -68,20 +68,48 @@ export function AdminProjects() {
   const { toast } = useToast();
 
   const fetchProjects = async () => {
-    const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
-    setProjects((data as Project[]) || []);
+    const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Kunde inte hämta projekt:', error);
+      toast({ title: 'Fel', description: 'Kunde inte hämta projekt.', variant: 'destructive' });
+      setProjects([]);
+    } else {
+      setProjects((data as Project[]) || []);
+    }
+
     setLoading(false);
   };
 
   useEffect(() => { fetchProjects(); }, []);
 
-  const updateField = async (id: string, field: string, value: any) => {
-    const { error } = await supabase.from('projects').update({ [field]: value }).eq('id', id);
+  const updateProject = async (id: string, updates: Record<string, any>) => {
+    const { data, error } = await supabase
+      .from('projects')
+      .update(updates)
+      .eq('id', id)
+      .select('*')
+      .maybeSingle();
+
     if (error) {
-      toast({ title: 'Fel', description: error.message, variant: 'destructive' });
-    } else {
-      setProjects(prev => prev.map(p => p.id === id ? { ...p, [field]: value } : p));
+      console.error('Kunde inte uppdatera projekt:', { id, updates, error });
+      toast({ title: 'Fel vid uppdatering', description: error.message, variant: 'destructive' });
+      return null;
     }
+
+    if (!data) {
+      const message = 'Ingen uppdatering genomfördes. Kontrollera behörighet (RLS) eller att projektet finns.';
+      console.error(message, { id, updates });
+      toast({ title: 'Uppdatering misslyckades', description: message, variant: 'destructive' });
+      return null;
+    }
+
+    setProjects(prev => prev.map(p => (p.id === id ? (data as Project) : p)));
+    return data as Project;
+  };
+
+  const updateField = async (id: string, field: string, value: any) => {
+    await updateProject(id, { [field]: value });
   };
 
   const handleStatusChange = (project: Project, newValue: string) => {
@@ -114,14 +142,19 @@ export function AdminProjects() {
 
   const confirmChange = async () => {
     if (!pendingChange) return;
+
     const { projectId, field, newValue, extraUpdates } = pendingChange;
-    await updateField(projectId, field, newValue);
-    if (extraUpdates) {
-      for (const [k, v] of Object.entries(extraUpdates)) {
-        await updateField(projectId, k, v);
-      }
+    const updates = { [field]: newValue, ...(extraUpdates || {}) };
+    const updated = await updateProject(projectId, updates);
+
+    if (!updated) {
+      return;
     }
-    toast({ title: 'Ändring sparad', description: `${pendingChange.projectName}: ${pendingChange.oldLabel} → ${pendingChange.newLabel}` });
+
+    toast({
+      title: 'Ändring sparad',
+      description: `${pendingChange.projectName}: ${pendingChange.oldLabel} → ${pendingChange.newLabel}`,
+    });
     setPendingChange(null);
   };
 
