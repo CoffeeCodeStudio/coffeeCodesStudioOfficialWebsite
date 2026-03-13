@@ -38,8 +38,32 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
   const [open, setOpen] = useState(false);
   const [projectNames, setProjectNames] = useState<Record<string, string>>({});
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const [panelStyle, setPanelStyle] = useState<CSSProperties>({});
 
   const unreadCount = notifications.filter(n => !n.is_read).length;
+
+  const updatePanelPosition = useCallback(() => {
+    if (!triggerRef.current) return;
+
+    const triggerRect = triggerRef.current.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const viewportPadding = 8;
+    const desiredWidth = Math.min(384, viewportWidth - viewportPadding * 2);
+    const left = Math.min(
+      Math.max(triggerRect.right - desiredWidth, viewportPadding),
+      viewportWidth - desiredWidth - viewportPadding,
+    );
+    const availableHeight = viewportHeight - triggerRect.bottom - 16;
+
+    setPanelStyle({
+      width: desiredWidth,
+      left,
+      top: triggerRect.bottom + 8,
+      maxHeight: Math.max(240, Math.min(448, availableHeight)),
+    });
+  }, []);
 
   // Fetch notifications and project names
   useEffect(() => {
