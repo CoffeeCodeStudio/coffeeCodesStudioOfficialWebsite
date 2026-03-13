@@ -118,6 +118,21 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+
+    updatePanelPosition();
+    const handleResize = () => updatePanelPosition();
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleResize, true);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleResize, true);
+    };
+  }, [open, updatePanelPosition]);
+
   const markAsRead = async (id: string) => {
     await supabase.from('admin_notifications').update({ is_read: true }).eq('id', id);
     setNotifications(prev => prev.map(n => n.id === id ? { ...n, is_read: true } : n));
