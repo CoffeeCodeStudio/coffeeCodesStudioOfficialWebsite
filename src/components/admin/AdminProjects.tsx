@@ -42,7 +42,14 @@ interface Project {
   renewal_date: string | null;
   system_prompt: string | null;
   created_at: string;
+  questionnaire_reminded_at: string | null;
 }
+
+const isQuestionnaireOverdue = (project: Project) => {
+  if (project.status !== 'questionnaire') return false;
+  const created = new Date(project.created_at).getTime();
+  return Date.now() - created > 24 * 60 * 60 * 1000;
+};
 
 interface PendingChange {
   projectId: string;
