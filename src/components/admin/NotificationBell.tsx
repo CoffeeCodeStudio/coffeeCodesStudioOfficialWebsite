@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback, type CSSProperties } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Bell, MessageCircle, MessageCirclePlus, FileUp, Check, CheckCheck } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -38,8 +38,32 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
   const [open, setOpen] = useState(false);
   const [projectNames, setProjectNames] = useState<Record<string, string>>({});
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const [panelStyle, setPanelStyle] = useState<CSSProperties>({});
 
   const unreadCount = notifications.filter(n => !n.is_read).length;
+
+  const updatePanelPosition = useCallback(() => {
+    if (!triggerRef.current) return;
+
+    const triggerRect = triggerRef.current.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const viewportPadding = 8;
+    const desiredWidth = Math.min(384, viewportWidth - viewportPadding * 2);
+    const left = Math.min(
+      Math.max(triggerRect.right - desiredWidth, viewportPadding),
+      viewportWidth - desiredWidth - viewportPadding,
+    );
+    const availableHeight = viewportHeight - triggerRect.bottom - 16;
+
+    setPanelStyle({
+      width: desiredWidth,
+      left,
+      top: triggerRect.bottom + 8,
+      maxHeight: Math.max(240, Math.min(448, availableHeight)),
+    });
+  }, []);
 
   // Fetch notifications and project names
   useEffect(() => {
@@ -94,6 +118,21 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+
+    updatePanelPosition();
+    const handleResize = () => updatePanelPosition();
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleResize, true);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleResize, true);
+    };
+  }, [open, updatePanelPosition]);
+
   const markAsRead = async (id: string) => {
     await supabase.from('admin_notifications').update({ is_read: true }).eq('id', id);
     setNotifications(prev => prev.map(n => n.id === id ? { ...n, is_read: true } : n));
@@ -122,7 +161,11 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
   return (
     <div ref={ref} className="relative">
       <button
-        onClick={() => setOpen(!open)}
+        ref={triggerRef}
+        onClick={() => {
+          if (!open) updatePanelPosition();
+          setOpen(!open);
+        }}
         className="relative p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
       >
         <Bell className="w-5 h-5" />
@@ -140,7 +183,8 @@ export function NotificationBell({ onNavigate }: NotificationBellProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full mt-2 w-[min(24rem,calc(100vw-2rem))] max-h-[min(28rem,calc(100vh-6rem))] overflow-hidden rounded-xl border border-border/50 bg-card shadow-xl z-[100] flex flex-col"
+            style={panelStyle}
+            className="fixed overflow-hidden rounded-xl border border-border/50 bg-card shadow-xl z-[120] flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-border/30">
