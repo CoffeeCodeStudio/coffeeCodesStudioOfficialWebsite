@@ -11,6 +11,9 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import {
+  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,
+} from '@/components/ui/dialog';
 import { AdminAgreement } from './AdminAgreement';
 
 const statuses = [
@@ -41,9 +44,20 @@ interface Project {
   created_at: string;
 }
 
+interface PendingChange {
+  projectId: string;
+  projectName: string;
+  field: 'status' | 'package';
+  oldLabel: string;
+  newLabel: string;
+  newValue: string;
+  extraUpdates?: Record<string, any>;
+}
+
 export function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pendingChange, setPendingChange] = useState<PendingChange | null>(null);
   const { toast } = useToast();
 
   const fetchProjects = async () => {
@@ -61,6 +75,47 @@ export function AdminProjects() {
     } else {
       setProjects(prev => prev.map(p => p.id === id ? { ...p, [field]: value } : p));
     }
+  };
+
+  const handleStatusChange = (project: Project, newValue: string) => {
+    const oldLabel = statuses.find(s => s.value === project.status)?.label || project.status;
+    const newLabel = statuses.find(s => s.value === newValue)?.label || newValue;
+    setPendingChange({
+      projectId: project.id,
+      projectName: project.name,
+      field: 'status',
+      oldLabel,
+      newLabel,
+      newValue,
+    });
+  };
+
+  const handlePackageChange = (project: Project, newValue: string) => {
+    const oldLabel = packages.find(p => p.value === project.package)?.label || project.package;
+    const pkg = packages.find(p => p.value === newValue);
+    const newLabel = pkg?.label || newValue;
+    setPendingChange({
+      projectId: project.id,
+      projectName: project.name,
+      field: 'package',
+      oldLabel,
+      newLabel,
+      newValue,
+      extraUpdates: pkg ? { monthly_quota: pkg.quota } : undefined,
+    });
+  };
+
+  const confirmChange = async () => {
+    if (!pendingChange) return;
+    const { projectId, field, newValue, extraUpdates } = pendingChange;
+    await updateField(projectId, field, newValue);
+    if (extraUpdates) {
+      for (const [k, v] of Object.entries(extraUpdates)) {
+        await updateField(projectId, k, v);
+      }
+    }
+    toast({ title: 'Ändring sparad', description: `${pendingChange.projectName}: ${pendingChange.oldLabel} → ${pendingChange.newLabel}` });
+    setPendingChange(null);
   };
 
   const deleteProject = async (id: string) => {
@@ -144,7 +199,7 @@ export function AdminProjects() {
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Status</span>
-                    <Select value={project.status} onValueChange={v => updateField(project.id, 'status', v)}>
+                    <Select value={project.status} onValueChange={v => handleStatusChange(project, v)}>
                       <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
                       <SelectContent>
                         {statuses.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
@@ -153,11 +208,7 @@ export function AdminProjects() {
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Paket</span>
-                    <Select value={project.package} onValueChange={v => {
-                      const pkg = packages.find(p => p.value === v);
-                      updateField(project.id, 'package', v);
-                      if (pkg) updateField(project.id, 'monthly_quota', pkg.quota);
-                    }}>
+                    <Select value={project.package} onValueChange={v => handlePackageChange(project, v)}>
                       <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
                       <SelectContent>
                         {packages.map(p => <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>)}
@@ -188,6 +239,22 @@ export function AdminProjects() {
           ))}
         </div>
       )}
+
+      {/* Confirmation modal for status/package changes */}
+      <Dialog open={!!pendingChange} onOpenChange={open => { if (!open) setPendingChange(null); }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Bekräfta ändring</DialogTitle>
+            <DialogDescription>
+              Är du säker på att du vill ändra {pendingChange?.field === 'status' ? 'status' : 'paket'} för <strong>{pendingChange?.projectName}</strong> från <strong>{pendingChange?.oldLabel}</strong> till <strong>{pendingChange?.newLabel}</strong>? Kunden kan komma att notifieras om ändringen.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setPendingChange(null)}>Avbryt</Button>
+            <Button onClick={confirmChange}>Bekräfta</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

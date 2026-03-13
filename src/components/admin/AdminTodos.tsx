@@ -6,6 +6,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
 import { Plus, Trash2, CheckSquare, Square } from 'lucide-react';
+import {
+  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,
+} from '@/components/ui/dialog';
 
 interface Project { id: string; name: string; }
 interface Todo { id: string; title: string; completed: boolean; project_id: string; created_at: string; }
@@ -15,7 +18,10 @@ export function AdminTodos() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [selectedProject, setSelectedProject] = useState('');
   const [title, setTitle] = useState('');
+  const [pendingTodo, setPendingTodo] = useState<Todo | null>(null);
   const { toast } = useToast();
+
+  const projectMap = Object.fromEntries(projects.map(p => [p.id, p.name]));
 
   useEffect(() => {
     Promise.all([
@@ -42,17 +48,32 @@ export function AdminTodos() {
     }
   };
 
-  const toggleTodo = async (todo: Todo) => {
+  const handleToggleClick = (todo: Todo) => {
+    if (!todo.completed) {
+      // Marking as done → show confirmation
+      setPendingTodo(todo);
+    } else {
+      // Unchecking → no confirmation needed
+      doToggle(todo);
+    }
+  };
+
+  const doToggle = async (todo: Todo) => {
     await supabase.from('project_todos').update({ completed: !todo.completed }).eq('id', todo.id);
     setTodos(prev => prev.map(t => t.id === todo.id ? { ...t, completed: !t.completed } : t));
+  };
+
+  const confirmToggle = async () => {
+    if (!pendingTodo) return;
+    await doToggle(pendingTodo);
+    toast({ title: 'Uppgift markerad som klar' });
+    setPendingTodo(null);
   };
 
   const deleteTodo = async (id: string) => {
     await supabase.from('project_todos').delete().eq('id', id);
     setTodos(prev => prev.filter(t => t.id !== id));
   };
-
-  const projectMap = Object.fromEntries(projects.map(p => [p.id, p.name]));
 
   return (
     <div className="space-y-6">
@@ -90,7 +111,7 @@ export function AdminTodos() {
             animate={{ opacity: todo.completed ? 0.5 : 1, x: 0 }}
             transition={{ delay: i * 0.03 }}
           >
-            <button onClick={() => toggleTodo(todo)} className="flex items-center gap-3 min-w-0">
+            <button onClick={() => handleToggleClick(todo)} className="flex items-center gap-3 min-w-0">
               {todo.completed ? <CheckSquare className="w-4 h-4 text-accent" /> : <Square className="w-4 h-4 text-muted-foreground" />}
               <div className="text-left min-w-0">
                 <p className={`text-sm ${todo.completed ? 'line-through text-muted-foreground' : 'text-foreground'}`}>{todo.title}</p>
@@ -103,6 +124,22 @@ export function AdminTodos() {
           </motion.div>
         ))}
       </div>
+
+      {/* Confirmation modal for marking todo as done */}
+      <Dialog open={!!pendingTodo} onOpenChange={open => { if (!open) setPendingTodo(null); }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Markera som klar?</DialogTitle>
+            <DialogDescription>
+              Är du säker på att du vill markera <strong>"{pendingTodo?.title}"</strong> ({projectMap[pendingTodo?.project_id ?? ''] || 'Projekt'}) som klar? Kunden kan komma att notifieras.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setPendingTodo(null)}>Avbryt</Button>
+            <Button onClick={confirmToggle}>Bekräfta</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
