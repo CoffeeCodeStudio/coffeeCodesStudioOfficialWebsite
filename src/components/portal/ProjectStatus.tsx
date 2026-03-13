@@ -302,15 +302,23 @@ export function ProjectStatus() {
               })}
             </div>
 
-            {/* Instruction text for questionnaire step */}
-            {(currentIndex === 0 || currentIndex === -1) && (
-              <motion.p
-                className="mt-4 text-sm text-muted-foreground bg-muted/20 border border-border/30 rounded-lg px-4 py-3"
+            {/* Instruction text + CTA for questionnaire step */}
+            {(project.status === 'questionnaire' || currentIndex === -1) && (
+              <motion.div
+                className="mt-4 text-sm text-muted-foreground bg-muted/20 border border-border/30 rounded-lg px-4 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
-                Vi behöver dina svar på projektfrågorna innan vi kan påbörja designen.
-              </motion.p>
+                <p>Vi behöver dina svar på projektfrågorna innan vi kan påbörja designen.</p>
+                <Button
+                  size="sm"
+                  className="shrink-0"
+                  onClick={() => window.open('/projektfragor', '_blank')}
+                >
+                  <FileText className="w-3.5 h-3.5 mr-1.5" />
+                  Fyll i projektfrågor
+                </Button>
+              </motion.div>
             )}
 
             {/* Approve delivery banner */}
