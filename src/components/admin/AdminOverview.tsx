@@ -91,7 +91,9 @@ export function AdminOverview() {
   const urgentRequests = requests.filter(r => r.priority === 'urgent' && r.status !== 'delivered');
   const pendingRequests = requests.filter(r => r.status === 'pending');
   const renewingSoon = projects.filter(p => p.renewal_date && new Date(p.renewal_date) <= weekFromNow && new Date(p.renewal_date) >= now);
-
+  const questionnaireOverdue = projects.filter(p => 
+    p.status === 'questionnaire' && (now.getTime() - new Date(p.created_at).getTime()) > 24 * 60 * 60 * 1000
+  );
   // Stats
   const activeProjects = projects.filter(p => p.status !== 'completed');
   const uniqueClients = new Set(projects.map(p => p.client_user_id)).size;
