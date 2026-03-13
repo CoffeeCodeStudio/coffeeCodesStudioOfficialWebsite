@@ -302,6 +302,17 @@ export function ProjectStatus() {
               })}
             </div>
 
+            {/* Instruction text for questionnaire step */}
+            {(currentIndex === 0 || currentIndex === -1) && (
+              <motion.p
+                className="mt-4 text-sm text-muted-foreground bg-muted/20 border border-border/30 rounded-lg px-4 py-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                Vi behöver dina svar på projektfrågorna innan vi kan påbörja designen.
+              </motion.p>
+            )}
+
             {/* Approve delivery banner */}
             {reviewReadyRequests.length > 0 && (
               <motion.div
