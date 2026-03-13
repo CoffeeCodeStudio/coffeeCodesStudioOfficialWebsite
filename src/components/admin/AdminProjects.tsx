@@ -161,7 +161,14 @@ export function AdminProjects() {
               <div className="flex flex-col gap-4">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
+                      {isQuestionnaireOverdue(project) && (
+                        <span title="Väntar på svar i mer än 24 timmar">
+                          <AlertCircle className="w-5 h-5 text-yellow-500 animate-pulse" />
+                        </span>
+                      )}
+                    </div>
                     {project.description && (
                       <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
                     )}
