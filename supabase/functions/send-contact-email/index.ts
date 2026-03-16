@@ -112,7 +112,7 @@ Deno.serve(async (req: Request) => {
     const projectTypeLabel = projectTypeLabels[projectType] || escapeHtml(projectType);
 
     const payload = {
-      to: ["coffeecodestudios@gmail.com"],
+      to: ["hej@coffeecodestudio.se"],
       reply_to: email,
       subject: `Ny kontaktförfrågan från ${safeName}`,
       html: `
