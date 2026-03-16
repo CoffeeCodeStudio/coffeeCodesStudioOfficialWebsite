@@ -5,8 +5,7 @@ const FALLBACK_FROM = "Coffee Code Studio <onboarding@resend.dev>";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 function escapeHtml(str: string): string {
@@ -76,37 +75,34 @@ Deno.serve(async (req: Request) => {
 
   try {
     if (!RESEND_API_KEY) {
-      return new Response(
-        JSON.stringify({ error: "RESEND_API_KEY saknas i Secrets" }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        },
-      );
+      return new Response(JSON.stringify({ error: "RESEND_API_KEY saknas i Secrets" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
     }
 
     const { name, company, email, projectType, message }: ContactEmailRequest = await req.json();
 
     if (!name || !email || !projectType || !message) {
-      return new Response(
-        JSON.stringify({ error: "Alla obligatoriska fält måste fyllas i" }),
-        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } },
-      );
+      return new Response(JSON.stringify({ error: "Alla obligatoriska fält måste fyllas i" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return new Response(
-        JSON.stringify({ error: "Ogiltig e-postadress" }),
-        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } },
-      );
+      return new Response(JSON.stringify({ error: "Ogiltig e-postadress" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
     }
 
     if (name.length > 100 || email.length > 255 || message.length > 5000) {
-      return new Response(
-        JSON.stringify({ error: "Fälten överskrider maxlängd" }),
-        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } },
-      );
+      return new Response(JSON.stringify({ error: "Fälten överskrider maxlängd" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
     }
 
     const safeName = escapeHtml(name);
@@ -116,7 +112,7 @@ Deno.serve(async (req: Request) => {
     const projectTypeLabel = projectTypeLabels[projectType] || escapeHtml(projectType);
 
     const payload = {
-      to: ["hej@coffeecodestudio.se"],
+      to: ["coffeecodestudios@gmail.com"],
       reply_to: email,
       subject: `Ny kontaktförfrågan från ${safeName}`,
       html: `
@@ -156,8 +152,7 @@ Deno.serve(async (req: Request) => {
       console.error("Resend API error (primary):", primarySend.data);
 
       const resendMessage = String(primarySend.data?.message || "");
-      const isDomainNotVerified =
-        primarySend.status === 403 && /domain is not verified/i.test(resendMessage);
+      const isDomainNotVerified = primarySend.status === 403 && /domain is not verified/i.test(resendMessage);
 
       if (isDomainNotVerified) {
         const fallbackSend = await sendEmailViaResend(payload, FALLBACK_FROM);
@@ -183,15 +178,15 @@ Deno.serve(async (req: Request) => {
       throw new Error(resendMessage || "Failed to send email");
     }
 
-    return new Response(
-      JSON.stringify({ success: true, message: "E-post skickad!", sender: "primary" }),
-      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } },
-    );
+    return new Response(JSON.stringify({ success: true, message: "E-post skickad!", sender: "primary" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
   } catch (error: any) {
     console.error("Error sending email:", error);
-    return new Response(
-      JSON.stringify({ error: error.message || "Kunde inte skicka e-post" }),
-      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } },
-    );
+    return new Response(JSON.stringify({ error: error.message || "Kunde inte skicka e-post" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
   }
 });
