@@ -36,7 +36,8 @@ export default function Integritetspolicy() {
         Vi delar aldrig dina uppgifter med tredje part i marknadsföringssyfte. Uppgifter kan delas med:
       </p>
       <ul>
-        <li><strong>Tjänsteleverantörer</strong> — hosting och databastjänster (Supabase/Lovable) för att driva webbplatsen</li>
+        <li><strong>Databasplattform</strong> — vi använder Supabase som databasplattform för att lagra och hantera data. Dataskyddsavtal (DPA) med Supabase aktiveras via deras officiella inställningar under Legal i kontopanelen, i enlighet med GDPR artikel 28.</li>
+        <li><strong>Hosting</strong> — Lovable för hosting och driftsättning av webbplatsen</li>
         <li><strong>E-posttjänster</strong> — för att skicka bekräftelser och kommunikation</li>
       </ul>
       <p>Alla leverantörer är bundna av dataskyddsavtal (DPA).</p>
