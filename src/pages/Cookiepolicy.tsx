@@ -32,7 +32,10 @@ export default function Cookiepolicy() {
 
       <h2>3. Tredjepartscookies</h2>
       <p>
-        Vi använder för närvarande inga tredjepartscookies för analys eller marknadsföring. Om detta ändras uppdaterar vi denna policy och ber om ditt samtycke.
+        Vi använder för närvarande inga tredjepartscookies för analys eller marknadsföring. Dock kan Google Search Console sätta cookies i samband med webbplatsverifiering och prestationsövervakning. Dessa cookies hanteras av Google och omfattas av Googles integritetspolicy. Vi informerar dig härmed om att sådan cookieanvändning kan förekomma.
+      </p>
+      <p>
+        Om vi i framtiden inför ytterligare tredjepartscookies uppdaterar vi denna policy och ber om ditt samtycke.
       </p>
 
       <h2>4. Hur hanterar du cookies?</h2>
