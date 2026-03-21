@@ -180,18 +180,20 @@ export function ClientRequests() {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
-    const { error } = await supabase.from('client_requests').insert({
-      project_id: selectedProject,
-      user_id: user.id,
-      message: message.trim(),
-      category,
-      priority,
+    const { data: fnData, error: fnError } = await supabase.functions.invoke('submit-client-request', {
+      body: {
+        project_id: selectedProject,
+        message: message.trim(),
+        category,
+        priority,
+      },
     });
 
     setSending(false);
 
-    if (error) {
-      toast({ title: 'Fel', description: error.message, variant: 'destructive' });
+    if (fnError || (fnData && fnData.error)) {
+      const errorMsg = fnData?.error || 'Något gick fel.';
+      toast({ title: 'Fel', description: errorMsg, variant: 'destructive' });
     } else {
       // Notify admin via email (fire-and-forget)
       const proj = projects.find(p => p.id === selectedProject);
