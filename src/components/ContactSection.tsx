@@ -377,6 +377,17 @@ export function ContactSection() {
                 maxLength={1000}
                 required
               />
+              {/* Honeypot field - hidden from real users, catches bots */}
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))}
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }}
+              />
               {errors.message && (
                 <p className="text-sm text-destructive">{errors.message}</p>
               )}
