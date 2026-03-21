@@ -190,8 +190,8 @@ export function ClientSettings({ user, profile, onProfileUpdate }: ClientSetting
         </div>
         <p className="text-xs text-muted-foreground">
           Vill du radera ditt konto? Kontakta oss på{' '}
-          <a href="mailto:CoffeeCodeStudios@gmail.com" className="text-primary underline">
-            CoffeeCodeStudios@gmail.com
+           <a href="mailto:hej@coffeecodestudio.se" className="text-primary underline">
+             hej@coffeecodestudio.se
           </a>{' '}
           så hjälper vi dig.
         </p>
