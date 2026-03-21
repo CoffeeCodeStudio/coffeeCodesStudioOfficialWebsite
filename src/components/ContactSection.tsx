@@ -21,6 +21,7 @@ interface FormData {
   email: string;
   projectType: string;
   message: string;
+  website: string; // honeypot field
 }
 
 interface FormErrors {
