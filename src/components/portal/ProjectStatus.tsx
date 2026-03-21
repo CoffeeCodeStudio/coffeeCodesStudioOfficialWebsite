@@ -80,7 +80,7 @@ export function ProjectStatus() {
       // First get user's projects
       const { data: userProjects } = await supabase
         .from('projects')
-        .select('*')
+        .select('id, name, status, description, created_at, updated_at, price, monthly_quota, renewal_date, package')
         .eq('client_user_id', user.id)
         .order('created_at', { ascending: false });
 
