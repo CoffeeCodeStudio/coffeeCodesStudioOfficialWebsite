@@ -34,7 +34,6 @@ interface Project {
   package: string;
   monthly_quota: number;
   renewal_date: string | null;
-  system_prompt: string | null;
   created_at: string;
   questionnaire_reminded_at: string | null;
 }
@@ -57,20 +56,30 @@ interface PendingChange {
 
 export function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [adminDataMap, setAdminDataMap] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [pendingChange, setPendingChange] = useState<PendingChange | null>(null);
   const { toast } = useToast();
 
   const fetchProjects = async () => {
-    const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+    const [projRes, adminRes] = await Promise.all([
+      supabase.from('projects').select('*').order('created_at', { ascending: false }),
+      supabase.from('project_admin_data').select('project_id, system_prompt'),
+    ]);
 
-    if (error) {
-      console.error('Kunde inte hämta projekt:', error);
+    if (projRes.error) {
+      console.error('Kunde inte hämta projekt:', projRes.error);
       toast({ title: 'Fel', description: 'Kunde inte hämta projekt.', variant: 'destructive' });
       setProjects([]);
     } else {
-      setProjects((data as Project[]) || []);
+      setProjects((projRes.data as Project[]) || []);
     }
+
+    const map: Record<string, string> = {};
+    ((adminRes.data as any[]) || []).forEach((d: any) => {
+      map[d.project_id] = d.system_prompt || '';
+    });
+    setAdminDataMap(map);
 
     setLoading(false);
   };
@@ -104,6 +113,16 @@ export function AdminProjects() {
 
   const updateField = async (id: string, field: string, value: any) => {
     await updateProject(id, { [field]: value });
+  };
+
+  const updateAdminField = async (projectId: string, field: string, value: any) => {
+    const { error } = await supabase.from('project_admin_data' as any)
+      .upsert({ project_id: projectId, [field]: value } as any, { onConflict: 'project_id' });
+    if (error) {
+      toast({ title: 'Fel', description: 'Kunde inte spara.', variant: 'destructive' });
+    } else {
+      setAdminDataMap(prev => ({ ...prev, [projectId]: String(value || '') }));
+    }
   };
 
   const handleStatusChange = (project: Project, newValue: string) => {
@@ -229,8 +248,8 @@ export function AdminProjects() {
                 <div className="space-y-1 mb-4">
                   <span className="text-[10px] text-muted-foreground uppercase">AI-assistentens systempromt</span>
                   <Textarea
-                    value={project.system_prompt || ''}
-                    onChange={e => updateField(project.id, 'system_prompt', e.target.value || null)}
+                    value={adminDataMap[project.id] || ''}
+                    onChange={e => updateAdminField(project.id, 'system_prompt', e.target.value || null)}
                     placeholder="Beskriv projektet för AI-assistenten, t.ex. 'Detta är en e-handelssite för...'"
                     className="bg-muted/50 border-border/50 min-h-[60px] text-sm"
                     rows={2}

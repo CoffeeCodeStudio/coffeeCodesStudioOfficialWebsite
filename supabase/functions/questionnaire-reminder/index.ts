@@ -12,10 +12,10 @@ Deno.serve(async (req: Request) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Verify authorization - only allow calls with the correct anon key (from pg_cron)
+  // Verify authorization - only allow calls with the dedicated CRON_SECRET
   const authHeader = req.headers.get("Authorization");
-  const expectedKey = Deno.env.get("SUPABASE_ANON_KEY");
-  if (!authHeader || authHeader !== `Bearer ${expectedKey}`) {
+  const cronSecret = Deno.env.get("CRON_SECRET");
+  if (!cronSecret || !authHeader || authHeader !== `Bearer ${cronSecret}`) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
       status: 401,
       headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -121,8 +121,8 @@ Deno.serve(async (req: Request) => {
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   } catch (error: any) {
-    console.error("Error:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    console.error("questionnaire-reminder error:", error);
+    return new Response(JSON.stringify({ error: 'Ett internt fel uppstod.' }), {
       status: 500,
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });

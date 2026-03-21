@@ -10,39 +10,55 @@ import { motion } from 'framer-motion';
 interface Project {
   id: string;
   name: string;
-  admin_notes: string | null;
   price: number | null;
   status: string;
   client_user_id: string;
 }
 
+interface AdminData {
+  project_id: string;
+  admin_notes: string | null;
+}
+
 export function AdminNotes() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [adminDataMap, setAdminDataMap] = useState<Record<string, string>>({});
   const [selectedProject, setSelectedProject] = useState('');
   const [notes, setNotes] = useState('');
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
-    supabase.from('projects').select('*').order('name').then(({ data }) => {
-      setProjects((data as Project[]) || []);
+    Promise.all([
+      supabase.from('projects').select('id, name, price, status, client_user_id').order('name'),
+      supabase.from('project_admin_data').select('project_id, admin_notes'),
+    ]).then(([projRes, adminRes]) => {
+      setProjects((projRes.data as Project[]) || []);
+      const map: Record<string, string> = {};
+      ((adminRes.data as AdminData[]) || []).forEach(d => {
+        map[d.project_id] = d.admin_notes || '';
+      });
+      setAdminDataMap(map);
     });
   }, []);
 
   useEffect(() => {
-    const project = projects.find(p => p.id === selectedProject);
-    setNotes(project?.admin_notes || '');
-  }, [selectedProject, projects]);
+    setNotes(adminDataMap[selectedProject] || '');
+  }, [selectedProject, adminDataMap]);
 
   const handleSave = async () => {
     if (!selectedProject) return;
     setSaving(true);
-    const { error } = await supabase.from('projects').update({ admin_notes: notes }).eq('id', selectedProject);
+    
+    // Upsert into project_admin_data
+    const { error } = await supabase.from('project_admin_data' as any)
+      .upsert({ project_id: selectedProject, admin_notes: notes } as any, { onConflict: 'project_id' });
+    
     setSaving(false);
     if (error) {
-      toast({ title: 'Fel', description: error.message, variant: 'destructive' });
+      toast({ title: 'Fel', description: 'Kunde inte spara anteckningar.', variant: 'destructive' });
     } else {
-      setProjects(prev => prev.map(p => p.id === selectedProject ? { ...p, admin_notes: notes } : p));
+      setAdminDataMap(prev => ({ ...prev, [selectedProject]: notes }));
       toast({ title: 'Anteckningar sparade!' });
     }
   };

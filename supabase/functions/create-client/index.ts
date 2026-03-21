@@ -225,7 +225,8 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    console.error('create-client error:', error);
+    return new Response(JSON.stringify({ error: 'Kunde inte skapa kund. Försök igen.' }), {
       status: 400,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
