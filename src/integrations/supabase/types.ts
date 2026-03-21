@@ -144,6 +144,38 @@ export type Database = {
         }
         Relationships: []
       }
+      project_admin_data: {
+        Row: {
+          admin_notes: string | null
+          created_at: string
+          id: string
+          project_id: string
+          system_prompt: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string
+          id?: string
+          project_id: string
+          system_prompt?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string
+          id?: string
+          project_id?: string
+          system_prompt?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_admin_data_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_agreements: {
         Row: {
           created_at: string
@@ -336,7 +368,6 @@ export type Database = {
       }
       projects: {
         Row: {
-          admin_notes: string | null
           client_user_id: string
           created_at: string
           description: string | null
@@ -348,11 +379,9 @@ export type Database = {
           questionnaire_reminded_at: string | null
           renewal_date: string | null
           status: string
-          system_prompt: string | null
           updated_at: string
         }
         Insert: {
-          admin_notes?: string | null
           client_user_id: string
           created_at?: string
           description?: string | null
@@ -364,11 +393,9 @@ export type Database = {
           questionnaire_reminded_at?: string | null
           renewal_date?: string | null
           status?: string
-          system_prompt?: string | null
           updated_at?: string
         }
         Update: {
-          admin_notes?: string | null
           client_user_id?: string
           created_at?: string
           description?: string | null
@@ -380,7 +407,6 @@ export type Database = {
           questionnaire_reminded_at?: string | null
           renewal_date?: string | null
           status?: string
-          system_prompt?: string | null
           updated_at?: string
         }
         Relationships: []
