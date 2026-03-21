@@ -60,6 +60,17 @@ export function ClientFileUpload() {
     return () => { supabase.removeChannel(channel); };
   }, []);
 
+  const sanitizeFileName = (name: string) => {
+    const ext = name.lastIndexOf('.') >= 0 ? name.slice(name.lastIndexOf('.')) : '';
+    let base = name.lastIndexOf('.') >= 0 ? name.slice(0, name.lastIndexOf('.')) : name;
+    base = base.replace(/[åÅ]/g, m => m === 'å' ? 'a' : 'A')
+               .replace(/[äÄ]/g, m => m === 'ä' ? 'a' : 'A')
+               .replace(/[öÖ]/g, m => m === 'ö' ? 'o' : 'O')
+               .replace(/\s+/g, '_')
+               .replace(/[^a-zA-Z0-9_\-.]/g, '');
+    return (base || 'file') + ext;
+  };
+
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !selectedProject) return;
@@ -67,7 +78,8 @@ export function ClientFileUpload() {
     setUploading(true);
     const { data: { user } } = await supabase.auth.getUser();
 
-    const path = `${selectedProject}/client_${Date.now()}_${file.name}`;
+    const safeName = sanitizeFileName(file.name);
+    const path = `${selectedProject}/client_${Date.now()}_${safeName}`;
     const { error: uploadError } = await supabase.storage.from('project-files').upload(path, file);
 
     if (uploadError) {
