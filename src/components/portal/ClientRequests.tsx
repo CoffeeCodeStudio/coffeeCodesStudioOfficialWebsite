@@ -350,9 +350,19 @@ export function ClientRequests() {
             />
           </div>
           {quotaExceeded && (
-            <p className="text-xs text-destructive mt-2">
-              Du har använt dina ärenden för månaden — kontakta oss för att uppgradera.
-            </p>
+            <div className="mt-3 p-4 rounded-xl border border-destructive/30 bg-destructive/5 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+              <div className="flex-1">
+                <p className="text-sm font-medium text-foreground">Kvoten är uppnådd</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Du har använt alla dina ärenden för denna månad. Uppgradera ditt paket för att få fler.
+                </p>
+              </div>
+              <a href="/#priser">
+                <Button size="sm" className="glow-button bg-primary text-primary-foreground shrink-0">
+                  Uppgradera paket
+                </Button>
+              </a>
+            </div>
           )}
         </div>
       )}
