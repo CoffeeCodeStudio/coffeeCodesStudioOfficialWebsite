@@ -32,7 +32,7 @@ const TERMS_TEXT = `Dessa villkor gäller enligt Coffee Code Studios allmänna a
 • Ändringar utanför projektets omfattning hanteras som tilläggsarbete.
 • Eventuella tvister avgörs av Göteborgs tingsrätt.
 
-Fullständiga villkor finns på coffeecodestudio.se/anvandardvillkor`;
+Fullständiga villkor finns på coffeecodestudio.se/anvandarvillkor`;
 
 export function ClientAgreement({ projectId, projectName }: ClientAgreementProps) {
   const [agreement, setAgreement] = useState<Agreement | null>(null);
