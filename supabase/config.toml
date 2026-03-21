@@ -17,3 +17,6 @@ verify_jwt = false
 
 [functions.sign-agreement]
 verify_jwt = false
+
+[functions.submit-client-request]
+verify_jwt = false
