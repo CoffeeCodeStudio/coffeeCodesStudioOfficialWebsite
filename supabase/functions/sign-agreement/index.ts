@@ -109,7 +109,8 @@ serve(async (req) => {
       .eq('id', agreement_id);
 
     if (updateError) {
-      return new Response(JSON.stringify({ error: updateError.message }), {
+      console.error('sign-agreement update error:', updateError);
+      return new Response(JSON.stringify({ error: 'Kunde inte signera avtalet. Försök igen.' }), {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
