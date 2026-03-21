@@ -166,7 +166,7 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
         ...prev.filter(m => m.content !== ''),
         { role: 'assistant', content: errorMsg },
       ]);
-      await saveMessage('assistant', errorMsg);
+      
     } finally {
       setIsLoading(false);
     }
