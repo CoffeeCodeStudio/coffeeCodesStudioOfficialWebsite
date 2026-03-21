@@ -8,6 +8,29 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// --- In-memory IP rate limiting ---
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const RATE_LIMIT_MAX = 3; // max 3 emails per IP per hour
+
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  if (entry.count >= RATE_LIMIT_MAX) {
+    return true;
+  }
+
+  entry.count++;
+  return false;
+}
+
 function escapeHtml(str: string): string {
   return str
     .replace(/&/g, "&amp;")
@@ -23,6 +46,7 @@ interface ContactEmailRequest {
   email: string;
   projectType: string;
   message: string;
+  website?: string; // honeypot field — should always be empty
 }
 
 interface ResendResult {
@@ -74,14 +98,31 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
+    // --- Rate limiting by IP ---
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (isRateLimited(ip)) {
+      return new Response(
+        JSON.stringify({ error: "För många förfrågningar. Försök igen senare." }),
+        { status: 429, headers: { "Content-Type": "application/json", ...corsHeaders } },
+      );
+    }
+
     if (!RESEND_API_KEY) {
-      return new Response(JSON.stringify({ error: "RESEND_API_KEY saknas i Secrets" }), {
+      return new Response(JSON.stringify({ error: "Serverfel. Försök igen senare." }), {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
-    const { name, company, email, projectType, message }: ContactEmailRequest = await req.json();
+    const { name, company, email, projectType, message, website }: ContactEmailRequest = await req.json();
+
+    // --- Honeypot check: if filled, silently succeed ---
+    if (website) {
+      return new Response(JSON.stringify({ success: true, message: "E-post skickad!" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
 
     if (!name || !email || !projectType || !message) {
       return new Response(JSON.stringify({ error: "Alla obligatoriska fält måste fyllas i" }), {
@@ -172,10 +213,10 @@ Deno.serve(async (req: Request) => {
         }
 
         console.error("Resend API error (fallback):", fallbackSend.data);
-        throw new Error(String(fallbackSend.data?.message || resendMessage || "Failed to send email"));
+        throw new Error("Failed to send email");
       }
 
-      throw new Error(resendMessage || "Failed to send email");
+      throw new Error("Failed to send email");
     }
 
     return new Response(JSON.stringify({ success: true, message: "E-post skickad!", sender: "primary" }), {
