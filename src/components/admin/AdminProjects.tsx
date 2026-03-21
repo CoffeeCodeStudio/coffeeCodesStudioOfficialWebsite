@@ -115,6 +115,16 @@ export function AdminProjects() {
     await updateProject(id, { [field]: value });
   };
 
+  const updateAdminField = async (projectId: string, field: string, value: any) => {
+    const { error } = await supabase.from('project_admin_data' as any)
+      .upsert({ project_id: projectId, [field]: value } as any, { onConflict: 'project_id' });
+    if (error) {
+      toast({ title: 'Fel', description: 'Kunde inte spara.', variant: 'destructive' });
+    } else {
+      setAdminDataMap(prev => ({ ...prev, [projectId]: String(value || '') }));
+    }
+  };
+
   const handleStatusChange = (project: Project, newValue: string) => {
     const oldLabel = PROJECT_STATUSES.find(s => s.value === project.status)?.label || project.status;
     const newLabel = PROJECT_STATUSES.find(s => s.value === newValue)?.label || newValue;
