@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -30,9 +30,12 @@ export function FilePreviewModal({ open, onOpenChange, fileName, filePath }: Fil
   const isText = textExts.includes(ext);
   const canPreview = isImage || isPdf || isText;
 
+  const blobUrlRef = useRef<string | null>(null);
+
   useEffect(() => {
     if (!open) {
-      if (blobUrl) URL.revokeObjectURL(blobUrl);
+      if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
+      blobUrlRef.current = null;
       setBlobUrl(null);
       setTextContent(null);
       return;
@@ -45,7 +48,9 @@ export function FilePreviewModal({ open, onOpenChange, fileName, filePath }: Fil
         if (isText) {
           setTextContent(await data.text());
         } else {
-          setBlobUrl(URL.createObjectURL(data));
+          const url = URL.createObjectURL(data);
+          blobUrlRef.current = url;
+          setBlobUrl(url);
         }
       }
       setLoading(false);
@@ -53,10 +58,12 @@ export function FilePreviewModal({ open, onOpenChange, fileName, filePath }: Fil
     load();
 
     return () => {
-      if (blobUrl) URL.revokeObjectURL(blobUrl);
+      if (blobUrlRef.current) {
+        URL.revokeObjectURL(blobUrlRef.current);
+        blobUrlRef.current = null;
+      }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, filePath]);
+  }, [open, filePath, isText]);
 
   const handleDownload = async () => {
     const { data } = await supabase.storage.from('project-files').download(filePath);
