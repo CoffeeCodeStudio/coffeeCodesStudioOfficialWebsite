@@ -56,20 +56,30 @@ interface PendingChange {
 
 export function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [adminDataMap, setAdminDataMap] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [pendingChange, setPendingChange] = useState<PendingChange | null>(null);
   const { toast } = useToast();
 
   const fetchProjects = async () => {
-    const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+    const [projRes, adminRes] = await Promise.all([
+      supabase.from('projects').select('*').order('created_at', { ascending: false }),
+      supabase.from('project_admin_data').select('project_id, system_prompt'),
+    ]);
 
-    if (error) {
-      console.error('Kunde inte hämta projekt:', error);
+    if (projRes.error) {
+      console.error('Kunde inte hämta projekt:', projRes.error);
       toast({ title: 'Fel', description: 'Kunde inte hämta projekt.', variant: 'destructive' });
       setProjects([]);
     } else {
-      setProjects((data as Project[]) || []);
+      setProjects((projRes.data as Project[]) || []);
     }
+
+    const map: Record<string, string> = {};
+    ((adminRes.data as any[]) || []).forEach((d: any) => {
+      map[d.project_id] = d.system_prompt || '';
+    });
+    setAdminDataMap(map);
 
     setLoading(false);
   };
