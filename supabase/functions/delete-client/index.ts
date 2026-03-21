@@ -85,7 +85,7 @@ Deno.serve(async (req) => {
     });
   } catch (error) {
     console.error("delete-client error:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: 'Kunde inte radera kund. Försök igen.' }), {
       status: 400,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });

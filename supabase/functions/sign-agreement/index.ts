@@ -130,7 +130,8 @@ serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
+    console.error('sign-agreement error:', err);
+    return new Response(JSON.stringify({ error: 'Ett internt fel uppstod. Försök igen.' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

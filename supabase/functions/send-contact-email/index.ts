@@ -184,7 +184,7 @@ Deno.serve(async (req: Request) => {
     });
   } catch (error: any) {
     console.error("Error sending email:", error);
-    return new Response(JSON.stringify({ error: error.message || "Kunde inte skicka e-post" }), {
+    return new Response(JSON.stringify({ error: 'Kunde inte skicka e-post. Försök igen.' }), {
       status: 500,
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });

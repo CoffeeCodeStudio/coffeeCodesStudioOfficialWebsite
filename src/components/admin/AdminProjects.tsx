@@ -248,8 +248,8 @@ export function AdminProjects() {
                 <div className="space-y-1 mb-4">
                   <span className="text-[10px] text-muted-foreground uppercase">AI-assistentens systempromt</span>
                   <Textarea
-                    value={project.system_prompt || ''}
-                    onChange={e => updateField(project.id, 'system_prompt', e.target.value || null)}
+                    value={adminDataMap[project.id] || ''}
+                    onChange={e => updateAdminField(project.id, 'system_prompt', e.target.value || null)}
                     placeholder="Beskriv projektet för AI-assistenten, t.ex. 'Detta är en e-handelssite för...'"
                     className="bg-muted/50 border-border/50 min-h-[60px] text-sm"
                     rows={2}
