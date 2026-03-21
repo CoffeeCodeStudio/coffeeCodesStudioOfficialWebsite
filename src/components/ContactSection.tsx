@@ -54,6 +54,7 @@ export function ContactSection() {
     email: '',
     projectType: '',
     message: '',
+    website: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
