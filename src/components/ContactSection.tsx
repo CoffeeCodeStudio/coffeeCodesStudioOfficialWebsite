@@ -21,6 +21,7 @@ interface FormData {
   email: string;
   projectType: string;
   message: string;
+  website: string; // honeypot field
 }
 
 interface FormErrors {
@@ -53,6 +54,7 @@ export function ContactSection() {
     email: '',
     projectType: '',
     message: '',
+    website: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -117,6 +119,7 @@ export function ContactSection() {
           email: formData.email,
           projectType: formData.projectType,
           message: formData.message,
+          website: formData.website, // honeypot
         },
       });
 
@@ -148,6 +151,7 @@ export function ContactSection() {
           email: '',
           projectType: '',
           message: '',
+          website: '',
         });
         setFillLevel(0);
         setIsSuccess(false);
@@ -372,6 +376,17 @@ export function ContactSection() {
                 className="glass-card border-white/10 bg-input/50 focus:border-primary/50 min-h-[100px] sm:min-h-[120px] placeholder:text-muted-foreground/60 text-base sm:text-sm"
                 maxLength={1000}
                 required
+              />
+              {/* Honeypot field - hidden from real users, catches bots */}
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))}
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }}
               />
               {errors.message && (
                 <p className="text-sm text-destructive">{errors.message}</p>
