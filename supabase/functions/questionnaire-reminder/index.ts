@@ -12,10 +12,10 @@ Deno.serve(async (req: Request) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Verify authorization - only allow calls with the correct anon key (from pg_cron)
+  // Verify authorization - only allow calls with the dedicated CRON_SECRET
   const authHeader = req.headers.get("Authorization");
-  const expectedKey = Deno.env.get("SUPABASE_ANON_KEY");
-  if (!authHeader || authHeader !== `Bearer ${expectedKey}`) {
+  const cronSecret = Deno.env.get("CRON_SECRET");
+  if (!cronSecret || !authHeader || authHeader !== `Bearer ${cronSecret}`) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
       status: 401,
       headers: { "Content-Type": "application/json", ...corsHeaders },
