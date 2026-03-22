@@ -5,7 +5,9 @@ import { useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import djloboScreenshot from '@/assets/djlobo-screenshot.webp';
-import echo2000Screenshot from '@/assets/echo2000-screenshot.png';
+import djloboScreenshotMobile from '@/assets/djlobo-screenshot-mobile.webp';
+import echo2000Screenshot from '@/assets/echo2000-screenshot.webp';
+import echo2000ScreenshotMobile from '@/assets/echo2000-screenshot-mobile.webp';
 
 export function ProjektSection() {
   const { t } = useLanguage();
@@ -41,11 +43,13 @@ export function ProjektSection() {
             <div className="relative">
               <img
                 src={djloboScreenshot}
+                srcSet={`${djloboScreenshotMobile} 400w, ${djloboScreenshot} 768w`}
+                sizes="(max-width: 768px) 400px, 768px"
                 alt="djloboproducciones.com - DJ Lobo Producciones webbplats med bokningssystem och live radio"
                 className="w-full h-48 sm:h-56 object-cover"
-                loading="lazy"
+                fetchPriority="high"
                 width="768"
-                height="576"
+                height="561"
               />
             </div>
             <div className="p-5 sm:p-6 flex flex-col flex-1">
@@ -82,11 +86,13 @@ export function ProjektSection() {
             <div className="relative">
               <img
                 src={echo2000Screenshot}
+                srcSet={`${echo2000ScreenshotMobile} 400w, ${echo2000Screenshot} 768w`}
+                sizes="(max-width: 768px) 400px, 768px"
                 alt="Echo2000 - Nostalgisk svensk community inspirerad av LunarStorm och MSN Messenger"
                 className="w-full h-48 sm:h-56 object-cover"
                 loading="lazy"
                 width="768"
-                height="576"
+                height="651"
               />
             </div>
             <div className="p-5 sm:p-6 flex flex-col flex-1">
