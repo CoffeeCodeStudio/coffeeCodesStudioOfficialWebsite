@@ -5,7 +5,9 @@ import { useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import djloboScreenshot from '@/assets/djlobo-screenshot.webp';
-import echo2000Screenshot from '@/assets/echo2000-screenshot.png';
+import djloboScreenshotMobile from '@/assets/djlobo-screenshot-mobile.webp';
+import echo2000Screenshot from '@/assets/echo2000-screenshot.webp';
+import echo2000ScreenshotMobile from '@/assets/echo2000-screenshot-mobile.webp';
 
 export function ProjektSection() {
   const { t } = useLanguage();
