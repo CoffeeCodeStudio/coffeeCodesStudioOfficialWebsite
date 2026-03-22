@@ -23,7 +23,7 @@ export function SEOHead({ title, description, canonical, ogImage, noindex }: SEO
     };
 
     setMeta('description', description);
-    setMeta('og:title', description, 'property');
+    setMeta('og:title', title, 'property');
     setMeta('og:description', description, 'property');
     if (ogImage) setMeta('og:image', ogImage, 'property');
     setMeta('og:type', 'website', 'property');

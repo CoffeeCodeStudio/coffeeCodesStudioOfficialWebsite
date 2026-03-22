@@ -16,7 +16,7 @@ const Index = () => {
     <LanguageProvider>
       <SEOHead
         title="Coffee Code Studio | Skräddarsydda Webbapplikationer"
-        description="Din vision, kodad till perfektion. Vi skapar skräddarsydda webbapplikationer med AI-driven utveckling i Göteborg."
+        description="Vi bygger blixtsnabba hemsidor och webbapplikationer för startups och småföretag i Göteborg — från idé till lansering på en vecka."
         canonical="https://coffeecodestudio.se/"
         ogImage="https://lovable.dev/opengraph-image-p98pqg.png"
       />

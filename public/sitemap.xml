@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://coffeecodestudio.lovable.app/</loc>
+    <loc>https://coffeecodestudio.se/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://coffeecodestudio.lovable.app/portal/login</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://coffeecodestudio.se/anvandarvillkor</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://coffeecodestudio.se/integritetspolicy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://coffeecodestudio.se/cookiepolicy</loc>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 </urlset>
