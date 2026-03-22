@@ -43,11 +43,13 @@ export function ProjektSection() {
             <div className="relative">
               <img
                 src={djloboScreenshot}
+                srcSet={`${djloboScreenshotMobile} 400w, ${djloboScreenshot} 768w`}
+                sizes="(max-width: 768px) 400px, 768px"
                 alt="djloboproducciones.com - DJ Lobo Producciones webbplats med bokningssystem och live radio"
                 className="w-full h-48 sm:h-56 object-cover"
-                loading="lazy"
+                fetchPriority="high"
                 width="768"
-                height="576"
+                height="561"
               />
             </div>
             <div className="p-5 sm:p-6 flex flex-col flex-1">
