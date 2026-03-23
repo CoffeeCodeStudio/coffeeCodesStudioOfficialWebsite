@@ -92,7 +92,7 @@ export function ProjektSection() {
                 className="w-full h-48 sm:h-56 object-cover"
                 loading="lazy"
                 width="768"
-                height="651" src="/lovable-uploads/8c09ddd2-70be-446e-b548-71c0b43d9f0f.png" />
+                height="651" src="/lovable-uploads/90852ec3-a4a3-42e9-bf12-0a6af071d054.png" />
               
             </div>
             <div className="p-5 sm:p-6 flex flex-col flex-1">
