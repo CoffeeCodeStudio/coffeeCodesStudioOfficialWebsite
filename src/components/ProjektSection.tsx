@@ -21,8 +21,8 @@ export function ProjektSection() {
           className="text-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
+          transition={{ duration: 0.6 }}>
+          
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif mb-4">
             <span className="gradient-text">{t.portfolio.headline}</span>
           </h2>
@@ -38,8 +38,8 @@ export function ProjektSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            whileHover={{ y: -5 }}
-          >
+            whileHover={{ y: -5 }}>
+            
             <div className="relative">
               <img
                 src={djloboScreenshot}
@@ -49,8 +49,8 @@ export function ProjektSection() {
                 className="w-full h-48 sm:h-56 object-cover"
                 fetchPriority="high"
                 width="768"
-                height="561"
-              />
+                height="561" />
+              
             </div>
             <div className="p-5 sm:p-6 flex flex-col flex-1">
               <div className="flex items-center gap-2 mb-2">
@@ -67,8 +67,8 @@ export function ProjektSection() {
               <Button
                 variant="outline"
                 className="border-primary/30 text-primary hover:bg-primary/10 w-fit"
-                onClick={() => window.open('https://djloboproducciones.com', '_blank')}
-              >
+                onClick={() => window.open('https://djloboproducciones.com', '_blank')}>
+                
                 {t.portfolio.viewDemo}
                 <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
@@ -81,19 +81,19 @@ export function ProjektSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.35 }}
-            whileHover={{ y: -5 }}
-          >
+            whileHover={{ y: -5 }}>
+            
             <div className="relative">
               <img
-                src={echo2000Screenshot}
+
                 srcSet={`${echo2000ScreenshotMobile} 400w, ${echo2000Screenshot} 768w`}
                 sizes="(max-width: 768px) 400px, 768px"
                 alt="Echo2000 - Nostalgisk svensk community inspirerad av LunarStorm och MSN Messenger"
                 className="w-full h-48 sm:h-56 object-cover"
                 loading="lazy"
                 width="768"
-                height="651"
-              />
+                height="651" src="/lovable-uploads/8c09ddd2-70be-446e-b548-71c0b43d9f0f.png" />
+              
             </div>
             <div className="p-5 sm:p-6 flex flex-col flex-1">
               <div className="flex items-center gap-2 mb-2">
@@ -110,8 +110,8 @@ export function ProjektSection() {
               <Button
                 variant="outline"
                 className="border-primary/30 text-primary hover:bg-primary/10 w-fit"
-                onClick={() => window.open('https://echo2000.lovable.app/', '_blank')}
-              >
+                onClick={() => window.open('https://echo2000.lovable.app/', '_blank')}>
+                
                 {t.portfolio.viewDemo}
                 <ExternalLink className="w-4 h-4 ml-2" />
               </Button>
@@ -119,6 +119,6 @@ export function ProjektSection() {
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 }
