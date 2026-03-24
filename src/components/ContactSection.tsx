@@ -367,6 +367,31 @@ export function ContactSection() {
               </div>
             </div>
 
+            {/* Budget */}
+            <div className="space-y-2">
+              <Label htmlFor="budget" className="text-foreground font-medium text-sm sm:text-base">
+                {t.contact.budget}
+              </Label>
+              <Select
+                value={formData.budget}
+                onValueChange={(value) => handleInputChange('budget', value)}
+              >
+                <SelectTrigger
+                  className="glass-card border-white/10 bg-input/50 focus:border-primary/50 h-11 sm:h-10 text-base sm:text-sm"
+                  aria-label={t.contact.budgetPlaceholder}
+                >
+                  <SelectValue placeholder={t.contact.budgetPlaceholder} />
+                </SelectTrigger>
+                <SelectContent className="glass-card border-white/10 bg-card z-[9999]">
+                  {t.contact.budgetOptions.map((option) => (
+                    <SelectItem key={option} value={option} className="text-base sm:text-sm">
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
             {/* Message */}
             <div className="space-y-2">
               <Label htmlFor="message" className="text-foreground font-medium text-sm sm:text-base">

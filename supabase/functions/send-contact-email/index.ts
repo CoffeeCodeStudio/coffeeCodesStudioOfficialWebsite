@@ -175,6 +175,7 @@ Deno.serve(async (req: Request) => {
                 <p style="color: #E0E0E0; margin: 8px 0;"><strong style="color: #FFC107;">Företag:</strong> ${safeCompany}</p>
                 <p style="color: #E0E0E0; margin: 8px 0;"><strong style="color: #FFC107;">E-post:</strong> ${safeEmail}</p>
                 <p style="color: #E0E0E0; margin: 8px 0;"><strong style="color: #FFC107;">Projekttyp:</strong> ${projectTypeLabel}</p>
+                <p style="color: #E0E0E0; margin: 8px 0;"><strong style="color: #FFC107;">Budget:</strong> ${safeBudget}</p>
               </div>
               <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 24px;">
                 <h2 style="color: #FFC107; font-size: 18px; margin-top: 0;">Meddelande</h2>
