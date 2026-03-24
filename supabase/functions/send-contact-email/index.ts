@@ -45,6 +45,7 @@ interface ContactEmailRequest {
   company?: string;
   email: string;
   projectType: string;
+  budget?: string;
   message: string;
   website?: string; // honeypot field — should always be empty
 }
