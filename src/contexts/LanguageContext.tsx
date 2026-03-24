@@ -89,6 +89,9 @@ interface Translations {
     booking: string;
     webApp: string;
     other: string;
+    budget: string;
+    budgetPlaceholder: string;
+    budgetOptions: string[];
     message: string;
     messagePlaceholder: string;
     submit: string;
