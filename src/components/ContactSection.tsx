@@ -20,6 +20,7 @@ interface FormData {
   company: string;
   email: string;
   projectType: string;
+  budget: string;
   message: string;
   website: string; // honeypot field
 }
@@ -53,6 +54,7 @@ export function ContactSection() {
     company: '',
     email: '',
     projectType: '',
+    budget: '',
     message: '',
     website: '',
   });
@@ -118,6 +120,7 @@ export function ContactSection() {
           company: formData.company,
           email: formData.email,
           projectType: formData.projectType,
+          budget: formData.budget,
           message: formData.message,
           website: formData.website, // honeypot
         },
@@ -150,6 +153,7 @@ export function ContactSection() {
           company: '',
           email: '',
           projectType: '',
+          budget: '',
           message: '',
           website: '',
         });
@@ -361,6 +365,31 @@ export function ContactSection() {
                   <p className="text-sm text-destructive">{errors.projectType}</p>
                 )}
               </div>
+            </div>
+
+            {/* Budget */}
+            <div className="space-y-2">
+              <Label htmlFor="budget" className="text-foreground font-medium text-sm sm:text-base">
+                {t.contact.budget}
+              </Label>
+              <Select
+                value={formData.budget}
+                onValueChange={(value) => handleInputChange('budget', value)}
+              >
+                <SelectTrigger
+                  className="glass-card border-white/10 bg-input/50 focus:border-primary/50 h-11 sm:h-10 text-base sm:text-sm"
+                  aria-label={t.contact.budgetPlaceholder}
+                >
+                  <SelectValue placeholder={t.contact.budgetPlaceholder} />
+                </SelectTrigger>
+                <SelectContent className="glass-card border-white/10 bg-card z-[9999]">
+                  {t.contact.budgetOptions.map((option) => (
+                    <SelectItem key={option} value={option} className="text-base sm:text-sm">
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Message */}

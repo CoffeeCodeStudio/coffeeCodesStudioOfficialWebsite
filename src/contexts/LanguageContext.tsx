@@ -89,6 +89,9 @@ interface Translations {
     booking: string;
     webApp: string;
     other: string;
+    budget: string;
+    budgetPlaceholder: string;
+    budgetOptions: string[];
     message: string;
     messagePlaceholder: string;
     submit: string;
@@ -263,6 +266,9 @@ const translations: Record<Language, Translations> = {
       booking: 'Bokningssystem',
       webApp: 'Webbapplikation',
       other: 'Annat',
+      budget: 'Budget',
+      budgetPlaceholder: 'Välj ungefärlig budget',
+      budgetOptions: ['Under 5 000 kr', '5 000 – 15 000 kr', '15 000 – 50 000 kr', 'Över 50 000 kr', 'Vet ej'],
       message: 'Meddelande',
       messagePlaceholder: 'Berätta kort om din vision och dina utmaningar...',
       submit: 'Skicka förfrågan',
@@ -450,6 +456,9 @@ const translations: Record<Language, Translations> = {
       booking: 'Booking System',
       webApp: 'Web Application',
       other: 'Other',
+      budget: 'Budget',
+      budgetPlaceholder: 'Select approximate budget',
+      budgetOptions: ['Under 5 000 SEK', '5 000 – 15 000 SEK', '15 000 – 50 000 SEK', 'Over 50 000 SEK', 'Not sure'],
       message: 'Message',
       messagePlaceholder: 'Tell us briefly about your vision and challenges...',
       submit: 'Send Request',
