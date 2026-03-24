@@ -115,7 +115,7 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const { name, company, email, projectType, message, website }: ContactEmailRequest = await req.json();
+    const { name, company, email, projectType, budget, message, website }: ContactEmailRequest = await req.json();
 
     // --- Honeypot check: if filled, silently succeed ---
     if (website) {
