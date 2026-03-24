@@ -48,7 +48,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}>
           
-          <div className="glass-card px-4 sm:px-6 py-2 sm:py-3 border border-primary/30 rounded-full">
+          <div className="glass-card px-4 sm:px-6 py-2 sm:py-3 border border-primary/30 rounded-full text-left">
             <span className="text-xs sm:text-sm text-primary font-medium leading-tight">
               ✨ {t.hero.promo}
             </span>
