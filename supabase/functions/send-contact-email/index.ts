@@ -150,6 +150,7 @@ Deno.serve(async (req: Request) => {
     const safeName = escapeHtml(name);
     const safeCompany = escapeHtml(company || "Ej angivet");
     const safeEmail = escapeHtml(email);
+    const safeBudget = escapeHtml(budget || "Ej angivet");
     const safeMessage = escapeHtml(message);
     const projectTypeLabel = projectTypeLabels[projectType] || escapeHtml(projectType);
 
