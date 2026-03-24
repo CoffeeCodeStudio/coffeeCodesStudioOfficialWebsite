@@ -54,6 +54,7 @@ export function ContactSection() {
     company: '',
     email: '',
     projectType: '',
+    budget: '',
     message: '',
     website: '',
   });
