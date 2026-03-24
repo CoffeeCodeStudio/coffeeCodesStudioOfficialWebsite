@@ -226,7 +226,7 @@ const translations: Record<Language, Translations> = {
       project1: {
         name: 'djloboproducciones.com',
         category: 'Kundprojekt',
-        description: 'En komplett plattform för DJ Lobo — bokningssystem, live radio och mixar på ett ställe. Från idé till live på under en veckFrån idé till live på under en vecka.',
+        description: 'En komplett plattform för DJ Lobo — bokningssystem, live radio och mixar på ett ställe. Från idé till live på under en vecka.',
       },
       project2: {
         name: 'Echo2000',

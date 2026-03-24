@@ -41,19 +41,6 @@ export function HeroSection() {
       </div>
 
       <div className="container mx-auto px-5 sm:px-6 relative z-10">
-        {/* Promo Banner */}
-        <motion.div
-          className="flex justify-center mb-5 sm:mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}>
-          
-          <div className="glass-card px-4 sm:px-6 py-2 sm:py-3 border border-primary/30 rounded-full text-left">
-            <span className="text-xs sm:text-sm text-primary font-medium leading-tight">
-              ✨ {t.hero.promo}
-            </span>
-          </div>
-        </motion.div>
 
         {/* Main Headline */}
         <motion.h1
