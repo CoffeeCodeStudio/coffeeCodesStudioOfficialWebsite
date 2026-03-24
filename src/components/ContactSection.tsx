@@ -120,6 +120,7 @@ export function ContactSection() {
           company: formData.company,
           email: formData.email,
           projectType: formData.projectType,
+          budget: formData.budget,
           message: formData.message,
           website: formData.website, // honeypot
         },
