@@ -2,6 +2,11 @@ import React, { createContext, useContext, useState, type ReactNode } from 'reac
 
 type Language = 'sv' | 'en';
 
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
 interface Translations {
   nav: {
     services: string;
@@ -27,21 +32,9 @@ interface Translations {
   process: {
     headline: string;
     intro: string;
-    step1: {
-      title: string;
-      subtitle: string;
-      text: string;
-    };
-    step2: {
-      title: string;
-      subtitle: string;
-      text: string;
-    };
-    step3: {
-      title: string;
-      subtitle: string;
-      text: string;
-    };
+    step1: { title: string; subtitle: string; text: string };
+    step2: { title: string; subtitle: string; text: string };
+    step3: { title: string; subtitle: string; text: string };
   };
   portfolio: {
     headline: string;
@@ -49,21 +42,9 @@ interface Translations {
     viewDemo: string;
     explorePrototype: string;
     seeDesign: string;
-    project1: {
-      name: string;
-      category: string;
-      description: string;
-    };
-    project2: {
-      name: string;
-      category: string;
-      description: string;
-    };
-    project3: {
-      name: string;
-      category: string;
-      description: string;
-    };
+    project1: { name: string; category: string; description: string };
+    project2: { name: string; category: string; description: string };
+    project3: { name: string; category: string; description: string };
   };
   about: {
     headline: string;
@@ -155,6 +136,9 @@ interface Translations {
     cta: string;
     comingSoon: string;
     paymentTitle: string;
+    tooltipText: string;
+    disclaimerText: string;
+    paymentNote: string;
     packages: {
       bas: { name: string; price: string; description: string; features: string[] };
       standard: { name: string; price: string; description: string; features: string[] };
@@ -175,6 +159,10 @@ interface Translations {
       paypal: { name: string };
       crypto: { name: string };
     };
+  };
+  faq: {
+    headline: string;
+    items: FAQItem[];
   };
 }
 
