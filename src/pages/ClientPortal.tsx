@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History, Sparkles, Settings } from 'lucide-react';
+import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History, Sparkles, Settings, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
@@ -35,6 +36,7 @@ export default function ClientPortal() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [projectId, setProjectId] = useState<string | null>(null);
   const [projectName, setProjectName] = useState<string>('');
+  const [projectStatus, setProjectStatus] = useState<string>('');
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [loading, setLoading] = useState(true);
   const [unreadMessages, setUnreadMessages] = useState(0);
@@ -77,13 +79,14 @@ export default function ClientPortal() {
     const fetchProjectId = async () => {
       const { data } = await supabase
         .from('projects')
-        .select('id, name')
+        .select('id, name, status')
         .eq('client_user_id', user.id)
         .limit(1)
         .single();
       if (data) {
         setProjectId(data.id);
         setProjectName(data.name);
+        setProjectStatus(data.status);
       }
     };
     fetchProjectId();
@@ -308,16 +311,34 @@ export default function ClientPortal() {
         {/* Welcome banner on dashboard */}
         {activeTab === 'dashboard' && (
           <motion.div
-            className="glass-card cyber-border p-6 rounded-2xl mb-6"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h2 className="text-lg font-serif text-foreground mb-2">
-              Välkommen, {getDisplayName()}.
-            </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Ditt projekt är igång — följ framstegen nedan och skicka önskemål direkt.
-            </p>
+            {projectId && projectStatus === 'questionnaire' ? (
+              <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6 mb-6">
+                <h2 className="text-lg font-serif text-foreground mb-2">
+                  Välkommen, {getDisplayName()}!
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  Nästa steg: Fyll i projektfrågorna så kan vi börja bygga din sajt.
+                </p>
+                <Button asChild>
+                  <Link to="/projektfragor">
+                    Fyll i projektfrågor
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                </Button>
+              </div>
+            ) : (
+              <div className="glass-card cyber-border p-6 rounded-2xl mb-6">
+                <h2 className="text-lg font-serif text-foreground mb-2">
+                  Välkommen, {getDisplayName()}.
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Ditt projekt är igång — följ framstegen nedan och skicka önskemål direkt.
+                </p>
+              </div>
+            )}
           </motion.div>
         )}
 
