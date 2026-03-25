@@ -2,6 +2,11 @@ import React, { createContext, useContext, useState, type ReactNode } from 'reac
 
 type Language = 'sv' | 'en';
 
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
 interface Translations {
   nav: {
     services: string;
@@ -27,21 +32,9 @@ interface Translations {
   process: {
     headline: string;
     intro: string;
-    step1: {
-      title: string;
-      subtitle: string;
-      text: string;
-    };
-    step2: {
-      title: string;
-      subtitle: string;
-      text: string;
-    };
-    step3: {
-      title: string;
-      subtitle: string;
-      text: string;
-    };
+    step1: { title: string; subtitle: string; text: string };
+    step2: { title: string; subtitle: string; text: string };
+    step3: { title: string; subtitle: string; text: string };
   };
   portfolio: {
     headline: string;
@@ -49,21 +42,9 @@ interface Translations {
     viewDemo: string;
     explorePrototype: string;
     seeDesign: string;
-    project1: {
-      name: string;
-      category: string;
-      description: string;
-    };
-    project2: {
-      name: string;
-      category: string;
-      description: string;
-    };
-    project3: {
-      name: string;
-      category: string;
-      description: string;
-    };
+    project1: { name: string; category: string; description: string };
+    project2: { name: string; category: string; description: string };
+    project3: { name: string; category: string; description: string };
   };
   about: {
     headline: string;
@@ -155,6 +136,9 @@ interface Translations {
     cta: string;
     comingSoon: string;
     paymentTitle: string;
+    tooltipText: string;
+    disclaimerText: string;
+    paymentNote: string;
     packages: {
       bas: { name: string; price: string; description: string; features: string[] };
       standard: { name: string; price: string; description: string; features: string[] };
@@ -175,6 +159,10 @@ interface Translations {
       paypal: { name: string };
       crypto: { name: string };
     };
+  };
+  faq: {
+    headline: string;
+    items: FAQItem[];
   };
 }
 
@@ -332,6 +320,9 @@ const translations: Record<Language, Translations> = {
       cta: 'Kom igång',
       comingSoon: 'Kommer snart',
       paymentTitle: 'Betalningsmetoder',
+      tooltipText: 'Paketet gäller för webbprojekt byggda av Coffee Code Studio.',
+      disclaimerText: 'Underhållspaketen gäller i första hand projekt byggda av Coffee Code Studio. Har du en befintlig sajt? Hör av dig så ser vi vad vi kan göra.',
+      paymentNote: 'Betalning via faktura. Fler betalningsalternativ kommer snart.',
       packages: {
         bas: {
           name: 'Bas',
@@ -349,13 +340,13 @@ const translations: Record<Language, Translations> = {
           name: 'Premium',
           price: '1 999',
           description: 'Full tillgång till utvecklingsresurser med högsta prioritet.',
-          features: ['Obegränsade ärenden', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Direktlinje — svar inom 4 timmar, även kvällar', 'Månatlig statusrapport'],
+          features: ['10 utvecklingstimmar/mån', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Månatlig statusrapport'],
         },
       },
       oneTime: {
         title: 'Engångsprojekt',
-        price: '4 900',
-        note: 'Pris från 4 900 kr — komplexa projekt offereras individuellt efter konsultation.',
+        price: '9 900',
+        note: 'Pris från 9 900 kr — komplexa projekt offereras individuellt efter konsultation.',
         description: 'Skräddarsydda webbapplikationer från grunden, med fast pris och tydlig leverans.',
         features: ['Responsiv design', 'SEO-optimerad', 'Kundportal ingår', 'Efterföljande support tillgänglig'],
         cta: 'Boka konsultation',
@@ -367,6 +358,27 @@ const translations: Record<Language, Translations> = {
         paypal: { name: 'PayPal' },
         crypto: { name: 'Krypto' },
       },
+    },
+    faq: {
+      headline: 'Vanliga frågor om webbutveckling',
+      items: [
+        {
+          q: 'Vad innebär AI-driven webbproduktion?',
+          a: 'AI-driven webbproduktion betyder att vi använder artificiell intelligens som ett kraftfullt verktyg i utvecklingsprocessen. Det gör att vi kan leverera skräddarsydda webbapplikationer snabbare och med högre kvalitet – utan att kompromissa med design eller funktionalitet.',
+        },
+        {
+          q: 'Varför ska jag välja webbutveckling i Göteborg?',
+          a: 'Med en lokal partner i Göteborg får du personlig kontakt, snabb kommunikation och en utvecklare som förstår den svenska marknaden. Vi på Coffee Code Studio kombinerar lokal närvaro med modern AI-teknik för att leverera konkurrenskraftiga lösningar.',
+        },
+        {
+          q: 'Hur lång tid tar det att bygga en skräddarsydd webbapplikation?',
+          a: 'Tack vare vår AI-drivna utvecklingsprocess kan vi leverera en MVP (Minimum Viable Product) på så lite som 2–4 veckor. Tidsramen beror på projektets komplexitet, men vi arbetar alltid agilt för att komma igång snabbt.',
+        },
+        {
+          q: 'Vad kostar det att utveckla en webbapplikation?',
+          a: 'Priset varierar beroende på projektets omfattning. Vi erbjuder transparenta paketpriser som inkluderar design, utveckling och löpande underhåll. Kontakta oss för en kostnadsfri konsultation så tar vi fram ett förslag anpassat efter dina behov.',
+        },
+      ],
     },
   },
   en: {
@@ -522,6 +534,9 @@ const translations: Record<Language, Translations> = {
       cta: 'Get started',
       comingSoon: 'Coming soon',
       paymentTitle: 'Payment Methods',
+      tooltipText: 'This package applies to web projects built by Coffee Code Studio.',
+      disclaimerText: 'Maintenance packages primarily apply to projects built by Coffee Code Studio. Have an existing site? Contact us and we\'ll see what we can do.',
+      paymentNote: 'Payment via invoice. More payment options coming soon.',
       packages: {
         bas: {
           name: 'Basic',
@@ -539,13 +554,13 @@ const translations: Record<Language, Translations> = {
           name: 'Premium',
           price: '1,999',
           description: 'Full access to development resources with highest priority.',
-          features: ['Unlimited requests', 'Response within 4 hours', 'Priority support', 'Direct line — responds within 4 hours even evenings', 'Monthly status report'],
+          features: ['10 dev hours/month', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Monthly status report'],
         },
       },
       oneTime: {
         title: 'One-time Project',
-        price: '4,900',
-        note: 'Starting from 4,900 SEK — complex projects are quoted individually after consultation.',
+        price: '9,900',
+        note: 'Starting from 9,900 SEK — complex projects are quoted individually after consultation.',
         description: 'Custom web applications built from scratch, with a fixed price and clear delivery.',
         features: ['Responsive design', 'SEO-optimized', 'Client portal included', 'Follow-up support available'],
         cta: 'Book consultation',
@@ -557,6 +572,27 @@ const translations: Record<Language, Translations> = {
         paypal: { name: 'PayPal' },
         crypto: { name: 'Crypto' },
       },
+    },
+    faq: {
+      headline: 'Frequently Asked Questions',
+      items: [
+        {
+          q: 'What does AI-driven web production mean?',
+          a: 'AI-driven web production means we use artificial intelligence as a powerful tool in the development process. This allows us to deliver custom web applications faster and with higher quality — without compromising on design or functionality.',
+        },
+        {
+          q: 'Why should I choose web development in Gothenburg?',
+          a: 'With a local partner in Gothenburg, you get personal contact, fast communication, and a developer who understands the Swedish market. We at Coffee Code Studio combine local presence with modern AI technology to deliver competitive solutions.',
+        },
+        {
+          q: 'How long does it take to build a custom web application?',
+          a: 'Thanks to our AI-driven development process, we can deliver an MVP (Minimum Viable Product) in as little as 2–4 weeks. The timeline depends on project complexity, but we always work agile to get started quickly.',
+        },
+        {
+          q: 'How much does it cost to develop a web application?',
+          a: 'The price varies depending on the scope of the project. We offer transparent package pricing that includes design, development, and ongoing maintenance. Contact us for a free consultation and we\'ll put together a proposal tailored to your needs.',
+        },
+      ],
     },
   },
 };

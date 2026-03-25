@@ -4,23 +4,10 @@ import { Check, Star, Zap, Crown, Rocket, Info } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
-  {
-    key: 'bas' as const,
-    icon: Zap,
-    popular: false,
-  },
-  {
-    key: 'standard' as const,
-    icon: Star,
-    popular: true,
-  },
-  {
-    key: 'premium' as const,
-    icon: Crown,
-    popular: false,
-  },
+  { key: 'bas' as const, icon: Zap, popular: false },
+  { key: 'standard' as const, icon: Star, popular: true },
+  { key: 'premium' as const, icon: Crown, popular: false },
 ];
-
 
 export function PricingSection() {
   const { t } = useLanguage();
@@ -28,7 +15,6 @@ export function PricingSection() {
 
   return (
     <section id="priser" className="py-24 relative overflow-hidden">
-      {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -39,15 +25,10 @@ export function PricingSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
-            {p.headline}
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            {p.intro}
-          </p>
+          <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">{p.headline}</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">{p.intro}</p>
         </motion.div>
 
-        {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
           {packages.map((pkg, index) => {
             const pkgData = p.packages[pkg.key];
@@ -71,9 +52,7 @@ export function PricingSection() {
                   </div>
                 )}
 
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${
-                  pkg.popular ? 'bg-primary/20' : 'bg-muted'
-                }`}>
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${pkg.popular ? 'bg-primary/20' : 'bg-muted'}`}>
                   <Icon className={`w-6 h-6 ${pkg.popular ? 'text-primary' : 'text-muted-foreground'}`} />
                 </div>
 
@@ -85,7 +64,7 @@ export function PricingSection() {
                         <Info className="w-4 h-4 text-muted-foreground/60 hover:text-primary cursor-help transition-colors" />
                       </TooltipTrigger>
                       <TooltipContent side="top" className="max-w-[220px] text-xs">
-                        Paketet gäller för webbprojekt byggda av Coffee Code Studio.
+                        {p.tooltipText}
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -125,7 +104,7 @@ export function PricingSection() {
         </div>
 
         <p className="text-xs text-muted-foreground italic text-center max-w-2xl mx-auto mt-6 mb-16">
-          Underhållspaketen gäller i första hand projekt byggda av Coffee Code Studio. Har du en befintlig sajt? Hör av dig så ser vi vad vi kan göra.
+          {p.disclaimerText}
         </p>
 
         {/* One-time Project Card */}
@@ -170,7 +149,7 @@ export function PricingSection() {
           </div>
         </motion.div>
 
-        {/* Payment Methods */}
+        {/* Payment note */}
         <motion.div
           className="max-w-3xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -178,9 +157,7 @@ export function PricingSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <p className="text-sm text-muted-foreground">
-            Betalning via faktura. Fler betalningsalternativ kommer snart.
-          </p>
+          <p className="text-sm text-muted-foreground">{p.paymentNote}</p>
         </motion.div>
       </div>
     </section>
