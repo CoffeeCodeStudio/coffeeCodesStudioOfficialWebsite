@@ -78,13 +78,14 @@ export default function ClientPortal() {
     const fetchProjectId = async () => {
       const { data } = await supabase
         .from('projects')
-        .select('id, name')
+        .select('id, name, status')
         .eq('client_user_id', user.id)
         .limit(1)
         .single();
       if (data) {
         setProjectId(data.id);
         setProjectName(data.name);
+        setProjectStatus(data.status);
       }
     };
     fetchProjectId();
