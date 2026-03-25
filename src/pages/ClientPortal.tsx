@@ -311,16 +311,34 @@ export default function ClientPortal() {
         {/* Welcome banner on dashboard */}
         {activeTab === 'dashboard' && (
           <motion.div
-            className="glass-card cyber-border p-6 rounded-2xl mb-6"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h2 className="text-lg font-serif text-foreground mb-2">
-              Välkommen, {getDisplayName()}.
-            </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Ditt projekt är igång — följ framstegen nedan och skicka önskemål direkt.
-            </p>
+            {projectId && projectStatus === 'questionnaire' ? (
+              <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6 mb-6">
+                <h2 className="text-lg font-serif text-foreground mb-2">
+                  Välkommen, {getDisplayName()}!
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  Nästa steg: Fyll i projektfrågorna så kan vi börja bygga din sajt.
+                </p>
+                <Button asChild>
+                  <Link to="/projektfragor">
+                    Fyll i projektfrågor
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                </Button>
+              </div>
+            ) : (
+              <div className="glass-card cyber-border p-6 rounded-2xl mb-6">
+                <h2 className="text-lg font-serif text-foreground mb-2">
+                  Välkommen, {getDisplayName()}.
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Ditt projekt är igång — följ framstegen nedan och skicka önskemål direkt.
+                </p>
+              </div>
+            )}
           </motion.div>
         )}
 
