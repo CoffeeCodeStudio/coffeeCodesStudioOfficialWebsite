@@ -534,6 +534,9 @@ const translations: Record<Language, Translations> = {
       cta: 'Get started',
       comingSoon: 'Coming soon',
       paymentTitle: 'Payment Methods',
+      tooltipText: 'This package applies to web projects built by Coffee Code Studio.',
+      disclaimerText: 'Maintenance packages primarily apply to projects built by Coffee Code Studio. Have an existing site? Contact us and we\'ll see what we can do.',
+      paymentNote: 'Payment via invoice. More payment options coming soon.',
       packages: {
         bas: {
           name: 'Basic',
@@ -551,13 +554,13 @@ const translations: Record<Language, Translations> = {
           name: 'Premium',
           price: '1,999',
           description: 'Full access to development resources with highest priority.',
-          features: ['Unlimited requests', 'Response within 4 hours', 'Priority support', 'Direct line — responds within 4 hours even evenings', 'Monthly status report'],
+          features: ['10 dev hours/month', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Monthly status report'],
         },
       },
       oneTime: {
         title: 'One-time Project',
-        price: '4,900',
-        note: 'Starting from 4,900 SEK — complex projects are quoted individually after consultation.',
+        price: '9,900',
+        note: 'Starting from 9,900 SEK — complex projects are quoted individually after consultation.',
         description: 'Custom web applications built from scratch, with a fixed price and clear delivery.',
         features: ['Responsive design', 'SEO-optimized', 'Client portal included', 'Follow-up support available'],
         cta: 'Book consultation',
@@ -569,6 +572,27 @@ const translations: Record<Language, Translations> = {
         paypal: { name: 'PayPal' },
         crypto: { name: 'Crypto' },
       },
+    },
+    faq: {
+      headline: 'Frequently Asked Questions',
+      items: [
+        {
+          q: 'What does AI-driven web production mean?',
+          a: 'AI-driven web production means we use artificial intelligence as a powerful tool in the development process. This allows us to deliver custom web applications faster and with higher quality — without compromising on design or functionality.',
+        },
+        {
+          q: 'Why should I choose web development in Gothenburg?',
+          a: 'With a local partner in Gothenburg, you get personal contact, fast communication, and a developer who understands the Swedish market. We at Coffee Code Studio combine local presence with modern AI technology to deliver competitive solutions.',
+        },
+        {
+          q: 'How long does it take to build a custom web application?',
+          a: 'Thanks to our AI-driven development process, we can deliver an MVP (Minimum Viable Product) in as little as 2–4 weeks. The timeline depends on project complexity, but we always work agile to get started quickly.',
+        },
+        {
+          q: 'How much does it cost to develop a web application?',
+          a: 'The price varies depending on the scope of the project. We offer transparent package pricing that includes design, development, and ongoing maintenance. Contact us for a free consultation and we\'ll put together a proposal tailored to your needs.',
+        },
+      ],
     },
   },
 };
