@@ -320,6 +320,9 @@ const translations: Record<Language, Translations> = {
       cta: 'Kom igång',
       comingSoon: 'Kommer snart',
       paymentTitle: 'Betalningsmetoder',
+      tooltipText: 'Paketet gäller för webbprojekt byggda av Coffee Code Studio.',
+      disclaimerText: 'Underhållspaketen gäller i första hand projekt byggda av Coffee Code Studio. Har du en befintlig sajt? Hör av dig så ser vi vad vi kan göra.',
+      paymentNote: 'Betalning via faktura. Fler betalningsalternativ kommer snart.',
       packages: {
         bas: {
           name: 'Bas',
@@ -337,13 +340,13 @@ const translations: Record<Language, Translations> = {
           name: 'Premium',
           price: '1 999',
           description: 'Full tillgång till utvecklingsresurser med högsta prioritet.',
-          features: ['Obegränsade ärenden', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Direktlinje — svar inom 4 timmar, även kvällar', 'Månatlig statusrapport'],
+          features: ['10 utvecklingstimmar/mån', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Månatlig statusrapport'],
         },
       },
       oneTime: {
         title: 'Engångsprojekt',
-        price: '4 900',
-        note: 'Pris från 4 900 kr — komplexa projekt offereras individuellt efter konsultation.',
+        price: '9 900',
+        note: 'Pris från 9 900 kr — komplexa projekt offereras individuellt efter konsultation.',
         description: 'Skräddarsydda webbapplikationer från grunden, med fast pris och tydlig leverans.',
         features: ['Responsiv design', 'SEO-optimerad', 'Kundportal ingår', 'Efterföljande support tillgänglig'],
         cta: 'Boka konsultation',
@@ -355,6 +358,27 @@ const translations: Record<Language, Translations> = {
         paypal: { name: 'PayPal' },
         crypto: { name: 'Krypto' },
       },
+    },
+    faq: {
+      headline: 'Vanliga frågor om webbutveckling',
+      items: [
+        {
+          q: 'Vad innebär AI-driven webbproduktion?',
+          a: 'AI-driven webbproduktion betyder att vi använder artificiell intelligens som ett kraftfullt verktyg i utvecklingsprocessen. Det gör att vi kan leverera skräddarsydda webbapplikationer snabbare och med högre kvalitet – utan att kompromissa med design eller funktionalitet.',
+        },
+        {
+          q: 'Varför ska jag välja webbutveckling i Göteborg?',
+          a: 'Med en lokal partner i Göteborg får du personlig kontakt, snabb kommunikation och en utvecklare som förstår den svenska marknaden. Vi på Coffee Code Studio kombinerar lokal närvaro med modern AI-teknik för att leverera konkurrenskraftiga lösningar.',
+        },
+        {
+          q: 'Hur lång tid tar det att bygga en skräddarsydd webbapplikation?',
+          a: 'Tack vare vår AI-drivna utvecklingsprocess kan vi leverera en MVP (Minimum Viable Product) på så lite som 2–4 veckor. Tidsramen beror på projektets komplexitet, men vi arbetar alltid agilt för att komma igång snabbt.',
+        },
+        {
+          q: 'Vad kostar det att utveckla en webbapplikation?',
+          a: 'Priset varierar beroende på projektets omfattning. Vi erbjuder transparenta paketpriser som inkluderar design, utveckling och löpande underhåll. Kontakta oss för en kostnadsfri konsultation så tar vi fram ett förslag anpassat efter dina behov.',
+        },
+      ],
     },
   },
   en: {
