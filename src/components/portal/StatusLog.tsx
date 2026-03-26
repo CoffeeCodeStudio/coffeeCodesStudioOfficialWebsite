@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { MessageSquare, User, RefreshCw, FileUp, MessageCircle, ClipboardList, PenLine, Search, CalendarIcon, X } from 'lucide-react';
+import { MessageSquare, User, RefreshCw, FileUp, MessageCircle, ClipboardList, PenLine, Search, CalendarIcon, X, Download } from 'lucide-react';
 import { format, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
 import { sv } from 'date-fns/locale';
 import { Input } from '@/components/ui/input';
@@ -111,6 +111,24 @@ export function StatusLog() {
     setDateRange({ from: undefined, to: undefined });
   };
 
+  const exportCsv = () => {
+    const header = 'Datum,Typ,Författare,Projekt,Meddelande';
+    const rows = filteredLogs.map(log => {
+      const date = format(new Date(log.created_at), 'yyyy-MM-dd HH:mm');
+      const type = eventConfig[log.event_type]?.label || 'Uppdatering';
+      const project = (projects[log.project_id] || 'Projekt').replace(/,/g, ' ');
+      const message = log.message.replace(/,/g, ' ').replace(/\n/g, ' ');
+      return `${date},${type},${log.author_name},${project},${message}`;
+    });
+    const blob = new Blob([header + '\n' + rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `aktivitetshistorik-${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const hasFilters = searchQuery || dateRange.from || dateRange.to;
 
   if (loading) {
@@ -171,6 +189,13 @@ export function StatusLog() {
             <Button variant="ghost" size="sm" onClick={clearFilters} className="text-muted-foreground hover:text-foreground">
               <X className="w-4 h-4 mr-1" />
               Rensa
+            </Button>
+          )}
+
+          {filteredLogs.length > 0 && (
+            <Button variant="outline" size="sm" onClick={exportCsv} className="border-border/50 text-muted-foreground hover:text-foreground">
+              <Download className="w-4 h-4 mr-1" />
+              Exportera CSV
             </Button>
           )}
         </div>
