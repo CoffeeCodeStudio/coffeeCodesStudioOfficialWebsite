@@ -372,6 +372,7 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
+          is_vip: boolean
           monthly_quota: number
           name: string
           package: string
@@ -386,6 +387,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_vip?: boolean
           monthly_quota?: number
           name: string
           package?: string
@@ -400,6 +402,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          is_vip?: boolean
           monthly_quota?: number
           name?: string
           package?: string
