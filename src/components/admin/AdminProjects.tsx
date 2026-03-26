@@ -37,6 +37,7 @@ interface Project {
   renewal_date: string | null;
   created_at: string;
   questionnaire_reminded_at: string | null;
+  is_vip: boolean;
 }
 
 const isQuestionnaireOverdue = (project: Project) => {
