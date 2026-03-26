@@ -58,7 +58,7 @@ interface PendingChange {
 
 export function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [adminDataMap, setAdminDataMap] = useState<Record<string, string>>({});
+  const [adminDataMap, setAdminDataMap] = useState<Record<string, { system_prompt: string; vip_notes: string }>>({});
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [pendingChange, setPendingChange] = useState<PendingChange | null>(null);
@@ -67,7 +67,7 @@ export function AdminProjects() {
   const fetchProjects = async () => {
     const [projRes, adminRes] = await Promise.all([
       supabase.from('projects').select('*').order('created_at', { ascending: false }),
-      supabase.from('project_admin_data').select('project_id, system_prompt'),
+      supabase.from('project_admin_data').select('project_id, system_prompt, vip_notes'),
     ]);
 
     if (projRes.error) {
@@ -78,9 +78,12 @@ export function AdminProjects() {
       setProjects((projRes.data as Project[]) || []);
     }
 
-    const map: Record<string, string> = {};
+    const map: Record<string, { system_prompt: string; vip_notes: string }> = {};
     ((adminRes.data as any[]) || []).forEach((d: any) => {
-      map[d.project_id] = d.system_prompt || '';
+      map[d.project_id] = {
+        system_prompt: d.system_prompt || '',
+        vip_notes: d.vip_notes || '',
+      };
     });
     setAdminDataMap(map);
 
