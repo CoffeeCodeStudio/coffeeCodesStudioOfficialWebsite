@@ -1,4 +1,4 @@
-import { LanguageProvider } from '@/contexts/LanguageContext';
+import { LanguageProvider, useLanguage } from '@/contexts/LanguageContext';
 import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/HeroSection';
 import { TjansterSection } from '@/components/TjansterSection';
@@ -11,9 +11,11 @@ import { FAQSection } from '@/components/FAQSection';
 import { Footer } from '@/components/Footer';
 import { SEOHead } from '@/components/SEOHead';
 
-const Index = () => {
+function IndexContent() {
+  const { language } = useLanguage();
+
   return (
-    <LanguageProvider>
+    <div key={language}>
       <SEOHead
         title="Coffee Code Studio | Skräddarsydda Webbapplikationer"
         description="Vi bygger blixtsnabba hemsidor och webbapplikationer för startups och småföretag i Göteborg — från idé till lansering på en vecka."
@@ -37,6 +39,14 @@ const Index = () => {
         </main>
         <Footer />
       </div>
+    </div>
+  );
+}
+
+const Index = () => {
+  return (
+    <LanguageProvider>
+      <IndexContent />
     </LanguageProvider>
   );
 };

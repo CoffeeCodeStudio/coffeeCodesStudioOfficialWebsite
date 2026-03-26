@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Accordion,
@@ -9,25 +10,36 @@ import {
 export function FAQSection() {
   const { t } = useLanguage();
 
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: t.faq.items.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.a,
-      },
-    })),
-  };
+  useEffect(() => {
+    const faqJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: t.faq.items.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a,
+        },
+      })),
+    };
+
+    let script = document.getElementById('faq-jsonld') as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'faq-jsonld';
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(faqJsonLd);
+
+    return () => {
+      script?.remove();
+    };
+  }, [t.faq.items]);
 
   return (
     <section id="faq" className="py-16 sm:py-24 relative">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
       <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
         <h2 className="text-2xl sm:text-3xl font-serif gradient-text text-center mb-10">
           {t.faq.headline}
