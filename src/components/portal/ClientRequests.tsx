@@ -376,7 +376,7 @@ export function ClientRequests() {
       )}
 
       {/* Submit form */}
-      <div className="glass-card cyber-border p-6 rounded-2xl space-y-5">
+      <div className="glass-card cyber-border p-4 sm:p-6 rounded-2xl space-y-5">
         <div className="flex items-center gap-3 mb-1">
           <MessageCirclePlus className="w-5 h-5 text-primary" />
           <h3 className="font-serif text-foreground text-sm">Skicka nytt önskemål</h3>
