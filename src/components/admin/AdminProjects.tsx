@@ -60,6 +60,7 @@ export function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [adminDataMap, setAdminDataMap] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   const [pendingChange, setPendingChange] = useState<PendingChange | null>(null);
   const { toast } = useToast();
 
