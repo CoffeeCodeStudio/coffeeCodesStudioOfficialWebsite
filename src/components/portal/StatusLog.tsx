@@ -70,14 +70,18 @@ export function StatusLog() {
   }, []);
 
   useEffect(() => {
+    const projectIds = Object.keys(projects);
+    if (projectIds.length === 0) return;
+
+    const filter = `project_id=in.(${projectIds.join(',')})`;
     const channel = supabase
       .channel('portal-status-logs-realtime')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'status_logs' }, (payload) => {
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'status_logs', filter }, (payload) => {
         setLogs(prev => [payload.new as LogEntry, ...prev]);
       })
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-  }, []);
+  }, [projects]);
 
   const filteredLogs = useMemo(() => {
     return logs.filter(log => {
@@ -91,8 +95,12 @@ export function StatusLog() {
       
       // Date filter
       const logDate = new Date(log.created_at);
-      const matchesDate = (!dateRange.from || !dateRange.to) ||
-        isWithinInterval(logDate, { start: startOfDay(dateRange.from), end: endOfDay(dateRange.to) });
+      let matchesDate = true;
+      if (dateRange.from && dateRange.to) {
+        matchesDate = isWithinInterval(logDate, { start: startOfDay(dateRange.from), end: endOfDay(dateRange.to) });
+      } else if (dateRange.from) {
+        matchesDate = logDate >= startOfDay(dateRange.from);
+      }
       
       return matchesSearch && matchesDate;
     });
