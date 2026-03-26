@@ -307,7 +307,7 @@ export default function ClientPortal() {
       </header>
 
       {/* Main */}
-      <main className="md:ml-64 pt-28 md:pt-8 p-6 md:p-10">
+      <main className="md:ml-64 pt-32 md:pt-8 px-4 pb-6 md:p-10">
         {/* Welcome banner on dashboard */}
         {activeTab === 'dashboard' && (
           <motion.div

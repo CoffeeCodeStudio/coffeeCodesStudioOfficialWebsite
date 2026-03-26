@@ -218,7 +218,7 @@ export function AIAssistant({ projectId, projectStatus }: AIAssistantProps) {
       </div>
 
       <div className="glass-card cyber-border rounded-2xl overflow-hidden">
-        <div ref={scrollRef} className="h-[400px] overflow-y-auto p-4 space-y-4">
+        <div ref={scrollRef} className="h-[300px] sm:h-[400px] overflow-y-auto p-4 space-y-4">
           {isLoadingHistory ? (
             <div className="flex items-center justify-center h-full">
               <div className="flex gap-1">

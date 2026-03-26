@@ -376,7 +376,7 @@ export function ClientRequests() {
       )}
 
       {/* Submit form */}
-      <div className="glass-card cyber-border p-6 rounded-2xl space-y-5">
+      <div className="glass-card cyber-border p-4 sm:p-6 rounded-2xl space-y-5">
         <div className="flex items-center gap-3 mb-1">
           <MessageCirclePlus className="w-5 h-5 text-primary" />
           <h3 className="font-serif text-foreground text-sm">Skicka nytt önskemål</h3>
@@ -424,7 +424,7 @@ export function ClientRequests() {
         {/* Priority buttons */}
         <div>
           <p className="text-xs text-muted-foreground mb-3">Prioritet</p>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {priorities.map(p => {
               const Icon = p.icon;
               const active = priority === p.value;
@@ -432,7 +432,7 @@ export function ClientRequests() {
                 <button
                   key={p.value}
                   onClick={() => setPriority(p.value)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl border-2 transition-all text-sm font-medium ${
+                  className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl border-2 transition-all text-sm font-medium ${
                     active
                       ? p.value === 'urgent'
                         ? 'border-destructive bg-destructive/10 text-destructive'
