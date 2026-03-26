@@ -13,9 +13,27 @@ interface Message {
 
 interface AIAssistantProps {
   projectId: string;
+  projectStatus?: string;
 }
 
-export function AIAssistant({ projectId }: AIAssistantProps) {
+const statusSuggestions: Record<string, string[]> = {
+  questionnaire: ['Vad behöver ni från mig nu?', 'Hur fyller jag i projektfrågorna?'],
+  design: ['Kan jag se designen?', 'Hur länge tar designfasen?'],
+  development: ['Hur långt har ni kommit?', 'Kan jag följa utvecklingen?'],
+  testing: ['Hur testar ni min sajt?', 'När blir den klar?'],
+  live: ['Hur skickar jag en ändringsförfrågan?', 'Vad ingår i mitt underhållspaket?'],
+  completed: ['Hur skickar jag en ändringsförfrågan?', 'Vad ingår i mitt underhållspaket?'],
+};
+
+const defaultSuggestions = [
+  'Vad ingår i mitt paket?',
+  'Hur lång tid tar det?',
+  'Hur skickar jag feedback?',
+  'Kan jag ändra något efteråt?',
+  'Vad händer nu?',
+];
+
+export function AIAssistant({ projectId, projectStatus }: AIAssistantProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -217,13 +235,7 @@ export function AIAssistant({ projectId }: AIAssistantProps) {
                 Klicka på ett förslag eller skriv din egen fråga.
               </p>
               <div className="flex flex-wrap gap-2 justify-center max-w-md">
-                {[
-                  'Vad ingår i mitt paket?',
-                  'Hur lång tid tar det?',
-                  'Hur skickar jag feedback?',
-                  'Kan jag ändra något efteråt?',
-                  'Vad händer nu?',
-                ].map((suggestion) => (
+                {(projectStatus && statusSuggestions[projectStatus] ? statusSuggestions[projectStatus] : defaultSuggestions).map((suggestion) => (
                   <Button
                     key={suggestion}
                     variant="outline"
