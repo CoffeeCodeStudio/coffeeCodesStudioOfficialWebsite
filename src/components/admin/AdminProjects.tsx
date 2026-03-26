@@ -282,10 +282,15 @@ export function AdminProjects() {
                           </span>
                           <Textarea
                             value={adminDataMap[project.id]?.vip_notes || ''}
-                            onChange={e => updateAdminField(project.id, 'vip_notes', e.target.value || null)}
+                            onChange={e => {
+                              updateAdminField(project.id, 'vip_notes', e.target.value || null);
+                              e.target.style.height = 'auto';
+                              e.target.style.height = e.target.scrollHeight + 'px';
+                            }}
+                            ref={el => { if (el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; } }}
                             placeholder="Speciella villkor, rabatter, överenskommelser..."
-                            className="bg-muted/50 border-amber-500/20 min-h-[80px] text-sm"
-                            rows={3}
+                            className="bg-muted/50 border-amber-500/20 text-sm resize-none overflow-hidden"
+                            rows={2}
                           />
                         </div>
                       )}
