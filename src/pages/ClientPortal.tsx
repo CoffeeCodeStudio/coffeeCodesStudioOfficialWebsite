@@ -270,6 +270,12 @@ export default function ClientPortal() {
           <div className="flex items-center gap-2">
             <Coffee className="w-5 h-5 text-primary" />
             <span className="font-serif text-sm">Kundportal</span>
+            {isVip && (
+              <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-400 text-[9px] font-medium border border-amber-500/20">
+                <Crown className="w-2.5 h-2.5" />
+                VIP
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-1">
             <Button variant="ghost" size="icon" onClick={() => navigate('/')}>
