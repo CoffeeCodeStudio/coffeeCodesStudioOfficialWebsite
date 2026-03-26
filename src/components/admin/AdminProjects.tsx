@@ -260,13 +260,29 @@ export function AdminProjects() {
                       <div className="space-y-1">
                         <span className="text-[10px] text-muted-foreground uppercase">AI-assistentens systempromt</span>
                         <Textarea
-                          value={adminDataMap[project.id] || ''}
+                          value={adminDataMap[project.id]?.system_prompt || ''}
                           onChange={e => updateAdminField(project.id, 'system_prompt', e.target.value || null)}
                           placeholder="Beskriv projektet för AI-assistenten, t.ex. 'Detta är en e-handelssite för...'"
                           className="bg-muted/50 border-border/50 min-h-[120px] text-sm"
                           rows={5}
                         />
                       </div>
+
+                      {/* VIP notes – only visible when VIP */}
+                      {project.is_vip && (
+                        <div className="space-y-1 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3">
+                          <span className="text-[10px] text-amber-400 uppercase flex items-center gap-1">
+                            <Crown className="w-3 h-3" /> VIP-anteckningar
+                          </span>
+                          <Textarea
+                            value={adminDataMap[project.id]?.vip_notes || ''}
+                            onChange={e => updateAdminField(project.id, 'vip_notes', e.target.value || null)}
+                            placeholder="Speciella villkor, rabatter, överenskommelser..."
+                            className="bg-muted/50 border-amber-500/20 min-h-[80px] text-sm"
+                            rows={3}
+                          />
+                        </div>
+                      )}
 
                       {/* Settings grid */}
                       <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
