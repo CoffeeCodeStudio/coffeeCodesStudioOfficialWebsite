@@ -319,7 +319,7 @@ export function AIAssistant({ projectId, projectStatus }: AIAssistantProps) {
             }}
           />
           <Button
-            onClick={sendMessage}
+            onClick={() => sendMessage()}
             disabled={isLoading || !input.trim()}
             size="icon"
             className="shrink-0 bg-primary text-primary-foreground"
