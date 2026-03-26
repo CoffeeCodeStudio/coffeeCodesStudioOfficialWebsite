@@ -22,9 +22,12 @@ export function FAQSection() {
     })),
   };
 
+  const { language } = useLanguage();
+
   return (
     <section id="faq" className="py-16 sm:py-24 relative">
       <script
+        key={language}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
