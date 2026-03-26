@@ -235,13 +235,7 @@ export function AIAssistant({ projectId, projectStatus }: AIAssistantProps) {
                 Klicka på ett förslag eller skriv din egen fråga.
               </p>
               <div className="flex flex-wrap gap-2 justify-center max-w-md">
-                {[
-                  'Vad ingår i mitt paket?',
-                  'Hur lång tid tar det?',
-                  'Hur skickar jag feedback?',
-                  'Kan jag ändra något efteråt?',
-                  'Vad händer nu?',
-                ].map((suggestion) => (
+                {(projectStatus && statusSuggestions[projectStatus] ? statusSuggestions[projectStatus] : defaultSuggestions).map((suggestion) => (
                   <Button
                     key={suggestion}
                     variant="outline"
