@@ -214,14 +214,7 @@ export function ProjectStatus() {
         <Button
           variant="outline"
           className="border-primary/30 text-primary"
-          onClick={() => {
-            const contactSection = document.getElementById('kontakt');
-            if (contactSection) {
-              window.location.href = '/#kontakt';
-            } else {
-              window.location.href = '/#kontakt';
-            }
-          }}
+          onClick={() => { window.location.href = '/#kontakt'; }}
         >
           <Mail className="w-4 h-4 mr-2" />
           Kontakta oss för att komma igång
