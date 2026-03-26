@@ -143,10 +143,18 @@ export function ClientRequests() {
 
   // Calculate quota for current month (excluding cancelled)
   const getQuotaInfo = () => {
+    const defaultQuota = { used: 0, total: 3, remaining: 3, packageName: 'Bas' };
     const now = new Date();
     const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-    const proj = projects.find(p => p.id === selectedProject) || projects[0];
-    if (!proj) return { used: 0, total: 3, remaining: 3, packageName: 'Bas' };
+
+    let proj;
+    if (selectedProject) {
+      proj = projects.find(p => p.id === selectedProject);
+      if (!proj) return defaultQuota;
+    } else {
+      proj = projects[0];
+      if (!proj) return defaultQuota;
+    }
 
     const used = requests.filter(r =>
       r.project_id === proj.id && 
