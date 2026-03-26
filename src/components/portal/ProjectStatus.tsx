@@ -267,15 +267,15 @@ export function ProjectStatus() {
             </div>
 
             {/* Progress steps */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 -mx-2 px-2">
               {statusSteps.map((step, i) => {
                 const Icon = step.icon;
                 const isDone = i <= currentIndex;
                 const isCurrent = i === currentIndex;
                 return (
-                  <div key={step.key} className="flex items-center gap-2 flex-shrink-0">
+                  <div key={step.key} className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                     <motion.div
-                      className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-medium transition-all ${
+                      className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-medium transition-all ${
                         isCurrent
                           ? 'bg-primary/20 text-primary border border-primary/30 shadow-lg shadow-primary/10'
                           : isDone

@@ -424,7 +424,7 @@ export function ClientRequests() {
         {/* Priority buttons */}
         <div>
           <p className="text-xs text-muted-foreground mb-3">Prioritet</p>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {priorities.map(p => {
               const Icon = p.icon;
               const active = priority === p.value;
@@ -432,7 +432,7 @@ export function ClientRequests() {
                 <button
                   key={p.value}
                   onClick={() => setPriority(p.value)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl border-2 transition-all text-sm font-medium ${
+                  className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl border-2 transition-all text-sm font-medium ${
                     active
                       ? p.value === 'urgent'
                         ? 'border-destructive bg-destructive/10 text-destructive'
