@@ -264,7 +264,7 @@ export function AdminProjects() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Status</span>
                     <Select value={project.status} onValueChange={v => handleStatusChange(project, v)}>
@@ -300,6 +300,16 @@ export function AdminProjects() {
                     <Input type="date" value={project.renewal_date || ''}
                       onChange={e => updateField(project.id, 'renewal_date', e.target.value || null)}
                       className="bg-muted/50 border-border/50" />
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-muted-foreground uppercase">VIP</span>
+                    <div className="flex items-center gap-2 h-10">
+                      <Switch
+                        checked={project.is_vip}
+                        onCheckedChange={v => updateField(project.id, 'is_vip', v)}
+                      />
+                      <Crown className={`w-4 h-4 ${project.is_vip ? 'text-amber-400' : 'text-muted-foreground/30'}`} />
+                    </div>
                   </div>
                 </div>
               </div>
