@@ -70,14 +70,18 @@ export function StatusLog() {
   }, []);
 
   useEffect(() => {
+    const projectIds = Object.keys(projects);
+    if (projectIds.length === 0) return;
+
+    const filter = `project_id=in.(${projectIds.join(',')})`;
     const channel = supabase
       .channel('portal-status-logs-realtime')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'status_logs' }, (payload) => {
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'status_logs', filter }, (payload) => {
         setLogs(prev => [payload.new as LogEntry, ...prev]);
       })
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-  }, []);
+  }, [projects]);
 
   const filteredLogs = useMemo(() => {
     return logs.filter(log => {
