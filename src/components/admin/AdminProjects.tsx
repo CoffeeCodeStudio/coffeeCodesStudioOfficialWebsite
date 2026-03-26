@@ -127,7 +127,10 @@ export function AdminProjects() {
     if (error) {
       toast({ title: 'Fel', description: 'Kunde inte spara.', variant: 'destructive' });
     } else {
-      setAdminDataMap(prev => ({ ...prev, [projectId]: String(value || '') }));
+      setAdminDataMap(prev => ({
+        ...prev,
+        [projectId]: { ...(prev[projectId] || { system_prompt: '', vip_notes: '' }), [field]: String(value || '') },
+      }));
     }
   };
 
