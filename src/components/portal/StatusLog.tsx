@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { MessageSquare, User, RefreshCw, FileUp, MessageCircle, ClipboardList, PenLine, Search, CalendarIcon, X } from 'lucide-react';
+import { MessageSquare, User, RefreshCw, FileUp, MessageCircle, ClipboardList, PenLine, Search, CalendarIcon, X, Download } from 'lucide-react';
 import { format, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
 import { sv } from 'date-fns/locale';
 import { Input } from '@/components/ui/input';
