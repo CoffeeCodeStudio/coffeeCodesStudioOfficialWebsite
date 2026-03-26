@@ -243,7 +243,7 @@ export function AIAssistant({ projectId, projectStatus }: AIAssistantProps) {
                     size="sm"
                     className="text-xs bg-muted/30 border-border/50 hover:bg-primary/10 hover:border-primary/30"
                     onClick={() => {
-                      setInput(suggestion);
+                      sendMessage(suggestion);
                     }}
                   >
                     {suggestion}
