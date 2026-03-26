@@ -289,7 +289,7 @@ export function ProjectStatus() {
                       <span className="hidden sm:inline">{step.label}</span>
                     </motion.div>
                     {i < statusSteps.length - 1 && (
-                      <div className={`w-6 h-0.5 ${isDone ? 'bg-accent/50' : 'bg-border/30'}`} />
+                      <div className={`w-3 sm:w-6 h-0.5 ${isDone ? 'bg-accent/50' : 'bg-border/30'}`} />
                     )}
                   </div>
                 );
