@@ -94,10 +94,11 @@ export function AIAssistant({ projectId, projectStatus }: AIAssistantProps) {
     }
   };
 
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+  const sendMessage = async (overrideMessage?: string) => {
+    const text = overrideMessage || input.trim();
+    if (!text || isLoading) return;
 
-    const userMsg: Message = { role: 'user', content: input.trim() };
+    const userMsg: Message = { role: 'user', content: text };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsLoading(true);
@@ -242,7 +243,7 @@ export function AIAssistant({ projectId, projectStatus }: AIAssistantProps) {
                     size="sm"
                     className="text-xs bg-muted/30 border-border/50 hover:bg-primary/10 hover:border-primary/30"
                     onClick={() => {
-                      setInput(suggestion);
+                      sendMessage(suggestion);
                     }}
                   >
                     {suggestion}
@@ -318,7 +319,7 @@ export function AIAssistant({ projectId, projectStatus }: AIAssistantProps) {
             }}
           />
           <Button
-            onClick={sendMessage}
+            onClick={() => sendMessage()}
             disabled={isLoading || !input.trim()}
             size="icon"
             className="shrink-0 bg-primary text-primary-foreground"
