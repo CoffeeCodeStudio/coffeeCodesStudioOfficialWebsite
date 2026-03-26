@@ -1,0 +1,1 @@
+ALTER TABLE public.project_admin_data ADD COLUMN vip_notes text DEFAULT null;

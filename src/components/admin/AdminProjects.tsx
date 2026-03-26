@@ -58,7 +58,7 @@ interface PendingChange {
 
 export function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [adminDataMap, setAdminDataMap] = useState<Record<string, string>>({});
+  const [adminDataMap, setAdminDataMap] = useState<Record<string, { system_prompt: string; vip_notes: string }>>({});
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [pendingChange, setPendingChange] = useState<PendingChange | null>(null);
@@ -67,7 +67,7 @@ export function AdminProjects() {
   const fetchProjects = async () => {
     const [projRes, adminRes] = await Promise.all([
       supabase.from('projects').select('*').order('created_at', { ascending: false }),
-      supabase.from('project_admin_data').select('project_id, system_prompt'),
+      supabase.from('project_admin_data').select('project_id, system_prompt, vip_notes'),
     ]);
 
     if (projRes.error) {
@@ -78,9 +78,12 @@ export function AdminProjects() {
       setProjects((projRes.data as Project[]) || []);
     }
 
-    const map: Record<string, string> = {};
+    const map: Record<string, { system_prompt: string; vip_notes: string }> = {};
     ((adminRes.data as any[]) || []).forEach((d: any) => {
-      map[d.project_id] = d.system_prompt || '';
+      map[d.project_id] = {
+        system_prompt: d.system_prompt || '',
+        vip_notes: d.vip_notes || '',
+      };
     });
     setAdminDataMap(map);
 
@@ -124,7 +127,10 @@ export function AdminProjects() {
     if (error) {
       toast({ title: 'Fel', description: 'Kunde inte spara.', variant: 'destructive' });
     } else {
-      setAdminDataMap(prev => ({ ...prev, [projectId]: String(value || '') }));
+      setAdminDataMap(prev => ({
+        ...prev,
+        [projectId]: { ...(prev[projectId] || { system_prompt: '', vip_notes: '' }), [field]: String(value || '') },
+      }));
     }
   };
 
@@ -254,13 +260,29 @@ export function AdminProjects() {
                       <div className="space-y-1">
                         <span className="text-[10px] text-muted-foreground uppercase">AI-assistentens systempromt</span>
                         <Textarea
-                          value={adminDataMap[project.id] || ''}
+                          value={adminDataMap[project.id]?.system_prompt || ''}
                           onChange={e => updateAdminField(project.id, 'system_prompt', e.target.value || null)}
                           placeholder="Beskriv projektet för AI-assistenten, t.ex. 'Detta är en e-handelssite för...'"
                           className="bg-muted/50 border-border/50 min-h-[120px] text-sm"
                           rows={5}
                         />
                       </div>
+
+                      {/* VIP notes – only visible when VIP */}
+                      {project.is_vip && (
+                        <div className="space-y-1 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3">
+                          <span className="text-[10px] text-amber-400 uppercase flex items-center gap-1">
+                            <Crown className="w-3 h-3" /> VIP-anteckningar
+                          </span>
+                          <Textarea
+                            value={adminDataMap[project.id]?.vip_notes || ''}
+                            onChange={e => updateAdminField(project.id, 'vip_notes', e.target.value || null)}
+                            placeholder="Speciella villkor, rabatter, överenskommelser..."
+                            className="bg-muted/50 border-amber-500/20 min-h-[80px] text-sm"
+                            rows={3}
+                          />
+                        </div>
+                      )}
 
                       {/* Settings grid */}
                       <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
