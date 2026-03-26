@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History, Sparkles, Settings, ArrowRight } from 'lucide-react';
+import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History, Sparkles, Settings, ArrowRight, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -37,6 +37,7 @@ export default function ClientPortal() {
   const [projectId, setProjectId] = useState<string | null>(null);
   const [projectName, setProjectName] = useState<string>('');
   const [projectStatus, setProjectStatus] = useState<string>('');
+  const [isVip, setIsVip] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [loading, setLoading] = useState(true);
   const [unreadMessages, setUnreadMessages] = useState(0);
@@ -79,7 +80,7 @@ export default function ClientPortal() {
     const fetchProjectId = async () => {
       const { data } = await supabase
         .from('projects')
-        .select('id, name, status')
+        .select('id, name, status, is_vip')
         .eq('client_user_id', user.id)
         .limit(1)
         .maybeSingle();
@@ -87,6 +88,7 @@ export default function ClientPortal() {
         setProjectId(data.id);
         setProjectName(data.name);
         setProjectStatus(data.status);
+        setIsVip((data as any).is_vip || false);
       }
     };
     fetchProjectId();
@@ -183,7 +185,15 @@ export default function ClientPortal() {
             <Coffee className="w-5 h-5 text-primary" />
           </div>
           <div>
-            <p className="font-serif text-sm text-foreground">Kundportal</p>
+            <div className="flex items-center gap-1.5">
+              <p className="font-serif text-sm text-foreground">Kundportal</p>
+              {isVip && (
+                <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-400 text-[9px] font-medium border border-amber-500/20">
+                  <Crown className="w-2.5 h-2.5" />
+                  VIP
+                </span>
+              )}
+            </div>
             <p className="text-[10px] text-muted-foreground truncate max-w-[140px]">{user.email}</p>
           </div>
         </div>
@@ -260,6 +270,12 @@ export default function ClientPortal() {
           <div className="flex items-center gap-2">
             <Coffee className="w-5 h-5 text-primary" />
             <span className="font-serif text-sm">Kundportal</span>
+            {isVip && (
+              <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-400 text-[9px] font-medium border border-amber-500/20">
+                <Crown className="w-2.5 h-2.5" />
+                VIP
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-1">
             <Button variant="ghost" size="icon" onClick={() => navigate('/')}>

@@ -1,0 +1,1 @@
+ALTER TABLE public.projects ADD COLUMN is_vip boolean NOT NULL DEFAULT false;

@@ -6,7 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
-import { FolderKanban, Trash2, AlertCircle } from 'lucide-react';
+import { FolderKanban, Trash2, AlertCircle, Crown } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -36,6 +37,7 @@ interface Project {
   renewal_date: string | null;
   created_at: string;
   questionnaire_reminded_at: string | null;
+  is_vip: boolean;
 }
 
 const isQuestionnaireOverdue = (project: Project) => {
@@ -206,9 +208,15 @@ export function AdminProjects() {
             >
               <div className="flex flex-col gap-4">
                 <div className="flex items-start justify-between gap-3">
-                  <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
+                      {project.is_vip && (
+                        <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 text-[10px] font-medium border border-amber-500/20">
+                          <Crown className="w-3 h-3" />
+                          VIP
+                        </span>
+                      )}
                       {isQuestionnaireOverdue(project) && (
                         <span title="Väntar på svar i mer än 24 timmar">
                           <AlertCircle className="w-5 h-5 text-yellow-500 animate-pulse" />
@@ -256,7 +264,7 @@ export function AdminProjects() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
                   <div className="space-y-1">
                     <span className="text-[10px] text-muted-foreground uppercase">Status</span>
                     <Select value={project.status} onValueChange={v => handleStatusChange(project, v)}>
@@ -292,6 +300,16 @@ export function AdminProjects() {
                     <Input type="date" value={project.renewal_date || ''}
                       onChange={e => updateField(project.id, 'renewal_date', e.target.value || null)}
                       className="bg-muted/50 border-border/50" />
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-muted-foreground uppercase">VIP</span>
+                    <div className="flex items-center gap-2 h-10">
+                      <Switch
+                        checked={project.is_vip}
+                        onCheckedChange={v => updateField(project.id, 'is_vip', v)}
+                      />
+                      <Crown className={`w-4 h-4 ${project.is_vip ? 'text-amber-400' : 'text-muted-foreground/30'}`} />
+                    </div>
                   </div>
                 </div>
               </div>
