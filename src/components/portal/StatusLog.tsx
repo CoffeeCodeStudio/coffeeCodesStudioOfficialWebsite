@@ -111,6 +111,24 @@ export function StatusLog() {
     setDateRange({ from: undefined, to: undefined });
   };
 
+  const exportCsv = () => {
+    const header = 'Datum,Typ,Författare,Projekt,Meddelande';
+    const rows = filteredLogs.map(log => {
+      const date = format(new Date(log.created_at), 'yyyy-MM-dd HH:mm');
+      const type = eventConfig[log.event_type]?.label || 'Uppdatering';
+      const project = (projects[log.project_id] || 'Projekt').replace(/,/g, ' ');
+      const message = log.message.replace(/,/g, ' ').replace(/\n/g, ' ');
+      return `${date},${type},${log.author_name},${project},${message}`;
+    });
+    const blob = new Blob([header + '\n' + rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `aktivitetshistorik-${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const hasFilters = searchQuery || dateRange.from || dateRange.to;
 
   if (loading) {
