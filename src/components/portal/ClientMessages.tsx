@@ -11,6 +11,7 @@ interface Project {
 export function ClientMessages() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [userId, setUserId] = useState<string>('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -18,11 +19,14 @@ export function ClientMessages() {
       setUserId(uid);
       supabase.from('projects').select('id, name').eq('client_user_id', uid).then(({ data: p }) => {
         setProjects((p as Project[]) || []);
+        setLoading(false);
       });
     });
   }, []);
 
-  if (!userId) return null;
+  if (loading) {
+    return <div className="flex justify-center py-20"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>;
+  }
 
   return (
     <div className="space-y-6">
