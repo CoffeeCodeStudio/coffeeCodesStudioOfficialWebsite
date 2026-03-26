@@ -208,9 +208,15 @@ export function AdminProjects() {
             >
               <div className="flex flex-col gap-4">
                 <div className="flex items-start justify-between gap-3">
-                  <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
+                      {project.is_vip && (
+                        <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 text-[10px] font-medium border border-amber-500/20">
+                          <Crown className="w-3 h-3" />
+                          VIP
+                        </span>
+                      )}
                       {isQuestionnaireOverdue(project) && (
                         <span title="Väntar på svar i mer än 24 timmar">
                           <AlertCircle className="w-5 h-5 text-yellow-500 animate-pulse" />
