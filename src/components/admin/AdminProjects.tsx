@@ -5,8 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { motion } from 'framer-motion';
-import { FolderKanban, Trash2, AlertCircle, Crown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FolderKanban, Trash2, AlertCircle, Crown, ChevronDown } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
@@ -60,6 +60,7 @@ export function AdminProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [adminDataMap, setAdminDataMap] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   const [pendingChange, setPendingChange] = useState<PendingChange | null>(null);
   const { toast } = useToast();
 
@@ -201,118 +202,145 @@ export function AdminProjects() {
           {projects.map((project, i) => (
             <motion.div
               key={project.id}
-              className="glass-card cyber-border p-6 rounded-2xl"
+              className="glass-card cyber-border rounded-2xl overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
             >
-              <div className="flex flex-col gap-4">
-                <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-lg font-serif text-foreground">{project.name}</h3>
-                      {project.is_vip && (
-                        <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 text-[10px] font-medium border border-amber-500/20">
-                          <Crown className="w-3 h-3" />
-                          VIP
-                        </span>
-                      )}
-                      {isQuestionnaireOverdue(project) && (
-                        <span title="Väntar på svar i mer än 24 timmar">
-                          <AlertCircle className="w-5 h-5 text-yellow-500 animate-pulse" />
-                        </span>
-                      )}
-                    </div>
-                    {project.description && (
-                      <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <AdminAgreement projectId={project.id} projectName={project.name} />
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive shrink-0">
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>Radera projekt?</AlertDialogTitle>
-                        <AlertDialogDescription>
-                          Detta raderar projektet "{project.name}" och all tillhörande data permanent. Åtgärden kan inte ångras.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Avbryt</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => deleteProject(project.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                          Radera
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                  </div>
+              {/* Clickable header */}
+              <button
+                type="button"
+                className="w-full flex items-center justify-between gap-3 p-5 text-left hover:bg-muted/30 transition-colors"
+                onClick={() => setExpandedId(prev => prev === project.id ? null : project.id)}
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  <h3 className="text-lg font-serif text-foreground truncate">{project.name}</h3>
+                  {project.is_vip && (
+                    <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 text-[10px] font-medium border border-amber-500/20 shrink-0">
+                      <Crown className="w-3 h-3" />
+                      VIP
+                    </span>
+                  )}
+                  {isQuestionnaireOverdue(project) && (
+                    <span title="Väntar på svar i mer än 24 timmar">
+                      <AlertCircle className="w-5 h-5 text-yellow-500 animate-pulse" />
+                    </span>
+                  )}
                 </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-xs text-muted-foreground hidden sm:inline">
+                    {PROJECT_STATUSES.find(s => s.value === project.status)?.label || project.status}
+                  </span>
+                  <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${expandedId === project.id ? 'rotate-180' : ''}`} />
+                </div>
+              </button>
 
-                <div className="space-y-1 mb-4">
-                  <span className="text-[10px] text-muted-foreground uppercase">AI-assistentens systempromt</span>
-                  <Textarea
-                    value={adminDataMap[project.id] || ''}
-                    onChange={e => updateAdminField(project.id, 'system_prompt', e.target.value || null)}
-                    placeholder="Beskriv projektet för AI-assistenten, t.ex. 'Detta är en e-handelssite för...'"
-                    className="bg-muted/50 border-border/50 min-h-[60px] text-sm"
-                    rows={2}
-                  />
-                </div>
+              {/* Expandable detail view */}
+              <AnimatePresence>
+                {expandedId === project.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-5 pb-5 space-y-4 border-t border-border/30 pt-4">
+                      {project.description && (
+                        <p className="text-sm text-muted-foreground">{project.description}</p>
+                      )}
 
-                <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-                  <div className="space-y-1">
-                    <span className="text-[10px] text-muted-foreground uppercase">Status</span>
-                    <Select value={project.status} onValueChange={v => handleStatusChange(project, v)}>
-                      <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
-                      <SelectContent>
-                        {PROJECT_STATUSES.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[10px] text-muted-foreground uppercase">Paket</span>
-                    <Select value={project.package} onValueChange={v => handlePackageChange(project, v)}>
-                      <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
-                      <SelectContent>
-                        {packages.map(p => <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[10px] text-muted-foreground uppercase">Kvot/månad</span>
-                    <Input type="number" value={project.monthly_quota}
-                      onChange={e => updateField(project.id, 'monthly_quota', parseInt(e.target.value) || 3)}
-                      className="bg-muted/50 border-border/50" />
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[10px] text-muted-foreground uppercase">Pris (SEK)</span>
-                    <Input type="number" value={project.price ?? ''}
-                      onChange={e => updateField(project.id, 'price', e.target.value ? parseFloat(e.target.value) : null)}
-                      placeholder="0" className="bg-muted/50 border-border/50" />
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[10px] text-muted-foreground uppercase">Förnyas</span>
-                    <Input type="date" value={project.renewal_date || ''}
-                      onChange={e => updateField(project.id, 'renewal_date', e.target.value || null)}
-                      className="bg-muted/50 border-border/50" />
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[10px] text-muted-foreground uppercase">VIP</span>
-                    <div className="flex items-center gap-2 h-10">
-                      <Switch
-                        checked={project.is_vip}
-                        onCheckedChange={v => updateField(project.id, 'is_vip', v)}
-                      />
-                      <Crown className={`w-4 h-4 ${project.is_vip ? 'text-amber-400' : 'text-muted-foreground/30'}`} />
+                      {/* System prompt – full view */}
+                      <div className="space-y-1">
+                        <span className="text-[10px] text-muted-foreground uppercase">AI-assistentens systempromt</span>
+                        <Textarea
+                          value={adminDataMap[project.id] || ''}
+                          onChange={e => updateAdminField(project.id, 'system_prompt', e.target.value || null)}
+                          placeholder="Beskriv projektet för AI-assistenten, t.ex. 'Detta är en e-handelssite för...'"
+                          className="bg-muted/50 border-border/50 min-h-[120px] text-sm"
+                          rows={5}
+                        />
+                      </div>
+
+                      {/* Settings grid */}
+                      <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+                        <div className="space-y-1">
+                          <span className="text-[10px] text-muted-foreground uppercase">Status</span>
+                          <Select value={project.status} onValueChange={v => handleStatusChange(project, v)}>
+                            <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
+                            <SelectContent>
+                              {PROJECT_STATUSES.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] text-muted-foreground uppercase">Paket</span>
+                          <Select value={project.package} onValueChange={v => handlePackageChange(project, v)}>
+                            <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
+                            <SelectContent>
+                              {packages.map(p => <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>)}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] text-muted-foreground uppercase">Kvot/månad</span>
+                          <Input type="number" value={project.monthly_quota}
+                            onChange={e => updateField(project.id, 'monthly_quota', parseInt(e.target.value) || 3)}
+                            className="bg-muted/50 border-border/50" />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] text-muted-foreground uppercase">Pris (SEK)</span>
+                          <Input type="number" value={project.price ?? ''}
+                            onChange={e => updateField(project.id, 'price', e.target.value ? parseFloat(e.target.value) : null)}
+                            placeholder="0" className="bg-muted/50 border-border/50" />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] text-muted-foreground uppercase">Förnyas</span>
+                          <Input type="date" value={project.renewal_date || ''}
+                            onChange={e => updateField(project.id, 'renewal_date', e.target.value || null)}
+                            className="bg-muted/50 border-border/50" />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] text-muted-foreground uppercase">VIP</span>
+                          <div className="flex items-center gap-2 h-10">
+                            <Switch
+                              checked={project.is_vip}
+                              onCheckedChange={v => updateField(project.id, 'is_vip', v)}
+                            />
+                            <Crown className={`w-4 h-4 ${project.is_vip ? 'text-amber-400' : 'text-muted-foreground/30'}`} />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Actions row */}
+                      <div className="flex items-center justify-end gap-2 pt-2">
+                        <AdminAgreement projectId={project.id} projectName={project.name} />
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-destructive">
+                              <Trash2 className="w-4 h-4 mr-1" /> Radera
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Radera projekt?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Detta raderar projektet "{project.name}" och all tillhörande data permanent. Åtgärden kan inte ångras.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Avbryt</AlertDialogCancel>
+                              <AlertDialogAction onClick={() => deleteProject(project.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                                Radera
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>
