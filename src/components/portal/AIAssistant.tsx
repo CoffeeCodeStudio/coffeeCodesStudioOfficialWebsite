@@ -94,10 +94,11 @@ export function AIAssistant({ projectId, projectStatus }: AIAssistantProps) {
     }
   };
 
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+  const sendMessage = async (overrideMessage?: string) => {
+    const text = overrideMessage || input.trim();
+    if (!text || isLoading) return;
 
-    const userMsg: Message = { role: 'user', content: input.trim() };
+    const userMsg: Message = { role: 'user', content: text };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsLoading(true);
