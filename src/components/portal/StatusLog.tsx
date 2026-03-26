@@ -191,6 +191,13 @@ export function StatusLog() {
               Rensa
             </Button>
           )}
+
+          {filteredLogs.length > 0 && (
+            <Button variant="outline" size="sm" onClick={exportCsv} className="border-border/50 text-muted-foreground hover:text-foreground">
+              <Download className="w-4 h-4 mr-1" />
+              Exportera CSV
+            </Button>
+          )}
         </div>
         
         {hasFilters && (
