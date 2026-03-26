@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Paintbrush, Code2, HardDrive, Rocket, CheckCircle2, ChevronDown, Upload, CheckSquare, Square, Circle, FileArchive, Download, Calendar, Image, FileText, Mail, ThumbsUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 import { sv } from 'date-fns/locale';
