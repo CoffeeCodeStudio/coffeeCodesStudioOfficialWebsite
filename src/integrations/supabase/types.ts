@@ -151,6 +151,7 @@ export type Database = {
           id: string
           project_id: string
           system_prompt: string | null
+          vip_notes: string | null
         }
         Insert: {
           admin_notes?: string | null
@@ -158,6 +159,7 @@ export type Database = {
           id?: string
           project_id: string
           system_prompt?: string | null
+          vip_notes?: string | null
         }
         Update: {
           admin_notes?: string | null
@@ -165,6 +167,7 @@ export type Database = {
           id?: string
           project_id?: string
           system_prompt?: string | null
+          vip_notes?: string | null
         }
         Relationships: [
           {
