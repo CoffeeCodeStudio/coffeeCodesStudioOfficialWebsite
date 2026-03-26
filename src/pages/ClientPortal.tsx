@@ -37,6 +37,7 @@ export default function ClientPortal() {
   const [projectId, setProjectId] = useState<string | null>(null);
   const [projectName, setProjectName] = useState<string>('');
   const [projectStatus, setProjectStatus] = useState<string>('');
+  const [isVip, setIsVip] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [loading, setLoading] = useState(true);
   const [unreadMessages, setUnreadMessages] = useState(0);
