@@ -82,7 +82,7 @@ export default function ClientPortal() {
         .select('id, name, status')
         .eq('client_user_id', user.id)
         .limit(1)
-        .single();
+        .maybeSingle();
       if (data) {
         setProjectId(data.id);
         setProjectName(data.name);
