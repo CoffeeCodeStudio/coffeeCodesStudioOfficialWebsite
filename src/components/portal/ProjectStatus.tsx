@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Paintbrush, Code2, HardDrive, Rocket, CheckCircle2, ChevronDown, Upload, CheckSquare, Square, Circle, FileArchive, Download, Calendar, Image, FileText, Mail, ThumbsUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 import { sv } from 'date-fns/locale';
@@ -40,6 +40,7 @@ const statusSteps = [
   { key: 'development', label: 'Utveckling', icon: Code2 },
   { key: 'testing', label: 'Testning', icon: HardDrive },
   { key: 'live', label: 'Live', icon: Rocket },
+  { key: 'completed', label: 'Klart', icon: CheckCircle2 },
 ];
 
 const requestTimeline = [
@@ -213,14 +214,7 @@ export function ProjectStatus() {
         <Button
           variant="outline"
           className="border-primary/30 text-primary"
-          onClick={() => {
-            const contactSection = document.getElementById('kontakt');
-            if (contactSection) {
-              window.location.href = '/#kontakt';
-            } else {
-              window.location.href = '/#kontakt';
-            }
-          }}
+          onClick={() => { window.location.href = '/#kontakt'; }}
         >
           <Mail className="w-4 h-4 mr-2" />
           Kontakta oss för att komma igång
