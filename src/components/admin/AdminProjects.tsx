@@ -261,10 +261,16 @@ export function AdminProjects() {
                         <span className="text-[10px] text-muted-foreground uppercase">AI-assistentens systempromt</span>
                         <Textarea
                           value={adminDataMap[project.id]?.system_prompt || ''}
-                          onChange={e => updateAdminField(project.id, 'system_prompt', e.target.value || null)}
+                          onChange={e => {
+                            updateAdminField(project.id, 'system_prompt', e.target.value || null);
+                            e.target.style.height = 'auto';
+                            e.target.style.height = e.target.scrollHeight + 'px';
+                          }}
+                          onFocus={e => { e.target.style.height = 'auto'; e.target.style.height = e.target.scrollHeight + 'px'; }}
+                          ref={el => { if (el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; } }}
                           placeholder="Beskriv projektet för AI-assistenten, t.ex. 'Detta är en e-handelssite för...'"
-                          className="bg-muted/50 border-border/50 min-h-[120px] text-sm"
-                          rows={5}
+                          className="bg-muted/50 border-border/50 text-sm resize-none overflow-hidden"
+                          rows={2}
                         />
                       </div>
 
