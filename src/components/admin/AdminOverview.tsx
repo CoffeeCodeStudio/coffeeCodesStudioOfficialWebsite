@@ -30,6 +30,12 @@ interface ClientRequest {
   created_at: string;
 }
 
+interface ChecklistRow {
+  project_id: string;
+  item_key: string;
+  checked: boolean;
+}
+
 const packageLabels: Record<string, string> = { bas: 'Bas', standard: 'Standard', premium: 'Premium' };
 const packageColors: Record<string, string> = {
   bas: 'bg-muted/50 text-muted-foreground',
