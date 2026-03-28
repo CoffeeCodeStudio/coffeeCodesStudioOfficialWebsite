@@ -107,6 +107,21 @@ export function AdminOverview() {
   const activeProjects = projects.filter(p => p.status !== 'completed');
   const uniqueClients = new Set(projects.map(p => p.client_user_id)).size;
 
+  // Launch readiness
+  const RED_KEYS = [
+    'agreement_signed', 'pub_agreement_signed', 'price_delivery_documented',
+    'supabase_dpa_active', 'privacy_policy_linked', 'cookie_banner_works',
+  ];
+  const checkedByProject: Record<string, Set<string>> = {};
+  checklistData.forEach(row => {
+    if (RED_KEYS.includes(row.item_key)) {
+      if (!checkedByProject[row.project_id]) checkedByProject[row.project_id] = new Set();
+      checkedByProject[row.project_id].add(row.item_key);
+    }
+  });
+  const readyCount = activeProjects.filter(p => checkedByProject[p.id]?.size === RED_KEYS.length).length;
+  const notReadyProjects = activeProjects.filter(p => (checkedByProject[p.id]?.size ?? 0) < RED_KEYS.length);
+
   return (
     <div className="space-y-8">
       <h2 className="text-2xl font-serif gradient-text">Översikt</h2>
