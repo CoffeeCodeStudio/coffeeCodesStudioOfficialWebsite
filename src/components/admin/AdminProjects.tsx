@@ -376,7 +376,7 @@ export function AdminProjects() {
 
                       {/* Launch checklist */}
                       <div className="border-t border-border/30 pt-4">
-                        <ProjectChecklist projectId={project.id} />
+                        <ProjectChecklist projectId={project.id} projectName={project.name} />
                       </div>
                     </div>
                   </motion.div>
