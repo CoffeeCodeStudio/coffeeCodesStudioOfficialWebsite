@@ -368,6 +368,7 @@ export default function ClientPortal() {
           {activeTab === 'dashboard' && (
             <>
               {projectId && <ClientAgreement projectId={projectId} projectName={projectName} />}
+              {projectId && <div className="mt-4"><ClientPubAgreement projectId={projectId} projectName={projectName} /></div>}
               <div className="mt-6">
                 <ProjectStatus />
               </div>
