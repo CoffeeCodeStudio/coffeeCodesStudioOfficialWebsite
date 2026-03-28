@@ -373,6 +373,11 @@ export function AdminProjects() {
                           </AlertDialogContent>
                         </AlertDialog>
                       </div>
+
+                      {/* Launch checklist */}
+                      <div className="border-t border-border/30 pt-4">
+                        <ProjectChecklist projectId={project.id} />
+                      </div>
                     </div>
                   </motion.div>
                 )}
