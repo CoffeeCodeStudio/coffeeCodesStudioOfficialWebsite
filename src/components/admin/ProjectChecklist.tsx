@@ -123,6 +123,26 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
     if (error) {
       setCheckedItems(prev => ({ ...prev, [key]: !checked }));
       toast({ title: 'Fel', description: 'Kunde inte spara.', variant: 'destructive' });
+      return;
+    }
+
+    // Check if all red items are now complete
+    if (checked && !notifiedComplete) {
+      const updated = { ...checkedItems, [key]: checked };
+      const allRedDone = RED_KEYS.every(k => updated[k]);
+      if (allRedDone) {
+        setNotifiedComplete(true);
+        toast({ title: '🚀 Alla blockerande punkter klara!', description: 'Skickar notis till admin...' });
+        supabase.functions.invoke('notify-checklist-complete', {
+          body: { projectName: projectName || 'Okänt projekt' },
+        }).then(({ error: fnError }) => {
+          if (fnError) {
+            console.error('notify-checklist-complete error:', fnError);
+          } else {
+            toast({ title: '✅ E-postnotis skickad', description: 'Admin har fått besked att projektet är redo.' });
+          }
+        });
+      }
     }
   };
 
