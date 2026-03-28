@@ -153,6 +153,18 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
         data.forEach((row: any) => { map[row.item_key] = row.checked; });
         setCheckedItems(map);
       }
+
+      // Fetch saved verification answers
+      const { data: vData } = await supabase
+        .from('checklist_verifications')
+        .select('item_key, answers')
+        .eq('project_id', projectId);
+      if (vData) {
+        const vMap: Record<string, { question: string; answer: string }[]> = {};
+        vData.forEach((row: any) => { vMap[row.item_key] = row.answers as any; });
+        setVerifications(vMap);
+      }
+
       setLoading(false);
     };
     fetchData();
