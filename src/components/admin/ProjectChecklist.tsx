@@ -131,6 +131,7 @@ const RED_KEYS = CHECKLIST_CATEGORIES
 
 export function ProjectChecklist({ projectId, projectName }: Props) {
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+  const [verifications, setVerifications] = useState<Record<string, { question: string; answer: string }[]>>({});
   const [notifiedComplete, setNotifiedComplete] = useState(false);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
