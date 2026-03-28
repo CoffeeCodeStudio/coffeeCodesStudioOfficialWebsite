@@ -177,6 +177,22 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
       toast({ title: 'Alla fält måste fyllas i', description: 'Besvara alla kontrollfrågor innan du bockar av.', variant: 'destructive' });
       return;
     }
+    // Save verification answers to database
+    const questionsWithAnswers = questions?.map((q, i) => ({
+      question: q.question,
+      answer: answers[i]?.trim() || '',
+    })) || [];
+
+    supabase
+      .from('checklist_verifications')
+      .upsert(
+        { project_id: projectId, item_key: pendingKey, answers: questionsWithAnswers } as any,
+        { onConflict: 'project_id,item_key' }
+      )
+      .then(({ error: saveErr }) => {
+        if (saveErr) console.error('Failed to save verification:', saveErr);
+      });
+
     setConfirmOpen(false);
     toggle(pendingKey, true);
     setPendingKey(null);
