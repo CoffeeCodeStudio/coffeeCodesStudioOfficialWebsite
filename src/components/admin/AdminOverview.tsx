@@ -53,6 +53,7 @@ export function AdminOverview() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [profiles, setProfiles] = useState<Record<string, Profile>>({});
   const [requests, setRequests] = useState<ClientRequest[]>([]);
+  const [checklistData, setChecklistData] = useState<ChecklistRow[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
