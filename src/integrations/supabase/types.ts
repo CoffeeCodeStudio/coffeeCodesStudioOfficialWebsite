@@ -305,6 +305,44 @@ export type Database = {
           },
         ]
       }
+      project_pub_agreements: {
+        Row: {
+          created_at: string
+          id: string
+          project_id: string
+          sent_at: string | null
+          signed_at: string | null
+          signed_ip: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          project_id: string
+          sent_at?: string | null
+          signed_at?: string | null
+          signed_ip?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          project_id?: string
+          sent_at?: string | null
+          signed_at?: string | null
+          signed_ip?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_pub_agreements_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_responses: {
         Row: {
           created_at: string
