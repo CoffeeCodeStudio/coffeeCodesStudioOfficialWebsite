@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Users, AlertTriangle, Flame, CalendarClock, Package, BarChart3, Clock } from 'lucide-react';
+import { Users, AlertTriangle, Flame, CalendarClock, Package, BarChart3, Clock, ShieldCheck } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 
@@ -30,6 +30,12 @@ interface ClientRequest {
   created_at: string;
 }
 
+interface ChecklistRow {
+  project_id: string;
+  item_key: string;
+  checked: boolean;
+}
+
 const packageLabels: Record<string, string> = { bas: 'Bas', standard: 'Standard', premium: 'Premium' };
 const packageColors: Record<string, string> = {
   bas: 'bg-muted/50 text-muted-foreground',
@@ -47,6 +53,7 @@ export function AdminOverview() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [profiles, setProfiles] = useState<Record<string, Profile>>({});
   const [requests, setRequests] = useState<ClientRequest[]>([]);
+  const [checklistData, setChecklistData] = useState<ChecklistRow[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
@@ -69,12 +76,14 @@ export function AdminOverview() {
       supabase.from('projects').select('*').order('created_at', { ascending: false }),
       supabase.from('profiles').select('*'),
       supabase.from('client_requests').select('*').order('created_at', { ascending: false }),
-    ]).then(([projRes, profRes, reqRes]) => {
+      supabase.from('project_checklists').select('project_id, item_key, checked').eq('checked', true),
+    ]).then(([projRes, profRes, reqRes, clRes]) => {
       setProjects((projRes.data as Project[]) || []);
       const map: Record<string, Profile> = {};
       ((profRes.data as Profile[]) || []).forEach(p => { map[p.id] = p; });
       setProfiles(map);
       setRequests((reqRes.data as ClientRequest[]) || []);
+      setChecklistData((clRes.data as ChecklistRow[]) || []);
       setLoading(false);
     });
   }, []);
@@ -97,6 +106,21 @@ export function AdminOverview() {
   // Stats
   const activeProjects = projects.filter(p => p.status !== 'completed');
   const uniqueClients = new Set(projects.map(p => p.client_user_id)).size;
+
+  // Launch readiness
+  const RED_KEYS = [
+    'agreement_signed', 'pub_agreement_signed', 'price_delivery_documented',
+    'supabase_dpa_active', 'privacy_policy_linked', 'cookie_banner_works',
+  ];
+  const checkedByProject: Record<string, Set<string>> = {};
+  checklistData.forEach(row => {
+    if (RED_KEYS.includes(row.item_key)) {
+      if (!checkedByProject[row.project_id]) checkedByProject[row.project_id] = new Set();
+      checkedByProject[row.project_id].add(row.item_key);
+    }
+  });
+  const readyCount = activeProjects.filter(p => checkedByProject[p.id]?.size === RED_KEYS.length).length;
+  const notReadyProjects = activeProjects.filter(p => (checkedByProject[p.id]?.size ?? 0) < RED_KEYS.length);
 
   return (
     <div className="space-y-8">
@@ -126,6 +150,43 @@ export function AdminOverview() {
           );
         })}
       </div>
+
+      {/* Launch readiness */}
+      <motion.div
+        className="glass-card cyber-border p-6 rounded-2xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <div className="flex items-center gap-2 mb-4">
+          <ShieldCheck className="w-5 h-5 text-emerald-500" />
+          <h3 className="font-serif text-foreground">Lanseringsberedskap</h3>
+          <span className="ml-auto text-sm font-mono text-muted-foreground">
+            {readyCount} / {activeProjects.length} redo
+          </span>
+        </div>
+        {readyCount === activeProjects.length && activeProjects.length > 0 ? (
+          <p className="text-sm text-emerald-400">Alla aktiva projekt har alla blockerande punkter avklarade ✅</p>
+        ) : (
+          <div className="space-y-2">
+            {notReadyProjects.map(proj => {
+              const done = checkedByProject[proj.id]?.size ?? 0;
+              const pct = Math.round((done / RED_KEYS.length) * 100);
+              return (
+                <div key={proj.id} className="flex items-center gap-3 p-3 bg-destructive/5 rounded-lg">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm text-foreground">{proj.name}</p>
+                    <p className="text-xs text-muted-foreground">{done}/{RED_KEYS.length} blockerande klara</p>
+                  </div>
+                  <div className="w-20 h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full bg-destructive/60 rounded-full transition-all" style={{ width: `${pct}%` }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </motion.div>
 
       {/* Urgent this week */}
       {(urgentRequests.length > 0 || renewingSoon.length > 0 || questionnaireOverdue.length > 0) && (
