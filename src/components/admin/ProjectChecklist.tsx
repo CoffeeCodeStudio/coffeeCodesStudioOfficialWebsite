@@ -80,7 +80,12 @@ const colorMap = {
 
 interface Props {
   projectId: string;
+  projectName?: string;
 }
+
+const RED_KEYS = CHECKLIST_CATEGORIES
+  .filter(c => c.color === 'red')
+  .flatMap(c => c.items.map(i => i.key));
 
 export function ProjectChecklist({ projectId }: Props) {
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
