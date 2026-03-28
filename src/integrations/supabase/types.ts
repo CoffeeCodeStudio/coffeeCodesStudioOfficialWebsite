@@ -232,6 +232,38 @@ export type Database = {
           },
         ]
       }
+      project_checklists: {
+        Row: {
+          checked: boolean
+          created_at: string
+          id: string
+          item_key: string
+          project_id: string
+        }
+        Insert: {
+          checked?: boolean
+          created_at?: string
+          id?: string
+          item_key: string
+          project_id: string
+        }
+        Update: {
+          checked?: boolean
+          created_at?: string
+          id?: string
+          item_key?: string
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_checklists_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_files: {
         Row: {
           created_at: string

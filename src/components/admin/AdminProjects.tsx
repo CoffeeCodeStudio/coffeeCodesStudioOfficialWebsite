@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/dialog';
 import { AdminAgreement } from './AdminAgreement';
 import { AdminPubAgreement } from './AdminPubAgreement';
+import { ProjectChecklist } from './ProjectChecklist';
 
 import { PROJECT_STATUSES } from '@/lib/projectStatuses';
 
@@ -371,6 +372,11 @@ export function AdminProjects() {
                             </AlertDialogFooter>
                           </AlertDialogContent>
                         </AlertDialog>
+                      </div>
+
+                      {/* Launch checklist */}
+                      <div className="border-t border-border/30 pt-4">
+                        <ProjectChecklist projectId={project.id} />
                       </div>
                     </div>
                   </motion.div>
