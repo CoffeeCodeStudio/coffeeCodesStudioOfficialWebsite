@@ -76,12 +76,14 @@ export function AdminOverview() {
       supabase.from('projects').select('*').order('created_at', { ascending: false }),
       supabase.from('profiles').select('*'),
       supabase.from('client_requests').select('*').order('created_at', { ascending: false }),
-    ]).then(([projRes, profRes, reqRes]) => {
+      supabase.from('project_checklists').select('project_id, item_key, checked').eq('checked', true),
+    ]).then(([projRes, profRes, reqRes, clRes]) => {
       setProjects((projRes.data as Project[]) || []);
       const map: Record<string, Profile> = {};
       ((profRes.data as Profile[]) || []).forEach(p => { map[p.id] = p; });
       setProfiles(map);
       setRequests((reqRes.data as ClientRequest[]) || []);
+      setChecklistData((clRes.data as ChecklistRow[]) || []);
       setLoading(false);
     });
   }, []);
