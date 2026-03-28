@@ -180,7 +180,7 @@ export function ProjectChecklist({ projectId }: Props) {
                     onCheckedChange={(v) => toggle(item.key, !!v)}
                     className="mt-1 shrink-0"
                   />
-                  <span
+                   <span
                     className={`text-sm transition-colors ${
                       checkedItems[item.key]
                         ? 'line-through text-muted-foreground/60'
@@ -188,6 +188,9 @@ export function ProjectChecklist({ projectId }: Props) {
                     }`}
                   >
                     {item.label}
+                    <span className="block text-xs text-muted-foreground font-normal mt-0.5 no-underline" style={{ textDecoration: 'none' }}>
+                      {item.help}
+                    </span>
                   </span>
                 </label>
               ))}
