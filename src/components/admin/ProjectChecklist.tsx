@@ -7,6 +7,7 @@ import { AlertTriangle, CheckCircle2, XCircle } from 'lucide-react';
 interface ChecklistItem {
   key: string;
   label: string;
+  help: string;
 }
 
 interface ChecklistCategory {
