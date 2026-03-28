@@ -315,6 +315,16 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
                       <span className="block text-xs text-muted-foreground font-normal mt-0.5" style={{ textDecoration: 'none' }}>
                         {item.help}
                       </span>
+                      {checkedItems[item.key] && verifications[item.key] && (
+                        <span className="block mt-1.5 space-y-1" style={{ textDecoration: 'none' }}>
+                          {verifications[item.key].map((v, vi) => (
+                            <span key={vi} className="block text-xs bg-muted/50 rounded px-2 py-1">
+                              <span className="font-medium text-muted-foreground">{v.question}</span>
+                              <span className="block text-foreground/70 mt-0.5">{v.answer}</span>
+                            </span>
+                          ))}
+                        </span>
+                      )}
                     </span>
                   </label>
                 ))}
