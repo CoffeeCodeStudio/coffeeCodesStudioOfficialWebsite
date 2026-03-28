@@ -16,6 +16,7 @@ import {
   Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog';
 import { AdminAgreement } from './AdminAgreement';
+import { AdminPubAgreement } from './AdminPubAgreement';
 
 import { PROJECT_STATUSES } from '@/lib/projectStatuses';
 
@@ -348,6 +349,7 @@ export function AdminProjects() {
                       {/* Actions row */}
                       <div className="flex items-center justify-end gap-2 pt-2">
                         <AdminAgreement projectId={project.id} projectName={project.name} />
+                        <AdminPubAgreement projectId={project.id} />
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
                             <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-destructive">

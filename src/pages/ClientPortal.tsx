@@ -13,6 +13,7 @@ import { StatusLog } from '@/components/portal/StatusLog';
 import { AIAssistant } from '@/components/portal/AIAssistant';
 import { ClientSettings } from '@/components/portal/ClientSettings';
 import { ClientAgreement } from '@/components/portal/ClientAgreement';
+import { ClientPubAgreement } from '@/components/portal/ClientPubAgreement';
 import type { User } from '@supabase/supabase-js';
 
 type Tab = 'dashboard' | 'requests' | 'messages' | 'ai' | 'log' | 'settings';
@@ -367,6 +368,7 @@ export default function ClientPortal() {
           {activeTab === 'dashboard' && (
             <>
               {projectId && <ClientAgreement projectId={projectId} projectName={projectName} />}
+              {projectId && <div className="mt-4"><ClientPubAgreement projectId={projectId} projectName={projectName} /></div>}
               <div className="mt-6">
                 <ProjectStatus />
               </div>
