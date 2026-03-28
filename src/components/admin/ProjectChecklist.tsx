@@ -7,6 +7,7 @@ import { AlertTriangle, CheckCircle2, XCircle } from 'lucide-react';
 interface ChecklistItem {
   key: string;
   label: string;
+  help: string;
 }
 
 interface ChecklistCategory {
@@ -24,12 +25,12 @@ const CHECKLIST_CATEGORIES: ChecklistCategory[] = [
     icon: <XCircle className="w-5 h-5 text-red-500" />,
     description: 'Dessa punkter måste vara avklarade innan sajten kan gå live.',
     items: [
-      { key: 'agreement_signed', label: 'Projektavtal signerat av kunden' },
-      { key: 'pub_agreement_signed', label: 'PUB-avtal (GDPR) signerat av kunden' },
-      { key: 'price_delivery_documented', label: 'Pris och leveransdatum dokumenterat' },
-      { key: 'supabase_dpa_active', label: 'Supabase DPA aktiverad' },
-      { key: 'privacy_policy_linked', label: 'Integritetspolicy länkad i footern' },
-      { key: 'cookie_banner_works', label: 'Cookie-banner fungerar på kundens sajt' },
+      { key: 'agreement_signed', label: 'Projektavtal signerat av kunden', help: 'Kunden har godkänt vad som ska göras och vad det kostar.' },
+      { key: 'pub_agreement_signed', label: 'PUB-avtal (GDPR) signerat av kunden', help: 'Ett avtal som reglerar hur vi hanterar kundens användares personuppgifter.' },
+      { key: 'price_delivery_documented', label: 'Pris och leveransdatum dokumenterat', help: 'Det finns skriftligt vad projektet kostar och när det ska vara klart.' },
+      { key: 'supabase_dpa_active', label: 'Supabase DPA aktiverad', help: 'Databasens leverantör har ett aktivt databehandlingsavtal med oss.' },
+      { key: 'privacy_policy_linked', label: 'Integritetspolicy länkad i footern', help: 'Besökare kan hitta information om hur deras data hanteras längst ner på sidan.' },
+      { key: 'cookie_banner_works', label: 'Cookie-banner fungerar på kundens sajt', help: 'En ruta visas för besökare där de kan godkänna eller neka cookies.' },
     ],
   },
   {
@@ -38,11 +39,11 @@ const CHECKLIST_CATEGORIES: ChecklistCategory[] = [
     icon: <AlertTriangle className="w-5 h-5 text-yellow-500" />,
     description: 'Bör åtgärdas men hindrar inte lansering.',
     items: [
-      { key: 'rate_limiting', label: 'Rate limiting på kontaktformulär' },
-      { key: 'resend_sender_verified', label: 'Resend avsändaradress verifierad' },
-      { key: 'no_pii_console', label: 'Inga personuppgifter i console.log' },
-      { key: 'images_licensed', label: 'Alla bilder licensierade eller ägs av kunden' },
-      { key: 'media_licensed', label: 'Musik/media har rätt licens' },
+      { key: 'rate_limiting', label: 'Rate limiting på kontaktformulär', help: 'Skydd mot att någon skickar hundratals meddelanden via formuläret.' },
+      { key: 'resend_sender_verified', label: 'Resend avsändaradress verifierad', help: 'E-post skickas från en verifierad adress så den inte hamnar i skräppost.' },
+      { key: 'no_pii_console', label: 'Inga personuppgifter i console.log', help: 'Namn, e-post eller annan känslig data syns inte i webbläsarens utvecklarverktyg.' },
+      { key: 'images_licensed', label: 'Alla bilder licensierade eller ägs av kunden', help: 'Vi har rätt att använda alla bilder på sajten – inga stulna bilder.' },
+      { key: 'media_licensed', label: 'Musik/media har rätt licens', help: 'Eventuell musik eller video på sajten har rätt tillstånd för användning.' },
     ],
   },
   {
@@ -51,10 +52,10 @@ const CHECKLIST_CATEGORIES: ChecklistCategory[] = [
     icon: <CheckCircle2 className="w-5 h-5 text-emerald-500" />,
     description: 'Extra steg som höjer kvaliteten.',
     items: [
-      { key: 'search_console', label: 'Google Search Console kopplat' },
-      { key: 'domain_owned', label: 'Domän och hosting ägs av kunden' },
-      { key: 'portal_login_sent', label: 'Kunden har fått inlogg till kundportalen' },
-      { key: 'review_requested', label: 'Referens och recension efterfrågad' },
+      { key: 'search_console', label: 'Google Search Console kopplat', help: 'Google kan hitta och visa sajten i sökresultat.' },
+      { key: 'domain_owned', label: 'Domän och hosting ägs av kunden', help: 'Kunden äger sin webbadress och sitt webbhotell själv.' },
+      { key: 'portal_login_sent', label: 'Kunden har fått inlogg till kundportalen', help: 'Kunden kan logga in och följa sitt projekt.' },
+      { key: 'review_requested', label: 'Referens och recension efterfrågad', help: 'Vi har bett kunden om en recension eller referens.' },
     ],
   },
 ];
@@ -179,7 +180,7 @@ export function ProjectChecklist({ projectId }: Props) {
                     onCheckedChange={(v) => toggle(item.key, !!v)}
                     className="mt-1 shrink-0"
                   />
-                  <span
+                   <span
                     className={`text-sm transition-colors ${
                       checkedItems[item.key]
                         ? 'line-through text-muted-foreground/60'
@@ -187,6 +188,9 @@ export function ProjectChecklist({ projectId }: Props) {
                     }`}
                   >
                     {item.label}
+                    <span className="block text-xs text-muted-foreground font-normal mt-0.5 no-underline" style={{ textDecoration: 'none' }}>
+                      {item.help}
+                    </span>
                   </span>
                 </label>
               ))}
