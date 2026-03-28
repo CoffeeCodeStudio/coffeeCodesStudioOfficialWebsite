@@ -2,13 +2,55 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
-import { AlertTriangle, CheckCircle2, XCircle } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, XCircle, ShieldAlert } from 'lucide-react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { Textarea } from '@/components/ui/textarea';
 
 interface ChecklistItem {
   key: string;
   label: string;
   help: string;
 }
+
+interface VerificationQuestion {
+  question: string;
+  placeholder: string;
+}
+
+const CRITICAL_VERIFICATIONS: Record<string, VerificationQuestion[]> = {
+  agreement_signed: [
+    { question: 'Var signerades avtalet?', placeholder: 'T.ex. i kundportalen, via e-post, fysiskt möte...' },
+    { question: 'Vilket datum signerades det?', placeholder: 'T.ex. 2026-03-15' },
+  ],
+  pub_agreement_signed: [
+    { question: 'Var signerades PUB-avtalet?', placeholder: 'T.ex. i kundportalen, via e-post...' },
+    { question: 'Vilket datum signerades det?', placeholder: 'T.ex. 2026-03-15' },
+  ],
+  price_delivery_documented: [
+    { question: 'Var finns priset och leveransdatumet dokumenterat?', placeholder: 'T.ex. i projektavtalet, offert, e-post...' },
+    { question: 'Vad är det avtalade priset och leveransdatumet?', placeholder: 'T.ex. 15 000 kr, leverans 2026-05-01' },
+  ],
+  supabase_dpa_active: [
+    { question: 'Hur verifierade du att DPA är aktiverad?', placeholder: 'T.ex. kontrollerat i Supabase dashboard, bekräftelsemail...' },
+  ],
+  privacy_policy_linked: [
+    { question: 'Vilken URL pekar länken till?', placeholder: 'T.ex. https://kund.se/integritetspolicy' },
+    { question: 'Har du testat att länken fungerar?', placeholder: 'Ja/Nej – beskriv kort' },
+  ],
+  cookie_banner_works: [
+    { question: 'Hur testade du att cookie-bannern fungerar?', placeholder: 'T.ex. besökte sajten i inkognitoläge, testade godkänn/neka...' },
+    { question: 'Fungerar den på både mobil och desktop?', placeholder: 'Ja/Nej – beskriv kort' },
+  ],
+};
 
 interface ChecklistCategory {
   title: string;
@@ -93,8 +135,13 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
+  // Confirmation dialog state
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [pendingKey, setPendingKey] = useState<string | null>(null);
+  const [answers, setAnswers] = useState<Record<number, string>>({});
+
   useEffect(() => {
-    const fetch = async () => {
+    const fetchData = async () => {
       const { data, error } = await supabase
         .from('project_checklists')
         .select('item_key, checked')
@@ -107,8 +154,34 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
       }
       setLoading(false);
     };
-    fetch();
+    fetchData();
   }, [projectId]);
+
+  const handleCheckChange = (key: string, checked: boolean) => {
+    // If checking a critical item, show confirmation dialog
+    if (checked && CRITICAL_VERIFICATIONS[key]) {
+      setPendingKey(key);
+      setAnswers({});
+      setConfirmOpen(true);
+      return;
+    }
+    // For unchecking or non-critical items, toggle directly
+    toggle(key, checked);
+  };
+
+  const confirmCritical = () => {
+    if (!pendingKey) return;
+    const questions = CRITICAL_VERIFICATIONS[pendingKey];
+    const allAnswered = questions?.every((_, i) => answers[i]?.trim());
+    if (!allAnswered) {
+      toast({ title: 'Alla fält måste fyllas i', description: 'Besvara alla kontrollfrågor innan du bockar av.', variant: 'destructive' });
+      return;
+    }
+    setConfirmOpen(false);
+    toggle(pendingKey, true);
+    setPendingKey(null);
+    setAnswers({});
+  };
 
   const toggle = async (key: string, checked: boolean) => {
     setCheckedItems(prev => ({ ...prev, [key]: checked }));
@@ -126,7 +199,6 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
       return;
     }
 
-    // Check if all red items are now complete
     if (checked && !notifiedComplete) {
       const updated = { ...checkedItems, [key]: checked };
       const allRedDone = RED_KEYS.every(k => updated[k]);
@@ -136,15 +208,17 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
         supabase.functions.invoke('notify-checklist-complete', {
           body: { projectName: projectName || 'Okänt projekt' },
         }).then(({ error: fnError }) => {
-          if (fnError) {
-            console.error('notify-checklist-complete error:', fnError);
-          } else {
-            toast({ title: '✅ E-postnotis skickad', description: 'Admin har fått besked att projektet är redo.' });
-          }
+          if (fnError) console.error('notify-checklist-complete error:', fnError);
+          else toast({ title: '✅ E-postnotis skickad', description: 'Admin har fått besked att projektet är redo.' });
         });
       }
     }
   };
+
+  const pendingQuestions = pendingKey ? CRITICAL_VERIFICATIONS[pendingKey] || [] : [];
+  const pendingLabel = pendingKey
+    ? CHECKLIST_CATEGORIES.flatMap(c => c.items).find(i => i.key === pendingKey)?.label || ''
+    : '';
 
   if (loading) {
     return (
@@ -158,72 +232,104 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
   const doneCount = allItems.filter(i => checkedItems[i.key]).length;
 
   return (
-    <div
-      className="space-y-5"
-      style={{ fontFamily: 'Arial, Helvetica, sans-serif', lineHeight: 1.8 }}
-    >
-      {/* Progress summary */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-foreground">
-          Lanseringschecklista
-        </h3>
-        <span className="text-sm text-muted-foreground">
-          {doneCount} / {allItems.length} klara
-        </span>
+    <>
+      <div
+        className="space-y-5"
+        style={{ fontFamily: 'Arial, Helvetica, sans-serif', lineHeight: 1.8 }}
+      >
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-semibold text-foreground">Lanseringschecklista</h3>
+          <span className="text-sm text-muted-foreground">{doneCount} / {allItems.length} klara</span>
+        </div>
+
+        {CHECKLIST_CATEGORIES.map(category => {
+          const colors = colorMap[category.color];
+          const catDone = category.items.filter(i => checkedItems[i.key]).length;
+
+          return (
+            <div
+              key={category.title}
+              className={`rounded-xl border ${colors.border} ${colors.bg} p-4 space-y-3`}
+            >
+              <div className="flex items-center gap-2">
+                {category.icon}
+                <span className="font-semibold text-foreground text-base">{category.title}</span>
+                <span className={`ml-auto text-xs px-2 py-0.5 rounded-full font-medium ${colors.badge}`}>
+                  {catDone}/{category.items.length}
+                </span>
+              </div>
+
+              <p className="text-sm text-muted-foreground">{category.description}</p>
+
+              <div className="space-y-2">
+                {category.items.map(item => (
+                  <label
+                    key={item.key}
+                    className="flex items-start gap-3 cursor-pointer group py-1"
+                  >
+                    <Checkbox
+                      checked={!!checkedItems[item.key]}
+                      onCheckedChange={(v) => handleCheckChange(item.key, !!v)}
+                      className="mt-1 shrink-0"
+                    />
+                    <span
+                      className={`text-sm transition-colors ${
+                        checkedItems[item.key]
+                          ? 'line-through text-muted-foreground/60'
+                          : 'text-foreground'
+                      }`}
+                    >
+                      {item.label}
+                      {category.color === 'red' && !checkedItems[item.key] && (
+                        <ShieldAlert className="inline-block w-3.5 h-3.5 text-red-400 ml-1.5 -mt-0.5" />
+                      )}
+                      <span className="block text-xs text-muted-foreground font-normal mt-0.5" style={{ textDecoration: 'none' }}>
+                        {item.help}
+                      </span>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      {CHECKLIST_CATEGORIES.map(category => {
-        const colors = colorMap[category.color];
-        const catDone = category.items.filter(i => checkedItems[i.key]).length;
+      {/* Critical item confirmation dialog */}
+      <AlertDialog open={confirmOpen} onOpenChange={(open) => { if (!open) { setConfirmOpen(false); setPendingKey(null); setAnswers({}); } }}>
+        <AlertDialogContent className="max-w-lg">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2 text-base">
+              <ShieldAlert className="w-5 h-5 text-red-500" />
+              Bekräfta: {pendingLabel}
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-sm">
+              Den här punkten är kritisk för lansering. Besvara frågorna nedan för att bekräfta att den är utförd.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
 
-        return (
-          <div
-            key={category.title}
-            className={`rounded-xl border ${colors.border} ${colors.bg} p-4 space-y-3`}
-          >
-            <div className="flex items-center gap-2">
-              {category.icon}
-              <span className="font-semibold text-foreground text-base">
-                {category.title}
-              </span>
-              <span className={`ml-auto text-xs px-2 py-0.5 rounded-full font-medium ${colors.badge}`}>
-                {catDone}/{category.items.length}
-              </span>
-            </div>
-
-            <p className="text-sm text-muted-foreground">
-              {category.description}
-            </p>
-
-            <div className="space-y-2">
-              {category.items.map(item => (
-                <label
-                  key={item.key}
-                  className="flex items-start gap-3 cursor-pointer group py-1"
-                >
-                  <Checkbox
-                    checked={!!checkedItems[item.key]}
-                    onCheckedChange={(v) => toggle(item.key, !!v)}
-                    className="mt-1 shrink-0"
-                  />
-                   <span
-                    className={`text-sm transition-colors ${
-                      checkedItems[item.key]
-                        ? 'line-through text-muted-foreground/60'
-                        : 'text-foreground'
-                    }`}
-                  >
-                    {item.label}
-                    <span className="block text-xs text-muted-foreground font-normal mt-0.5 no-underline" style={{ textDecoration: 'none' }}>
-                      {item.help}
-                    </span>
-                  </span>
-                </label>
-              ))}
-            </div>
+          <div className="space-y-4 py-2">
+            {pendingQuestions.map((q, i) => (
+              <div key={i} className="space-y-1.5">
+                <label className="text-sm font-medium text-foreground">{q.question}</label>
+                <Textarea
+                  placeholder={q.placeholder}
+                  value={answers[i] || ''}
+                  onChange={(e) => setAnswers(prev => ({ ...prev, [i]: e.target.value }))}
+                  className="min-h-[60px] text-sm"
+                />
+              </div>
+            ))}
           </div>
-        );
-      })}
-    </div>
+
+          <AlertDialogFooter>
+            <AlertDialogCancel>Avbryt</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmCritical} className="bg-red-600 hover:bg-red-700 text-white">
+              Bekräfta och bocka av
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
