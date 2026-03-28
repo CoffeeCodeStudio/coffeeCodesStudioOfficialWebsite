@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/dialog';
 import { AdminAgreement } from './AdminAgreement';
 import { AdminPubAgreement } from './AdminPubAgreement';
+import { ProjectChecklist } from './ProjectChecklist';
 
 import { PROJECT_STATUSES } from '@/lib/projectStatuses';
 
