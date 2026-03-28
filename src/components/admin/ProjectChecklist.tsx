@@ -131,6 +131,7 @@ const RED_KEYS = CHECKLIST_CATEGORIES
 
 export function ProjectChecklist({ projectId, projectName }: Props) {
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+  const [verifications, setVerifications] = useState<Record<string, { question: string; answer: string }[]>>({});
   const [notifiedComplete, setNotifiedComplete] = useState(false);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
@@ -152,6 +153,18 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
         data.forEach((row: any) => { map[row.item_key] = row.checked; });
         setCheckedItems(map);
       }
+
+      // Fetch saved verification answers
+      const { data: vData } = await supabase
+        .from('checklist_verifications')
+        .select('item_key, answers')
+        .eq('project_id', projectId);
+      if (vData) {
+        const vMap: Record<string, { question: string; answer: string }[]> = {};
+        vData.forEach((row: any) => { vMap[row.item_key] = row.answers as any; });
+        setVerifications(vMap);
+      }
+
       setLoading(false);
     };
     fetchData();
@@ -192,6 +205,9 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
       .then(({ error: saveErr }) => {
         if (saveErr) console.error('Failed to save verification:', saveErr);
       });
+
+    // Update local verifications state immediately
+    setVerifications(prev => ({ ...prev, [pendingKey]: questionsWithAnswers }));
 
     setConfirmOpen(false);
     toggle(pendingKey, true);
@@ -302,6 +318,16 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
                       <span className="block text-xs text-muted-foreground font-normal mt-0.5" style={{ textDecoration: 'none' }}>
                         {item.help}
                       </span>
+                      {checkedItems[item.key] && verifications[item.key] && (
+                        <span className="block mt-1.5 space-y-1" style={{ textDecoration: 'none' }}>
+                          {verifications[item.key].map((v, vi) => (
+                            <span key={vi} className="block text-xs bg-muted/50 rounded px-2 py-1">
+                              <span className="font-medium text-muted-foreground">{v.question}</span>
+                              <span className="block text-foreground/70 mt-0.5">{v.answer}</span>
+                            </span>
+                          ))}
+                        </span>
+                      )}
                     </span>
                   </label>
                 ))}
