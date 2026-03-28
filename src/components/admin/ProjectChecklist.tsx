@@ -206,6 +206,9 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
         if (saveErr) console.error('Failed to save verification:', saveErr);
       });
 
+    // Update local verifications state immediately
+    setVerifications(prev => ({ ...prev, [pendingKey]: questionsWithAnswers }));
+
     setConfirmOpen(false);
     toggle(pendingKey, true);
     setPendingKey(null);
