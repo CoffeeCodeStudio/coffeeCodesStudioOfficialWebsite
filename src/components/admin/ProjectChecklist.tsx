@@ -87,8 +87,9 @@ const RED_KEYS = CHECKLIST_CATEGORIES
   .filter(c => c.color === 'red')
   .flatMap(c => c.items.map(i => i.key));
 
-export function ProjectChecklist({ projectId }: Props) {
+export function ProjectChecklist({ projectId, projectName }: Props) {
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
+  const [notifiedComplete, setNotifiedComplete] = useState(false);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
