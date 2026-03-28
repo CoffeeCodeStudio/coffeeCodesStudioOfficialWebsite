@@ -79,6 +79,38 @@ export type Database = {
           },
         ]
       }
+      checklist_verifications: {
+        Row: {
+          answers: Json
+          created_at: string
+          id: string
+          item_key: string
+          project_id: string
+        }
+        Insert: {
+          answers?: Json
+          created_at?: string
+          id?: string
+          item_key: string
+          project_id: string
+        }
+        Update: {
+          answers?: Json
+          created_at?: string
+          id?: string
+          item_key?: string
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "checklist_verifications_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       client_requests: {
         Row: {
           admin_response: string | null
