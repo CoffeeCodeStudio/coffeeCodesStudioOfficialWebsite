@@ -49,7 +49,11 @@ const packages = [
   { value: 'premium', label: 'Premium', quota: 10 },
 ];
 
-export function AdminOverview() {
+interface AdminOverviewProps {
+  onNavigate?: (tab: string) => void;
+}
+
+export function AdminOverview({ onNavigate }: AdminOverviewProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [profiles, setProfiles] = useState<Record<string, Profile>>({});
   const [requests, setRequests] = useState<ClientRequest[]>([]);
