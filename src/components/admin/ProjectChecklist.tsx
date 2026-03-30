@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
-import { AlertTriangle, CheckCircle2, XCircle, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, XCircle, ShieldAlert, Download } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import jsPDF from 'jspdf';
 import {
   AlertDialog,
   AlertDialogAction,
