@@ -3,8 +3,11 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { Upload, FileArchive, Trash2 } from 'lucide-react';
+import { Upload, FileArchive, Trash2, Download, Eye, Image, FileText, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { FilePreviewModal } from '@/components/portal/FilePreviewModal';
+import { format } from 'date-fns';
+import { sv } from 'date-fns/locale';
 
 interface Project { id: string; name: string; }
 interface ProjectFile { id: string; file_name: string; file_path: string; file_size: number | null; project_id: string; created_at: string; }
@@ -14,6 +17,7 @@ export function AdminFileUpload() {
   const [files, setFiles] = useState<ProjectFile[]>([]);
   const [selectedProject, setSelectedProject] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [previewFile, setPreviewFile] = useState<ProjectFile | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
@@ -79,6 +83,31 @@ export function AdminFileUpload() {
     toast({ title: 'Fil borttagen' });
   };
 
+  const handleDownload = async (file: ProjectFile) => {
+    const { data } = await supabase.storage.from('project-files').download(file.file_path);
+    if (data) {
+      const url = URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.file_name;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  };
+
+  const getFileIcon = (name: string) => {
+    const ext = name.split('.').pop()?.toLowerCase();
+    if (['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'].includes(ext || '')) return Image;
+    return FileText;
+  };
+
+  const formatSize = (bytes: number | null) => {
+    if (!bytes) return '—';
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
   const projectMap = Object.fromEntries(projects.map(p => [p.id, p.name]));
 
   return (
@@ -111,27 +140,56 @@ export function AdminFileUpload() {
       </div>
 
       <div className="space-y-2">
-        {files.map((file, i) => (
-          <motion.div
-            key={file.id}
-            className="glass-card p-4 rounded-xl flex items-center justify-between gap-4"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.03 }}
-          >
-            <div className="flex items-center gap-3 min-w-0">
-              <FileArchive className="w-4 h-4 text-primary flex-shrink-0" />
-              <div className="min-w-0">
-                <p className="text-sm text-foreground truncate">{file.file_name}</p>
-                <p className="text-[10px] text-muted-foreground">{projectMap[file.project_id] || 'Projekt'}</p>
+        {files.map((file, i) => {
+          const FileIcon = getFileIcon(file.file_name);
+          return (
+            <motion.div
+              key={file.id}
+              className="glass-card p-4 rounded-xl flex items-center justify-between gap-4"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.03 }}
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <FileIcon className="w-5 h-5 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm text-foreground truncate">{file.file_name}</p>
+                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground mt-0.5">
+                    <span>{projectMap[file.project_id] || 'Projekt'}</span>
+                    <span>{formatSize(file.file_size)}</span>
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {format(new Date(file.created_at), 'd MMM yyyy', { locale: sv })}
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-            <Button variant="ghost" size="icon" onClick={() => handleDelete(file)} className="text-destructive hover:bg-destructive/10 flex-shrink-0">
-              <Trash2 className="w-4 h-4" />
-            </Button>
-          </motion.div>
-        ))}
+              <div className="flex items-center gap-1 flex-shrink-0">
+                <Button variant="ghost" size="icon" onClick={() => setPreviewFile(file)} title="Förhandsgranska">
+                  <Eye className="w-4 h-4 text-primary" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => handleDownload(file)} title="Ladda ner">
+                  <Download className="w-4 h-4 text-primary" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => handleDelete(file)} className="text-destructive hover:bg-destructive/10">
+                  <Trash2 className="w-4 h-4" />
+                </Button>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
+
+      {previewFile && (
+        <FilePreviewModal
+          open={!!previewFile}
+          onOpenChange={(open) => { if (!open) setPreviewFile(null); }}
+          fileName={previewFile.file_name}
+          filePath={previewFile.file_path}
+        />
+      )}
     </div>
   );
 }
