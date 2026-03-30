@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Upload, FileArchive, Download, Calendar, Image, FileText } from 'lucide-react';
+import { Upload, FileArchive, Download, Calendar, Image, FileText, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 import { sv } from 'date-fns/locale';
+import { FilePreviewModal } from './FilePreviewModal';
 
 interface ProjectFile {
   id: string;
