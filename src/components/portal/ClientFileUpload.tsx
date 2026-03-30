@@ -30,6 +30,7 @@ export function ClientFileUpload() {
   const [selectedProject, setSelectedProject] = useState('');
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [previewFile, setPreviewFile] = useState<ProjectFile | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
