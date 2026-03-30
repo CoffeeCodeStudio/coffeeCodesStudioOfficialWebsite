@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Upload, FileArchive, Download, Calendar, Image, FileText } from 'lucide-react';
+import { Upload, FileArchive, Download, Calendar, Image, FileText, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 import { sv } from 'date-fns/locale';
+import { FilePreviewModal } from './FilePreviewModal';
 
 interface ProjectFile {
   id: string;
@@ -29,6 +30,7 @@ export function ClientFileUpload() {
   const [selectedProject, setSelectedProject] = useState('');
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [previewFile, setPreviewFile] = useState<ProjectFile | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
@@ -215,14 +217,29 @@ export function ClientFileUpload() {
                     </div>
                   </div>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => handleDownload(file)}
-                  className="text-primary hover:bg-primary/10 flex-shrink-0">
-                  <Download className="w-4 h-4" />
-                </Button>
+                <div className="flex items-center gap-1 flex-shrink-0">
+                  <Button variant="ghost" size="icon" onClick={() => setPreviewFile(file)} title="Förhandsgranska"
+                    className="text-primary hover:bg-primary/10">
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                  <Button variant="ghost" size="icon" onClick={() => handleDownload(file)} title="Ladda ner"
+                    className="text-primary hover:bg-primary/10">
+                    <Download className="w-4 h-4" />
+                  </Button>
+                </div>
               </motion.div>
             );
           })}
         </div>
+      )}
+
+      {previewFile && (
+        <FilePreviewModal
+          open={!!previewFile}
+          onOpenChange={(open) => { if (!open) setPreviewFile(null); }}
+          fileName={previewFile.file_name}
+          filePath={previewFile.file_path}
+        />
       )}
     </div>
   );
