@@ -133,19 +133,20 @@ export function AdminOverview({ onNavigate }: AdminOverviewProps) {
       {/* Stats cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { label: 'Aktiva kunder', value: uniqueClients, icon: Users, color: 'text-primary' },
-          { label: 'Aktiva projekt', value: activeProjects.length, icon: Package, color: 'text-secondary' },
-          { label: 'Väntande ärenden', value: pendingRequests.length, icon: BarChart3, color: 'text-accent' },
-          { label: 'Brådskande', value: urgentRequests.length, icon: Flame, color: 'text-destructive' },
+          { label: 'Aktiva kunder', value: uniqueClients, icon: Users, color: 'text-primary', tab: 'clients' },
+          { label: 'Aktiva projekt', value: activeProjects.length, icon: Package, color: 'text-secondary', tab: 'projects' },
+          { label: 'Väntande ärenden', value: pendingRequests.length, icon: BarChart3, color: 'text-accent', tab: 'requests' },
+          { label: 'Brådskande', value: urgentRequests.length, icon: Flame, color: 'text-destructive', tab: 'requests' },
         ].map((stat, i) => {
           const Icon = stat.icon;
           return (
             <motion.div
               key={stat.label}
-              className="glass-card cyber-border p-5 rounded-2xl"
+              className="glass-card cyber-border p-5 rounded-2xl cursor-pointer hover:ring-1 hover:ring-primary/30 transition-all"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
+              onClick={() => onNavigate?.(stat.tab)}
             >
               <Icon className={`w-5 h-5 ${stat.color} mb-2`} />
               <p className="text-2xl font-serif text-foreground">{stat.value}</p>
