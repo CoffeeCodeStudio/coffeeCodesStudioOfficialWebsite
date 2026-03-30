@@ -196,7 +196,7 @@ export default function AdminDashboard() {
 
       <main className="md:ml-64 pt-28 md:pt-8 p-6 md:p-10">
         <motion.div key={activeTab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-          {activeTab === 'overview' && <AdminOverview />}
+          {activeTab === 'overview' && <AdminOverview onNavigate={(tab) => setActiveTab(tab as Tab)} />}
           {activeTab === 'onboarding' && <AdminOnboarding />}
           {activeTab === 'projects' && <AdminProjects />}
           {activeTab === 'requests' && <AdminClientRequests />}
