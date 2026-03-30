@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
-import { AlertTriangle, CheckCircle2, XCircle, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, XCircle, ShieldAlert, Download } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import jsPDF from 'jspdf';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -263,6 +265,49 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
   const allItems = CHECKLIST_CATEGORIES.flatMap(c => c.items);
   const doneCount = allItems.filter(i => checkedItems[i.key]).length;
 
+  const exportPDF = () => {
+    const doc = new jsPDF();
+    const margin = 20;
+    let y = margin;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const maxWidth = pageWidth - margin * 2;
+
+    const addText = (text: string, size: number, bold: boolean, color: [number, number, number] = [0, 0, 0]) => {
+      doc.setFontSize(size);
+      doc.setFont('helvetica', bold ? 'bold' : 'normal');
+      doc.setTextColor(...color);
+      const lines = doc.splitTextToSize(text, maxWidth);
+      const lineHeight = size * 0.5;
+      if (y + lines.length * lineHeight > doc.internal.pageSize.getHeight() - margin) {
+        doc.addPage();
+        y = margin;
+      }
+      doc.text(lines, margin, y);
+      y += lines.length * lineHeight + 2;
+    };
+
+    addText(`Lanseringschecklista – ${projectName || 'Projekt'}`, 16, true);
+    addText(`Exporterad: ${new Date().toLocaleDateString('sv-SE')}`, 10, false, [120, 120, 120]);
+    y += 5;
+
+    for (const category of CHECKLIST_CATEGORIES) {
+      addText(category.title, 13, true);
+      for (const item of category.items) {
+        const checked = checkedItems[item.key];
+        addText(`${checked ? '☑' : '☐'} ${item.label}`, 11, false);
+        if (checked && verifications[item.key]) {
+          for (const v of verifications[item.key]) {
+            addText(`   ${v.question}`, 9, true, [80, 80, 80]);
+            addText(`   ${v.answer}`, 9, false, [60, 60, 60]);
+          }
+        }
+      }
+      y += 4;
+    }
+
+    doc.save(`checklista-${(projectName || 'projekt').replace(/\s+/g, '-').toLowerCase()}.pdf`);
+  };
+
   return (
     <>
       <div
@@ -270,8 +315,14 @@ export function ProjectChecklist({ projectId, projectName }: Props) {
         style={{ fontFamily: 'Arial, Helvetica, sans-serif', lineHeight: 1.8 }}
       >
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-foreground">Lanseringschecklista</h3>
-          <span className="text-sm text-muted-foreground">{doneCount} / {allItems.length} klara</span>
+          <div className="flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-foreground">Lanseringschecklista</h3>
+            <span className="text-sm text-muted-foreground">{doneCount} / {allItems.length} klara</span>
+          </div>
+          <Button variant="outline" size="sm" onClick={exportPDF} className="gap-1.5">
+            <Download className="w-3.5 h-3.5" />
+            Exportera PDF
+          </Button>
         </div>
 
         {CHECKLIST_CATEGORIES.map(category => {
