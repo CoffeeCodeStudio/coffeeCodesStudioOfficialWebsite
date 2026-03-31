@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Image, Plus, Trash2, GripVertical, ExternalLink, EyeOff, ChevronDown, X, Upload, Loader2 } from 'lucide-react';
+import { Image, Plus, Trash2, GripVertical, ExternalLink, EyeOff, ChevronDown, X, Upload, Loader2, Eye } from 'lucide-react';
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
