@@ -25,13 +25,13 @@ export function AdminOnboarding() {
       return;
     }
 
-    console.log('create-client: invoking with session user', session.user.id);
+    
     const res = await supabase.functions.invoke('create-client', {
       body: form,
       headers: { Authorization: `Bearer ${session.access_token}` },
     });
 
-    console.log('create-client response:', res);
+    
     setLoading(false);
 
     const errorMsg = res.data?.error || res.error?.message;

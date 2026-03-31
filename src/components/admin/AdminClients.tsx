@@ -52,13 +52,13 @@ export function AdminClients() {
     setDeleting(userId);
     const { data: { session } } = await supabase.auth.getSession();
 
-    console.log('delete-client request body:', { user_id: userId });
+    
     const res = await supabase.functions.invoke('delete-client', {
       body: { user_id: userId },
       headers: { Authorization: `Bearer ${session?.access_token}` },
     });
 
-    console.log('delete-client response:', res);
+    
     setDeleting(null);
 
     const errorMsg = res.data?.error || res.error?.message;
