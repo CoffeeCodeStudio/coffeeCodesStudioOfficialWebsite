@@ -394,6 +394,21 @@ export function AdminPortfolio() {
                         <Textarea defaultValue={project.description} onBlur={e => { if (e.target.value !== project.description) updateField(project.id, 'description', e.target.value); }} className="bg-muted/50 border-border/50" rows={2} />
                       </div>
 
+
+                      {/* Live preview */}
+                      <div className="space-y-2 pt-2">
+                        <span className="text-[10px] text-muted-foreground uppercase flex items-center gap-1">
+                          <Eye className="w-3 h-3" /> Förhandsgranskning
+                        </span>
+                        <PortfolioCardPreview
+                          title={project.title}
+                          category={project.category}
+                          description={project.description}
+                          image_url={project.image_url}
+                          url={project.url}
+                        />
+                      </div>
+
                       {/* Controls */}
                       <div className="flex items-center justify-between pt-2">
                         <div className="flex items-center gap-4">
