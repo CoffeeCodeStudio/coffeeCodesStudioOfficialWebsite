@@ -64,6 +64,20 @@ export function AdminProjects() {
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [pendingChange, setPendingChange] = useState<PendingChange | null>(null);
+  const [showCreate, setShowCreate] = useState(false);
+  const [clients, setClients] = useState<{ id: string; email: string | null; full_name: string | null }[]>([]);
+  const [creating, setCreating] = useState(false);
+  const [newProject, setNewProject] = useState({
+    name: '',
+    client_user_id: '',
+    package: 'bas',
+    status: 'design',
+    price: '',
+    description: '',
+    monthly_quota: 3,
+    is_vip: false,
+    renewal_date: '',
+  });
   const { toast } = useToast();
 
   const fetchProjects = async () => {
@@ -92,7 +106,12 @@ export function AdminProjects() {
     setLoading(false);
   };
 
-  useEffect(() => { fetchProjects(); }, []);
+  const fetchClients = async () => {
+    const { data } = await supabase.from('profiles').select('id, email, full_name').order('email');
+    setClients(data || []);
+  };
+
+  useEffect(() => { fetchProjects(); fetchClients(); }, []);
 
   const updateProject = async (id: string, updates: Record<string, any>) => {
     const { data, error } = await supabase
