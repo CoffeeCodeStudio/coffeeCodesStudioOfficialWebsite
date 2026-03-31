@@ -58,7 +58,7 @@ export function AdminClients() {
       headers: { Authorization: `Bearer ${session?.access_token}` },
     });
 
-    console.log('delete-client response:', res);
+    
     setDeleting(null);
 
     const errorMsg = res.data?.error || res.error?.message;

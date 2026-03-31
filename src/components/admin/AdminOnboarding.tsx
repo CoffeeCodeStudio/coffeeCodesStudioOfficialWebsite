@@ -31,7 +31,7 @@ export function AdminOnboarding() {
       headers: { Authorization: `Bearer ${session.access_token}` },
     });
 
-    console.log('create-client response:', res);
+    
     setLoading(false);
 
     const errorMsg = res.data?.error || res.error?.message;
