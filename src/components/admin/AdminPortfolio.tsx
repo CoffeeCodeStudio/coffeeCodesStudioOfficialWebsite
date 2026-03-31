@@ -102,7 +102,7 @@ function DropZone({ projectId, currentImage, uploading, onUpload }: DropZoneProp
         </div>
       ) : currentImage ? (
         <div className="relative group">
-          <img src={currentImage} alt="Projektbild" className="w-full h-40 object-cover rounded-lg" />
+          <img src={currentImage} alt="Projektbild" className="w-full max-h-48 object-contain rounded-lg bg-muted" />
           <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex flex-col items-center justify-center gap-1">
             <Upload className="w-5 h-5 text-foreground" />
             <p className="text-xs text-foreground font-medium">Byt bild</p>
