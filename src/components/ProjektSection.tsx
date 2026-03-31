@@ -1,18 +1,36 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import djloboScreenshot from '@/assets/djlobo-screenshot.webp';
-import djloboScreenshotMobile from '@/assets/djlobo-screenshot-mobile.webp';
-import echo2000Screenshot from '@/assets/echo2000-screenshot.webp';
-import echo2000ScreenshotMobile from '@/assets/echo2000-screenshot-mobile.webp';
+import { supabase } from '@/integrations/supabase/client';
+
+interface PortfolioProject {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  url: string | null;
+  image_url: string | null;
+  sort_order: number;
+}
 
 export function ProjektSection() {
   const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [projects, setProjects] = useState<PortfolioProject[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from('portfolio_projects')
+      .select('id, title, category, description, url, image_url, sort_order')
+      .eq('is_visible', true)
+      .order('sort_order', { ascending: true })
+      .then(({ data }) => setProjects(data as PortfolioProject[] || []));
+  }, []);
+
+  if (projects.length === 0) return null;
 
   return (
     <section id="projekt" className="py-16 sm:py-24 relative" ref={ref}>
@@ -22,7 +40,6 @@ export function ProjektSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}>
-          
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif mb-4">
             <span className="gradient-text">{t.portfolio.headline}</span>
           </h2>
@@ -32,93 +49,54 @@ export function ProjektSection() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Project 1 - DJ Lobo */}
-          <motion.div
-            className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col"
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            whileHover={{ y: -5 }}>
-            
-            <div className="relative">
-              <img
-                src={djloboScreenshot}
-                srcSet={`${djloboScreenshotMobile} 400w, ${djloboScreenshot} 768w`}
-                sizes="(max-width: 768px) 400px, 768px"
-                alt="djloboproducciones.com - DJ Lobo Producciones webbplats med bokningssystem och live radio"
-                className="w-full h-48 sm:h-56 object-cover"
-                fetchPriority="high"
-                width="768"
-                height="561" />
-              
-            </div>
-            <div className="p-5 sm:p-6 flex flex-col flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
-                  {t.portfolio.project1.category}
-                </span>
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.id}
+              className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col"
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
+              whileHover={{ y: -5 }}>
+              {project.image_url && (
+                <div className="relative">
+                  <img
+                    src={project.image_url}
+                    alt={project.title}
+                    className="w-full h-48 sm:h-56 object-cover"
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    width="768"
+                    height="561"
+                  />
+                </div>
+              )}
+              <div className="p-5 sm:p-6 flex flex-col flex-1">
+                {project.category && (
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
+                      {project.category}
+                    </span>
+                  </div>
+                )}
+                <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
+                  {project.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
+                  {project.description}
+                </p>
+                {project.url && (
+                  <Button
+                    variant="outline"
+                    className="border-primary/30 text-primary hover:bg-primary/10 w-fit"
+                    onClick={() => window.open(project.url!, '_blank')}>
+                    {t.portfolio.viewDemo}
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                  </Button>
+                )}
               </div>
-              <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
-                {t.portfolio.project1.name}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
-                {t.portfolio.project1.description}
-              </p>
-              <Button
-                variant="outline"
-                className="border-primary/30 text-primary hover:bg-primary/10 w-fit"
-                onClick={() => window.open('https://djloboproducciones.com', '_blank')}>
-                
-                {t.portfolio.viewDemo}
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
-          </motion.div>
-
-          {/* Project 2 - Echo2000 */}
-          <motion.div
-            className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col"
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            whileHover={{ y: -5 }}>
-            
-            <div className="relative">
-              <img
-
-                srcSet={`${echo2000ScreenshotMobile} 400w, ${echo2000Screenshot} 768w`}
-                sizes="(max-width: 768px) 400px, 768px"
-                alt="Echo2000 - Nostalgisk svensk community inspirerad av LunarStorm och MSN Messenger"
-                className="w-full h-48 sm:h-56 object-cover"
-                loading="lazy"
-                width="768"
-                height="651" src="/lovable-uploads/90852ec3-a4a3-42e9-bf12-0a6af071d054.png" />
-              
-            </div>
-            <div className="p-5 sm:p-6 flex flex-col flex-1">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
-                  {t.portfolio.project2.category}
-                </span>
-              </div>
-              <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
-                {t.portfolio.project2.name}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
-                {t.portfolio.project2.description}
-              </p>
-              <Button
-                variant="outline"
-                className="border-primary/30 text-primary hover:bg-primary/10 w-fit"
-                onClick={() => window.open('https://echo2000.lovable.app/', '_blank')}>
-                
-                {t.portfolio.viewDemo}
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </section>);
-
+    </section>
+  );
 }
