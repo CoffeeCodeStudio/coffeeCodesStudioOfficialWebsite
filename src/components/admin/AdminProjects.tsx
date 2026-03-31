@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FolderKanban, Trash2, AlertCircle, Crown, ChevronDown } from 'lucide-react';
+import { FolderKanban, Trash2, AlertCircle, Crown, ChevronDown, Plus, X } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
