@@ -355,9 +355,16 @@ export function AdminPortfolio() {
           ))}
         </Reorder.Group>
       )}
+      {cropModal && (
+        <ImageCropModal
+          open={!!cropModal}
+          imageSrc={cropModal.src}
+          onClose={() => setCropModal(null)}
+          onCropComplete={handleCropComplete}
+        />
+      )}
     </div>
   );
-}
 
 // Sortable project card using Reorder.Item
 function SortableProjectCard({ project, isExpanded, onToggle, uploading, onImageUpload, onUpdateField, onDelete }: {
