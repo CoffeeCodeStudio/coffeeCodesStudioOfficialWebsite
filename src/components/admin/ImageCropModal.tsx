@@ -14,6 +14,13 @@ interface ImageCropModalProps {
   onCropComplete: (croppedFile: File) => void;
 }
 
+const ASPECT_OPTIONS = [
+  { label: '4:3', value: 4 / 3 },
+  { label: '16:9', value: 16 / 9 },
+  { label: '1:1', value: 1 },
+  { label: 'Fri', value: undefined },
+] as const;
+
 function centerAspectCrop(mediaWidth: number, mediaHeight: number, aspect: number): Crop {
   return centerCrop(
     makeAspectCrop({ unit: '%', width: 90 }, aspect, mediaWidth, mediaHeight),
@@ -43,18 +50,27 @@ async function getCroppedFile(image: HTMLImageElement, crop: PixelCrop): Promise
   });
 }
 
-const ASPECT = 4 / 3;
-
 export function ImageCropModal({ open, imageSrc, onClose, onCropComplete }: ImageCropModalProps) {
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
   const [saving, setSaving] = useState(false);
+  const [aspect, setAspect] = useState<number | undefined>(4 / 3);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const onImageLoad = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
     const { width, height } = e.currentTarget;
-    setCrop(centerAspectCrop(width, height, ASPECT));
-  }, []);
+    if (aspect) {
+      setCrop(centerAspectCrop(width, height, aspect));
+    }
+  }, [aspect]);
+
+  const handleAspectChange = (newAspect: number | undefined) => {
+    setAspect(newAspect);
+    if (newAspect && imgRef.current) {
+      const { width, height } = imgRef.current;
+      setCrop(centerAspectCrop(width, height, newAspect));
+    }
+  };
 
   const handleSave = async () => {
     if (!imgRef.current || !completedCrop) return;
@@ -75,12 +91,34 @@ export function ImageCropModal({ open, imageSrc, onClose, onCropComplete }: Imag
             <CropIcon className="w-4 h-4" /> Beskär bild
           </DialogTitle>
         </DialogHeader>
+
+        {/* Aspect ratio selector */}
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-muted-foreground uppercase">Format:</span>
+          <div className="flex gap-1">
+            {ASPECT_OPTIONS.map((opt) => (
+              <button
+                key={opt.label}
+                type="button"
+                onClick={() => handleAspectChange(opt.value)}
+                className={`px-3 py-1 text-xs rounded-md border transition-colors ${
+                  aspect === opt.value
+                    ? 'bg-primary text-primary-foreground border-primary'
+                    : 'bg-muted/50 text-muted-foreground border-border/50 hover:border-primary/50'
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="flex justify-center max-h-[60vh] overflow-auto">
           <ReactCrop
             crop={crop}
             onChange={(c) => setCrop(c)}
             onComplete={(c) => setCompletedCrop(c)}
-            aspect={ASPECT}
+            aspect={aspect}
           >
             <img
               ref={imgRef}
