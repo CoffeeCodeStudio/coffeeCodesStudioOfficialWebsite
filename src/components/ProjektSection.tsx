@@ -18,7 +18,7 @@ interface PortfolioProject {
 export function ProjektSection() {
   const { t } = useLanguage();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
 
   useEffect(() => {
