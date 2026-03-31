@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Image, Plus, Trash2, GripVertical, ExternalLink, Eye, EyeOff, ChevronDown, X } from 'lucide-react';
+import { Image, Plus, Trash2, GripVertical, ExternalLink, EyeOff, ChevronDown, X, Upload, Loader2 } from 'lucide-react';
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -33,6 +33,95 @@ const emptyProject = {
   is_visible: true,
 };
 
+function sanitizeFilename(name: string): string {
+  return name
+    .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
+    .replace(/Å/g, 'A').replace(/Ä/g, 'A').replace(/Ö/g, 'O')
+    .replace(/\s+/g, '_')
+    .replace(/[^a-zA-Z0-9_\-\.]/g, '');
+}
+
+interface DropZoneProps {
+  projectId: string;
+  currentImage: string | null;
+  uploading: boolean;
+  onUpload: (id: string, file: File) => void;
+}
+
+function DropZone({ projectId, currentImage, uploading, onUpload }: DropZoneProps) {
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith('image/')) {
+      onUpload(projectId, file);
+    }
+  }, [projectId, onUpload]);
+
+  return (
+    <div
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      onClick={() => !uploading && fileInputRef.current?.click()}
+      className={`relative rounded-xl border-2 border-dashed transition-all cursor-pointer ${
+        isDragging
+          ? 'border-primary bg-primary/10 scale-[1.01]'
+          : 'border-border/50 hover:border-primary/50 hover:bg-muted/30'
+      } ${currentImage ? 'p-2' : 'p-6'}`}
+    >
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={e => { const f = e.target.files?.[0]; if (f) onUpload(projectId, f); }}
+        disabled={uploading}
+      />
+      
+      {uploading ? (
+        <div className="flex flex-col items-center justify-center py-4 gap-2">
+          <Loader2 className="w-6 h-6 text-primary animate-spin" />
+          <p className="text-xs text-muted-foreground">Laddar upp...</p>
+        </div>
+      ) : currentImage ? (
+        <div className="relative group">
+          <img src={currentImage} alt="Projektbild" className="w-full h-40 object-cover rounded-lg" />
+          <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex flex-col items-center justify-center gap-1">
+            <Upload className="w-5 h-5 text-foreground" />
+            <p className="text-xs text-foreground font-medium">Byt bild</p>
+            <p className="text-[10px] text-muted-foreground">Dra & släpp eller klicka</p>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center">
+            <Upload className="w-5 h-5 text-muted-foreground" />
+          </div>
+          <p className="text-sm text-muted-foreground">Dra & släpp en bild här</p>
+          <p className="text-[10px] text-muted-foreground">eller klicka för att välja fil</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function AdminPortfolio() {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
@@ -41,6 +130,8 @@ export function AdminPortfolio() {
   const [newProject, setNewProject] = useState({ ...emptyProject });
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [uploading, setUploading] = useState<string | null>(null);
+  const [newImageFile, setNewImageFile] = useState<File | null>(null);
+  const [newImagePreview, setNewImagePreview] = useState<string | null>(null);
   const { toast } = useToast();
 
   const fetchProjects = async () => {
@@ -69,6 +160,38 @@ export function AdminPortfolio() {
     }
   };
 
+  const uploadImage = useCallback(async (id: string, file: File): Promise<string | null> => {
+    const ext = file.name.split('.').pop() || 'webp';
+    const safeName = sanitizeFilename(`${id}_${Date.now()}.${ext}`);
+    const path = `${safeName}`;
+    const { error: uploadError } = await supabase.storage
+      .from('portfolio-images')
+      .upload(path, file, { upsert: true });
+    if (uploadError) {
+      toast({ title: 'Uppladdningsfel', description: uploadError.message, variant: 'destructive' });
+      return null;
+    }
+    const { data: urlData } = supabase.storage.from('portfolio-images').getPublicUrl(path);
+    return urlData.publicUrl;
+  }, [toast]);
+
+  const handleImageUpload = useCallback(async (id: string, file: File) => {
+    setUploading(id);
+    const publicUrl = await uploadImage(id, file);
+    if (publicUrl) {
+      await updateField(id, 'image_url', publicUrl);
+      toast({ title: 'Bild uppladdad!' });
+    }
+    setUploading(null);
+  }, [uploadImage, toast]);
+
+  const handleNewImageDrop = useCallback((file: File) => {
+    setNewImageFile(file);
+    const reader = new FileReader();
+    reader.onload = e => setNewImagePreview(e.target?.result as string);
+    reader.readAsDataURL(file);
+  }, []);
+
   const createProject = async () => {
     if (!newProject.title.trim()) {
       toast({ title: 'Titel krävs', variant: 'destructive' });
@@ -76,12 +199,21 @@ export function AdminPortfolio() {
     }
     setCreating(true);
     const maxSort = projects.length > 0 ? Math.max(...projects.map(p => p.sort_order)) + 1 : 0;
+
+    // Upload image first if provided
+    let imageUrl: string | null = newProject.image_url.trim() || null;
+    if (newImageFile) {
+      const tempId = crypto.randomUUID();
+      const uploaded = await uploadImage(tempId, newImageFile);
+      if (uploaded) imageUrl = uploaded;
+    }
+
     const { error } = await supabase.from('portfolio_projects').insert({
       title: newProject.title.trim(),
       category: newProject.category.trim(),
       description: newProject.description.trim(),
       url: newProject.url.trim() || null,
-      image_url: newProject.image_url.trim() || null,
+      image_url: imageUrl,
       sort_order: maxSort,
       is_visible: newProject.is_visible,
     });
@@ -91,6 +223,8 @@ export function AdminPortfolio() {
     } else {
       toast({ title: 'Projekt tillagt!' });
       setNewProject({ ...emptyProject });
+      setNewImageFile(null);
+      setNewImagePreview(null);
       setShowCreate(false);
       fetchProjects();
     }
@@ -104,24 +238,6 @@ export function AdminPortfolio() {
       setProjects(prev => prev.filter(p => p.id !== id));
       toast({ title: 'Projekt borttaget' });
     }
-  };
-
-  const handleImageUpload = async (id: string, file: File) => {
-    setUploading(id);
-    const ext = file.name.split('.').pop();
-    const path = `portfolio/${id}.${ext}`;
-    const { error: uploadError } = await supabase.storage
-      .from('project-files')
-      .upload(path, file, { upsert: true });
-    if (uploadError) {
-      toast({ title: 'Uppladdningsfel', description: uploadError.message, variant: 'destructive' });
-      setUploading(null);
-      return;
-    }
-    const { data: urlData } = supabase.storage.from('project-files').getPublicUrl(path);
-    await updateField(id, 'image_url', urlData.publicUrl);
-    setUploading(null);
-    toast({ title: 'Bild uppladdad!' });
   };
 
   const moveProject = async (id: string, direction: 'up' | 'down') => {
@@ -157,6 +273,14 @@ export function AdminPortfolio() {
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
             <div className="glass-card cyber-border rounded-2xl p-5 space-y-4">
               <h3 className="text-lg font-serif text-foreground">Nytt portföljprojekt</h3>
+              
+              {/* Drop zone for new project */}
+              <NewProjectDropZone
+                preview={newImagePreview}
+                onDrop={handleNewImageDrop}
+                onClear={() => { setNewImageFile(null); setNewImagePreview(null); }}
+              />
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <span className="text-[10px] text-muted-foreground uppercase">Titel *</span>
@@ -171,8 +295,8 @@ export function AdminPortfolio() {
                   <Input value={newProject.url} onChange={e => setNewProject(p => ({ ...p, url: e.target.value }))} placeholder="https://..." className="bg-muted/50 border-border/50" />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[10px] text-muted-foreground uppercase">Bild-URL</span>
-                  <Input value={newProject.image_url} onChange={e => setNewProject(p => ({ ...p, image_url: e.target.value }))} placeholder="https://... eller /assets/..." className="bg-muted/50 border-border/50" />
+                  <span className="text-[10px] text-muted-foreground uppercase">Bild-URL (om ingen fil)</span>
+                  <Input value={newProject.image_url} onChange={e => setNewProject(p => ({ ...p, image_url: e.target.value }))} placeholder="https://..." className="bg-muted/50 border-border/50" disabled={!!newImageFile} />
                 </div>
               </div>
               <div className="space-y-1">
@@ -238,6 +362,14 @@ export function AdminPortfolio() {
                     className="overflow-hidden"
                   >
                     <div className="px-4 pb-4 space-y-4 border-t border-border/30 pt-4">
+                      {/* Drag & drop image zone */}
+                      <DropZone
+                        projectId={project.id}
+                        currentImage={project.image_url}
+                        uploading={uploading === project.id}
+                        onUpload={handleImageUpload}
+                      />
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-1">
                           <span className="text-[10px] text-muted-foreground uppercase">Titel</span>
@@ -260,19 +392,6 @@ export function AdminPortfolio() {
                       <div className="space-y-1">
                         <span className="text-[10px] text-muted-foreground uppercase">Beskrivning</span>
                         <Textarea defaultValue={project.description} onBlur={e => { if (e.target.value !== project.description) updateField(project.id, 'description', e.target.value); }} className="bg-muted/50 border-border/50" rows={2} />
-                      </div>
-
-                      {/* Image upload */}
-                      <div className="space-y-1">
-                        <span className="text-[10px] text-muted-foreground uppercase">Ladda upp bild</span>
-                        <Input
-                          type="file"
-                          accept="image/*"
-                          onChange={e => { const f = e.target.files?.[0]; if (f) handleImageUpload(project.id, f); }}
-                          className="bg-muted/50 border-border/50"
-                          disabled={uploading === project.id}
-                        />
-                        {uploading === project.id && <p className="text-xs text-muted-foreground">Laddar upp...</p>}
                       </div>
 
                       {/* Controls */}
@@ -326,6 +445,58 @@ export function AdminPortfolio() {
               </AnimatePresence>
             </motion.div>
           ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Drop zone for the "create new project" form
+function NewProjectDropZone({ preview, onDrop, onClear }: { preview: string | null; onDrop: (file: File) => void; onClear: () => void }) {
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => { e.preventDefault(); e.stopPropagation(); setIsDragging(true); }, []);
+  const handleDragLeave = useCallback((e: React.DragEvent) => { e.preventDefault(); e.stopPropagation(); setIsDragging(false); }, []);
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault(); e.stopPropagation(); setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith('image/')) onDrop(file);
+  }, [onDrop]);
+
+  return (
+    <div
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      onClick={() => fileInputRef.current?.click()}
+      className={`relative rounded-xl border-2 border-dashed transition-all cursor-pointer ${
+        isDragging ? 'border-primary bg-primary/10 scale-[1.01]' : 'border-border/50 hover:border-primary/50 hover:bg-muted/30'
+      } ${preview ? 'p-2' : 'p-6'}`}
+    >
+      <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) onDrop(f); }} />
+      {preview ? (
+        <div className="relative group">
+          <img src={preview} alt="Förhandsgranskning" className="w-full h-40 object-cover rounded-lg" />
+          <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex flex-col items-center justify-center gap-1">
+            <Upload className="w-5 h-5 text-foreground" />
+            <p className="text-xs text-foreground font-medium">Byt bild</p>
+          </div>
+          <button
+            type="button"
+            onClick={e => { e.stopPropagation(); onClear(); }}
+            className="absolute top-2 right-2 w-6 h-6 rounded-full bg-destructive/80 text-destructive-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <X className="w-3 h-3" />
+          </button>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center">
+            <Upload className="w-5 h-5 text-muted-foreground" />
+          </div>
+          <p className="text-sm text-muted-foreground">Dra & släpp en bild här</p>
+          <p className="text-[10px] text-muted-foreground">eller klicka för att välja fil</p>
         </div>
       )}
     </div>
