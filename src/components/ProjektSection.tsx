@@ -1,6 +1,6 @@
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
@@ -17,8 +17,6 @@ interface PortfolioProject {
 
 export function ProjektSection() {
   const { t } = useLanguage();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
 
   useEffect(() => {
@@ -33,12 +31,13 @@ export function ProjektSection() {
   if (projects.length === 0) return null;
 
   return (
-    <section id="projekt" className="py-16 sm:py-24 relative" ref={ref}>
+    <section id="projekt" className="py-16 sm:py-24 relative">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="text-center mb-12 sm:mb-16"
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}>
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif mb-4">
             <span className="gradient-text">{t.portfolio.headline}</span>
@@ -54,8 +53,9 @@ export function ProjektSection() {
               key={project.id}
               className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col"
               initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.15 }}
               whileHover={{ y: -5 }}>
               {project.image_url && (
                 <div className="relative">
