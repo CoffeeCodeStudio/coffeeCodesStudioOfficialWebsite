@@ -338,6 +338,154 @@ export function AdminPortfolio() {
   );
 }
 
+// Sortable project card using Reorder.Item
+function SortableProjectCard({ project, isExpanded, onToggle, uploading, onImageUpload, onUpdateField, onDelete }: {
+  project: PortfolioProject;
+  isExpanded: boolean;
+  onToggle: () => void;
+  uploading: boolean;
+  onImageUpload: (id: string, file: File) => void;
+  onUpdateField: (id: string, field: string, value: any) => void;
+  onDelete: (id: string) => void;
+}) {
+  const dragControls = useDragControls();
+
+  return (
+    <Reorder.Item
+      value={project}
+      dragListener={false}
+      dragControls={dragControls}
+      className="glass-card cyber-border rounded-2xl overflow-hidden"
+      whileDrag={{ scale: 1.02, boxShadow: '0 8px 30px rgba(0,0,0,0.3)' }}
+    >
+      <div className="flex items-center">
+        {/* Drag handle */}
+        <div
+          className="flex items-center justify-center w-10 shrink-0 cursor-grab active:cursor-grabbing self-stretch hover:bg-muted/30 transition-colors"
+          onPointerDown={e => dragControls.start(e)}
+        >
+          <GripVertical className="w-4 h-4 text-muted-foreground" />
+        </div>
+
+        {/* Header button */}
+        <button
+          type="button"
+          className="flex-1 flex items-center justify-between gap-3 p-4 text-left hover:bg-muted/30 transition-colors"
+          onClick={onToggle}
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            {project.image_url && (
+              <img src={project.image_url} alt={project.title} className="w-10 h-10 rounded-lg object-cover shrink-0" />
+            )}
+            <div className="min-w-0">
+              <h3 className="text-sm font-serif text-foreground truncate">{project.title}</h3>
+              <p className="text-[10px] text-muted-foreground">{project.category}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            {!project.is_visible && <EyeOff className="w-3 h-3 text-muted-foreground" />}
+            <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+          </div>
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 space-y-4 border-t border-border/30 pt-4">
+              <DropZone
+                projectId={project.id}
+                currentImage={project.image_url}
+                uploading={uploading}
+                onUpload={onImageUpload}
+              />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Titel</span>
+                  <Input defaultValue={project.title} onBlur={e => { if (e.target.value !== project.title) onUpdateField(project.id, 'title', e.target.value); }} className="bg-muted/50 border-border/50" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Kategori</span>
+                  <Input defaultValue={project.category} onBlur={e => { if (e.target.value !== project.category) onUpdateField(project.id, 'category', e.target.value); }} className="bg-muted/50 border-border/50" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">URL</span>
+                  <Input defaultValue={project.url || ''} onBlur={e => onUpdateField(project.id, 'url', e.target.value || null)} className="bg-muted/50 border-border/50" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Bild-URL</span>
+                  <Input defaultValue={project.image_url || ''} onBlur={e => onUpdateField(project.id, 'image_url', e.target.value || null)} className="bg-muted/50 border-border/50" />
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <span className="text-[10px] text-muted-foreground uppercase">Beskrivning</span>
+                <Textarea defaultValue={project.description} onBlur={e => { if (e.target.value !== project.description) onUpdateField(project.id, 'description', e.target.value); }} className="bg-muted/50 border-border/50" rows={2} />
+              </div>
+
+              {/* Live preview */}
+              <div className="space-y-2 pt-2">
+                <span className="text-[10px] text-muted-foreground uppercase flex items-center gap-1">
+                  <Eye className="w-3 h-3" /> Förhandsgranskning
+                </span>
+                <PortfolioCardPreview
+                  title={project.title}
+                  category={project.category}
+                  description={project.description}
+                  image_url={project.image_url}
+                  url={project.url}
+                />
+              </div>
+
+              {/* Controls */}
+              <div className="flex items-center justify-between pt-2">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <Switch checked={project.is_visible} onCheckedChange={v => onUpdateField(project.id, 'is_visible', v)} />
+                    <span className="text-xs text-muted-foreground">{project.is_visible ? 'Synlig' : 'Dold'}</span>
+                  </div>
+                  {project.url && (
+                    <Button variant="ghost" size="sm" className="text-xs" onClick={() => window.open(project.url!, '_blank')}>
+                      <ExternalLink className="w-3 h-3 mr-1" /> Visa
+                    </Button>
+                  )}
+                </div>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-destructive">
+                      <Trash2 className="w-4 h-4 mr-1" /> Radera
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Radera portföljprojekt?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        "{project.title}" tas bort permanent från portföljen.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Avbryt</AlertDialogCancel>
+                      <AlertDialogAction onClick={() => onDelete(project.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                        Radera
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </Reorder.Item>
+  );
+}
+
 // Drop zone for the "create new project" form
 function NewProjectDropZone({ preview, onDrop, onClear }: { preview: string | null; onDrop: (file: File) => void; onClear: () => void }) {
   const [isDragging, setIsDragging] = useState(false);
