@@ -547,7 +547,7 @@ function PortfolioCardPreview({ title, category, description, image_url, url }: 
       <div className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col pointer-events-none select-none">
         {image_url && (
           <div className="relative">
-            <img src={image_url} alt={title} className="w-full h-48 object-cover" />
+            <img src={image_url} alt={title} className="w-full max-h-48 object-contain bg-muted" />
           </div>
         )}
         <div className="p-5 flex flex-col flex-1">
