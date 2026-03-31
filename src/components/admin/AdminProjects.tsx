@@ -211,13 +211,129 @@ export function AdminProjects() {
     }
   };
 
+  const createProject = async () => {
+    if (!newProject.name.trim() || !newProject.client_user_id) {
+      toast({ title: 'Fyll i obligatoriska fält', description: 'Namn och kund krävs.', variant: 'destructive' });
+      return;
+    }
+    setCreating(true);
+    const pkg = packages.find(p => p.value === newProject.package);
+    const { error } = await supabase.from('projects').insert({
+      name: newProject.name.trim(),
+      client_user_id: newProject.client_user_id,
+      package: newProject.package,
+      status: newProject.status,
+      price: newProject.price ? parseFloat(newProject.price) : null,
+      description: newProject.description.trim() || null,
+      monthly_quota: newProject.monthly_quota || pkg?.quota || 3,
+      is_vip: newProject.is_vip,
+      renewal_date: newProject.renewal_date || null,
+    });
+    setCreating(false);
+    if (error) {
+      toast({ title: 'Fel', description: error.message, variant: 'destructive' });
+    } else {
+      toast({ title: 'Projekt skapat!' });
+      setNewProject({ name: '', client_user_id: '', package: 'bas', status: 'design', price: '', description: '', monthly_quota: 3, is_vip: false, renewal_date: '' });
+      setShowCreate(false);
+      fetchProjects();
+    }
+  };
+
   if (loading) {
     return <div className="flex justify-center py-20"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>;
   }
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-serif gradient-text">Alla projekt</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-serif gradient-text">Alla projekt</h2>
+        <Button onClick={() => setShowCreate(!showCreate)} variant={showCreate ? 'outline' : 'default'} size="sm">
+          {showCreate ? <><X className="w-4 h-4 mr-1" /> Stäng</> : <><Plus className="w-4 h-4 mr-1" /> Nytt projekt</>}
+        </Button>
+      </div>
+
+      {/* Create project form */}
+      <AnimatePresence>
+        {showCreate && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="glass-card cyber-border rounded-2xl p-5 space-y-4">
+              <h3 className="text-lg font-serif text-foreground">Skapa nytt projekt</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Projektnamn *</span>
+                  <Input value={newProject.name} onChange={e => setNewProject(p => ({ ...p, name: e.target.value }))} placeholder="T.ex. Webbplats Acme AB" className="bg-muted/50 border-border/50" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Kund *</span>
+                  <Select value={newProject.client_user_id} onValueChange={v => setNewProject(p => ({ ...p, client_user_id: v }))}>
+                    <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue placeholder="Välj kund..." /></SelectTrigger>
+                    <SelectContent>
+                      {clients.map(c => (
+                        <SelectItem key={c.id} value={c.id}>{c.full_name || c.email || c.id}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Status</span>
+                  <Select value={newProject.status} onValueChange={v => setNewProject(p => ({ ...p, status: v }))}>
+                    <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      {PROJECT_STATUSES.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Paket</span>
+                  <Select value={newProject.package} onValueChange={v => {
+                    const pkg = packages.find(p => p.value === v);
+                    setNewProject(p => ({ ...p, package: v, monthly_quota: pkg?.quota || p.monthly_quota }));
+                  }}>
+                    <SelectTrigger className="bg-muted/50 border-border/50"><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      {packages.map(p => <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Pris (SEK)</span>
+                  <Input type="number" value={newProject.price} onChange={e => setNewProject(p => ({ ...p, price: e.target.value }))} placeholder="0" className="bg-muted/50 border-border/50" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Kvot/månad</span>
+                  <Input type="number" value={newProject.monthly_quota} onChange={e => setNewProject(p => ({ ...p, monthly_quota: parseInt(e.target.value) || 3 }))} className="bg-muted/50 border-border/50" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">Förnyelsedatum</span>
+                  <Input type="date" value={newProject.renewal_date} onChange={e => setNewProject(p => ({ ...p, renewal_date: e.target.value }))} className="bg-muted/50 border-border/50" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] text-muted-foreground uppercase">VIP</span>
+                  <div className="flex items-center gap-2 h-10">
+                    <Switch checked={newProject.is_vip} onCheckedChange={v => setNewProject(p => ({ ...p, is_vip: v }))} />
+                    <Crown className={`w-4 h-4 ${newProject.is_vip ? 'text-amber-400' : 'text-muted-foreground/30'}`} />
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <span className="text-[10px] text-muted-foreground uppercase">Beskrivning</span>
+                <Textarea value={newProject.description} onChange={e => setNewProject(p => ({ ...p, description: e.target.value }))} placeholder="Kort projektbeskrivning..." className="bg-muted/50 border-border/50" rows={2} />
+              </div>
+              <div className="flex justify-end">
+                <Button onClick={createProject} disabled={creating}>
+                  {creating ? 'Skapar...' : 'Skapa projekt'}
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {projects.length === 0 ? (
         <div className="glass-card p-12 rounded-2xl text-center">
