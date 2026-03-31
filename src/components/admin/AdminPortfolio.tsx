@@ -319,143 +319,20 @@ export function AdminPortfolio() {
           <p className="text-muted-foreground">Inga portföljprojekt ännu.</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <Reorder.Group axis="y" values={projects} onReorder={handleReorder} className="space-y-3">
           {projects.map((project, i) => (
-            <motion.div
+            <SortableProjectCard
               key={project.id}
-              className="glass-card cyber-border rounded-2xl overflow-hidden"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-            >
-              <button
-                type="button"
-                className="w-full flex items-center justify-between gap-3 p-4 text-left hover:bg-muted/30 transition-colors"
-                onClick={() => setExpandedId(prev => prev === project.id ? null : project.id)}
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  {project.image_url && (
-                    <img src={project.image_url} alt={project.title} className="w-10 h-10 rounded-lg object-cover shrink-0" />
-                  )}
-                  <div className="min-w-0">
-                    <h3 className="text-sm font-serif text-foreground truncate">{project.title}</h3>
-                    <p className="text-[10px] text-muted-foreground">{project.category}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  {!project.is_visible && <EyeOff className="w-3 h-3 text-muted-foreground" />}
-                  <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${expandedId === project.id ? 'rotate-180' : ''}`} />
-                </div>
-              </button>
-
-              <AnimatePresence>
-                {expandedId === project.id && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-4 pb-4 space-y-4 border-t border-border/30 pt-4">
-                      {/* Drag & drop image zone */}
-                      <DropZone
-                        projectId={project.id}
-                        currentImage={project.image_url}
-                        uploading={uploading === project.id}
-                        onUpload={handleImageUpload}
-                      />
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <span className="text-[10px] text-muted-foreground uppercase">Titel</span>
-                          <Input defaultValue={project.title} onBlur={e => { if (e.target.value !== project.title) updateField(project.id, 'title', e.target.value); }} className="bg-muted/50 border-border/50" />
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[10px] text-muted-foreground uppercase">Kategori</span>
-                          <Input defaultValue={project.category} onBlur={e => { if (e.target.value !== project.category) updateField(project.id, 'category', e.target.value); }} className="bg-muted/50 border-border/50" />
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[10px] text-muted-foreground uppercase">URL</span>
-                          <Input defaultValue={project.url || ''} onBlur={e => updateField(project.id, 'url', e.target.value || null)} className="bg-muted/50 border-border/50" />
-                        </div>
-                        <div className="space-y-1">
-                          <span className="text-[10px] text-muted-foreground uppercase">Bild-URL</span>
-                          <Input defaultValue={project.image_url || ''} onBlur={e => updateField(project.id, 'image_url', e.target.value || null)} className="bg-muted/50 border-border/50" />
-                        </div>
-                      </div>
-
-                      <div className="space-y-1">
-                        <span className="text-[10px] text-muted-foreground uppercase">Beskrivning</span>
-                        <Textarea defaultValue={project.description} onBlur={e => { if (e.target.value !== project.description) updateField(project.id, 'description', e.target.value); }} className="bg-muted/50 border-border/50" rows={2} />
-                      </div>
-
-
-                      {/* Live preview */}
-                      <div className="space-y-2 pt-2">
-                        <span className="text-[10px] text-muted-foreground uppercase flex items-center gap-1">
-                          <Eye className="w-3 h-3" /> Förhandsgranskning
-                        </span>
-                        <PortfolioCardPreview
-                          title={project.title}
-                          category={project.category}
-                          description={project.description}
-                          image_url={project.image_url}
-                          url={project.url}
-                        />
-                      </div>
-
-                      {/* Controls */}
-                      <div className="flex items-center justify-between pt-2">
-                        <div className="flex items-center gap-4">
-                          <div className="flex items-center gap-2">
-                            <Switch checked={project.is_visible} onCheckedChange={v => updateField(project.id, 'is_visible', v)} />
-                            <span className="text-xs text-muted-foreground">{project.is_visible ? 'Synlig' : 'Dold'}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => moveProject(project.id, 'up')} disabled={i === 0}>
-                              <GripVertical className="w-3 h-3" />
-                              <span className="text-[9px]">↑</span>
-                            </Button>
-                            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => moveProject(project.id, 'down')} disabled={i === projects.length - 1}>
-                              <GripVertical className="w-3 h-3" />
-                              <span className="text-[9px]">↓</span>
-                            </Button>
-                          </div>
-                          {project.url && (
-                            <Button variant="ghost" size="sm" className="text-xs" onClick={() => window.open(project.url!, '_blank')}>
-                              <ExternalLink className="w-3 h-3 mr-1" /> Visa
-                            </Button>
-                          )}
-                        </div>
-                        <AlertDialog>
-                          <AlertDialogTrigger asChild>
-                            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-destructive">
-                              <Trash2 className="w-4 h-4 mr-1" /> Radera
-                            </Button>
-                          </AlertDialogTrigger>
-                          <AlertDialogContent>
-                            <AlertDialogHeader>
-                              <AlertDialogTitle>Radera portföljprojekt?</AlertDialogTitle>
-                              <AlertDialogDescription>
-                                "{project.title}" tas bort permanent från portföljen.
-                              </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                              <AlertDialogCancel>Avbryt</AlertDialogCancel>
-                              <AlertDialogAction onClick={() => deleteProject(project.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                                Radera
-                              </AlertDialogAction>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialog>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              project={project}
+              isExpanded={expandedId === project.id}
+              onToggle={() => setExpandedId(prev => prev === project.id ? null : project.id)}
+              uploading={uploading === project.id}
+              onImageUpload={handleImageUpload}
+              onUpdateField={updateField}
+              onDelete={deleteProject}
+            />
           ))}
-        </div>
+        </Reorder.Group>
       )}
     </div>
   );
