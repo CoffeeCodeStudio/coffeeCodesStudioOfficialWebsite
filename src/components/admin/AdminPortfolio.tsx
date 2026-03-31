@@ -11,6 +11,7 @@ import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { ImageCropModal } from './ImageCropModal';
 
 interface PortfolioProject {
   id: string;
@@ -132,6 +133,7 @@ export function AdminPortfolio() {
   const [uploading, setUploading] = useState<string | null>(null);
   const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const [newImagePreview, setNewImagePreview] = useState<string | null>(null);
+  const [cropModal, setCropModal] = useState<{ src: string; targetId: string | null; isNew: boolean } | null>(null);
   const { toast } = useToast();
 
   const fetchProjects = async () => {
@@ -176,19 +178,38 @@ export function AdminPortfolio() {
   }, [toast]);
 
   const handleImageUpload = useCallback(async (id: string, file: File) => {
-    setUploading(id);
-    const publicUrl = await uploadImage(id, file);
-    if (publicUrl) {
-      await updateField(id, 'image_url', publicUrl);
-      toast({ title: 'Bild uppladdad!' });
+    // Show crop modal instead of uploading directly
+    const reader = new FileReader();
+    reader.onload = e => setCropModal({ src: e.target?.result as string, targetId: id, isNew: false });
+    reader.readAsDataURL(file);
+  }, []);
+
+  const handleCropComplete = useCallback(async (croppedFile: File) => {
+    const info = cropModal;
+    setCropModal(null);
+    if (!info) return;
+
+    if (info.isNew) {
+      // For new project form
+      setNewImageFile(croppedFile);
+      const reader = new FileReader();
+      reader.onload = e => setNewImagePreview(e.target?.result as string);
+      reader.readAsDataURL(croppedFile);
+    } else if (info.targetId) {
+      // For existing project
+      setUploading(info.targetId);
+      const publicUrl = await uploadImage(info.targetId, croppedFile);
+      if (publicUrl) {
+        await updateField(info.targetId, 'image_url', publicUrl);
+        toast({ title: 'Bild uppladdad!' });
+      }
+      setUploading(null);
     }
-    setUploading(null);
-  }, [uploadImage, toast]);
+  }, [cropModal, uploadImage, toast]);
 
   const handleNewImageDrop = useCallback((file: File) => {
-    setNewImageFile(file);
     const reader = new FileReader();
-    reader.onload = e => setNewImagePreview(e.target?.result as string);
+    reader.onload = e => setCropModal({ src: e.target?.result as string, targetId: null, isNew: true });
     reader.readAsDataURL(file);
   }, []);
 
@@ -333,6 +354,14 @@ export function AdminPortfolio() {
             />
           ))}
         </Reorder.Group>
+      )}
+      {cropModal && (
+        <ImageCropModal
+          open={!!cropModal}
+          imageSrc={cropModal.src}
+          onClose={() => setCropModal(null)}
+          onCropComplete={handleCropComplete}
+        />
       )}
     </div>
   );
