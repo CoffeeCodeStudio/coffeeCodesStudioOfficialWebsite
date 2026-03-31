@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Image, Plus, Trash2, GripVertical, ExternalLink, EyeOff, ChevronDown, X, Upload, Loader2 } from 'lucide-react';
+import { Image, Plus, Trash2, GripVertical, ExternalLink, EyeOff, ChevronDown, X, Upload, Loader2, Eye } from 'lucide-react';
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
@@ -394,6 +394,21 @@ export function AdminPortfolio() {
                         <Textarea defaultValue={project.description} onBlur={e => { if (e.target.value !== project.description) updateField(project.id, 'description', e.target.value); }} className="bg-muted/50 border-border/50" rows={2} />
                       </div>
 
+
+                      {/* Live preview */}
+                      <div className="space-y-2 pt-2">
+                        <span className="text-[10px] text-muted-foreground uppercase flex items-center gap-1">
+                          <Eye className="w-3 h-3" /> Förhandsgranskning
+                        </span>
+                        <PortfolioCardPreview
+                          title={project.title}
+                          category={project.category}
+                          description={project.description}
+                          image_url={project.image_url}
+                          url={project.url}
+                        />
+                      </div>
+
                       {/* Controls */}
                       <div className="flex items-center justify-between pt-2">
                         <div className="flex items-center gap-4">
@@ -499,6 +514,44 @@ function NewProjectDropZone({ preview, onDrop, onClear }: { preview: string | nu
           <p className="text-[10px] text-muted-foreground">eller klicka för att välja fil</p>
         </div>
       )}
+    </div>
+  );
+}
+
+// Live preview mimicking the landing page card
+function PortfolioCardPreview({ title, category, description, image_url, url }: {
+  title: string; category: string; description: string; image_url: string | null; url: string | null;
+}) {
+  return (
+    <div className="max-w-sm mx-auto">
+      <div className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col pointer-events-none select-none">
+        {image_url && (
+          <div className="relative">
+            <img src={image_url} alt={title} className="w-full h-48 object-cover" />
+          </div>
+        )}
+        <div className="p-5 flex flex-col flex-1">
+          {category && (
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
+                {category}
+              </span>
+            </div>
+          )}
+          <h3 className="text-lg font-serif text-foreground mb-2">
+            {title || 'Projektnamn'}
+          </h3>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
+            {description || 'Beskrivning...'}
+          </p>
+          {url && (
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-primary/30 text-primary text-sm w-fit">
+              Besök sidan
+              <ExternalLink className="w-4 h-4" />
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
