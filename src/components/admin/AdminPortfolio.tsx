@@ -240,18 +240,13 @@ export function AdminPortfolio() {
     }
   };
 
-  const moveProject = async (id: string, direction: 'up' | 'down') => {
-    const idx = projects.findIndex(p => p.id === id);
-    const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-    if (swapIdx < 0 || swapIdx >= projects.length) return;
-
-    const a = projects[idx];
-    const b = projects[swapIdx];
-    await Promise.all([
-      supabase.from('portfolio_projects').update({ sort_order: b.sort_order }).eq('id', a.id),
-      supabase.from('portfolio_projects').update({ sort_order: a.sort_order }).eq('id', b.id),
-    ]);
-    fetchProjects();
+  const handleReorder = async (reordered: PortfolioProject[]) => {
+    setProjects(reordered);
+    // Persist new sort_order values
+    const updates = reordered.map((p, i) =>
+      supabase.from('portfolio_projects').update({ sort_order: i }).eq('id', p.id)
+    );
+    await Promise.all(updates);
   };
 
   if (loading) {
