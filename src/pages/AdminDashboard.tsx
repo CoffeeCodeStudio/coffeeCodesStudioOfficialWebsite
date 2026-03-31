@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '@/hooks/useAdmin';
 import { motion } from 'framer-motion';
-import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home, BarChart3, MessageCircle, ClipboardCheck, UserCog } from 'lucide-react';
+import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home, BarChart3, MessageCircle, ClipboardCheck, UserCog, Palette } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
@@ -17,9 +17,10 @@ import { AdminClientRequests } from '@/components/admin/AdminClientRequests';
 import { AdminMessages } from '@/components/admin/AdminMessages';
 import { AdminWorkflow } from '@/components/admin/AdminWorkflow';
 import { AdminClients } from '@/components/admin/AdminClients';
+import { AdminPortfolio } from '@/components/admin/AdminPortfolio';
 import { NotificationBell } from '@/components/admin/NotificationBell';
 
-type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'workflow' | 'files' | 'logs' | 'todos' | 'notes' | 'clients';
+type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'workflow' | 'files' | 'logs' | 'todos' | 'notes' | 'clients' | 'portfolio';
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'overview', label: 'Översikt', icon: BarChart3 },
@@ -33,6 +34,7 @@ const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'logs', label: 'Statuslogg', icon: MessageSquarePlus },
   { id: 'notes', label: 'Anteckningar', icon: StickyNote },
   { id: 'clients', label: 'Konton', icon: UserCog },
+  { id: 'portfolio', label: 'Portfölj', icon: Palette },
 ];
 
 export default function AdminDashboard() {
@@ -207,6 +209,7 @@ export default function AdminDashboard() {
           {activeTab === 'todos' && <AdminTodos />}
           {activeTab === 'notes' && <AdminNotes />}
           {activeTab === 'clients' && <AdminClients />}
+          {activeTab === 'portfolio' && <AdminPortfolio />}
         </motion.div>
       </main>
     </div>
