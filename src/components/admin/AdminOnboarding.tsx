@@ -25,7 +25,7 @@ export function AdminOnboarding() {
       return;
     }
 
-    console.log('create-client: invoking with session user', session.user.id);
+    
     const res = await supabase.functions.invoke('create-client', {
       body: form,
       headers: { Authorization: `Bearer ${session.access_token}` },
