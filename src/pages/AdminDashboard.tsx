@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '@/hooks/useAdmin';
 import { motion } from 'framer-motion';
-import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home, BarChart3, MessageCircle, ClipboardCheck, UserCog } from 'lucide-react';
+import { Shield, LogOut, Users, FolderKanban, FileUp, MessageSquarePlus, ListTodo, StickyNote, MessageCirclePlus, Home, BarChart3, MessageCircle, ClipboardCheck, UserCog, Palette } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
