@@ -133,6 +133,7 @@ export function AdminPortfolio() {
   const [uploading, setUploading] = useState<string | null>(null);
   const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const [newImagePreview, setNewImagePreview] = useState<string | null>(null);
+  const [cropModal, setCropModal] = useState<{ src: string; targetId: string | null; isNew: boolean } | null>(null);
   const { toast } = useToast();
 
   const fetchProjects = async () => {
