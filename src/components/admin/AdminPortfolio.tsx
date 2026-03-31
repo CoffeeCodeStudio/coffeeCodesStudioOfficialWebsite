@@ -365,6 +365,7 @@ export function AdminPortfolio() {
       )}
     </div>
   );
+}
 
 // Sortable project card using Reorder.Item
 function SortableProjectCard({ project, isExpanded, onToggle, uploading, onImageUpload, onUpdateField, onDelete }: {
