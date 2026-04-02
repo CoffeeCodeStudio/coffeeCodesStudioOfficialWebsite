@@ -9,7 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose,
 } from '@/components/ui/dialog';
-import { FileSignature, Send, CheckCircle2, Clock, FileX } from 'lucide-react';
+import { FileSignature, Send, CheckCircle2, Clock, FileX, Download } from 'lucide-react';
 
 interface Agreement {
   id: string;
@@ -22,6 +22,7 @@ interface Agreement {
   sent_at: string | null;
   signed_at: string | null;
   signed_by_name: string | null;
+  pdf_url: string | null;
 }
 
 interface AdminAgreementProps {
@@ -222,7 +223,7 @@ export function AdminAgreement({ projectId, projectName }: AdminAgreementProps) 
             </div>
 
             {agreement?.status === 'signed' && (
-              <div className="glass-card p-4 rounded-xl border border-accent/20 bg-accent/5 space-y-1">
+              <div className="glass-card p-4 rounded-xl border border-accent/20 bg-accent/5 space-y-2">
                 <p className="text-xs text-accent font-medium flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   Signerat av {agreement.signed_by_name}
@@ -230,6 +231,31 @@ export function AdminAgreement({ projectId, projectName }: AdminAgreementProps) 
                 <p className="text-[10px] text-muted-foreground">
                   {agreement.signed_at ? new Date(agreement.signed_at).toLocaleString('sv-SE') : ''}
                 </p>
+                {agreement.pdf_url && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="gap-1.5 text-xs mt-1"
+                    onClick={async () => {
+                      const { data, error } = await supabase.storage
+                        .from('project-files')
+                        .download(agreement.pdf_url!);
+                      if (error || !data) {
+                        toast({ title: 'Kunde inte ladda ner PDF', variant: 'destructive' });
+                        return;
+                      }
+                      const url = URL.createObjectURL(data);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = `avtal_${projectName}.pdf`;
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    }}
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    Ladda ner avtal (PDF)
+                  </Button>
+                )}
               </div>
             )}
           </div>

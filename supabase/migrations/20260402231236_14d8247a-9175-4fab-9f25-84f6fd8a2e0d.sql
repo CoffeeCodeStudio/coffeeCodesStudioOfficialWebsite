@@ -1,0 +1,1 @@
+ALTER TABLE public.project_agreements ADD COLUMN pdf_url text;

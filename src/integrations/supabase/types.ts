@@ -292,6 +292,7 @@ export type Database = {
           estimated_delivery: string
           id: string
           payment_terms: string
+          pdf_url: string | null
           project_id: string
           scope_description: string
           sent_at: string | null
@@ -306,6 +307,7 @@ export type Database = {
           estimated_delivery: string
           id?: string
           payment_terms?: string
+          pdf_url?: string | null
           project_id: string
           scope_description: string
           sent_at?: string | null
@@ -320,6 +322,7 @@ export type Database = {
           estimated_delivery?: string
           id?: string
           payment_terms?: string
+          pdf_url?: string | null
           project_id?: string
           scope_description?: string
           sent_at?: string | null
