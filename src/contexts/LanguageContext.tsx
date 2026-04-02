@@ -534,13 +534,14 @@ const translations: Record<Language, Translations> = {
     },
     pricing: {
       headline: 'Choose your plan',
-      intro: 'Flexible monthly packages tailored to your needs. No lock-in.',
+      intro: 'Everything you need for a professional web presence.',
+      maintenanceHeadline: 'Maintenance packages (for existing Coffee Code Studio clients)',
       popular: 'Most Popular',
       perMonth: 'SEK/mo',
       cta: 'Get started',
       comingSoon: 'Coming soon',
       paymentTitle: 'Payment Methods',
-      tooltipText: 'This package applies to web projects built by Coffee Code Studio.',
+      tooltipText: 'Hosting, support and maintenance for sites built by CCS.',
       disclaimerText: 'Maintenance packages primarily apply to projects built by Coffee Code Studio. Have an existing site? Contact us and we\'ll see what we can do.',
       paymentNote: 'Payment via invoice. More payment options coming soon.',
       packages: {
@@ -566,9 +567,9 @@ const translations: Record<Language, Translations> = {
       oneTime: {
         title: 'One-time Project',
         price: '9,900',
-        note: 'Starting from 9,900 SEK — complex projects are quoted individually after consultation.',
+        note: 'Delivery: 10–14 days. Starting from 9,900 SEK — complex projects quoted individually.',
         description: 'Custom web applications built from scratch, with a fixed price and clear delivery.',
-        features: ['Responsive design', 'SEO-optimized', 'Client portal included', 'Follow-up support available'],
+        features: ['Up to 7 pages', 'Mobile-friendly design', 'Contact form + email', 'Booking system (Calendly)', 'GDPR compliance', 'SEO optimization', '30 days support'],
         cta: 'Book consultation',
       },
       paymentMethods: {
