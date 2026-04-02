@@ -127,6 +127,7 @@ Deno.serve(async (req) => {
 
     const payload: NotificationPayload = await req.json();
     const { type } = payload;
+    console.log("[send-notification] Incoming payload:", JSON.stringify({ type, project_id: payload.project_id, project_name: payload.project_name }));
 
     if (!type) {
       return new Response(JSON.stringify({ error: "type required" }), {
