@@ -37,7 +37,7 @@ export default function LegalPage({
         </article>
 
         <p className="text-xs text-muted-foreground/60 mt-16 pt-6 border-t border-white/5">
-          Senast uppdaterad: mars 2026
+          Senast uppdaterad: april 2026
         </p>
       </div>
     </div>
