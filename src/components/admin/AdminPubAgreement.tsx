@@ -34,7 +34,21 @@ export function AdminPubAgreement({ projectId }: AdminPubAgreementProps) {
     setLoading(false);
   };
 
-  useEffect(() => { fetchAgreement(); }, [projectId]);
+  useEffect(() => {
+    fetchAgreement();
+
+    const channel = supabase
+      .channel(`pub-agreement-${projectId}`)
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'project_pub_agreements',
+        filter: `project_id=eq.${projectId}`,
+      }, () => fetchAgreement())
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [projectId]);
 
   const handleSend = async () => {
     setSending(true);
