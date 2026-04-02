@@ -360,23 +360,27 @@ const translations: Record<Language, Translations> = {
       },
     },
     faq: {
-      headline: 'Vanliga frågor om webbutveckling',
+      headline: 'Vanliga frågor',
       items: [
         {
-          q: 'Vad innebär AI-driven webbproduktion?',
-          a: 'AI-driven webbproduktion betyder att vi använder artificiell intelligens som ett kraftfullt verktyg i utvecklingsprocessen. Det gör att vi kan leverera skräddarsydda webbapplikationer snabbare och med högre kvalitet – utan att kompromissa med design eller funktionalitet.',
+          q: 'Vad ingår i priset?',
+          a: 'Responsiv design (mobil + desktop), SEO-optimering, GDPR-godkänd cookiebanner, kontaktformulär med email-integration, och 30 dagars support efter lansering.',
         },
         {
-          q: 'Varför ska jag välja webbutveckling i Göteborg?',
-          a: 'Med en lokal partner i Göteborg får du personlig kontakt, snabb kommunikation och en utvecklare som förstår den svenska marknaden. Vi på Coffee Code Studio kombinerar lokal närvaro med modern AI-teknik för att leverera konkurrenskraftiga lösningar.',
+          q: 'Kan jag redigera sajten själv efteråt?',
+          a: 'Ja, alla sidor levereras med Lovable editor-access så du kan göra ändringar själv. Alternativt ingår uppdateringar i underhållspaketet.',
         },
         {
-          q: 'Hur lång tid tar det att bygga en skräddarsydd webbapplikation?',
-          a: 'Tack vare vår AI-drivna utvecklingsprocess kan vi leverera en MVP (Minimum Viable Product) på så lite som 2–4 veckor. Tidsramen beror på projektets komplexitet, men vi arbetar alltid agilt för att komma igång snabbt.',
+          q: 'Vad händer om jag inte gillar designen?',
+          a: 'Vi gör obegränsade revideringar tills du är nöjd. Betalning sker först när du godkänt slutresultatet.',
         },
         {
-          q: 'Vad kostar det att utveckla en webbapplikation?',
-          a: 'Priset varierar beroende på projektets omfattning. Vi erbjuder transparenta paketpriser som inkluderar design, utveckling och löpande underhåll. Kontakta oss för en kostnadsfri konsultation så tar vi fram ett förslag anpassat efter dina behov.',
+          q: 'Ingår domän och hosting?',
+          a: 'Hosting via Netlify/Vercel ingår i priset. Domän köper du själv (ca 100 kr/år), jag hjälper till med kopplingen.',
+        },
+        {
+          q: 'Hur lång tid tar det egentligen?',
+          a: '7-10 dagar från godkänd briefing till färdig sajt. Komplexa projekt med e-handel kan ta 2-3 veckor.',
         },
       ],
     },
