@@ -16,6 +16,7 @@ interface Agreement {
   status: string;
   sent_at: string | null;
   signed_at: string | null;
+  pdf_url: string | null;
 }
 
 interface ClientAgreementProps {
