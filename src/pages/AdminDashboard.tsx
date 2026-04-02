@@ -19,8 +19,9 @@ import { AdminWorkflow } from '@/components/admin/AdminWorkflow';
 import { AdminClients } from '@/components/admin/AdminClients';
 import { AdminPortfolio } from '@/components/admin/AdminPortfolio';
 import { NotificationBell } from '@/components/admin/NotificationBell';
+import { AdminNotificationSettings } from '@/components/admin/AdminNotificationSettings';
 
-type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'workflow' | 'files' | 'logs' | 'todos' | 'notes' | 'clients' | 'portfolio';
+type Tab = 'overview' | 'onboarding' | 'projects' | 'requests' | 'messages' | 'workflow' | 'files' | 'logs' | 'todos' | 'notes' | 'clients' | 'portfolio' | 'notifications';
 
 const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'overview', label: 'Översikt', icon: BarChart3 },
