@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { NotificationSettings } from '@/components/portal/NotificationSettings';
 import type { User as SupaUser } from '@supabase/supabase-js';
 
 interface ClientSettingsProps {
