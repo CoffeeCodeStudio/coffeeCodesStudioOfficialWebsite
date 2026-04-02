@@ -144,13 +144,33 @@ serve(async (req) => {
       const page = pdfDoc.addPage([595, 842]); // A4
       let y = 780;
 
-      // Title
-      page.drawText('PROJEKTAVTAL', { x: 50, y, size: 22, font: boldFont, color: rgb(0.1, 0.1, 0.1) });
-      y -= 28;
-      page.drawText('Coffee Code Studio', { x: 50, y, size: 12, font: boldFont, color: rgb(0.25, 0.25, 0.25) });
-      y -= 16;
-      page.drawText('Göteborg, Sverige | hej@coffeecodestudio.se', { x: 50, y, size: 9, font, color: rgb(0.4, 0.4, 0.4) });
-      y -= 24;
+      // Embed logo
+      try {
+        const logoRes = await fetch(`${supabaseUrl}/storage/v1/object/public/portfolio-images/logo-pdf.png`);
+        if (logoRes.ok) {
+          const logoBytes = new Uint8Array(await logoRes.arrayBuffer());
+          const logoImage = await pdfDoc.embedPng(logoBytes);
+          const logoDim = logoImage.scale(0.1); // ~50px
+          page.drawImage(logoImage, { x: 50, y: y - logoDim.height + 20, width: logoDim.width, height: logoDim.height });
+          // Title next to logo
+          page.drawText('PROJEKTAVTAL', { x: 50 + logoDim.width + 12, y, size: 22, font: boldFont, color: rgb(0.1, 0.1, 0.1) });
+          y -= 28;
+          page.drawText('Coffee Code Studio', { x: 50 + logoDim.width + 12, y, size: 12, font: boldFont, color: rgb(0.25, 0.25, 0.25) });
+          y -= 16;
+          page.drawText('Göteborg, Sverige | hej@coffeecodestudio.se', { x: 50 + logoDim.width + 12, y, size: 9, font, color: rgb(0.4, 0.4, 0.4) });
+          y -= 24;
+        } else {
+          throw new Error('Logo fetch failed');
+        }
+      } catch {
+        // Fallback: no logo
+        page.drawText('PROJEKTAVTAL', { x: 50, y, size: 22, font: boldFont, color: rgb(0.1, 0.1, 0.1) });
+        y -= 28;
+        page.drawText('Coffee Code Studio', { x: 50, y, size: 12, font: boldFont, color: rgb(0.25, 0.25, 0.25) });
+        y -= 16;
+        page.drawText('Göteborg, Sverige | hej@coffeecodestudio.se', { x: 50, y, size: 9, font, color: rgb(0.4, 0.4, 0.4) });
+        y -= 24;
+      }
 
       drawLine(page, y);
       y -= 20;
