@@ -36,6 +36,7 @@ const tabs: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'notes', label: 'Anteckningar', icon: StickyNote },
   { id: 'clients', label: 'Konton', icon: UserCog },
   { id: 'portfolio', label: 'Portfölj', icon: Palette },
+  { id: 'notifications', label: 'Notifieringar', icon: BellRing },
 ];
 
 export default function AdminDashboard() {
