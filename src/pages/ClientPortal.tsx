@@ -336,15 +336,9 @@ export default function ClientPortal() {
                 <h2 className="text-lg font-serif text-foreground mb-2">
                   Välkommen, {getDisplayName()}!
                 </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   Nästa steg: Fyll i projektfrågorna så kan vi börja bygga din sajt.
                 </p>
-                <Button asChild>
-                  <Link to="/projektfragor">
-                    Fyll i projektfrågor
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                </Button>
               </div>
             ) : (
               <div className="glass-card cyber-border p-6 rounded-2xl mb-6">
