@@ -43,6 +43,7 @@ export default function AdminDashboard() {
   const { user, isAdmin, loading } = useAdmin();
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const [pendingRequests, setPendingRequests] = useState(0);
+  const [unreadMessages, setUnreadMessages] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,6 +79,47 @@ export default function AdminDashboard() {
 
     return () => { supabase.removeChannel(channel); };
   }, [isAdmin]);
+
+  // Unread client messages for admin
+  useEffect(() => {
+    if (!isAdmin || !user) return;
+
+    const storageKey = `admin_lastSeenMessages_${user.id}`;
+    const lastSeen = localStorage.getItem(storageKey);
+
+    const fetchUnread = async () => {
+      let query = supabase
+        .from('project_messages')
+        .select('id', { count: 'exact', head: true })
+        .eq('is_admin', false);
+      if (lastSeen) query = query.gt('created_at', lastSeen);
+      const { count } = await query;
+      setUnreadMessages(count || 0);
+    };
+
+    fetchUnread();
+
+    const channel = supabase
+      .channel('admin-unread-messages')
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'project_messages',
+        filter: 'is_admin=eq.false',
+      }, () => fetchUnread())
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [isAdmin, user]);
+
+  // Mark messages as read when viewing messages tab
+  useEffect(() => {
+    if (activeTab === 'messages' && user) {
+      const now = new Date().toISOString();
+      localStorage.setItem(`admin_lastSeenMessages_${user.id}`, now);
+      setUnreadMessages(0);
+    }
+  }, [activeTab, user]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
