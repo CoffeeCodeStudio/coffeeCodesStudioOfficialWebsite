@@ -29,9 +29,9 @@ function IndexContent() {
         <Navbar />
         <main id="main-content">
           <HeroSection />
+          <TestimonialsSection />
           <TjansterSection />
           <ProjektSection />
-          <TestimonialsSection />
           <PricingSection />
           <AboutSection />
           <ContactSection />
