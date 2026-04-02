@@ -212,6 +212,7 @@ export default function AdminDashboard() {
           {activeTab === 'notes' && <AdminNotes />}
           {activeTab === 'clients' && <AdminClients />}
           {activeTab === 'portfolio' && <AdminPortfolio />}
+          {activeTab === 'notifications' && user && <AdminNotificationSettings user={user} />}
         </motion.div>
       </main>
     </div>
