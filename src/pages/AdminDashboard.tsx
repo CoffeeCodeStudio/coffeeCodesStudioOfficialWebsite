@@ -222,7 +222,8 @@ export default function AdminDashboard() {
           {tabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
-            const showBadge = tab.id === 'requests' && pendingRequests > 0;
+            const showBadge = (tab.id === 'requests' && pendingRequests > 0) || (tab.id === 'messages' && unreadMessages > 0);
+            const badgeCount = tab.id === 'requests' ? pendingRequests : tab.id === 'messages' ? unreadMessages : 0;
             return (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)}
                 className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
@@ -232,7 +233,7 @@ export default function AdminDashboard() {
                 {tab.label}
                 {showBadge && (
                   <span className="absolute -top-1 -right-1 h-4 min-w-4 px-1 rounded-full bg-destructive text-destructive-foreground text-[9px] flex items-center justify-center">
-                    {pendingRequests > 9 ? '9+' : pendingRequests}
+                    {badgeCount > 9 ? '9+' : badgeCount}
                   </span>
                 )}
               </button>
