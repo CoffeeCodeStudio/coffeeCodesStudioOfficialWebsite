@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
-import { FileSignature, CheckCircle2, AlertCircle } from 'lucide-react';
+import { FileSignature, CheckCircle2, AlertCircle, Download } from 'lucide-react';
 
 interface Agreement {
   id: string;
