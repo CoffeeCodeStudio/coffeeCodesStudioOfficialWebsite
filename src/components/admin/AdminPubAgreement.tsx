@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { ShieldCheck, Send, CheckCircle2, Clock, FileX } from 'lucide-react';
+import { ShieldCheck, Send, CheckCircle2, Clock, FileX, Download } from 'lucide-react';
 
 interface PubAgreement {
   id: string;
@@ -12,6 +12,7 @@ interface PubAgreement {
   sent_at: string | null;
   signed_at: string | null;
   signed_ip: string | null;
+  pdf_url: string | null;
 }
 
 interface AdminPubAgreementProps {
@@ -91,6 +92,23 @@ export function AdminPubAgreement({ projectId }: AdminPubAgreementProps) {
     setSending(false);
   };
 
+  const handleDownloadPdf = async () => {
+    if (!agreement?.pdf_url) return;
+    const { data, error } = await supabase.storage
+      .from('project-files')
+      .download(agreement.pdf_url);
+    if (error || !data) {
+      toast({ title: 'Fel', description: 'Kunde inte ladda ner PDF.', variant: 'destructive' });
+      return;
+    }
+    const url = URL.createObjectURL(data);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `pub_avtal_${agreement.id}.pdf`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   if (loading) return null;
 
   const statusBadge = () => {
@@ -122,9 +140,22 @@ export function AdminPubAgreement({ projectId }: AdminPubAgreementProps) {
         </Button>
       )}
       {agreement?.status === 'signed' && (
-        <span className="text-[10px] text-muted-foreground">
-          {agreement.signed_at ? new Date(agreement.signed_at).toLocaleString('sv-SE') : ''}
-        </span>
+        <>
+          <span className="text-[10px] text-muted-foreground">
+            {agreement.signed_at ? new Date(agreement.signed_at).toLocaleString('sv-SE') : ''}
+          </span>
+          {agreement.pdf_url && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5 text-xs border-border/50"
+              onClick={handleDownloadPdf}
+            >
+              <Download className="w-3.5 h-3.5" />
+              PDF
+            </Button>
+          )}
+        </>
       )}
     </div>
   );

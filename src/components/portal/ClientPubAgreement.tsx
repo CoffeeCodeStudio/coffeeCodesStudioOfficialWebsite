@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { motion } from 'framer-motion';
-import { ShieldCheck, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, AlertCircle, Download } from 'lucide-react';
 
 interface PubAgreement {
   id: string;
@@ -12,6 +12,7 @@ interface PubAgreement {
   status: string;
   sent_at: string | null;
   signed_at: string | null;
+  pdf_url: string | null;
 }
 
 interface ClientPubAgreementProps {
@@ -55,10 +56,33 @@ export function ClientPubAgreement({ projectId, projectName }: ClientPubAgreemen
         variant: 'destructive',
       });
     } else {
-      setAgreement(prev => prev ? { ...prev, status: 'signed', signed_at: new Date().toISOString() } : null);
+      // Re-fetch to get pdf_url
+      const { data: updated } = await supabase
+        .from('project_pub_agreements' as any)
+        .select('*')
+        .eq('id', agreement.id)
+        .single();
+      if (updated) setAgreement(updated as any as PubAgreement);
       toast({ title: 'PUB-avtal signerat!', description: 'Tack för att du godkände avtalet.' });
     }
     setSigning(false);
+  };
+
+  const handleDownloadPdf = async () => {
+    if (!agreement?.pdf_url) return;
+    const { data, error } = await supabase.storage
+      .from('project-files')
+      .download(agreement.pdf_url);
+    if (error || !data) {
+      toast({ title: 'Fel', description: 'Kunde inte ladda ner PDF.', variant: 'destructive' });
+      return;
+    }
+    const url = URL.createObjectURL(data);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `pub_avtal_${agreement.id}.pdf`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   if (loading) return null;
@@ -78,6 +102,17 @@ export function ClientPubAgreement({ projectId, projectName }: ClientPubAgreemen
         <p className="text-xs text-muted-foreground">
           Du godkände personuppgiftsbiträdesavtalet {agreement.signed_at ? new Date(agreement.signed_at).toLocaleDateString('sv-SE') : ''}.
         </p>
+        {agreement.pdf_url && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-3 gap-1.5 text-xs"
+            onClick={handleDownloadPdf}
+          >
+            <Download className="w-3.5 h-3.5" />
+            Ladda ner PUB-avtal (PDF)
+          </Button>
+        )}
       </motion.div>
     );
   }
