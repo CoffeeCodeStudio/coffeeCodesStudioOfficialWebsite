@@ -135,6 +135,29 @@ Deno.serve(async (req) => {
       });
     }
 
+    // Send notification to admins
+    try {
+      const notifyRes = await fetch(
+        `${Deno.env.get("SUPABASE_URL")}/functions/v1/send-notification`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+          },
+          body: JSON.stringify({
+            type: "email_new_request",
+            project_id,
+            project_name: project.name || project_id,
+            preview: message.trim().substring(0, 200),
+          }),
+        }
+      );
+      if (!notifyRes.ok) console.error("Notification failed:", await notifyRes.text());
+    } catch (e) {
+      console.error("Notification error:", e);
+    }
+
     return new Response(JSON.stringify({ data: inserted }), {
       status: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
