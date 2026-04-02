@@ -67,7 +67,18 @@ export function ProjectChat({ projectId, isAdmin, currentUserId }: ProjectChatPr
       message: newMessage.trim(),
       is_admin: isAdmin,
     } as any);
-    if (!error) setNewMessage('');
+    if (!error) {
+      // Fire-and-forget notification
+      supabase.functions.invoke('send-notification', {
+        body: {
+          type: 'email_new_message',
+          project_id: projectId,
+          is_admin_sender: isAdmin,
+          preview: newMessage.trim().substring(0, 200),
+        },
+      }).catch(() => {});
+      setNewMessage('');
+    }
     setSending(false);
   };
 

@@ -67,7 +67,7 @@ Deno.serve(async (req) => {
     // Verify user owns this project
     const { data: project, error: projectError } = await serviceClient
       .from("projects")
-      .select("id, monthly_quota, client_user_id")
+      .select("id, monthly_quota, client_user_id, name")
       .eq("id", project_id)
       .single();
 
@@ -133,6 +133,29 @@ Deno.serve(async (req) => {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
+    }
+
+    // Send notification to admins
+    try {
+      const notifyRes = await fetch(
+        `${Deno.env.get("SUPABASE_URL")}/functions/v1/send-notification`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+          },
+          body: JSON.stringify({
+            type: "email_new_request",
+            project_id,
+            project_name: project.name || project_id,
+            preview: message.trim().substring(0, 200),
+          }),
+        }
+      );
+      if (!notifyRes.ok) console.error("Notification failed:", await notifyRes.text());
+    } catch (e) {
+      console.error("Notification error:", e);
     }
 
     return new Response(JSON.stringify({ data: inserted }), {

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { NotificationSettings } from '@/components/portal/NotificationSettings';
 import type { User as SupaUser } from '@supabase/supabase-js';
 
 interface ClientSettingsProps {
@@ -182,8 +183,13 @@ export function ClientSettings({ user, profile, onProfileUpdate }: ClientSetting
         </div>
       </motion.div>
 
+      {/* Notification Preferences */}
+      <motion.div className={sectionClass} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }}>
+        <NotificationSettings user={user} />
+      </motion.div>
+
       {/* Danger Zone */}
-      <motion.div className="border border-destructive/30 p-6 rounded-2xl space-y-4" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
+      <motion.div className="border border-destructive/30 p-6 rounded-2xl space-y-4" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.17 }}>
         <div className="flex items-center gap-2 text-destructive">
           <AlertTriangle className="w-4 h-4" />
           <h3 className="text-sm font-medium">Farozon</h3>
