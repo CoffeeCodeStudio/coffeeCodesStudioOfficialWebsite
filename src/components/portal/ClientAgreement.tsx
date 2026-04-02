@@ -69,8 +69,19 @@ export function ClientAgreement({ projectId, projectName }: ClientAgreementProps
         variant: 'destructive',
       });
     } else {
-      setAgreement(prev => prev ? { ...prev, status: 'signed', signed_at: new Date().toISOString() } : null);
       toast({ title: 'Avtal signerat!', description: 'Tack för att du godkände avtalet.' });
+      // Refetch to get pdf_url (generated async server-side)
+      const refetch = async () => {
+        const { data: updated } = await supabase
+          .from('project_agreements')
+          .select('*')
+          .eq('id', agreement.id)
+          .maybeSingle();
+        if (updated) setAgreement(updated as Agreement);
+      };
+      // Try immediately, then again after a delay for PDF generation
+      await refetch();
+      setTimeout(refetch, 3000);
     }
     setSigning(false);
   };
