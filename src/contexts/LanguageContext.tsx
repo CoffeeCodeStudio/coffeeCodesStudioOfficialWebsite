@@ -131,6 +131,7 @@ interface Translations {
   pricing: {
     headline: string;
     intro: string;
+    maintenanceHeadline: string;
     popular: string;
     perMonth: string;
     cta: string;
