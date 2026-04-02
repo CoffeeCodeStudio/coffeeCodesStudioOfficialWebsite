@@ -22,6 +22,7 @@ interface Agreement {
   sent_at: string | null;
   signed_at: string | null;
   signed_by_name: string | null;
+  pdf_url: string | null;
 }
 
 interface AdminAgreementProps {
