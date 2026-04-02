@@ -581,20 +581,24 @@ const translations: Record<Language, Translations> = {
       headline: 'Frequently Asked Questions',
       items: [
         {
-          q: 'What does AI-driven web production mean?',
-          a: 'AI-driven web production means we use artificial intelligence as a powerful tool in the development process. This allows us to deliver custom web applications faster and with higher quality — without compromising on design or functionality.',
+          q: 'What\'s included in the price?',
+          a: 'Responsive design (mobile + desktop), SEO optimization, GDPR-compliant cookie banner, contact form with email integration, and 30 days of support after launch.',
         },
         {
-          q: 'Why should I choose web development in Gothenburg?',
-          a: 'With a local partner in Gothenburg, you get personal contact, fast communication, and a developer who understands the Swedish market. We at Coffee Code Studio combine local presence with modern AI technology to deliver competitive solutions.',
+          q: 'Can I edit the site myself afterwards?',
+          a: 'Yes, all sites are delivered with Lovable editor access so you can make changes yourself. Alternatively, updates are included in the maintenance package.',
         },
         {
-          q: 'How long does it take to build a custom web application?',
-          a: 'Thanks to our AI-driven development process, we can deliver an MVP (Minimum Viable Product) in as little as 2–4 weeks. The timeline depends on project complexity, but we always work agile to get started quickly.',
+          q: 'What if I don\'t like the design?',
+          a: 'We do unlimited revisions until you\'re satisfied. Payment is only due once you\'ve approved the final result.',
         },
         {
-          q: 'How much does it cost to develop a web application?',
-          a: 'The price varies depending on the scope of the project. We offer transparent package pricing that includes design, development, and ongoing maintenance. Contact us for a free consultation and we\'ll put together a proposal tailored to your needs.',
+          q: 'Is domain and hosting included?',
+          a: 'Hosting via Netlify/Vercel is included in the price. You purchase the domain yourself (about 100 SEK/year), and I help with the setup.',
+        },
+        {
+          q: 'How long does it really take?',
+          a: '7-10 days from approved briefing to finished site. Complex projects with e-commerce can take 2-3 weeks.',
         },
       ],
     },
