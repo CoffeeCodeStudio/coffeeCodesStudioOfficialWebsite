@@ -173,7 +173,7 @@ export function ClientFileUpload() {
           <Upload className="w-5 h-5 text-primary" />
           <h3 className="font-serif text-foreground text-sm">Ladda upp material</h3>
         </div>
-        <p className="text-xs text-muted-foreground">Ladda upp logotyper, bilder eller annat material till ditt projekt.</p>
+        <p className="text-xs text-muted-foreground">Ladda upp logotyper, bilder eller annat material till ditt projekt. Max 10 MB per fil. Tillåtna format: bilder, PDF, Office-dokument, text, CSV, ZIP.</p>
 
         <div className="flex flex-col sm:flex-row gap-3">
           {projects.length > 1 && (
