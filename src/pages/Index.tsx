@@ -17,8 +17,8 @@ function IndexContent() {
   return (
     <div key={language}>
       <SEOHead
-        title="Coffee Code Studio | Skräddarsydda Webbapplikationer"
-        description="Vi bygger blixtsnabba hemsidor och webbapplikationer för startups och småföretag i Göteborg — från idé till lansering på en vecka."
+        title="Professionell hemsida på 7 dagar från 4 900 kr | Coffee Code Studio"
+        description="Få en responsiv, SEO-optimerad hemsida på 7 dagar från 4 900 kr. Webbutveckling i Göteborg med AI-driven process, GDPR-anpassning och 30 dagars support."
         canonical="https://coffeecodestudio.se/"
         ogImage="https://lovable.dev/opengraph-image-p98pqg.png"
       />
