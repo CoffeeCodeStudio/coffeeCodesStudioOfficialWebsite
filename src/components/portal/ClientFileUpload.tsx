@@ -73,9 +73,32 @@ export function ClientFileUpload() {
     return (base || 'file') + ext;
   };
 
+  const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+  const ALLOWED_TYPES = [
+    'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp',
+    'application/pdf',
+    'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'text/plain', 'text/csv',
+    'application/zip', 'application/x-zip-compressed',
+  ];
+
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !selectedProject) return;
+
+    if (file.size > MAX_FILE_SIZE) {
+      toast({ title: 'Filen är för stor', description: 'Max filstorlek är 10 MB.', variant: 'destructive' });
+      if (fileRef.current) fileRef.current.value = '';
+      return;
+    }
+
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      toast({ title: 'Otillåten filtyp', description: 'Tillåtna format: bilder, PDF, Office-dokument, text, CSV och ZIP.', variant: 'destructive' });
+      if (fileRef.current) fileRef.current.value = '';
+      return;
+    }
 
     setUploading(true);
     const { data: { user } } = await supabase.auth.getUser();
@@ -150,7 +173,7 @@ export function ClientFileUpload() {
           <Upload className="w-5 h-5 text-primary" />
           <h3 className="font-serif text-foreground text-sm">Ladda upp material</h3>
         </div>
-        <p className="text-xs text-muted-foreground">Ladda upp logotyper, bilder eller annat material till ditt projekt.</p>
+        <p className="text-xs text-muted-foreground">Ladda upp logotyper, bilder eller annat material till ditt projekt. Max 10 MB per fil. Tillåtna format: bilder, PDF, Office-dokument, text, CSV, ZIP.</p>
 
         <div className="flex flex-col sm:flex-row gap-3">
           {projects.length > 1 && (
