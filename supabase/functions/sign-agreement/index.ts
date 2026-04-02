@@ -152,7 +152,7 @@ serve(async (req) => {
       page.drawText('Göteborg, Sverige | hej@coffeecodestudio.se', { x: 50, y, size: 9, font, color: rgb(0.4, 0.4, 0.4) });
       y -= 24;
 
-      drawLine(page, y, font);
+      drawLine(page, y);
       y -= 20;
 
       // Supplier
@@ -172,7 +172,7 @@ serve(async (req) => {
       ], y, font, boldFont, 9);
       y -= 6;
 
-      drawLine(page, y, font);
+      drawLine(page, y);
       y -= 20;
 
       // Project
@@ -200,7 +200,7 @@ serve(async (req) => {
       page.drawText(`Uppskattad leverans: ${agreement.estimated_delivery}`, { x: 50, y, size: 9, font, color: rgb(0.15, 0.15, 0.15) });
       y -= 18;
 
-      drawLine(page, y, font);
+      drawLine(page, y);
       y -= 20;
 
       // Economy
@@ -213,7 +213,7 @@ serve(async (req) => {
       ], y, font, boldFont, 9);
       y -= 6;
 
-      drawLine(page, y, font);
+      drawLine(page, y);
       y -= 20;
 
       // Terms
@@ -227,7 +227,7 @@ serve(async (req) => {
       ], y, font, boldFont, 9);
       y -= 6;
 
-      drawLine(page, y, font);
+      drawLine(page, y);
       y -= 20;
 
       // Digital signature
@@ -243,7 +243,7 @@ serve(async (req) => {
       ], y, font, boldFont, 9);
       y -= 6;
 
-      drawLine(page, y, font);
+      drawLine(page, y);
       y -= 16;
 
       page.drawText(`© ${currentYear} Coffee Code Studio`, { x: 50, y, size: 8, font, color: rgb(0.5, 0.5, 0.5) });
