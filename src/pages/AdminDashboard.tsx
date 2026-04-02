@@ -161,7 +161,8 @@ export default function AdminDashboard() {
           {tabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
-            const showBadge = tab.id === 'requests' && pendingRequests > 0;
+            const showBadge = (tab.id === 'requests' && pendingRequests > 0) || (tab.id === 'messages' && unreadMessages > 0);
+            const badgeCount = tab.id === 'requests' ? pendingRequests : tab.id === 'messages' ? unreadMessages : 0;
             return (
               <button
                 key={tab.id}
@@ -178,7 +179,7 @@ export default function AdminDashboard() {
                 </span>
                 {showBadge && (
                   <Badge variant="destructive" className="h-5 min-w-5 px-1.5 text-[10px]">
-                    {pendingRequests > 9 ? '9+' : pendingRequests}
+                    {badgeCount > 9 ? '9+' : badgeCount}
                   </Badge>
                 )}
               </button>
