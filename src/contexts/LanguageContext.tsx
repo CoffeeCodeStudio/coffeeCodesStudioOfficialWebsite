@@ -178,9 +178,9 @@ const translations: Record<Language, Translations> = {
       portal: 'Kundportal',
     },
     hero: {
-      headline: 'Din webbsajt på en vecka. På riktigt.',
+      headline: 'Professionell hemsida på 7 dagar — från 4,900 kr',
       subheadline: 'Snabbare leverans, högre kvalitet. Vi bygger skräddarsydda webbappar med AI-driven utveckling — från idé till lansering.',
-      cta: 'Boka en Digital Kaffe',
+      cta: 'Boka gratis konsultation',
       promo: 'Nu tar vi emot nya kunder — boka ett kostnadsfritt samtal idag',
       planning: 'Planering',
       solution: 'Lösning',
@@ -392,9 +392,9 @@ const translations: Record<Language, Translations> = {
       portal: 'Client Portal',
     },
     hero: {
-      headline: 'Web Development with AI Precision.',
+      headline: 'Professional website in 7 days — from 4,900 SEK',
       subheadline: 'Faster delivery, higher quality. We build custom web apps with AI-driven development — from idea to launch.',
-      cta: 'Book a Digital Coffee',
+      cta: 'Book free consultation',
       promo: 'We\'re now accepting new clients — book a free consultation today',
       planning: 'Planning',
       solution: 'Solution',
