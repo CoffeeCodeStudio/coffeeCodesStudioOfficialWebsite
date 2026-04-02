@@ -370,7 +370,14 @@ export default function ClientPortal() {
           )}
           {activeTab === 'requests' && <ClientRequests />}
           {activeTab === 'messages' && <ClientMessages />}
-          {activeTab === 'ai' && projectId && <AIAssistant projectId={projectId} projectStatus={projectStatus} />}
+          {activeTab === 'ai' && (
+            projectId
+              ? <AIAssistant projectId={projectId} projectStatus={projectStatus} />
+              : <div className="glass-card p-12 rounded-2xl text-center">
+                  <Sparkles className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+                  <p className="text-muted-foreground">AI-assistenten är tillgänglig när ditt projekt har startats.</p>
+                </div>
+          )}
           {activeTab === 'log' && <StatusLog />}
           {activeTab === 'settings' && <ClientSettings user={user} profile={profile} onProfileUpdate={setProfile} />}
         </motion.div>
