@@ -43,6 +43,7 @@ export default function AdminDashboard() {
   const { user, isAdmin, loading } = useAdmin();
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const [pendingRequests, setPendingRequests] = useState(0);
+  const [unreadMessages, setUnreadMessages] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,6 +79,47 @@ export default function AdminDashboard() {
 
     return () => { supabase.removeChannel(channel); };
   }, [isAdmin]);
+
+  // Unread client messages for admin
+  useEffect(() => {
+    if (!isAdmin || !user) return;
+
+    const storageKey = `admin_lastSeenMessages_${user.id}`;
+    const lastSeen = localStorage.getItem(storageKey);
+
+    const fetchUnread = async () => {
+      let query = supabase
+        .from('project_messages')
+        .select('id', { count: 'exact', head: true })
+        .eq('is_admin', false);
+      if (lastSeen) query = query.gt('created_at', lastSeen);
+      const { count } = await query;
+      setUnreadMessages(count || 0);
+    };
+
+    fetchUnread();
+
+    const channel = supabase
+      .channel('admin-unread-messages')
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'project_messages',
+        filter: 'is_admin=eq.false',
+      }, () => fetchUnread())
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [isAdmin, user]);
+
+  // Mark messages as read when viewing messages tab
+  useEffect(() => {
+    if (activeTab === 'messages' && user) {
+      const now = new Date().toISOString();
+      localStorage.setItem(`admin_lastSeenMessages_${user.id}`, now);
+      setUnreadMessages(0);
+    }
+  }, [activeTab, user]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -119,7 +161,8 @@ export default function AdminDashboard() {
           {tabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
-            const showBadge = tab.id === 'requests' && pendingRequests > 0;
+            const showBadge = (tab.id === 'requests' && pendingRequests > 0) || (tab.id === 'messages' && unreadMessages > 0);
+            const badgeCount = tab.id === 'requests' ? pendingRequests : tab.id === 'messages' ? unreadMessages : 0;
             return (
               <button
                 key={tab.id}
@@ -136,7 +179,7 @@ export default function AdminDashboard() {
                 </span>
                 {showBadge && (
                   <Badge variant="destructive" className="h-5 min-w-5 px-1.5 text-[10px]">
-                    {pendingRequests > 9 ? '9+' : pendingRequests}
+                    {badgeCount > 9 ? '9+' : badgeCount}
                   </Badge>
                 )}
               </button>
@@ -179,7 +222,8 @@ export default function AdminDashboard() {
           {tabs.map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
-            const showBadge = tab.id === 'requests' && pendingRequests > 0;
+            const showBadge = (tab.id === 'requests' && pendingRequests > 0) || (tab.id === 'messages' && unreadMessages > 0);
+            const badgeCount = tab.id === 'requests' ? pendingRequests : tab.id === 'messages' ? unreadMessages : 0;
             return (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)}
                 className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-all ${
@@ -189,7 +233,7 @@ export default function AdminDashboard() {
                 {tab.label}
                 {showBadge && (
                   <span className="absolute -top-1 -right-1 h-4 min-w-4 px-1 rounded-full bg-destructive text-destructive-foreground text-[9px] flex items-center justify-center">
-                    {pendingRequests > 9 ? '9+' : pendingRequests}
+                    {badgeCount > 9 ? '9+' : badgeCount}
                   </span>
                 )}
               </button>

@@ -203,18 +203,6 @@ export function ClientRequests() {
       const errorMsg = fnData?.error || 'Något gick fel.';
       toast({ title: 'Fel', description: errorMsg, variant: 'destructive' });
     } else {
-      // Notify admin via email (fire-and-forget)
-      const proj = projects.find(p => p.id === selectedProject);
-      supabase.functions.invoke('notify-admin-request', {
-        body: {
-          message: message.trim(),
-          category,
-          priority,
-          projectName: proj?.name || '',
-          clientEmail: user.email || '',
-        },
-      }).catch(console.error);
-
       setMessage('');
       setCategory('');
       setPriority('normal');

@@ -44,6 +44,18 @@ export function AdminAgreement({ projectId, projectName }: AdminAgreementProps) 
 
   useEffect(() => {
     fetchAgreement();
+
+    const channel = supabase
+      .channel(`agreement-${projectId}`)
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'project_agreements',
+        filter: `project_id=eq.${projectId}`,
+      }, () => fetchAgreement())
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
   }, [projectId]);
 
   const fetchAgreement = async () => {

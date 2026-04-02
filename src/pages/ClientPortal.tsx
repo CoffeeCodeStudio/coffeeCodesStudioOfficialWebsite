@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { motion } from 'framer-motion';
-import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History, Sparkles, Settings, ArrowRight, Crown } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Coffee, LogOut, LayoutDashboard, MessageCirclePlus, Home, MessageCircle, History, Sparkles, Settings, Crown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ProjectStatus } from '@/components/portal/ProjectStatus';
@@ -336,15 +335,9 @@ export default function ClientPortal() {
                 <h2 className="text-lg font-serif text-foreground mb-2">
                   Välkommen, {getDisplayName()}!
                 </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   Nästa steg: Fyll i projektfrågorna så kan vi börja bygga din sajt.
                 </p>
-                <Button asChild>
-                  <Link to="/projektfragor">
-                    Fyll i projektfrågor
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                </Button>
               </div>
             ) : (
               <div className="glass-card cyber-border p-6 rounded-2xl mb-6">
@@ -376,7 +369,14 @@ export default function ClientPortal() {
           )}
           {activeTab === 'requests' && <ClientRequests />}
           {activeTab === 'messages' && <ClientMessages />}
-          {activeTab === 'ai' && projectId && <AIAssistant projectId={projectId} projectStatus={projectStatus} />}
+          {activeTab === 'ai' && (
+            projectId
+              ? <AIAssistant projectId={projectId} projectStatus={projectStatus} />
+              : <div className="glass-card p-12 rounded-2xl text-center">
+                  <Sparkles className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+                  <p className="text-muted-foreground">AI-assistenten är tillgänglig när ditt projekt har startats.</p>
+                </div>
+          )}
           {activeTab === 'log' && <StatusLog />}
           {activeTab === 'settings' && <ClientSettings user={user} profile={profile} onProfileUpdate={setProfile} />}
         </motion.div>
