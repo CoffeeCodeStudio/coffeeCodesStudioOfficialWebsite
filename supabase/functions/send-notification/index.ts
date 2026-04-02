@@ -139,6 +139,21 @@ Deno.serve(async (req) => {
     const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const adminClient = createClient(supabaseUrl, serviceKey);
 
+    // Look up project info if needed
+    if (payload.project_id && !payload.project_name) {
+      const { data: proj } = await adminClient
+        .from("projects")
+        .select("name, client_user_id")
+        .eq("id", payload.project_id)
+        .single();
+      if (proj) {
+        payload.project_name = proj.name;
+        if (payload.is_admin_sender && !payload.target_user_id) {
+          payload.target_user_id = proj.client_user_id;
+        }
+      }
+    }
+
     // Determine recipients
     const recipientEmails: string[] = [];
 
