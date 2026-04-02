@@ -451,6 +451,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          pdf_url: string | null
           project_id: string
           sent_at: string | null
           signed_at: string | null
@@ -460,6 +461,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          pdf_url?: string | null
           project_id: string
           sent_at?: string | null
           signed_at?: string | null
@@ -469,6 +471,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          pdf_url?: string | null
           project_id?: string
           sent_at?: string | null
           signed_at?: string | null
