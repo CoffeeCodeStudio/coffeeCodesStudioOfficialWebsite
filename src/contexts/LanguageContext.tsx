@@ -315,13 +315,14 @@ const translations: Record<Language, Translations> = {
     },
     pricing: {
       headline: 'Välj ditt paket',
-      intro: 'Flexibla månadspaket anpassade efter dina behov. Ingen bindningstid.',
+      intro: 'Allt du behöver för en professionell webbnärvaro.',
+      maintenanceHeadline: 'Underhållspaket (för befintliga Coffee Code Studio-kunder)',
       popular: 'Populärast',
       perMonth: 'kr/mån',
       cta: 'Kom igång',
       comingSoon: 'Kommer snart',
       paymentTitle: 'Betalningsmetoder',
-      tooltipText: 'Paketet gäller för webbprojekt byggda av Coffee Code Studio.',
+      tooltipText: 'Hosting, support och underhåll för sidor byggda av CCS.',
       disclaimerText: 'Underhållspaketen gäller i första hand projekt byggda av Coffee Code Studio. Har du en befintlig sajt? Hör av dig så ser vi vad vi kan göra.',
       paymentNote: 'Betalning via faktura. Fler betalningsalternativ kommer snart.',
       packages: {
@@ -347,9 +348,9 @@ const translations: Record<Language, Translations> = {
       oneTime: {
         title: 'Engångsprojekt',
         price: '9 900',
-        note: 'Pris från 9 900 kr — komplexa projekt offereras individuellt efter konsultation.',
+        note: 'Leverans: 10–14 dagar. Pris från 9,900 kr — komplexa projekt offereras individuellt.',
         description: 'Skräddarsydda webbapplikationer från grunden, med fast pris och tydlig leverans.',
-        features: ['Responsiv design', 'SEO-optimerad', 'Kundportal ingår', 'Efterföljande support tillgänglig'],
+        features: ['Upp till 7 sidor', 'Mobilvänlig design', 'Kontaktformulär + email', 'Bokningssystem (Calendly)', 'GDPR-compliance', 'SEO-optimering', '30 dagars support'],
         cta: 'Boka konsultation',
       },
       paymentMethods: {
