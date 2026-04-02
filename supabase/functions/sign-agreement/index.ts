@@ -7,8 +7,8 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 };
 
-function drawLine(page: any, y: number, font: any) {
-  page.drawText('─'.repeat(50), { x: 50, y, size: 8, font, color: rgb(0.5, 0.5, 0.5) });
+function drawLine(page: any, y: number) {
+  page.drawLine({ start: { x: 50, y }, end: { x: 545, y }, thickness: 0.5, color: rgb(0.7, 0.7, 0.7) });
 }
 
 function drawSection(page: any, lines: string[], startY: number, font: any, boldFont: any, fontSize = 10): number {
