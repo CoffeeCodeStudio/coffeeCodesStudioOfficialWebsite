@@ -9,7 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose,
 } from '@/components/ui/dialog';
-import { FileSignature, Send, CheckCircle2, Clock, FileX } from 'lucide-react';
+import { FileSignature, Send, CheckCircle2, Clock, FileX, Download } from 'lucide-react';
 
 interface Agreement {
   id: string;
