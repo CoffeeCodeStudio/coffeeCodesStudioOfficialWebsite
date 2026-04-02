@@ -7,6 +7,8 @@ export default function Cookiepolicy() {
       seoTitle="Cookiepolicy | Coffee Code Studio"
       seoDescription="Information om hur Coffee Code Studio använder cookies."
     >
+      <p className="text-xs text-muted-foreground italic">Senast uppdaterad: 2 april 2026</p>
+
       <p>
         Denna cookiepolicy förklarar hur Coffee Code Studio använder cookies och liknande tekniker på vår webbplats.
       </p>
@@ -30,7 +32,20 @@ export default function Cookiepolicy() {
         <li><strong>Språkinställning</strong> — sparar ditt val av språk (svenska/engelska)</li>
       </ul>
 
-      <h2>3. Tredjepartscookies</h2>
+      <h2>3. Lokal lagring (localStorage)</h2>
+      <p>
+        Utöver cookies använder vi webbläsarens lokala lagring (localStorage) för att spara viss information direkt på din enhet. Denna data skickas inte automatiskt till våra servrar. Vi lagrar följande:
+      </p>
+      <ul>
+        <li><strong>ccs-cookie-consent</strong> — ditt val gällande cookies (accepterat/avböjt)</li>
+        <li><strong>Autentiseringstoken</strong> — sessionsinformation för inloggade användare i kundportalen (hanteras av vår autentiseringsleverantör)</li>
+        <li><strong>Språkval</strong> — ditt val av språk på webbplatsen</li>
+      </ul>
+      <p>
+        Du kan rensa localStorage via din webbläsares utvecklarverktyg eller inställningar. Observera att rensning av autentiseringsdata loggar ut dig från kundportalen.
+      </p>
+
+      <h2>4. Tredjepartscookies</h2>
       <p>
         Vi använder för närvarande inga tredjepartscookies för analys eller marknadsföring. Dock kan Google Search Console sätta cookies i samband med webbplatsverifiering och prestationsövervakning. Dessa cookies hanteras av Google och omfattas av Googles integritetspolicy. Vi informerar dig härmed om att sådan cookieanvändning kan förekomma.
       </p>
@@ -38,7 +53,7 @@ export default function Cookiepolicy() {
         Om vi i framtiden inför ytterligare tredjepartscookies uppdaterar vi denna policy och ber om ditt samtycke.
       </p>
 
-      <h2>4. Hur hanterar du cookies?</h2>
+      <h2>5. Hur hanterar du cookies?</h2>
       <p>
         Du kan när som helst hantera eller radera cookies via din webbläsares inställningar. Observera att blockering av nödvändiga cookies kan påverka webbplatsens funktionalitet.
       </p>
@@ -49,7 +64,7 @@ export default function Cookiepolicy() {
         <li><a href="https://support.apple.com/sv-se/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari</a></li>
       </ul>
 
-      <h2>5. Kontakt</h2>
+      <h2>6. Kontakt</h2>
       <p>
         Har du frågor om vår användning av cookies? Kontakta oss på{' '}
         <a href="mailto:hej@coffeecodestudio.se">hej@coffeecodestudio.se</a>.
