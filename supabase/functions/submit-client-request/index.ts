@@ -67,7 +67,7 @@ Deno.serve(async (req) => {
     // Verify user owns this project
     const { data: project, error: projectError } = await serviceClient
       .from("projects")
-      .select("id, monthly_quota, client_user_id")
+      .select("id, monthly_quota, client_user_id, name")
       .eq("id", project_id)
       .single();
 

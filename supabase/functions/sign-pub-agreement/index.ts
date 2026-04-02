@@ -118,6 +118,32 @@ serve(async (req) => {
         event_type: 'pub_agreement_signed',
       });
 
+    // Get project name for notification
+    const { data: projectData } = await adminClient
+      .from('projects')
+      .select('name')
+      .eq('id', agreement.project_id)
+      .single();
+
+    // Notify admin + client about signed PUB agreement
+    try {
+      await fetch(`${supabaseUrl}/functions/v1/send-notification`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${supabaseServiceKey}`,
+        },
+        body: JSON.stringify({
+          type: 'email_agreement_signed',
+          project_id: agreement.project_id,
+          project_name: projectData?.name || '',
+          target_user_id: user.id,
+        }),
+      });
+    } catch (e) {
+      console.error('PUB agreement notification error:', e);
+    }
+
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
