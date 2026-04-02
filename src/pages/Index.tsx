@@ -32,10 +32,10 @@ function IndexContent() {
           <TestimonialsSection />
           <TjansterSection />
           <ProjektSection />
+          <FAQSection />
           <PricingSection />
           <AboutSection />
           <ContactSection />
-          <FAQSection />
         </main>
         <Footer />
       </div>
