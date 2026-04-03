@@ -1,0 +1,1 @@
+UPDATE portfolio_projects SET image_url = 'https://uasauatewyepgkuxhgoj.supabase.co/storage/v1/object/public/portfolio-images/f3b5fea3-41fd-465b-ae92-141d9e9d42f3_djlobo-screenshot.png' WHERE id = 'f3b5fea3-41fd-465b-ae92-141d9e9d42f3';
