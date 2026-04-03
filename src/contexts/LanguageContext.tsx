@@ -150,6 +150,14 @@ interface Translations {
       standard: { name: string; price: string; description: string; features: string[] };
       premium: { name: string; price: string; description: string; features: string[] };
     };
+    starter: {
+      title: string;
+      price: string;
+      note: string;
+      description: string;
+      features: string[];
+      cta: string;
+    };
     oneTime: {
       title: string;
       price: string;
@@ -355,10 +363,18 @@ const translations: Record<Language, Translations> = {
           features: ['10 utvecklingstimmar/mån', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Månatlig statusrapport'],
         },
       },
+      starter: {
+        title: 'Starter',
+        price: '4 900',
+        note: 'Leverans: 5–7 dagar. Perfekt för dig som behöver en enkel, proffsig närvaro snabbt.',
+        description: 'En stilren one-page-sajt med allt du behöver för att komma igång.',
+        features: ['One-page design (scroll-baserad)', 'Mobilvänlig & snabb', 'Kontaktformulär + email', 'GDPR-compliance', 'SEO-grundpaket', '14 dagars support'],
+        cta: 'Boka konsultation',
+      },
       oneTime: {
         title: 'Engångsprojekt',
         price: '9 900',
-        note: 'Leverans: 10–14 dagar. Pris från 9,900 kr — komplexa projekt offereras individuellt.',
+        note: 'Leverans: 10–14 dagar. Pris från 9 900 kr — komplexa projekt offereras individuellt.',
         description: 'Skräddarsydda webbapplikationer från grunden, med fast pris och tydlig leverans.',
         features: ['Upp till 7 sidor', 'Mobilvänlig design', 'Kontaktformulär + email', 'Bokningssystem (Calendly)', 'GDPR-compliance', 'SEO-optimering', '30 dagars support'],
         cta: 'Boka konsultation',
@@ -578,6 +594,14 @@ const translations: Record<Language, Translations> = {
           description: 'Full access to development resources with highest priority.',
           features: ['10 dev hours/month', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Monthly status report'],
         },
+      },
+      starter: {
+        title: 'Starter',
+        price: '4,900',
+        note: 'Delivery: 5–7 days. Perfect if you need a simple, professional presence fast.',
+        description: 'A clean one-page site with everything you need to get started.',
+        features: ['One-page design (scroll-based)', 'Mobile-friendly & fast', 'Contact form + email', 'GDPR compliance', 'Basic SEO package', '14 days support'],
+        cta: 'Book consultation',
       },
       oneTime: {
         title: 'One-time Project',

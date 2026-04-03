@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Check, Zap, Star, Crown, Rocket, Info, ChevronDown } from 'lucide-react';
+import { Check, Zap as ZapIcon, Star, Crown, Rocket, Info, ChevronDown } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
-  { key: 'bas' as const, icon: Zap },
+  { key: 'bas' as const, icon: ZapIcon },
   { key: 'standard' as const, icon: Star },
   { key: 'premium' as const, icon: Crown },
 ];
@@ -31,47 +31,92 @@ export function PricingSection() {
           <p className="text-muted-foreground max-w-2xl mx-auto">{p.intro}</p>
         </motion.div>
 
-        {/* One-time Project Card — FIRST and prominent */}
-        <motion.div
-          className="max-w-3xl mx-auto mb-8 glass-card rounded-2xl p-10 border-2 border-primary/30 shadow-[0_0_50px_-12px_hsl(var(--primary)/0.25)] hover:border-primary/50 transition-all"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-            <div className="w-16 h-16 rounded-2xl bg-primary/15 flex items-center justify-center shrink-0">
-              <Rocket className="w-8 h-8 text-primary" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-2xl font-serif text-foreground mb-2">{p.oneTime.title}</h3>
-              <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-4xl font-bold text-primary">{p.oneTime.price}</span>
-                <span className="text-muted-foreground text-sm">kr</span>
+        {/* Starter + One-time Project — side by side */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-8">
+          {/* Starter Card — clean, simple */}
+          <motion.div
+            className="glass-card rounded-2xl p-8 border border-border/30 hover:border-primary/20 transition-all flex flex-col"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center shrink-0">
+                <ZapIcon className="w-6 h-6 text-muted-foreground" />
               </div>
-              <p className="text-muted-foreground text-sm mb-6">{p.oneTime.description}</p>
-              <ul className="grid sm:grid-cols-2 gap-3 mb-6">
-                {p.oneTime.features.map((feature: string, i: number) => (
-                  <li key={i} className="flex items-center gap-2.5 text-sm">
-                    <Check className="w-4 h-4 text-primary shrink-0" />
-                    <span className="text-foreground/80">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs text-muted-foreground italic mb-5">{p.oneTime.note}</p>
-              <a
-                href="#kontakt"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="inline-block text-center py-3 px-8 rounded-xl font-medium text-sm bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20 transition-all"
-              >
-                {p.oneTime.cta}
-              </a>
+              <div>
+                <h3 className="text-xl font-serif text-foreground">{p.starter.title}</h3>
+                <div className="flex items-baseline gap-1 mt-1">
+                  <span className="text-3xl font-bold text-primary">{p.starter.price}</span>
+                  <span className="text-muted-foreground text-sm">kr</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </motion.div>
+            <p className="text-muted-foreground text-sm mb-5">{p.starter.description}</p>
+            <ul className="space-y-3 mb-5 flex-1">
+              {p.starter.features.map((feature: string, i: number) => (
+                <li key={i} className="flex items-center gap-2.5 text-sm">
+                  <Check className="w-4 h-4 text-primary shrink-0" />
+                  <span className="text-foreground/80">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-xs text-muted-foreground italic mb-5">{p.starter.note}</p>
+            <a
+              href="#kontakt"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-muted text-foreground hover:bg-muted/80 border border-border/30"
+            >
+              {p.starter.cta}
+            </a>
+          </motion.div>
+
+          {/* One-time Project Card — prominent */}
+          <motion.div
+            className="glass-card rounded-2xl p-8 border-2 border-primary/30 shadow-[0_0_50px_-12px_hsl(var(--primary)/0.25)] hover:border-primary/50 transition-all flex flex-col"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
+                <Rocket className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-xl font-serif text-foreground">{p.oneTime.title}</h3>
+                <div className="flex items-baseline gap-1 mt-1">
+                  <span className="text-3xl font-bold text-primary">{p.oneTime.price}</span>
+                  <span className="text-muted-foreground text-sm">kr</span>
+                </div>
+              </div>
+            </div>
+            <p className="text-muted-foreground text-sm mb-5">{p.oneTime.description}</p>
+            <ul className="space-y-3 mb-5 flex-1">
+              {p.oneTime.features.map((feature: string, i: number) => (
+                <li key={i} className="flex items-center gap-2.5 text-sm">
+                  <Check className="w-4 h-4 text-primary shrink-0" />
+                  <span className="text-foreground/80">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-xs text-muted-foreground italic mb-5">{p.oneTime.note}</p>
+            <a
+              href="#kontakt"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="block text-center py-3 px-8 rounded-xl font-medium text-sm bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20 transition-all"
+            >
+              {p.oneTime.cta}
+            </a>
+          </motion.div>
+        </div>
 
         {/* Disclaimer */}
         <p className="text-xs text-muted-foreground italic text-center max-w-2xl mx-auto mb-16">
