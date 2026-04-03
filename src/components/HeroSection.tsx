@@ -79,8 +79,8 @@ export function HeroSection() {
                 />
               </div>
             </div>
-            {/* Laptop base */}
-            <div className="bg-[#2a2a2e] h-3 rounded-b-lg mx-auto" style={{ width: '110%', marginLeft: '-5%' }} />
+          {/* Laptop base */}
+            <div className="bg-[#2a2a2e] h-3 rounded-b-lg mx-auto overflow-hidden" style={{ width: 'calc(100% + 20px)', marginLeft: '-10px', maxWidth: '110%' }} />
             <div className="bg-[#222225] h-1.5 rounded-b-xl mx-auto" style={{ width: '40%' }} />
           </div>
 
