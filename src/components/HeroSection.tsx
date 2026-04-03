@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import djloboMockup from '@/assets/djlobo-mockup.png';
 
 export function HeroSection() {
   const { t } = useLanguage();
@@ -61,7 +62,7 @@ export function HeroSection() {
               {/* Screen */}
               <div className="rounded-t-sm overflow-hidden">
                 <img
-                  src="https://uasauatewyepgkuxhgoj.supabase.co/storage/v1/object/public/portfolio-images/djlobo-screenshot.webp"
+                  src={djloboMockup}
                   alt="djloboproducciones.com — kundprojekt byggt av Coffee Code Studio"
                   className="w-full h-auto block"
                   loading="eager"
