@@ -595,6 +595,14 @@ const translations: Record<Language, Translations> = {
           features: ['10 dev hours/month', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Monthly status report'],
         },
       },
+      starter: {
+        title: 'Starter',
+        price: '4,900',
+        note: 'Delivery: 5–7 days. Perfect if you need a simple, professional presence fast.',
+        description: 'A clean one-page site with everything you need to get started.',
+        features: ['One-page design (scroll-based)', 'Mobile-friendly & fast', 'Contact form + email', 'GDPR compliance', 'Basic SEO package', '14 days support'],
+        cta: 'Book consultation',
+      },
       oneTime: {
         title: 'One-time Project',
         price: '9,900',
