@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import djloboMockup from '@/assets/djlobo-mockup.png';
 
 export function HeroSection() {
   const { t } = useLanguage();
