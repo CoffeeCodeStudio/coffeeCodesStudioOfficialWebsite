@@ -150,6 +150,14 @@ interface Translations {
       standard: { name: string; price: string; description: string; features: string[] };
       premium: { name: string; price: string; description: string; features: string[] };
     };
+    starter: {
+      title: string;
+      price: string;
+      note: string;
+      description: string;
+      features: string[];
+      cta: string;
+    };
     oneTime: {
       title: string;
       price: string;
