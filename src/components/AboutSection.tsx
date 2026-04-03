@@ -12,7 +12,7 @@ export function AboutSection() {
     <section id="about" className="py-24 relative" ref={ref}>
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          {/* Visual */}
+          {/* Pull-quote / stats */}
           <motion.div
             className="order-2 md:order-1"
             initial={{ opacity: 0, x: -40 }}
@@ -21,26 +21,10 @@ export function AboutSection() {
           >
             <div className="glass-card cyber-border p-8 rounded-2xl relative overflow-hidden">
               <div className="relative z-10 text-center">
-                <motion.div
-                  className="text-8xl mb-6"
-                  animate={{ 
-                    rotate: [0, 5, -5, 0],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                >
-                  ☕
-                </motion.div>
-                
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-12 h-1 bg-primary/50 rounded" />
-                  <span className="text-sm font-mono text-muted-foreground">+</span>
-                  <div className="text-2xl">💻</div>
-                  <span className="text-sm font-mono text-muted-foreground">=</span>
-                  <div className="text-2xl">✨</div>
-                </div>
+                <p className="text-xl sm:text-2xl font-serif gradient-text leading-relaxed">
+                  {t.about.pullQuote}
+                </p>
               </div>
-
-              {/* Background decoration */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
             </div>
           </motion.div>

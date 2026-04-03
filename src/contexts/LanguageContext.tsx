@@ -24,6 +24,7 @@ interface Translations {
     promo: string;
     planning: string;
     solution: string;
+    mockupTagline: string;
   };
   problem: {
     headline: string;
@@ -42,6 +43,7 @@ interface Translations {
     viewDemo: string;
     explorePrototype: string;
     seeDesign: string;
+    comingSoon: string;
     project1: { name: string; category: string; description: string };
     project2: { name: string; category: string; description: string };
     project3: { name: string; category: string; description: string };
@@ -49,10 +51,12 @@ interface Translations {
   about: {
     headline: string;
     body: string;
+    pullQuote: string;
   };
   footer: {
     cta: string;
     phone: string;
+    rights: string;
   };
   contact: {
     headline: string;
@@ -132,6 +136,7 @@ interface Translations {
     headline: string;
     intro: string;
     maintenanceHeadline: string;
+    showMaintenance: string;
     popular: string;
     perMonth: string;
     cta: string;
@@ -179,12 +184,13 @@ const translations: Record<Language, Translations> = {
       portal: 'Kundportal',
     },
     hero: {
-      headline: 'Professionell hemsida på 7 dagar — från 4,900 kr',
-      subheadline: 'Snabbare leverans, högre kvalitet. Vi bygger skräddarsydda webbappar med AI-driven utveckling — från idé till lansering.',
+      headline: 'Professionell hemsida på 7 dagar — från 4 900 kr',
+      subheadline: 'Färre möten, snabbare resultat. Din nya hemsida — klar på en vecka.',
       cta: 'Boka gratis konsultation',
       promo: 'Nu tar vi emot nya kunder — boka ett kostnadsfritt samtal idag',
       planning: 'Planering',
       solution: 'Lösning',
+      mockupTagline: 'Byggt åt riktiga kunder i Göteborg',
     },
     problem: {
       headline: 'Trött på generisk mjukvara? Släpp loss din potential.',
@@ -210,11 +216,12 @@ const translations: Record<Language, Translations> = {
       },
     },
     portfolio: {
-      headline: 'Projekt',
+      headline: 'Senaste projektet',
       intro: 'Verkliga lösningar vi har levererat.',
       viewDemo: 'Besök sajten',
       explorePrototype: 'Utforska Prototypen',
       seeDesign: 'Se Designkoncept',
+      comingSoon: 'Projekt kommer snart — vi jobbar med spännande kunder just nu.',
       project1: {
         name: 'djloboproducciones.com',
         category: 'Kundprojekt',
@@ -233,11 +240,13 @@ const translations: Record<Language, Translations> = {
     },
     about: {
       headline: 'Vi bygger snabbare. Du lanserar tidigare.',
-      body: 'Coffee Code Studio kombinerar modern webbutveckling med AI-verktyg för att leverera proffsiga sajter på dagar — inte månader. Dedikerat fokus, transparent process och en kundportal där du följer varje steg.',
+      body: 'Coffee Code Studio drivs av Rami — med bakgrund inom försäljning och kundrelationer, baserad i Göteborg. Här får varje projekt personlig kontakt från start till slut. Jag kombinerar modern webbutveckling med AI-verktyg för att leverera proffsiga sajter på dagar — inte månader. Transparent process och en kundportal där du följer varje steg.',
+      pullQuote: 'Första kundprojektet levererat. 100% nöjd kund. Göteborg-baserad.',
     },
     footer: {
       cta: 'Redo att brygga din nästa stora idé?',
       phone: 'Inget satt',
+      rights: 'Alla rättigheter förbehållna',
     },
     contact: {
       headline: 'Starta din bryggning',
@@ -273,11 +282,11 @@ const translations: Record<Language, Translations> = {
     services: {
       headline: 'Våra Tjänster',
       intro: 'Fullstack-utveckling med AI-verktyg. Vi bygger snabbt, levererar kvalitet och håller det enkelt.',
-      mvpTitle: 'Din sajt live på en vecka',
+      mvpTitle: 'Validera din idé på en vecka',
       mvpDescription: 'Vi bygger din webbplats snabbt och till fast pris — så att du kan fokusera på din verksamhet, inte tekniken.',
-      rapidTitle: 'Testa din idé utan risk',
+      rapidTitle: 'Lansera utan väntan',
       rapidDescription: 'Se hur din lösning ser ut och fungerar innan du investerar fullt ut. Från skiss till klickbar prototyp på dagar.',
-      aiTitle: 'Proffsig kvalitet till lägre kostnad',
+      aiTitle: 'Smartare sajt, lägre kostnad',
       aiDescription: 'Med moderna verktyg levererar vi snabbare och billigare än traditionella byråer — utan att kompromissa med kvaliteten.',
       iterationTitle: 'Iterativ Förfining',
       iterationDescription: 'Kontinuerlig förbättring baserad på användarfeedback och data för att optimera din produkt.',
@@ -317,6 +326,7 @@ const translations: Record<Language, Translations> = {
       headline: 'Välj ditt paket',
       intro: 'Allt du behöver för en professionell webbnärvaro.',
       maintenanceHeadline: 'Underhållspaket (för befintliga Coffee Code Studio-kunder)',
+      showMaintenance: 'Visa underhållspaket',
       popular: 'Populärast',
       perMonth: 'kr/mån',
       cta: 'Kom igång',
@@ -398,12 +408,13 @@ const translations: Record<Language, Translations> = {
       portal: 'Client Portal',
     },
     hero: {
-      headline: 'Professional website in 7 days — from 4,900 SEK',
-      subheadline: 'Faster delivery, higher quality. We build custom web apps with AI-driven development — from idea to launch.',
+      headline: 'Professional website in 7 days — from 4 900 SEK',
+      subheadline: 'Fewer meetings, faster results. Your new website — done in a week.',
       cta: 'Book free consultation',
       promo: 'We\'re now accepting new clients — book a free consultation today',
       planning: 'Planning',
       solution: 'Solution',
+      mockupTagline: 'Built for real clients in Gothenburg',
     },
     problem: {
       headline: 'Tired of generic software? Unleash your potential.',
@@ -429,11 +440,12 @@ const translations: Record<Language, Translations> = {
       },
     },
     portfolio: {
-      headline: 'Projects',
+      headline: 'Latest project',
       intro: 'Real solutions we have delivered.',
       viewDemo: 'Visit Site',
       explorePrototype: 'Explore the Prototype',
       seeDesign: 'See Design Concepts',
+      comingSoon: 'Projects coming soon — we\'re working with exciting clients right now.',
       project1: {
         name: 'djloboproducciones.com',
         category: 'Client Project',
@@ -452,11 +464,13 @@ const translations: Record<Language, Translations> = {
     },
     about: {
       headline: 'We Build Faster. You Launch Sooner.',
-      body: 'Coffee Code Studio combines modern web development with AI tools to deliver professional sites in days — not months. Dedicated focus, transparent process, and a client portal where you follow every step.',
+      body: 'Coffee Code Studio is run by Rami — with a background in sales and client relations, based in Gothenburg. Every project gets personal attention from start to finish. I combine modern web development with AI tools to deliver professional sites in days — not months. Transparent process and a client portal where you follow every step.',
+      pullQuote: 'First client project delivered. 100% satisfied client. Gothenburg-based.',
     },
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',
       phone: 'Not set',
+      rights: 'All rights reserved',
     },
     contact: {
       headline: 'Start Your Brew',
@@ -492,11 +506,11 @@ const translations: Record<Language, Translations> = {
     services: {
       headline: 'Our Services',
       intro: 'We help businesses quickly go from idea to working product using modern technology and AI-driven development.',
-      mvpTitle: 'Your site live in one week',
+      mvpTitle: 'Validate your idea in a week',
       mvpDescription: 'We build your website fast at a fixed price — so you can focus on your business, not the tech.',
-      rapidTitle: 'Test your idea risk-free',
+      rapidTitle: 'Launch without the wait',
       rapidDescription: 'See how your solution looks and works before you fully commit. From sketch to clickable prototype in days.',
-      aiTitle: 'Pro quality at lower cost',
+      aiTitle: 'Smarter site, lower cost',
       aiDescription: 'With modern tools we deliver faster and cheaper than traditional agencies — without compromising on quality.',
       iterationTitle: 'Iterative Refinement',
       iterationDescription: 'Continuous improvement based on user feedback and data to optimize your product.',
@@ -536,6 +550,7 @@ const translations: Record<Language, Translations> = {
       headline: 'Choose your plan',
       intro: 'Everything you need for a professional web presence.',
       maintenanceHeadline: 'Maintenance packages (for existing Coffee Code Studio clients)',
+      showMaintenance: 'Show maintenance plans',
       popular: 'Most Popular',
       perMonth: 'SEK/mo',
       cta: 'Get started',

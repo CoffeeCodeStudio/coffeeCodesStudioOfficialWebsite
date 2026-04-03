@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Rocket, Zap, Sparkles, MessageCircle, Code, RocketIcon } from 'lucide-react';
+import { Rocket, Zap, Sparkles, MessageCircle, Code, RocketIcon, ArrowRight } from 'lucide-react';
 
 const serviceIcons = [Rocket, Zap, Sparkles];
 const stepIcons = [MessageCircle, Code, RocketIcon];
@@ -84,25 +84,31 @@ export function TjansterSection() {
           </h3>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 sm:gap-6 max-w-5xl mx-auto items-start">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <motion.div
-                key={index}
-                className="flex items-start gap-4 p-5 rounded-xl glass-card border border-border/20"
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.15 }}
-              >
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">
-                  0{index + 1}
-                </div>
-                <div>
-                  <h4 className="font-serif text-foreground mb-1">{step.title}</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{step.text}</p>
-                </div>
-              </motion.div>
+              <div key={index} className="contents">
+                <motion.div
+                  className="flex items-start gap-4 p-5 rounded-xl glass-card border border-border/20"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.15 }}
+                >
+                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">
+                    0{index + 1}
+                  </div>
+                  <div>
+                    <h4 className="font-serif text-foreground mb-1">{step.title}</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{step.text}</p>
+                  </div>
+                </motion.div>
+                {index < steps.length - 1 && (
+                  <div className="hidden md:flex items-center justify-center self-center">
+                    <ArrowRight className="w-5 h-5 text-primary/30" />
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
