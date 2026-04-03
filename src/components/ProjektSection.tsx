@@ -29,7 +29,7 @@ export function ProjektSection() {
   }, []);
 
   return (
-    <section id="projekt" className="py-16 sm:py-24 relative">
+    <section id="projekt" className="py-14 sm:py-20 relative">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="text-center mb-12 sm:mb-16"

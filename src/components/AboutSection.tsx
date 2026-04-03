@@ -9,7 +9,7 @@ export function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-24 relative" ref={ref}>
+    <section id="about" className="py-14 sm:py-20 relative" ref={ref}>
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           {/* Pull-quote / stats */}
