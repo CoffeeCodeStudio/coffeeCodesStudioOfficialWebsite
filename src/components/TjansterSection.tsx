@@ -25,7 +25,7 @@ export function TjansterSection() {
   ];
 
   return (
-    <section id="tjanster" <section id="tjanster" className="py-14 sm:py-20 relative" ref={ref}> ref={ref}>
+    <section id="tjanster" className="py-14 sm:py-20 relative" ref={ref}>
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="text-center mb-12 sm:mb-16"

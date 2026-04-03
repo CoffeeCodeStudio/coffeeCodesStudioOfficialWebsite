@@ -16,7 +16,7 @@ export function PricingSection() {
   const [maintenanceOpen, setMaintenanceOpen] = useState(false);
 
   return (
-    <section id="priser" <section id="priser" className="py-14 sm:py-20 relative overflow-hidden">>
+    <section id="priser" className="py-14 sm:py-20 relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
