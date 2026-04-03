@@ -1,16 +1,12 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { Star } from 'lucide-react';
 
 export function HeroSection() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section className="relative min-h-0 flex-col pt-28 sm:pt-32 pb-0 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
-      <div className="absolute inset-0 code-bg" />
-      <div className="hero-fade-bottom" />
-
       <div className="container mx-auto px-5 sm:px-6 relative z-10">
         <motion.h1
           className="text-[1.75rem] sm:text-4xl md:text-6xl lg:text-7xl font-serif text-center max-w-4xl mx-auto leading-tight mb-3 sm:mb-6"
@@ -87,16 +83,10 @@ export function HeroSection() {
             <div className="bg-[#222225] h-1.5 rounded-b-xl mx-auto" style={{ width: '40%' }} />
           </div>
 
-          {/* Google Reviews badge */}
-          <div className="flex items-center justify-center gap-2 mt-4">
-            <span className="text-sm font-medium text-foreground/80">5.0</span>
-            <div className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-              ))}
-            </div>
-            <span className="text-sm text-muted-foreground">Google Reviews</span>
-          </div>
+          {/* Tagline under mockup */}
+          <p className="text-sm text-muted-foreground font-mono text-center mt-4">
+            {t.hero.mockupTagline}
+          </p>
         </motion.div>
       </div>
     </section>

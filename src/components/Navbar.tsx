@@ -83,7 +83,6 @@ export function Navbar() {
     { label: t.nav.contact, href: '#kontakt' },
   ];
 
-  // Close menu when clicking outside or pressing escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsOpen(false);
@@ -144,7 +143,7 @@ export function Navbar() {
             ))}
             <button
               onClick={() => navigate('/portal/login')}
-              className="text-sm font-medium px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors border border-primary/20"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {t.nav.portal}
             </button>
@@ -170,7 +169,6 @@ export function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               className="fixed inset-0 bg-background/90 backdrop-blur-md md:hidden"
               initial={{ opacity: 0 }}
@@ -180,7 +178,6 @@ export function Navbar() {
               style={{ top: '62px' }}
             />
             
-            {/* Menu Panel */}
             <motion.div
               className="fixed left-0 right-0 bg-card/95 backdrop-blur-xl border-b border-white/10 md:hidden shadow-2xl"
               style={{ top: '62px' }}
@@ -209,7 +206,7 @@ export function Navbar() {
                   ))}
                   <motion.button
                     onClick={() => { setIsOpen(false); navigate('/portal/login'); }}
-                    className="text-base font-medium text-primary bg-primary/10 hover:bg-primary/20 transition-colors py-4 px-4 rounded-xl border border-primary/20 mt-2 text-center"
+                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-4 px-4 rounded-xl mt-2 text-center"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: navItems.length * 0.05 }}

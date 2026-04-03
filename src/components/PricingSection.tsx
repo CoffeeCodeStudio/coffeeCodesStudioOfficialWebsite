@@ -1,17 +1,19 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Check, Star, Zap, Crown, Rocket, Info } from 'lucide-react';
+import { Check, Zap, Star, Crown, Rocket, Info, ChevronDown } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
-  { key: 'bas' as const, icon: Zap, popular: false },
-  { key: 'standard' as const, icon: Star, popular: true },
-  { key: 'premium' as const, icon: Crown, popular: false },
+  { key: 'bas' as const, icon: Zap },
+  { key: 'standard' as const, icon: Star },
+  { key: 'premium' as const, icon: Crown },
 ];
 
 export function PricingSection() {
   const { t } = useLanguage();
   const p = t.pricing;
+  const [maintenanceOpen, setMaintenanceOpen] = useState(false);
 
   return (
     <section id="priser" className="py-24 relative overflow-hidden">
@@ -76,90 +78,83 @@ export function PricingSection() {
           {p.disclaimerText}
         </p>
 
-        {/* Maintenance headline */}
-        <motion.div
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h3 className="text-xl md:text-2xl font-serif text-foreground/80">{p.maintenanceHeadline}</h3>
-        </motion.div>
+        {/* Collapsible maintenance section */}
+        <div className="max-w-5xl mx-auto mb-12">
+          <button
+            onClick={() => setMaintenanceOpen(!maintenanceOpen)}
+            className="w-full flex items-center justify-center gap-2 text-xl md:text-2xl font-serif text-foreground/80 hover:text-foreground transition-colors cursor-pointer py-4"
+          >
+            {p.showMaintenance}
+            <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${maintenanceOpen ? 'rotate-180' : ''}`} />
+          </button>
 
-        {/* Maintenance packages */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
-          {packages.map((pkg, index) => {
-            const pkgData = p.packages[pkg.key];
-            const Icon = pkg.icon;
-            return (
-              <motion.div
-                key={pkg.key}
-                className={`relative glass-card rounded-2xl p-8 border transition-all duration-300 hover:scale-[1.02] ${
-                  pkg.popular
-                    ? 'border-primary/40 shadow-[0_0_40px_-10px_hsl(var(--primary)/0.3)]'
-                    : 'border-border/30 hover:border-primary/20'
-                }`}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-bold px-4 py-1 rounded-full">
-                    {p.popular}
-                  </div>
-                )}
+          {maintenanceOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              transition={{ duration: 0.3 }}
+            >
+              <p className="text-sm text-muted-foreground text-center mb-8">{p.maintenanceHeadline}</p>
+              <div className="grid md:grid-cols-3 gap-6">
+                {packages.map((pkg, index) => {
+                  const pkgData = p.packages[pkg.key];
+                  const Icon = pkg.icon;
+                  return (
+                    <motion.div
+                      key={pkg.key}
+                      className="relative glass-card rounded-2xl p-8 border border-border/30 hover:border-primary/20 transition-all duration-300 hover:scale-[1.02]"
+                      initial={{ opacity: 0, y: 40 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.15 }}
+                    >
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-muted">
+                        <Icon className="w-6 h-6 text-muted-foreground" />
+                      </div>
 
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${pkg.popular ? 'bg-primary/20' : 'bg-muted'}`}>
-                  <Icon className={`w-6 h-6 ${pkg.popular ? 'text-primary' : 'text-muted-foreground'}`} />
-                </div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="text-xl font-serif text-foreground">{pkgData.name}</h3>
+                        <TooltipProvider delayDuration={200}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Info className="w-4 h-4 text-muted-foreground/60 hover:text-primary cursor-help transition-colors" />
+                            </TooltipTrigger>
+                            <TooltipContent side="top" className="max-w-[220px] text-xs">
+                              {p.tooltipText}
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+                      <div className="flex items-baseline gap-1 mb-1">
+                        <span className="text-3xl font-bold text-primary">{pkgData.price}</span>
+                        <span className="text-muted-foreground text-sm">{p.perMonth}</span>
+                      </div>
+                      <p className="text-muted-foreground text-sm mb-6">{pkgData.description}</p>
 
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-xl font-serif text-foreground">{pkgData.name}</h3>
-                  <TooltipProvider delayDuration={200}>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Info className="w-4 h-4 text-muted-foreground/60 hover:text-primary cursor-help transition-colors" />
-                      </TooltipTrigger>
-                      <TooltipContent side="top" className="max-w-[220px] text-xs">
-                        {p.tooltipText}
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-                <div className="flex items-baseline gap-1 mb-1">
-                  <span className="text-3xl font-bold text-primary">{pkgData.price}</span>
-                  <span className="text-muted-foreground text-sm">{p.perMonth}</span>
-                </div>
-                <p className="text-muted-foreground text-sm mb-6">{pkgData.description}</p>
+                      <ul className="space-y-3 mb-8">
+                        {pkgData.features.map((feature: string, i: number) => (
+                          <li key={i} className="flex items-start gap-2.5 text-sm">
+                            <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                            <span className="text-foreground/80">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
 
-                <ul className="space-y-3 mb-8">
-                  {pkgData.features.map((feature: string, i: number) => (
-                    <li key={i} className="flex items-start gap-2.5 text-sm">
-                      <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                      <span className="text-foreground/80">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="#kontakt"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className={`block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all ${
-                    pkg.popular
-                      ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20'
-                      : 'bg-muted text-foreground hover:bg-muted/80 border border-border/30'
-                  }`}
-                >
-                  {p.cta}
-                </a>
-              </motion.div>
-            );
-          })}
+                      <a
+                        href="#kontakt"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-muted text-foreground hover:bg-muted/80 border border-border/30"
+                      >
+                        {p.cta}
+                      </a>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
         </div>
 
         {/* Payment note */}
