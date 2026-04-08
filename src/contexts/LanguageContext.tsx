@@ -314,7 +314,7 @@ const translations: Record<Language, Translations> = {
       benefit1Title: 'Minskad Risk',
       benefit1Text: 'Testa din idé med en MVP innan du investerar stort. Validera marknaden med minimal insats.',
       benefit2Title: 'Snabbare Time-to-Market',
-      benefit2Text: 'Gå från idé till lansering på veckor istället för månader med vår effektiva process.',
+      benefit2Text: 'Gå från idé till lansering på veckor istället för månader med en effektiv process.',
       benefit3Title: 'Mätbara Resultat',
       benefit3Text: 'Varje projekt levereras med tydliga KPI:er och mätbara affärsresultat.',
       cta: 'Se vad vi kan göra för dig',
