@@ -437,22 +437,22 @@ const translations: Record<Language, Translations> = {
       body: 'Off-the-shelf solutions rarely cut it. Your business deserves a website as unique as your brand. I build custom websites that solve your challenges, grow with you, and reflect your identity.',
     },
     process: {
-      headline: 'How we work — from idea to live in days.',
+      headline: 'How it works — from idea to live in days.',
       intro: '',
       step1: {
         title: 'Digital Coffee',
         subtitle: '',
-        text: 'We start with a short conversation to understand your vision and goals.',
+        text: 'I start with a short conversation to understand your vision and goals.',
       },
       step2: {
-        title: 'We build',
+        title: 'I build',
         subtitle: '',
-        text: 'With AI-powered development, we deliver fast and cost-effectively.',
+        text: 'With fast delivery, you get a professional website in days — not months.',
       },
       step3: {
         title: 'You approve',
         subtitle: '',
-        text: 'You review the result and we fine-tune until you\'re happy.',
+        text: 'You review the result and I fine-tune until you\'re happy.',
       },
     },
     portfolio: {
