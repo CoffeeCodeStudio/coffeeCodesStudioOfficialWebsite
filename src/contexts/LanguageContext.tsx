@@ -317,7 +317,7 @@ const translations: Record<Language, Translations> = {
       benefit2Text: 'Gå från idé till lansering på veckor istället för månader med en effektiv process.',
       benefit3Title: 'Mätbara Resultat',
       benefit3Text: 'Varje projekt levereras med tydliga KPI:er och mätbara affärsresultat.',
-      cta: 'Se vad vi kan göra för dig',
+      cta: 'Se vad jag kan göra för dig',
     },
     partnership: {
       headline: 'Långsiktigt Partnerskap',
