@@ -479,8 +479,8 @@ const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      headline: 'We Build Faster. You Launch Sooner.',
-      body: 'Coffee Code Studio is run by Rami — with a background in sales and client relations, based in Gothenburg. Every project gets personal attention from start to finish. I combine modern web development with AI tools to deliver professional sites in days — not months. Transparent process and a client portal where you follow every step.',
+      headline: 'I Build Faster. You Launch Sooner.',
+      body: 'Coffee Code Studio is run by Rami — with a background in sales and client relations, based in Gothenburg. Every project gets personal attention from start to finish. I combine modern web development with smart tools to deliver professional websites in days — not months. Transparent process and a client portal where you follow every step.',
       pullQuote: 'First client project delivered. 100% satisfied client. Gothenburg-based.',
     },
     footer: {
