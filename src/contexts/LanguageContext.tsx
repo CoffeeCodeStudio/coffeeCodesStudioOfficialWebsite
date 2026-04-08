@@ -246,6 +246,18 @@ const translations: Record<Language, Translations> = {
         category: 'Innehållshanteringssystem',
         description: 'Designade och utvecklade en intern webbapplikation för att optimera innehållshantering.',
       },
+      projectOverrides: {
+        'cc6027f3-83ba-4b60-a197-b1e538e51e90': {
+          title: 'Echo2000',
+          category: 'Personligt projekt',
+          description: 'En social plattform för 25+ inspirerad av det tidiga 2000-talets internet. Profiler, realtidschatt, klotterplank och gästbok — från idé till live beta med aktiva användare.',
+        },
+        'f3b5fea3-41fd-465b-ae92-141d9e9d42f3': {
+          title: 'DJ Lobo Producciones',
+          category: 'Kundprojekt',
+          description: 'Professionell webbplats med bokningssystem och live radio för DJ Lobo Producciones.',
+        },
+      },
     },
     about: {
       headline: 'Jag bygger snabbare. Du lanserar tidigare.',
