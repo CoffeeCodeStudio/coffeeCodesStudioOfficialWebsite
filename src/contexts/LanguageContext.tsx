@@ -258,7 +258,7 @@ const translations: Record<Language, Translations> = {
     },
     contact: {
       headline: 'Starta din bryggning',
-      intro: 'Berätta om ditt projekt så hör vi av oss inom 24 timmar.',
+      intro: 'Berätta om ditt projekt så hör jag av mig inom 24 timmar.',
       name: 'Namn',
       namePlaceholder: 'Ditt namn',
       company: 'Företag',
