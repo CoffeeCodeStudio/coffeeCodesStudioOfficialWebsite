@@ -375,7 +375,7 @@ const translations: Record<Language, Translations> = {
         title: 'Engångsprojekt',
         price: '9 900',
         note: 'Leverans: 10–14 dagar. Pris från 9 900 kr — komplexa projekt offereras individuellt.',
-        description: 'Skräddarsydda webbapplikationer från grunden, med fast pris och tydlig leverans.',
+        description: 'Skräddarsydda hemsidor från grunden, med fast pris och tydlig leverans.',
         features: ['Upp till 7 sidor', 'Mobilvänlig design', 'Kontaktformulär + email', 'Bokningssystem (Calendly)', 'GDPR-compliance', 'SEO-optimering', '30 dagars support'],
         cta: 'Boka konsultation',
       },
