@@ -433,8 +433,8 @@ const translations: Record<Language, Translations> = {
       mockupTagline: 'Built for real clients in Gothenburg',
     },
     problem: {
-      headline: 'Tired of generic software? Unleash your potential.',
-      body: 'Off-the-shelf solutions often fall short. At Coffee Code Studio, we believe your business deserves a digital platform as unique and dynamic as your vision. We build custom web applications designed to solve your specific challenges, scale with your growth, and integrate seamlessly into your workflow.',
+      headline: 'Tired of generic templates? You deserve better.',
+      body: 'Off-the-shelf solutions rarely cut it. Your business deserves a website as unique as your brand. I build custom websites that solve your challenges, grow with you, and reflect your identity.',
     },
     process: {
       headline: 'How we work — from idea to live in days.',
