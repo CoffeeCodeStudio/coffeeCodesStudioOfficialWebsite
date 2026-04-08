@@ -354,7 +354,7 @@ const translations: Record<Language, Translations> = {
       comingSoon: 'Kommer snart',
       paymentTitle: 'Betalningsmetoder',
       tooltipText: 'Hosting, support och underhåll för sidor byggda av CCS.',
-      disclaimerText: 'Underhållspaketen gäller i första hand projekt byggda av Coffee Code Studio. Har du en befintlig sajt? Hör av dig så ser vi vad vi kan göra.',
+      disclaimerText: 'Underhållspaketen gäller i första hand projekt byggda av Coffee Code Studio. Har du en befintlig sajt? Hör av dig så ser jag vad jag kan göra.',
       paymentNote: 'Betalning via faktura. Fler betalningsalternativ kommer snart.',
       packages: {
         bas: {
