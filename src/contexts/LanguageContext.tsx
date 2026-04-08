@@ -332,7 +332,7 @@ const translations: Record<Language, Translations> = {
     },
     pricing: {
       headline: 'Välj ditt paket',
-      intro: 'Allt du behöver för en professionell webbnärvaro.',
+      intro: 'Allt du behöver för en professionell hemsida.',
       maintenanceHeadline: 'Underhållspaket (för befintliga Coffee Code Studio-kunder)',
       showMaintenance: 'Visa underhållspaket',
       popular: 'Populärast',
