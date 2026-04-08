@@ -546,10 +546,10 @@ const translations: Record<Language, Translations> = {
       benefit1Title: 'Reduced Risk',
       benefit1Text: 'Test your idea with an MVP before investing heavily. Validate the market with minimal effort.',
       benefit2Title: 'Faster Time-to-Market',
-      benefit2Text: 'Go from idea to launch in weeks instead of months with our efficient process.',
+      benefit2Text: 'Go from idea to launch in weeks instead of months with an efficient process.',
       benefit3Title: 'Measurable Results',
       benefit3Text: 'Every project is delivered with clear KPIs and measurable business outcomes.',
-      cta: 'See what we can do for you',
+      cta: 'See what I can do for you',
     },
     partnership: {
       headline: 'Long-Term Partnership',
