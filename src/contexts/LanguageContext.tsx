@@ -512,7 +512,7 @@ const translations: Record<Language, Translations> = {
       submit: 'Send Request',
       sending: 'Sending...',
       success: 'Thank you for your request!',
-      successMessage: 'We have received your message and will get back to you within 24 hours.',
+      successMessage: 'I have received your message and will get back to you within 24 hours.',
       errorName: 'Name is required',
       errorEmail: 'Email is required',
       errorEmailInvalid: 'Invalid email address',
