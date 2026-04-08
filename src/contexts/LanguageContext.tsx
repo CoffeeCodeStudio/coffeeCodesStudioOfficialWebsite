@@ -280,7 +280,7 @@ const translations: Record<Language, Translations> = {
       submit: 'Skicka förfrågan',
       sending: 'Skickar...',
       success: 'Tack för din förfrågan!',
-      successMessage: 'Vi har tagit emot ditt meddelande och återkommer inom 24 timmar.',
+      successMessage: 'Jag har tagit emot ditt meddelande och återkommer inom 24 timmar.',
       errorName: 'Namn krävs',
       errorEmail: 'E-post krävs',
       errorEmailInvalid: 'Ogiltig e-postadress',
