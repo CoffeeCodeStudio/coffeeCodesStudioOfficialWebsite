@@ -632,7 +632,7 @@ const translations: Record<Language, Translations> = {
         },
         {
           q: 'What if I don\'t like the design?',
-          a: 'We do unlimited revisions until you\'re satisfied. Payment is only due once you\'ve approved the final result.',
+          a: 'I do unlimited revisions until you\'re satisfied. Payment is only due once you\'ve approved the final result.',
         },
         {
           q: 'Is domain and hosting included?',
