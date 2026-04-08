@@ -262,7 +262,7 @@ const translations: Record<Language, Translations> = {
     about: {
       headline: 'Jag bygger snabbare. Du lanserar tidigare.',
       body: 'Coffee Code Studio drivs av Rami — med bakgrund inom försäljning och kundrelationer, baserad i Göteborg. Varje projekt får personlig kontakt från start till slut. Jag kombinerar modern webbutveckling med smarta verktyg för att leverera proffsiga hemsidor på dagar — inte månader. Transparent process och en kundportal där du följer varje steg.',
-      pullQuote: 'Första kundprojektet levererat. 100% nöjd kund. Göteborg-baserad.',
+      pullQuote: 'Kundprojekt levererat. 100% nöjd kund. Göteborg-baserad.',
     },
     footer: {
       cta: 'Redo att brygga din nästa stora idé?',
@@ -506,7 +506,7 @@ const translations: Record<Language, Translations> = {
     about: {
       headline: 'I Build Faster. You Launch Sooner.',
       body: 'Coffee Code Studio is run by Rami — with a background in sales and client relations, based in Gothenburg. Every project gets personal attention from start to finish. I combine modern web development with smart tools to deliver professional websites in days — not months. Transparent process and a client portal where you follow every step.',
-      pullQuote: 'First client project delivered. 100% satisfied client. Gothenburg-based.',
+      pullQuote: 'Client project delivered. 100% satisfied. Gothenburg-based.',
     },
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',
