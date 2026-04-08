@@ -461,7 +461,7 @@ const translations: Record<Language, Translations> = {
       viewDemo: 'Visit Site',
       explorePrototype: 'Explore the Prototype',
       seeDesign: 'See Design Concepts',
-      comingSoon: 'Projects coming soon — we\'re working with exciting clients right now.',
+      comingSoon: 'Projects coming soon — I\'m working with exciting clients right now.',
       project1: {
         name: 'djloboproducciones.com',
         category: 'Client Project',
