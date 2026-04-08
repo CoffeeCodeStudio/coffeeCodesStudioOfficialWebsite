@@ -110,7 +110,8 @@ export function ProjektSection() {
                   )}
                 </div>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
