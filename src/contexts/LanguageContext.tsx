@@ -413,7 +413,7 @@ const translations: Record<Language, Translations> = {
         },
         {
           q: 'Vad händer om jag inte gillar designen?',
-          a: 'Jag gör obegränsade revideringar tills du är nöjd. Betalning sker först när du godkänt slutresultatet.',
+          a: 'Du får se designförslag innan vi går vidare. Två revideringsrundor ingår i priset. Behövs fler justeringar tar vi det därifrån.',
         },
         {
           q: 'Ingår domän och hosting?',
