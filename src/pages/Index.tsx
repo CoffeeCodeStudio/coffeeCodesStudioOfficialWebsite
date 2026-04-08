@@ -17,10 +17,14 @@ function IndexContent() {
   return (
     <div key={language}>
       <SEOHead
-        title="Professionell hemsida på 7 dagar från 4 900 kr | Coffee Code Studio"
-        description="Få en responsiv, SEO-optimerad hemsida på 7 dagar från 4 900 kr. Webbutveckling i Göteborg med AI-driven process, GDPR-anpassning och 30 dagars support."
+        title={language === 'sv'
+          ? 'Hemsidor för småföretag i Göteborg | Coffee Code Studio'
+          : 'Websites for Small Businesses | Coffee Code Studio'}
+        description={language === 'sv'
+          ? 'Professionell hemsida på 7 dagar från 4 900 kr. Jag bygger snabba, mobilanpassade hemsidor för småföretag i Göteborg. Boka gratis konsultation.'
+          : 'Professional website in 7 days from 4,900 SEK. Fast, mobile-friendly websites for small businesses. Book a free consultation.'}
         canonical="https://coffeecodestudio.se/"
-        ogImage="https://lovable.dev/opengraph-image-p98pqg.png"
+        ogImage="https://coffeecodestudio.se/og-image.png"
       />
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md">
         Hoppa till innehåll
