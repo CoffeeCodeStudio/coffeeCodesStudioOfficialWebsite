@@ -457,7 +457,7 @@ const translations: Record<Language, Translations> = {
     },
     portfolio: {
       headline: 'Latest project',
-      intro: 'Real solutions we have delivered.',
+      intro: 'Real websites I have delivered.',
       viewDemo: 'Visit Site',
       explorePrototype: 'Explore the Prototype',
       seeDesign: 'See Design Concepts',
