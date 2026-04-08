@@ -607,7 +607,7 @@ const translations: Record<Language, Translations> = {
         title: 'One-time Project',
         price: '9,900',
         note: 'Delivery: 10–14 days. Starting from 9,900 SEK — complex projects quoted individually.',
-        description: 'Custom web applications built from scratch, with a fixed price and clear delivery.',
+        description: 'Custom websites built from scratch, with a fixed price and clear delivery.',
         features: ['Up to 7 pages', 'Mobile-friendly design', 'Contact form + email', 'Booking system (Calendly)', 'GDPR compliance', 'SEO optimization', '30 days support'],
         cta: 'Book consultation',
       },
