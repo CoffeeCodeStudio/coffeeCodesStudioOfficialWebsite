@@ -661,7 +661,7 @@ const translations: Record<Language, Translations> = {
         },
         {
           q: 'Is domain and hosting included?',
-          a: 'Hosting via Netlify/Vercel is included in the price. You purchase the domain yourself (about 100 SEK/year), and I help with the setup.',
+          a: 'Hosting is included. You purchase the domain yourself (about 100 SEK/year) and I help you connect it.',
         },
         {
           q: 'How long does it really take?',
