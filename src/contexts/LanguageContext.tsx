@@ -301,7 +301,7 @@ const translations: Record<Language, Translations> = {
       cta: 'Diskutera ditt projekt',
     },
     value: {
-      headline: 'Affärsvärde & ROI',
+      headline: 'Affärsvärde & Resultat',
       intro: 'Konkreta resultat som driver din verksamhet framåt.',
       stat1: '3x',
       stat1Label: 'Snabbare lansering',
