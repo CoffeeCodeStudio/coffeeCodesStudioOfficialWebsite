@@ -400,7 +400,7 @@ const translations: Record<Language, Translations> = {
         },
         {
           q: 'Vad händer om jag inte gillar designen?',
-          a: 'Vi gör obegränsade revideringar tills du är nöjd. Betalning sker först när du godkänt slutresultatet.',
+          a: 'Jag gör obegränsade revideringar tills du är nöjd. Betalning sker först när du godkänt slutresultatet.',
         },
         {
           q: 'Ingår domän och hosting?',
