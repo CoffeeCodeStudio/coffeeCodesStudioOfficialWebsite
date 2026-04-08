@@ -413,7 +413,7 @@ const translations: Record<Language, Translations> = {
         },
         {
           q: 'Vad händer om jag inte gillar designen?',
-          a: 'Jag gör obegränsade revideringar tills du är nöjd. Betalning sker först när du godkänt slutresultatet.',
+          a: 'Du får se designförslag innan vi går vidare. Två revideringsrundor ingår i priset. Behövs fler justeringar tar vi det därifrån.',
         },
         {
           q: 'Ingår domän och hosting?',
@@ -657,7 +657,7 @@ const translations: Record<Language, Translations> = {
         },
         {
           q: 'What if I don\'t like the design?',
-          a: 'I do unlimited revisions until you\'re satisfied. Payment is only due once you\'ve approved the final result.',
+          a: 'You\'ll see design drafts before we proceed. Two revision rounds are included. If more adjustments are needed, we\'ll take it from there.',
         },
         {
           q: 'Is domain and hosting included?',
