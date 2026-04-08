@@ -59,7 +59,12 @@ export function ProjektSection() {
           </motion.div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {projects.map((project, i) => (
+            {projects.map((project, i) => {
+              const override = t.portfolio.projectOverrides[project.id];
+              const title = override?.title || project.title;
+              const category = override?.category || project.category;
+              const description = override?.description || project.description;
+              return (
               <motion.div
                 key={project.id}
                 className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col"
@@ -72,7 +77,7 @@ export function ProjektSection() {
                   <div className="relative">
                     <img
                       src={project.image_url}
-                      alt={project.title}
+                      alt={title}
                       className="w-full h-48 sm:h-56 object-cover"
                       loading={i === 0 ? 'eager' : 'lazy'}
                       width="768"
@@ -81,18 +86,18 @@ export function ProjektSection() {
                   </div>
                 )}
                 <div className="p-5 sm:p-6 flex flex-col flex-1">
-                  {project.category && (
+                  {category && (
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-1 rounded">
-                        {project.category}
+                        {category}
                       </span>
                     </div>
                   )}
                   <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
-                    {project.title}
+                    {title}
                   </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
-                    {project.description}
+                    {description}
                   </p>
                   {project.url && (
                     <Button
