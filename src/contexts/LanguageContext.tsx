@@ -409,7 +409,7 @@ const translations: Record<Language, Translations> = {
         },
         {
           q: 'Kan jag redigera sajten själv efteråt?',
-          a: 'Ja, alla sidor levereras med Lovable editor-access så du kan göra ändringar själv. Alternativt ingår uppdateringar i underhållspaketet.',
+          a: 'Mindre ändringar som text och bilder fixar jag snabbt och smidigt. Vill du kunna redigera själv kan jag sätta upp en enkel lösning, eller så ingår uppdateringar i underhållspaketet.',
         },
         {
           q: 'Vad händer om jag inte gillar designen?',
