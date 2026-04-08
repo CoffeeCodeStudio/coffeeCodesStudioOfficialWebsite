@@ -47,6 +47,7 @@ interface Translations {
     project1: { name: string; category: string; description: string };
     project2: { name: string; category: string; description: string };
     project3: { name: string; category: string; description: string };
+    projectOverrides: Record<string, { title: string; category: string; description: string }>;
   };
   about: {
     headline: string;
@@ -244,6 +245,18 @@ const translations: Record<Language, Translations> = {
         name: 'SnapCode CMS',
         category: 'Innehållshanteringssystem',
         description: 'Designade och utvecklade en intern webbapplikation för att optimera innehållshantering.',
+      },
+      projectOverrides: {
+        'cc6027f3-83ba-4b60-a197-b1e538e51e90': {
+          title: 'Echo2000',
+          category: 'Personligt projekt',
+          description: 'En social plattform för 25+ inspirerad av det tidiga 2000-talets internet. Profiler, realtidschatt, klotterplank och gästbok — från idé till live beta med aktiva användare.',
+        },
+        'f3b5fea3-41fd-465b-ae92-141d9e9d42f3': {
+          title: 'DJ Lobo Producciones',
+          category: 'Kundprojekt',
+          description: 'Professionell webbplats med bokningssystem och live radio för DJ Lobo Producciones.',
+        },
       },
     },
     about: {
@@ -476,6 +489,18 @@ const translations: Record<Language, Translations> = {
         name: 'SnapCode CMS',
         category: 'Content Management System',
         description: 'Designed and developed an internal web application to optimize content management.',
+      },
+      projectOverrides: {
+        'cc6027f3-83ba-4b60-a197-b1e538e51e90': {
+          title: 'Echo2000',
+          category: 'Personal project',
+          description: 'A social platform for 25+ inspired by the early 2000s internet. Profiles, real-time chat, guestbook and message wall — from idea to live beta with active users.',
+        },
+        'f3b5fea3-41fd-465b-ae92-141d9e9d42f3': {
+          title: 'DJ Lobo Producciones',
+          category: 'Client project',
+          description: 'Professional website with booking system and live radio for DJ Lobo Producciones.',
+        },
       },
     },
     about: {
