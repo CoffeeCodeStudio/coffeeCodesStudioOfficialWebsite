@@ -490,6 +490,18 @@ const translations: Record<Language, Translations> = {
         category: 'Content Management System',
         description: 'Designed and developed an internal web application to optimize content management.',
       },
+      projectOverrides: {
+        'cc6027f3-83ba-4b60-a197-b1e538e51e90': {
+          title: 'Echo2000',
+          category: 'Personal project',
+          description: 'A social platform for 25+ inspired by the early 2000s internet. Profiles, real-time chat, guestbook and message wall — from idea to live beta with active users.',
+        },
+        'f3b5fea3-41fd-465b-ae92-141d9e9d42f3': {
+          title: 'DJ Lobo Producciones',
+          category: 'Client project',
+          description: 'Professional website with booking system and live radio for DJ Lobo Producciones.',
+        },
+      },
     },
     about: {
       headline: 'I Build Faster. You Launch Sooner.',
