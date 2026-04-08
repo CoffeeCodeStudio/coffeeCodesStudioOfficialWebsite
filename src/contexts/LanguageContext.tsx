@@ -564,7 +564,7 @@ const translations: Record<Language, Translations> = {
     },
     pricing: {
       headline: 'Choose your plan',
-      intro: 'Everything you need for a professional web presence.',
+      intro: 'Everything you need for a professional website.',
       maintenanceHeadline: 'Maintenance packages (for existing Coffee Code Studio clients)',
       showMaintenance: 'Show maintenance plans',
       popular: 'Most Popular',
