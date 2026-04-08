@@ -419,7 +419,7 @@ const translations: Record<Language, Translations> = {
       projects: 'Projects',
       process: 'Process',
       pricing: 'Pricing',
-      about: 'About Us',
+      about: 'About',
       contact: 'Contact',
       portal: 'Client Portal',
     },
