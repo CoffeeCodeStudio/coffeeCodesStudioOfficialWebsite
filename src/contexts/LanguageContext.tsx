@@ -247,8 +247,8 @@ const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      headline: 'Vi bygger snabbare. Du lanserar tidigare.',
-      body: 'Coffee Code Studio drivs av Rami — med bakgrund inom försäljning och kundrelationer, baserad i Göteborg. Här får varje projekt personlig kontakt från start till slut. Jag kombinerar modern webbutveckling med AI-verktyg för att leverera proffsiga sajter på dagar — inte månader. Transparent process och en kundportal där du följer varje steg.',
+      headline: 'Jag bygger snabbare. Du lanserar tidigare.',
+      body: 'Coffee Code Studio drivs av Rami — med bakgrund inom försäljning och kundrelationer, baserad i Göteborg. Varje projekt får personlig kontakt från start till slut. Jag kombinerar modern webbutveckling med smarta verktyg för att leverera proffsiga hemsidor på dagar — inte månader. Transparent process och en kundportal där du följer varje steg.',
       pullQuote: 'Första kundprojektet levererat. 100% nöjd kund. Göteborg-baserad.',
     },
     footer: {
