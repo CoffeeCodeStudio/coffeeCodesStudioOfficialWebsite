@@ -136,6 +136,7 @@ interface Translations {
   pricing: {
     headline: string;
     intro: string;
+    scopeNote: string;
     maintenanceHeadline: string;
     showMaintenance: string;
     popular: string;
@@ -193,10 +194,10 @@ const translations: Record<Language, Translations> = {
       portal: 'Kundportal',
     },
     hero: {
-      headline: 'Professionell hemsida på 7 dagar — från 4 900 kr',
-      subheadline: 'Färre möten, snabbare resultat. Din nya hemsida — klar på en vecka.',
+      headline: 'Din hemsida live inom en vecka',
+      subheadline: 'Jag bygger en professionell första version av din sajt på sju dagar. Snabbt, enkelt och utan krångel.',
       cta: 'Boka gratis konsultation',
-      promo: 'Nu tar vi emot nya kunder — boka ett kostnadsfritt samtal idag',
+      promo: 'Jag tar emot nya kunder — boka ett kostnadsfritt samtal idag',
       planning: 'Planering',
       solution: 'Lösning',
       mockupTagline: 'Byggt åt riktiga kunder i Göteborg',
@@ -287,7 +288,7 @@ const translations: Record<Language, Translations> = {
       other: 'Annat',
       budget: 'Budget',
       budgetPlaceholder: 'Välj ungefärlig budget',
-      budgetOptions: ['Under 5 000 kr', '5 000 – 15 000 kr', '15 000 – 50 000 kr', 'Över 50 000 kr', 'Vet ej'],
+      budgetOptions: ['Under 5 000 kr', '5 000 – 15 000 kr', '15 000 – 30 000 kr', 'Större projekt / Offert'],
       message: 'Meddelande',
       messagePlaceholder: 'Berätta kort om din vision och dina utmaningar...',
       submit: 'Skicka förfrågan',
@@ -306,11 +307,11 @@ const translations: Record<Language, Translations> = {
       mvpTitle: 'Din hemsida — klar på en vecka',
       mvpDescription: 'Jag bygger din hemsida snabbt och till fast pris — så att du kan fokusera på din verksamhet, inte tekniken.',
       rapidTitle: 'Snabbt från start till live',
-      rapidDescription: 'Se hur din hemsida ser ut och fungerar innan du investerar fullt ut. Från skiss till klickbar prototyp på dagar.',
+      rapidDescription: 'Se hur din hemsida ser ut och fungerar innan du bestämmer dig fullt. Från skiss till en fungerande första version på dagar.',
       aiTitle: 'Proffsig sajt, lägre pris',
       aiDescription: 'Jag levererar snabbare och billigare än traditionella byråer — utan att kompromissa med kvaliteten.',
-      iterationTitle: 'Iterativ Förfining',
-      iterationDescription: 'Kontinuerlig förbättring baserad på feedback och data för att optimera din hemsida.',
+      iterationTitle: 'Kontinuerlig utveckling',
+      iterationDescription: 'Din sajt växer med dig. Jag hjälper dig att lägga till funktioner och förbättra över tid.',
       cta: 'Diskutera ditt projekt',
     },
     value: {
@@ -324,12 +325,12 @@ const translations: Record<Language, Translations> = {
       stat3Label: 'Kundnöjdhet',
       stat4: '2v',
       stat4Label: 'Till första prototyp',
-      benefit1Title: 'Minskad Risk',
-      benefit1Text: 'Testa din idé med en MVP innan du investerar stort. Validera marknaden med minimal insats.',
+      benefit1Title: 'Mindre Risk',
+      benefit1Text: 'Testa din idé med en första version innan du investerar stort. Validera marknaden med minimal insats.',
       benefit2Title: 'Snabbare Time-to-Market',
       benefit2Text: 'Gå från idé till lansering på veckor istället för månader med en effektiv process.',
       benefit3Title: 'Mätbara Resultat',
-      benefit3Text: 'Varje projekt levereras med tydliga KPI:er och mätbara affärsresultat.',
+      benefit3Text: 'Varje projekt levereras med tydliga mål och mätbara resultat.',
       cta: 'Se vad jag kan göra för dig',
     },
     partnership: {
@@ -346,6 +347,7 @@ const translations: Record<Language, Translations> = {
     pricing: {
       headline: 'Välj ditt paket',
       intro: 'Allt du behöver för en professionell hemsida.',
+      scopeNote: 'Pris och tid anpassas efter hur stor sajt du behöver. Jag börjar med det viktigaste så att du kommer live inom en vecka.',
       maintenanceHeadline: 'Underhållspaket (för befintliga Coffee Code Studio-kunder)',
       showMaintenance: 'Visa underhållspaket',
       popular: 'Populärast',
@@ -437,10 +439,10 @@ const translations: Record<Language, Translations> = {
       portal: 'Client Portal',
     },
     hero: {
-      headline: 'Professional website in 7 days — from 4 900 SEK',
-      subheadline: 'Fewer meetings, faster results. Your new website — done in a week.',
+      headline: 'Your website live within a week',
+      subheadline: 'I build a professional first version of your site in seven days. Fast, simple and without hassle.',
       cta: 'Book free consultation',
-      promo: 'We\'re now accepting new clients — book a free consultation today',
+      promo: 'I\'m now accepting new clients — book a free consultation today',
       planning: 'Planning',
       solution: 'Solution',
       mockupTagline: 'Built for real clients in Gothenburg',
@@ -531,9 +533,9 @@ const translations: Record<Language, Translations> = {
       other: 'Other',
       budget: 'Budget',
       budgetPlaceholder: 'Select approximate budget',
-      budgetOptions: ['Under 5 000 SEK', '5 000 – 15 000 SEK', '15 000 – 50 000 SEK', 'Over 50 000 SEK', 'Not sure'],
+      budgetOptions: ['Under 5 000 SEK', '5 000 – 15 000 SEK', '15 000 – 30 000 SEK', 'Larger project / Quote'],
       message: 'Message',
-      messagePlaceholder: 'Tell us briefly about your vision and challenges...',
+      messagePlaceholder: 'Tell me briefly about your vision and challenges...',
       submit: 'Send Request',
       sending: 'Sending...',
       success: 'Thank you for your request!',
@@ -550,11 +552,11 @@ const translations: Record<Language, Translations> = {
       mvpTitle: 'Your website — done in a week',
       mvpDescription: 'I build your website fast at a fixed price — so you can focus on your business, not the tech.',
       rapidTitle: 'Fast from start to live',
-      rapidDescription: 'See how your website looks and works before you fully commit. From sketch to clickable prototype in days.',
+      rapidDescription: 'See how your website looks and works before you fully commit. From sketch to a working first version in days.',
       aiTitle: 'Professional site, lower price',
       aiDescription: 'I deliver faster and cheaper than traditional agencies — without compromising on quality.',
-      iterationTitle: 'Iterative Refinement',
-      iterationDescription: 'Continuous improvement based on feedback and data to optimize your website.',
+      iterationTitle: 'Continuous development',
+      iterationDescription: 'Your site grows with you. I help you add features and improve over time.',
       cta: 'Discuss your project',
     },
     value: {
@@ -569,11 +571,11 @@ const translations: Record<Language, Translations> = {
       stat4: '2w',
       stat4Label: 'To first prototype',
       benefit1Title: 'Reduced Risk',
-      benefit1Text: 'Test your idea with an MVP before investing heavily. Validate the market with minimal effort.',
+      benefit1Text: 'Test your idea with a first version before investing heavily. Validate the market with minimal effort.',
       benefit2Title: 'Faster Time-to-Market',
       benefit2Text: 'Go from idea to launch in weeks instead of months with an efficient process.',
       benefit3Title: 'Measurable Results',
-      benefit3Text: 'Every project is delivered with clear KPIs and measurable business outcomes.',
+      benefit3Text: 'Every project is delivered with clear goals and measurable outcomes.',
       cta: 'See what I can do for you',
     },
     partnership: {
@@ -590,6 +592,7 @@ const translations: Record<Language, Translations> = {
     pricing: {
       headline: 'Choose your plan',
       intro: 'Everything you need for a professional website.',
+      scopeNote: 'Price and timeline adapt to how big a site you need. I start with the essentials so you go live within a week.',
       maintenanceHeadline: 'Maintenance packages (for existing Coffee Code Studio clients)',
       showMaintenance: 'Show maintenance plans',
       popular: 'Most Popular',
