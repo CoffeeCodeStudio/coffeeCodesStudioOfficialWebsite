@@ -136,6 +136,7 @@ interface Translations {
   pricing: {
     headline: string;
     intro: string;
+    scopeNote: string;
     maintenanceHeadline: string;
     showMaintenance: string;
     popular: string;
@@ -438,10 +439,10 @@ const translations: Record<Language, Translations> = {
       portal: 'Client Portal',
     },
     hero: {
-      headline: 'Professional website in 7 days — from 4 900 SEK',
-      subheadline: 'Fewer meetings, faster results. Your new website — done in a week.',
+      headline: 'Your website live within a week',
+      subheadline: 'I build a professional first version of your site in seven days. Fast, simple and without hassle.',
       cta: 'Book free consultation',
-      promo: 'We\'re now accepting new clients — book a free consultation today',
+      promo: 'I\'m now accepting new clients — book a free consultation today',
       planning: 'Planning',
       solution: 'Solution',
       mockupTagline: 'Built for real clients in Gothenburg',
