@@ -263,7 +263,7 @@ const translations: Record<Language, Translations> = {
     about: {
       headline: 'Jag bygger snabbare. Du lanserar tidigare.',
       body: 'Coffee Code Studio drivs av Rami — med bakgrund inom försäljning och kundrelationer, baserad i Göteborg. Varje projekt får personlig kontakt från start till slut. Jag kombinerar modern webbutveckling med smarta verktyg för att leverera proffsiga hemsidor på dagar — inte månader. Transparent process och en kundportal där du följer varje steg.',
-      pullQuote: 'Kundprojekt levererat. 100% nöjd kund. Göteborg-baserad.',
+      pullQuote: 'Senaste leverans: DJ Lobo Producciones — live och i drift. Göteborg-baserad. Personlig kontakt från start till slut.',
     },
     footer: {
       cta: 'Redo att brygga din nästa stora idé?',
@@ -422,7 +422,7 @@ const translations: Record<Language, Translations> = {
           a: 'Hosting ingår i priset. Du köper domänen själv (ca 100 kr/år) och jag hjälper dig koppla den.',
         },
         {
-          q: 'Hur lång tid tar det egentligen?',
+          q: 'Hur lång tid tar projektet?',
           a: '7-10 dagar från godkänd briefing till färdig sajt. Komplexa projekt med e-handel kan ta 2-3 veckor.',
         },
       ],
@@ -508,7 +508,7 @@ const translations: Record<Language, Translations> = {
     about: {
       headline: 'I Build Faster. You Launch Sooner.',
       body: 'Coffee Code Studio is run by Rami — with a background in sales and client relations, based in Gothenburg. Every project gets personal attention from start to finish. I combine modern web development with smart tools to deliver professional websites in days — not months. Transparent process and a client portal where you follow every step.',
-      pullQuote: 'Client project delivered. 100% satisfied. Gothenburg-based.',
+      pullQuote: 'Latest delivery: DJ Lobo Producciones — live and running. Gothenburg-based. Personal contact from start to finish.',
     },
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',
@@ -667,7 +667,7 @@ const translations: Record<Language, Translations> = {
           a: 'Hosting is included. You purchase the domain yourself (about 100 SEK/year) and I help you connect it.',
         },
         {
-          q: 'How long does it really take?',
+          q: 'How long does the project take?',
           a: '7-10 days from approved briefing to finished site. Complex projects with e-commerce can take 2-3 weeks.',
         },
       ],
