@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Check, Zap as ZapIcon, Star, Crown, Rocket, Info, ChevronDown } from 'lucide-react';
+import { Check, Zap as ZapIcon, Star, Rocket, Info, ChevronDown } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
-  { key: 'bas' as const, icon: ZapIcon },
-  { key: 'standard' as const, icon: Star },
-  { key: 'premium' as const, icon: Crown },
+  { key: 'bas' as const, icon: ZapIcon, highlighted: false },
+  { key: 'standard' as const, icon: Star, highlighted: true },
 ];
 
 export function PricingSection() {
@@ -141,20 +140,29 @@ export function PricingSection() {
               transition={{ duration: 0.3 }}
             >
               <p className="text-sm text-muted-foreground text-center mb-8">{p.maintenanceHeadline}</p>
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                 {packages.map((pkg, index) => {
                   const pkgData = p.packages[pkg.key];
                   const Icon = pkg.icon;
                   return (
                     <motion.div
                       key={pkg.key}
-                      className="relative glass-card rounded-2xl p-8 border border-border/30 hover:border-primary/20 transition-all duration-300 hover:scale-[1.02]"
+                      className={`relative glass-card rounded-2xl p-8 transition-all duration-300 hover:scale-[1.02] flex flex-col ${
+                        pkg.highlighted
+                          ? 'border-2 border-primary/30 shadow-[0_0_50px_-12px_hsl(var(--primary)/0.25)] hover:border-primary/50'
+                          : 'border border-border/30 hover:border-primary/20'
+                      }`}
                       initial={{ opacity: 0, y: 40 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.15 }}
                     >
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-muted">
-                        <Icon className="w-6 h-6 text-muted-foreground" />
+                      {pkg.highlighted && (
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
+                          {p.popular}
+                        </div>
+                      )}
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${pkg.highlighted ? 'bg-primary/15' : 'bg-muted'}`}>
+                        <Icon className={`w-6 h-6 ${pkg.highlighted ? 'text-primary' : 'text-muted-foreground'}`} />
                       </div>
 
                       <div className="flex items-center gap-2 mb-1">
@@ -176,7 +184,7 @@ export function PricingSection() {
                       </div>
                       <p className="text-muted-foreground text-sm mb-6">{pkgData.description}</p>
 
-                      <ul className="space-y-3 mb-8">
+                      <ul className="space-y-3 mb-8 flex-1">
                         {pkgData.features.map((feature: string, i: number) => (
                           <li key={i} className="flex items-start gap-2.5 text-sm">
                             <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
@@ -191,7 +199,11 @@ export function PricingSection() {
                           e.preventDefault();
                           document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-muted text-foreground hover:bg-muted/80 border border-border/30"
+                        className={`block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all ${
+                          pkg.highlighted
+                            ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20'
+                            : 'bg-muted text-foreground hover:bg-muted/80 border border-border/30'
+                        }`}
                       >
                         {p.cta}
                       </a>
@@ -199,6 +211,7 @@ export function PricingSection() {
                   );
                 })}
               </div>
+              <p className="text-sm text-muted-foreground/70 text-center mt-6">{p.maintenanceExtra}</p>
             </motion.div>
           )}
         </div>
