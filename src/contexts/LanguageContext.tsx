@@ -147,10 +147,10 @@ interface Translations {
     tooltipText: string;
     disclaimerText: string;
     paymentNote: string;
+    maintenanceExtra: string;
     packages: {
       bas: { name: string; price: string; description: string; features: string[] };
       standard: { name: string; price: string; description: string; features: string[] };
-      premium: { name: string; price: string; description: string; features: string[] };
     };
     starter: {
       title: string;
@@ -358,24 +358,19 @@ const translations: Record<Language, Translations> = {
       tooltipText: 'Hosting, support och underhåll för sidor byggda av CCS.',
       disclaimerText: 'Underhållspaketen gäller i första hand projekt byggda av Coffee Code Studio. Har du en befintlig sajt? Hör av dig så ser jag vad jag kan göra.',
       paymentNote: 'Betalning via faktura. Fler betalningsalternativ kommer snart.',
+      maintenanceExtra: 'Behöver du mer? Dedikerade utvecklingstimmar från 1 200 kr/tim — kontakta mig för offert.',
       packages: {
         bas: {
           name: 'Bas',
-          price: '499',
+          price: '799',
           description: 'Perfekt för mindre underhåll och löpande justeringar.',
-          features: ['3 ärenden per månad', 'Svar inom 48 timmar', 'E-postsupport', 'Kundportal med projektöversikt'],
+          features: ['2 ärenden per månad', 'Svar inom 48 timmar', 'E-postsupport', 'Kundportal med projektöversikt'],
         },
         standard: {
           name: 'Standard',
-          price: '999',
+          price: '1 499',
           description: 'För företag som behöver löpande utveckling och snabbare respons.',
-          features: ['6 ärenden per månad', 'Svar inom 24 timmar', 'Prioriterad support', 'Kundportal med projektöversikt'],
-        },
-        premium: {
-          name: 'Premium',
-          price: '1 999',
-          description: 'Full tillgång till utvecklingsresurser med högsta prioritet.',
-          features: ['10 utvecklingstimmar/mån', 'Svar inom 4 timmar', 'Prioriterad support', 'Dedikerad kontaktperson', 'Månatlig statusrapport'],
+          features: ['5 ärenden per månad', 'Svar inom 24 timmar', 'Prioriterad support', 'Kundportal med projektöversikt', 'Månatlig statusrapport'],
         },
       },
       starter: {
@@ -603,24 +598,19 @@ const translations: Record<Language, Translations> = {
       tooltipText: 'Hosting, support and maintenance for sites built by CCS.',
       disclaimerText: 'Maintenance packages primarily apply to projects built by Coffee Code Studio. Have an existing site? Contact me and I\'ll see what I can do.',
       paymentNote: 'Payment via invoice. More payment options coming soon.',
+      maintenanceExtra: 'Need more? Dedicated development hours from 1 200 kr/hr — contact me for a quote.',
       packages: {
         bas: {
           name: 'Basic',
-          price: '499',
+          price: '799',
           description: 'Perfect for minor maintenance and ongoing adjustments.',
-          features: ['3 requests per month', 'Response within 48 hours', 'Email support', 'Client portal with project overview'],
+          features: ['2 requests per month', 'Response within 48 hours', 'Email support', 'Client portal with project overview'],
         },
         standard: {
           name: 'Standard',
-          price: '999',
+          price: '1,499',
           description: 'For businesses needing ongoing development and faster response.',
-          features: ['6 requests per month', 'Response within 24 hours', 'Priority support', 'Client portal with project overview'],
-        },
-        premium: {
-          name: 'Premium',
-          price: '1,999',
-          description: 'Full access to development resources with highest priority.',
-          features: ['10 dev hours/month', 'Response within 4 hours', 'Priority support', 'Dedicated contact person', 'Monthly status report'],
+          features: ['5 requests per month', 'Response within 24 hours', 'Priority support', 'Client portal with project overview', 'Monthly status report'],
         },
       },
       starter: {
