@@ -8,8 +8,8 @@ import testimonialDjLobo from '@/assets/testimonial-djlobo.webp';
 const testimonials = [
   {
     image: testimonialDjLobo,
-    quoteSv: 'Rami byggde min nya sajt snabbt och proffsigt. Allt på ett ställe nu.',
-    quoteEn: 'Rami built my new site quickly and professionally. Everything in one place now.',
+    quoteSv: 'Rami levererade snabbt och professionellt. Sajten är exakt vad jag behövde — enkel att uppdatera och ser proffsig ut.',
+    quoteEn: 'Rami delivered quickly and professionally. The site is exactly what I needed — easy to update and looks professional.',
     name: 'DJ Lobo Producciones',
   },
 ];
