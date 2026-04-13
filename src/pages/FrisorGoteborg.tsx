@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import djLoboMockup from '@/assets/djlobo-mockup.jpg';
+import djLoboMockup from '@/assets/djlobo-mockup.webp';
 import salonPreview from '@/assets/salon-preview.jpg';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { Navbar } from '@/components/Navbar';
