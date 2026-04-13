@@ -170,7 +170,7 @@ function CaseSection() {
 
           {/* Testimonial */}
           <div className="mt-8 flex flex-col items-center gap-3 text-center">
-            <Quote className="w-5 h-5 text-primary/60" />
+            <MessageSquareQuote className="w-5 h-5 text-primary/60" />
             <blockquote className="text-base sm:text-lg font-serif text-foreground italic leading-relaxed max-w-xl">
               "Rami levererade snabbt och professionellt. Sajten är exakt vad jag behövde
               — enkel att uppdatera och ser proffsig ut."
@@ -187,7 +187,7 @@ function CaseSection() {
 
 /* ─── Benefits ─── */
 const benefits = [
-  { icon: Zap, title: 'Live på 7 dagar', desc: 'Du får en färdig hemsida på en vecka – ingen väntan i månader.' },
+  { icon: Coffee, title: 'Live på 7 dagar', desc: 'Du får en färdig hemsida på en vecka – ingen väntan i månader.' },
   { icon: Palette, title: 'Design som sticker ut', desc: 'Modern och unik design som speglar ditt varumärke.' },
   { icon: BarChart3, title: 'Syns på Google', desc: 'SEO-optimerad från start så att lokala kunder hittar dig.' },
 ];
@@ -295,7 +295,7 @@ function StarterPricing() {
           <ul className="space-y-3 mb-6">
             {features.map((f, i) => (
               <li key={i} className="flex items-center gap-2.5 text-sm">
-                <Check className="w-4 h-4 text-primary shrink-0" />
+                <CircleCheck className="w-4 h-4 text-primary shrink-0" />
                 <span className="text-foreground/80">{f}</span>
               </li>
             ))}
