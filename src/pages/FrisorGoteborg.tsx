@@ -131,7 +131,7 @@ function CustomerCaseSection() {
           className="glass-card rounded-2xl border border-border/30 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6"
         >
           {/* Small mockup */}
-          <div className="shrink-0 w-40 sm:w-48">
+          <div className="shrink-0 w-56 sm:w-72">
             <div className="bg-muted rounded-lg overflow-hidden shadow-lg">
               {!imageError ? (
                 <img
