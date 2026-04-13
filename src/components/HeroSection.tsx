@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import djloboMockup from '@/assets/djlobo-mockup.png';
+import djloboMockupWebp from '@/assets/djlobo-mockup.webp';
+import djloboMockupPng from '@/assets/djlobo-mockup.png';
 
 export function HeroSection() {
   const { t } = useLanguage();
@@ -64,15 +65,18 @@ export function HeroSection() {
               {/* Screen */}
               <div className="rounded-t-sm overflow-hidden">
                 {!imageError ? (
-                  <img
-                    src={djloboMockup}
-                    alt={t.hero.mockupAlt}
-                    className="w-full h-auto block"
-                    loading="eager"
-                    width="540"
-                    height="338"
-                    onError={() => setImageError(true)}
-                  />
+                  <picture>
+                    <source srcSet={djloboMockupWebp} type="image/webp" />
+                    <img
+                      src={djloboMockupPng}
+                      alt={t.hero.mockupAlt}
+                      className="w-full h-auto block"
+                      loading="eager"
+                      width="540"
+                      height="338"
+                      onError={() => setImageError(true)}
+                    />
+                  </picture>
                 ) : (
                   <div className="w-full aspect-[16/10] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
                     <span className="text-muted-foreground text-sm">djloboproducciones.com</span>
