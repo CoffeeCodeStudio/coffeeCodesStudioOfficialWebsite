@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Quote } from 'lucide-react';
+import { MessageSquareQuote } from 'lucide-react';
 import testimonialDjLobo from '@/assets/testimonial-djlobo.webp';
 
 const testimonials = [
@@ -46,7 +46,7 @@ export function TestimonialsSection() {
                 />
               </motion.div>
 
-              <Quote className="w-6 h-6 text-primary/60" />
+              <MessageSquareQuote className="w-6 h-6 text-primary/60" />
 
               <blockquote className="text-base sm:text-lg font-serif text-foreground italic leading-relaxed">
                 "{language === 'sv' ? t.quoteSv : t.quoteEn}"

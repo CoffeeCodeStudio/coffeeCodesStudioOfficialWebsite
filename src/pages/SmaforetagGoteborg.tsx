@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer';
 import { ContactSection } from '@/components/ContactSection';
 import { SEOHead } from '@/components/SEOHead';
 import { Button } from '@/components/ui/button';
-import { Check, Zap, Palette, BarChart3, Coffee, Hammer, ThumbsUp, Quote } from 'lucide-react';
+import { CircleCheck, Coffee, Palette, BarChart3, Hammer, ThumbsUp, MessageSquareQuote } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,

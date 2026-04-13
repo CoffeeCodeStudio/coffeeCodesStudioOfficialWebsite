@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer';
 import { ContactSection } from '@/components/ContactSection';
 import { SEOHead } from '@/components/SEOHead';
 import { Button } from '@/components/ui/button';
-import { Check, Clock, Banknote, Pencil, Quote } from 'lucide-react';
+import { CircleCheck, Clock, Banknote, Pencil, MessageSquareQuote } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
