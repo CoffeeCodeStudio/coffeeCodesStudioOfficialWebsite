@@ -33,7 +33,7 @@ interface CodeRainBackgroundProps {
   columns?: number;
 }
 
-export function CodeRainBackground({ columns = 50 }: CodeRainBackgroundProps) {
+export function CodeRainBackground({ columns = 28 }: CodeRainBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -55,20 +55,20 @@ export function CodeRainBackground({ columns = 50 }: CodeRainBackgroundProps) {
     function createSymbol(x: number, startOffscreen = true): Symbol {
       const colors = getColors();
       const hsl = colors[Math.floor(Math.random() * colors.length)];
-      const opacity = randomBetween(0.1, 0.2);
+      const opacity = randomBetween(0.05, 0.12);
       return {
         x,
         y: startOffscreen ? randomBetween(-200, -20) : randomBetween(0, canvas!.height),
-        speed: randomBetween(0.4, 1.5),
+        speed: randomBetween(0.2, 0.7),
         text: getRandomSymbol(),
         color: `hsla(${hsl} / ${opacity})`,
-        size: Math.floor(randomBetween(14, 28)),
+        size: Math.floor(randomBetween(12, 20)),
         opacity,
       };
     }
 
     function initSymbols() {
-      const colWidth = Math.max(45, canvas!.width / columns);
+      const colWidth = Math.max(70, canvas!.width / columns);
       const count = Math.floor(canvas!.width / colWidth);
       symbols = [];
       for (let i = 0; i < count; i++) {
@@ -97,10 +97,10 @@ export function CodeRainBackground({ columns = 50 }: CodeRainBackgroundProps) {
           sym.text = getRandomSymbol();
           const colors = getColors();
           const hsl = colors[Math.floor(Math.random() * colors.length)];
-          sym.opacity = randomBetween(0.1, 0.2);
+          sym.opacity = randomBetween(0.05, 0.12);
           sym.color = `hsla(${hsl} / ${sym.opacity})`;
-          sym.size = Math.floor(randomBetween(14, 28));
-          sym.speed = randomBetween(0.4, 1.5);
+          sym.size = Math.floor(randomBetween(12, 20));
+          sym.speed = randomBetween(0.2, 0.7);
         }
 
         ctx!.font = `${sym.size}px "Inter", monospace`;
