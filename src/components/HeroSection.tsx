@@ -63,22 +63,21 @@ export function HeroSection() {
               </div>
               {/* Screen */}
               <div className="rounded-t-sm overflow-hidden">
-                <img
-                  src={djloboMockup}
-                  alt="djloboproducciones.com — kundprojekt byggt av Coffee Code Studio"
-                  className="w-full h-auto block"
-                  loading="eager"
-                  width="540"
-                  height="338"
-                  onError={(e) => {
-                    const img = e.currentTarget;
-                    img.style.display = 'none';
-                    const placeholder = document.createElement('div');
-                    placeholder.className = 'w-full aspect-[16/10] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center';
-                    placeholder.innerHTML = '<span class="text-muted-foreground text-sm">djloboproducciones.com</span>';
-                    img.parentNode?.appendChild(placeholder);
-                  }}
-                />
+                {!imageError ? (
+                  <img
+                    src={djloboMockup}
+                    alt="djloboproducciones.com — kundprojekt byggt av Coffee Code Studio"
+                    className="w-full h-auto block"
+                    loading="eager"
+                    width="540"
+                    height="338"
+                    onError={() => setImageError(true)}
+                  />
+                ) : (
+                  <div className="w-full aspect-[16/10] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                    <span className="text-muted-foreground text-sm">djloboproducciones.com</span>
+                  </div>
+                )}
               </div>
             </div>
           {/* Laptop base */}
