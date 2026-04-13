@@ -55,6 +55,7 @@ const App = () => (
           <Route path="/cookiepolicy" element={<Cookiepolicy />} />
           <Route path="/anvandardvillkor" element={<Anvandardvillkor />} />
           <Route path="/projektfragor" element={<Projektfragor />} />
+          <Route path="/frisor-goteborg" element={<FrisorGoteborg />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
