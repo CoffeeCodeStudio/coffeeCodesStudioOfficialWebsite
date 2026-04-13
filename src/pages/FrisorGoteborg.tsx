@@ -65,7 +65,7 @@ function SalonPreviewSection() {
     <section className="pb-14 sm:pb-20 px-4">
       <div className="container mx-auto max-w-2xl">
         <h2 className="text-2xl sm:text-3xl font-serif gradient-text text-center mb-8">
-          Så här kan din salongsida se ut
+          Vad jag kan bygga åt dig
         </h2>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -84,11 +84,17 @@ function SalonPreviewSection() {
                   din-salong.se
                 </span>
               </div>
-              {/* Screen content – styled preview */}
-              <div className="rounded-t-sm overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 aspect-[16/10] flex flex-col items-center justify-center gap-4 px-6">
-                <div className="w-10 h-[2px] bg-primary/40 rounded-full" />
+              {/* Screen content */}
+              <div
+                className="rounded-t-sm overflow-hidden bg-muted aspect-[16/10] flex flex-col items-center justify-center gap-4 px-6 relative"
+                role="img"
+                aria-label="Exempel på hemsida frisör göteborg – preview av en salongsida"
+              >
+                <span className="absolute top-2 right-2 text-xs bg-primary/20 text-primary px-2 py-1 rounded">
+                  Preview – inte en riktig kund
+                </span>
                 <p className="text-xs sm:text-sm font-mono text-primary/70 tracking-widest uppercase">
-                  Förhandsvisning
+                  Exempel: Frisörsalong
                 </p>
                 <h3 className="text-lg sm:text-2xl font-serif text-foreground text-center">
                   Din Frisörsalong
@@ -103,14 +109,6 @@ function SalonPreviewSection() {
                 >
                   Boka tid
                 </Button>
-                <div className="flex gap-6 mt-2">
-                  {['Klippning', 'Färgning', 'Styling'].map((s) => (
-                    <div key={s} className="text-center">
-                      <div className="w-12 h-8 rounded bg-muted/60 mb-1" />
-                      <span className="text-[10px] text-muted-foreground">{s}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
             <div
@@ -120,9 +118,8 @@ function SalonPreviewSection() {
             <div className="bg-muted/80 h-1.5 rounded-b-xl mx-auto" style={{ width: '40%' }} />
           </div>
 
-          <p className="text-sm text-muted-foreground text-center mt-6 max-w-lg mx-auto leading-relaxed">
-            Detta är ett exempel på hur en modern hemsida för din salong skulle kunna se ut.
-            Jag bygger den skräddarsydd efter dina färger, bilder och behov – redo på 7 dagar.
+          <p className="text-sm text-muted-foreground text-center mt-6 max-w-lg mx-auto leading-relaxed italic">
+            Ett exempel på hur din salongs hemsida skulle kunna se ut. Jag bygger den efter dina önskemål – leverans inom 7 dagar.
           </p>
         </motion.div>
       </div>
