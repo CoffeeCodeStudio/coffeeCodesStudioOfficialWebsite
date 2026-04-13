@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import frisorMockup from '@/assets/frisor-mockup.jpg';
