@@ -1,5 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Mail, MessageCircle } from 'lucide-react';
+import { Mail, MessageCircle, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Navbar';
 
@@ -31,22 +31,31 @@ export function Footer() {
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-1">
               Kontakt
             </p>
-            <a
-              href="mailto:hej@coffeecodestudio.se"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
-            >
-              <Mail className="w-4 h-4 group-hover:text-primary transition-colors" />
-              hej@coffeecodestudio.se
-            </a>
-            <a
-              href="https://wa.me/46738764299"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
-            >
-              <MessageCircle className="w-4 h-4 group-hover:text-primary transition-colors" />
-              WhatsApp
-            </a>
+            <div className="flex flex-wrap justify-center md:justify-end gap-4 sm:gap-6">
+              <a
+                href="tel:+46738764299"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+              >
+                <Phone className="w-4 h-4 group-hover:text-primary transition-colors" />
+                073 876 42 99
+              </a>
+              <a
+                href="https://wa.me/46738764299"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+              >
+                <MessageCircle className="w-4 h-4 group-hover:text-primary transition-colors" />
+                WhatsApp
+              </a>
+              <a
+                href="mailto:hej@coffeecodestudio.se"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+              >
+                <Mail className="w-4 h-4 group-hover:text-primary transition-colors" />
+                hej@coffeecodestudio.se
+              </a>
+            </div>
           </div>
         </div>
 
