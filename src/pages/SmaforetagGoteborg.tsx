@@ -60,6 +60,60 @@ function Hero() {
   );
 }
 
+/* ─── Business Preview Mockup ─── */
+function BusinessPreviewSection() {
+  return (
+    <section className="pb-14 sm:pb-20 px-4">
+      <div className="container mx-auto max-w-2xl">
+        <h2 className="text-2xl sm:text-3xl font-serif gradient-text text-center mb-8">
+          Vad jag kan bygga åt dig
+        </h2>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="relative w-11/12 sm:w-10/12 mx-auto">
+            <div className="bg-muted rounded-t-xl pt-3 px-3 pb-0 shadow-2xl">
+              <div className="flex items-center gap-1.5 mb-2 px-1">
+                <div className="w-2 h-2 rounded-full bg-red-500/60" />
+                <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
+                <div className="w-2 h-2 rounded-full bg-green-500/60" />
+                <span className="ml-3 text-[10px] text-muted-foreground/50 font-mono truncate">
+                  ditt-foretag.se
+                </span>
+              </div>
+              <div className="rounded-t-sm overflow-hidden relative">
+                <span className="absolute top-2 right-2 z-10 text-xs bg-primary/20 text-primary px-2 py-1 rounded">
+                  Preview – inte en riktig kund
+                </span>
+                <img
+                  src={smaforetagPreview}
+                  alt="Exempel på hemsida småföretag göteborg – preview av en modern företagssida"
+                  className="w-full h-auto block"
+                  loading="lazy"
+                  width="960"
+                  height="600"
+                />
+              </div>
+            </div>
+            <div
+              className="bg-muted h-3 rounded-b-lg mx-auto overflow-hidden"
+              style={{ width: 'calc(100% + 20px)', marginLeft: '-10px', maxWidth: '110%' }}
+            />
+            <div className="bg-muted/80 h-1.5 rounded-b-xl mx-auto" style={{ width: '40%' }} />
+          </div>
+
+          <p className="text-sm text-muted-foreground text-center mt-6 max-w-lg mx-auto leading-relaxed italic">
+            Ett exempel på hur ditt företags hemsida skulle kunna se ut. Jag bygger den efter dina önskemål – leverans inom 7 dagar.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── DJ Lobo Case ─── */
 function CaseSection() {
   const [imageError, setImageError] = useState(false);
