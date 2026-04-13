@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import frisorMockup from '@/assets/frisor-mockup.jpg';
@@ -307,6 +308,65 @@ function FinalCTA() {
 
 /* ─── Page ─── */
 function FrisorContent() {
+  useEffect(() => {
+    const localBusiness = {
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'Coffee Code Studio',
+      description: 'Professionell hemsida för frisörer och salonger i Göteborg. Fast pris 4 900 kr, leverans inom en vecka.',
+      url: 'https://coffeecodestudio.se/frisor-goteborg',
+      telephone: '+46738764299',
+      email: 'hej@coffeecodestudio.se',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Göteborg',
+        addressCountry: 'SE',
+      },
+      areaServed: {
+        '@type': 'City',
+        name: 'Göteborg',
+      },
+      priceRange: 'från 4 900 kr',
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '17:00',
+      },
+    };
+
+    const faqPage = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a,
+        },
+      })),
+    };
+
+    const scriptLB = document.createElement('script');
+    scriptLB.id = 'frisor-localbusiness-jsonld';
+    scriptLB.type = 'application/ld+json';
+    scriptLB.textContent = JSON.stringify(localBusiness);
+
+    const scriptFAQ = document.createElement('script');
+    scriptFAQ.id = 'frisor-faq-jsonld';
+    scriptFAQ.type = 'application/ld+json';
+    scriptFAQ.textContent = JSON.stringify(faqPage);
+
+    document.head.appendChild(scriptLB);
+    document.head.appendChild(scriptFAQ);
+
+    return () => {
+      scriptLB.remove();
+      scriptFAQ.remove();
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <SEOHead
