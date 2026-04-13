@@ -16,6 +16,7 @@ import Cookiepolicy from "./pages/Cookiepolicy";
 import Anvandardvillkor from "./pages/Anvandardvillkor";
 import Projektfragor from "./pages/Projektfragor";
 import FrisorGoteborg from "./pages/FrisorGoteborg";
+import SmaforetagGoteborg from "./pages/SmaforetagGoteborg";
 import { CookieConsent } from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -56,6 +57,7 @@ const App = () => (
           <Route path="/anvandardvillkor" element={<Anvandardvillkor />} />
           <Route path="/projektfragor" element={<Projektfragor />} />
           <Route path="/frisor-goteborg" element={<FrisorGoteborg />} />
+          <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
