@@ -53,6 +53,33 @@ export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    const match = hash.match(/[?&]plan=([^&]*)/);
+    if (!match) return;
+
+    const planKey = decodeURIComponent(match[1]);
+    const planNames: Record<string, { sv: string; en: string }> = {
+      starter: { sv: 'Starter (4 900 kr)', en: 'Starter (4,900 SEK)' },
+      onetime: { sv: 'Engångsprojekt (9 900 kr)', en: 'One-time Project (9,900 SEK)' },
+      maintenance_bas: { sv: 'Underhåll Bas (799 kr/mån)', en: 'Maintenance Basic (799 SEK/mo)' },
+      maintenance_standard: { sv: 'Underhåll Standard (1 499 kr/mån)', en: 'Maintenance Standard (1,499 SEK/mo)' },
+    };
+
+    const plan = planNames[planKey];
+    if (!plan) return;
+
+    const isSv = t.hero.cta.includes('Boka');
+    const prefill = isSv
+      ? `Jag är intresserad av paketet: ${plan.sv}.`
+      : `I am interested in the package: ${plan.en}.`;
+
+    setFormData((prev) => ({
+      ...prev,
+      message: prev.message ? `${prev.message}\n${prefill}` : prefill,
+    }));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     if (!formData.name.trim()) newErrors.name = t.contact.errorName;
