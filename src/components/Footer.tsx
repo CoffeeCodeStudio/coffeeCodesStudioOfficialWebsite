@@ -1,5 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Mail } from 'lucide-react';
+import { Mail, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Navbar';
 
@@ -37,6 +37,15 @@ export function Footer() {
             >
               <Mail className="w-4 h-4 group-hover:text-primary transition-colors" />
               hej@coffeecodestudio.se
+            </a>
+            <a
+              href="https://wa.me/46738764299"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+            >
+              <MessageCircle className="w-4 h-4 group-hover:text-primary transition-colors" />
+              WhatsApp
             </a>
           </div>
         </div>
