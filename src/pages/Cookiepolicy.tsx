@@ -47,10 +47,11 @@ export default function Cookiepolicy() {
 
       <h2>4. Tredjepartscookies</h2>
       <p>
-        Vi använder för närvarande inga tredjepartscookies för analys eller marknadsföring. Dock kan Google Search Console sätta cookies i samband med webbplatsverifiering och prestationsövervakning. Dessa cookies hanteras av Google och omfattas av Googles integritetspolicy. Vi informerar dig härmed om att sådan cookieanvändning kan förekomma.
+        Vi använder Google Analytics 4 för att samla in anonymiserad statistik om hur besökare använder webbplatsen. Detta hjälper oss att förbättra innehållet och användarupplevelsen. Google Analytics använder cookies för att känna igen återkommande besökare och analysera trafikmönster. Informationen som genereras av dessa cookies överförs till och lagras av Google på servrar i USA och andra länder. Google använder denna information för att utvärdera användningen av webbplatsen och sammanställa rapporter. Google kan även överföra denna information till tredje part om det krävs enligt lag. Läs mer i{' '}
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Googles integritetspolicy</a>.
       </p>
       <p>
-        Om vi i framtiden inför ytterligare tredjepartscookies uppdaterar vi denna policy och ber om ditt samtycke.
+        Dessa cookies placeras endast om du aktivt accepterar cookies i vår cookie-banner.
       </p>
 
       <h2>5. Hur hanterar du cookies?</h2>
