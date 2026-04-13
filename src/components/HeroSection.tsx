@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -5,6 +6,7 @@ import djloboMockup from '@/assets/djlobo-mockup.png';
 
 export function HeroSection() {
   const { t } = useLanguage();
+  const [imageError, setImageError] = useState(false);
 
   return (
     <section className="relative min-h-0 flex-col pt-28 sm:pt-32 pb-0 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
@@ -61,22 +63,21 @@ export function HeroSection() {
               </div>
               {/* Screen */}
               <div className="rounded-t-sm overflow-hidden">
-                <img
-                  src={djloboMockup}
-                  alt="djloboproducciones.com — kundprojekt byggt av Coffee Code Studio"
-                  className="w-full h-auto block"
-                  loading="eager"
-                  width="540"
-                  height="338"
-                  onError={(e) => {
-                    const img = e.currentTarget;
-                    img.style.display = 'none';
-                    const placeholder = document.createElement('div');
-                    placeholder.className = 'w-full aspect-[16/10] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center';
-                    placeholder.innerHTML = '<span class="text-muted-foreground text-sm">djloboproducciones.com</span>';
-                    img.parentNode?.appendChild(placeholder);
-                  }}
-                />
+                {!imageError ? (
+                  <img
+                    src={djloboMockup}
+                    alt="djloboproducciones.com — kundprojekt byggt av Coffee Code Studio"
+                    className="w-full h-auto block"
+                    loading="eager"
+                    width="540"
+                    height="338"
+                    onError={() => setImageError(true)}
+                  />
+                ) : (
+                  <div className="w-full aspect-[16/10] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                    <span className="text-muted-foreground text-sm">djloboproducciones.com</span>
+                  </div>
+                )}
               </div>
             </div>
           {/* Laptop base */}
