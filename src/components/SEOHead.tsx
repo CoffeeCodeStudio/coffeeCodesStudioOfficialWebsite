@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-
+import { StructuredData } from './StructuredData';
 interface SEOHeadProps {
   title: string;
   description: string;
@@ -33,7 +33,11 @@ export function SEOHead({ title, description, canonical, ogImage, noindex }: SEO
     ensureMeta('property', 'og:title', title);
     ensureMeta('property', 'og:description', description);
     ensureMeta('property', 'og:type', 'website');
-    if (ogImage) ensureMeta('property', 'og:image', ogImage);
+    if (ogImage) {
+      ensureMeta('property', 'og:image', ogImage);
+      ensureMeta('name', 'twitter:card', 'summary_large_image');
+      ensureMeta('name', 'twitter:image', ogImage);
+    }
 
     if (noindex) {
       ensureMeta('name', 'robots', 'noindex, nofollow');
@@ -59,5 +63,5 @@ export function SEOHead({ title, description, canonical, ogImage, noindex }: SEO
     };
   }, [title, description, canonical, ogImage, noindex]);
 
-  return null;
+  return <StructuredData />;
 }
