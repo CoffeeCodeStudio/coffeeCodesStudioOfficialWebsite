@@ -61,7 +61,7 @@ function Hero() {
 
 /* ─── Mockup ─── */
 function MockupSection() {
-  return (
+  const [imageError, setImageError] = useState(false);
     <section className="pb-14 sm:pb-20 px-4">
       <div className="container mx-auto max-w-2xl">
         <motion.div
