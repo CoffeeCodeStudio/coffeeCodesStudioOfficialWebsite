@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import frisorMockup from '@/assets/frisor-mockup.jpg';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
