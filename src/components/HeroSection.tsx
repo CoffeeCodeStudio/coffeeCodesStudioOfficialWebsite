@@ -6,6 +6,7 @@ import djloboMockup from '@/assets/djlobo-mockup.png';
 
 export function HeroSection() {
   const { t } = useLanguage();
+  const [imageError, setImageError] = useState(false);
 
   return (
     <section className="relative min-h-0 flex-col pt-28 sm:pt-32 pb-0 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
