@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Check, Zap as ZapIcon, Star, Rocket, Info, ChevronDown } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
@@ -67,6 +68,7 @@ export function PricingSection() {
               href="#kontakt"
               onClick={(e) => {
                 e.preventDefault();
+                trackEvent('pricing_cta_click', { plan: 'starter' });
                 document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
               }}
               className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-muted text-foreground hover:bg-muted/80 border border-border/30"
@@ -109,6 +111,7 @@ export function PricingSection() {
               href="#kontakt"
               onClick={(e) => {
                 e.preventDefault();
+                trackEvent('pricing_cta_click', { plan: 'onetime' });
                 document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
               }}
               className="block text-center py-3 px-8 rounded-xl font-medium text-sm bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20 transition-all"
@@ -197,6 +200,7 @@ export function PricingSection() {
                         href="#kontakt"
                         onClick={(e) => {
                           e.preventDefault();
+                          trackEvent('pricing_cta_click', { plan: `maintenance_${pkg.key}` });
                           document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
                         }}
                         className={`block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all ${

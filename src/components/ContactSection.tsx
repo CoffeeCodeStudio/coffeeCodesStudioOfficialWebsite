@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { trackEvent } from '@/lib/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -93,6 +94,7 @@ export function ContactSection() {
 
       setIsSubmitting(false);
       setIsSuccess(true);
+      trackEvent('contact_form_submit', { project_type: formData.projectType, budget: formData.budget });
       toast({ title: t.contact.success, description: t.contact.successMessage });
 
       setTimeout(() => {
