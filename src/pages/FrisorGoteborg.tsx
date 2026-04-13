@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import frisorMockup from '@/assets/frisor-mockup.jpg';
+import djLoboMockup from '@/assets/djlobo-mockup.jpg';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -60,47 +59,58 @@ function Hero() {
   );
 }
 
-/* ─── Mockup ─── */
-function MockupSection() {
-  const [imageError, setImageError] = useState(false);
-
+/* ─── Salon Preview Mockup ─── */
+function SalonPreviewSection() {
   return (
     <section className="pb-14 sm:pb-20 px-4">
       <div className="container mx-auto max-w-2xl">
+        <h2 className="text-2xl sm:text-3xl font-serif gradient-text text-center mb-8">
+          Så här kan din salongsida se ut
+        </h2>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          {/* Laptop bezel */}
           <div className="relative w-11/12 sm:w-10/12 mx-auto">
-            {/* Laptop bezel */}
             <div className="bg-muted rounded-t-xl pt-3 px-3 pb-0 shadow-2xl">
               <div className="flex items-center gap-1.5 mb-2 px-1">
                 <div className="w-2 h-2 rounded-full bg-red-500/60" />
                 <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
                 <div className="w-2 h-2 rounded-full bg-green-500/60" />
                 <span className="ml-3 text-[10px] text-muted-foreground/50 font-mono truncate">
-                  studiogoteborg.se
+                  din-salong.se
                 </span>
               </div>
-              {/* Screen */}
-              <div className="rounded-t-sm overflow-hidden">
-                {!imageError ? (
-                  <img
-                    src={frisorMockup}
-                    alt="Exempel på en frisörhemsida – Studio Göteborg"
-                    className="w-full h-auto block"
-                    loading="lazy"
-                    width="1080"
-                    height="675"
-                    onError={() => setImageError(true)}
-                  />
-                ) : (
-                  <div className="w-full aspect-[16/10] bg-gradient-to-br from-primary/15 via-primary/5 to-background flex items-center justify-center">
-                    <span className="text-muted-foreground text-sm">studiogoteborg.se</span>
-                  </div>
-                )}
+              {/* Screen content – styled preview */}
+              <div className="rounded-t-sm overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 aspect-[16/10] flex flex-col items-center justify-center gap-4 px-6">
+                <div className="w-10 h-[2px] bg-primary/40 rounded-full" />
+                <p className="text-xs sm:text-sm font-mono text-primary/70 tracking-widest uppercase">
+                  Förhandsvisning
+                </p>
+                <h3 className="text-lg sm:text-2xl font-serif text-foreground text-center">
+                  Din Frisörsalong
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground text-center tracking-wide">
+                  Prislista · Boka tid · Galleri
+                </p>
+                <Button
+                  size="sm"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full text-xs px-5 mt-1 pointer-events-none"
+                  tabIndex={-1}
+                >
+                  Boka tid
+                </Button>
+                <div className="flex gap-6 mt-2">
+                  {['Klippning', 'Färgning', 'Styling'].map((s) => (
+                    <div key={s} className="text-center">
+                      <div className="w-12 h-8 rounded bg-muted/60 mb-1" />
+                      <span className="text-[10px] text-muted-foreground">{s}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
             <div
@@ -109,9 +119,64 @@ function MockupSection() {
             />
             <div className="bg-muted/80 h-1.5 rounded-b-xl mx-auto" style={{ width: '40%' }} />
           </div>
-          <p className="text-sm text-muted-foreground font-mono text-center mt-4">
-            Exempel på en frisörhemsida – levererad på 5 dagar.
+
+          <p className="text-sm text-muted-foreground text-center mt-6 max-w-lg mx-auto leading-relaxed">
+            Detta är ett exempel på hur en modern hemsida för din salong skulle kunna se ut.
+            Jag bygger den skräddarsydd efter dina färger, bilder och behov – redo på 7 dagar.
           </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── DJ Lobo – Nöjd kund ─── */
+function CustomerCaseSection() {
+  const [imageError, setImageError] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
+
+  return (
+    <section className="py-10 sm:py-14 px-4" ref={ref}>
+      <div className="container mx-auto max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="glass-card rounded-2xl border border-border/30 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6"
+        >
+          {/* Small mockup */}
+          <div className="shrink-0 w-40 sm:w-48">
+            <div className="bg-muted rounded-lg overflow-hidden shadow-lg">
+              {!imageError ? (
+                <img
+                  src={djLoboMockup}
+                  alt="DJ Lobo Producciones – kundcase hemsida"
+                  className="w-full h-auto block"
+                  loading="lazy"
+                  width="1080"
+                  height="675"
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                <div className="w-full aspect-[16/10] bg-gradient-to-br from-primary/15 via-primary/5 to-background flex items-center justify-center">
+                  <span className="text-muted-foreground text-xs">djlobo-producciones.com</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Quote */}
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left gap-3">
+            <h3 className="text-sm font-mono text-primary tracking-widest uppercase">Nöjd kund</h3>
+            <Quote className="w-4 h-4 text-primary/50" />
+            <blockquote className="text-sm sm:text-base font-serif text-foreground italic leading-relaxed">
+              "Rami levererade snabbt och professionellt. Sajten är exakt vad jag behövde."
+            </blockquote>
+            <p className="text-xs font-mono text-muted-foreground">
+              — DJ Lobo Producciones
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -150,34 +215,6 @@ function BenefitsSection() {
             </motion.div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Testimonial ─── */
-function TestimonialSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
-
-  return (
-    <section className="py-10 px-4" ref={ref}>
-      <div className="container mx-auto max-w-2xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-center gap-4"
-        >
-          <Quote className="w-6 h-6 text-primary/60" />
-          <blockquote className="text-base sm:text-lg font-serif text-foreground italic leading-relaxed">
-            "Tack vare Coffee Code Studio fick vi en proffsig hemsida på nolltid.
-            Kunder bokar tid direkt via sidan!"
-          </blockquote>
-          <p className="text-sm font-mono text-primary tracking-wide">
-            — Emma, Salong Bläck, Göteborg
-          </p>
-        </motion.div>
       </div>
     </section>
   );
@@ -322,10 +359,7 @@ function FrisorContent() {
         addressLocality: 'Göteborg',
         addressCountry: 'SE',
       },
-      areaServed: {
-        '@type': 'City',
-        name: 'Göteborg',
-      },
+      areaServed: { '@type': 'City', name: 'Göteborg' },
       priceRange: 'från 4 900 kr',
       openingHoursSpecification: {
         '@type': 'OpeningHoursSpecification',
@@ -341,10 +375,7 @@ function FrisorContent() {
       mainEntity: faqItems.map((item) => ({
         '@type': 'Question',
         name: item.q,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: item.a,
-        },
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
       })),
     };
 
@@ -377,9 +408,9 @@ function FrisorContent() {
       <Navbar />
       <main>
         <Hero />
-        <MockupSection />
+        <SalonPreviewSection />
+        <CustomerCaseSection />
         <BenefitsSection />
-        <TestimonialSection />
         <StarterPricing />
         <FAQSectionLocal />
         <FinalCTA />
