@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Rocket, Zap, Sparkles, MessageCircle, Code, RocketIcon, ArrowRight } from 'lucide-react';
+import { Flame, Coffee, Sparkles, MessageCircle, Code, ArrowRight } from 'lucide-react';
 
-const serviceIcons = [Rocket, Zap, Sparkles];
-const stepIcons = [MessageCircle, Code, RocketIcon];
+const serviceIcons = [Flame, Coffee, Sparkles];
+const stepIcons = [MessageCircle, Code, Flame];
 
 export function TjansterSection() {
   const { t } = useLanguage();

@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer';
 import { ContactSection } from '@/components/ContactSection';
 import { SEOHead } from '@/components/SEOHead';
 import { Button } from '@/components/ui/button';
-import { Check, Clock, Banknote, Pencil, Quote } from 'lucide-react';
+import { CircleCheck, Clock, Banknote, Pencil, MessageSquareQuote } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
@@ -154,7 +154,7 @@ function CustomerCaseSection() {
           {/* Quote */}
           <div className="flex flex-col items-center sm:items-start text-center sm:text-left gap-3">
             <h3 className="text-sm font-mono text-primary tracking-widest uppercase">Nöjd kund</h3>
-            <Quote className="w-4 h-4 text-primary/50" />
+            <MessageSquareQuote className="w-4 h-4 text-primary/50" />
             <blockquote className="text-sm sm:text-base font-serif text-foreground italic leading-relaxed">
               "Rami levererade snabbt och professionellt. Sajten är exakt vad jag behövde."
             </blockquote>
@@ -240,7 +240,7 @@ function StarterPricing() {
           <ul className="space-y-3 mb-6">
             {features.map((f, i) => (
               <li key={i} className="flex items-center gap-2.5 text-sm">
-                <Check className="w-4 h-4 text-primary shrink-0" />
+                <CircleCheck className="w-4 h-4 text-primary shrink-0" />
                 <span className="text-foreground/80">{f}</span>
               </li>
             ))}

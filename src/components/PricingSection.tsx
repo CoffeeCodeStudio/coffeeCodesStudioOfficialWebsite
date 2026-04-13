@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Check, Zap as ZapIcon, Star, Rocket, Info, ChevronDown } from 'lucide-react';
+import { CircleCheck, Coffee, Crown, Flame, Info, ChevronDown } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
-  { key: 'bas' as const, icon: ZapIcon, highlighted: false },
-  { key: 'standard' as const, icon: Star, highlighted: true },
+  { key: 'bas' as const, icon: Coffee, highlighted: false },
+  { key: 'standard' as const, icon: Crown, highlighted: true },
 ];
 
 export function PricingSection() {
@@ -44,7 +44,7 @@ export function PricingSection() {
           >
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center shrink-0">
-                <ZapIcon className="w-6 h-6 text-muted-foreground" />
+                <Coffee className="w-6 h-6 text-muted-foreground" />
               </div>
               <div>
                 <h3 className="text-xl font-serif text-foreground">{p.starter.title}</h3>
@@ -58,7 +58,7 @@ export function PricingSection() {
             <ul className="space-y-3 mb-5 flex-1">
               {p.starter.features.map((feature: string, i: number) => (
                 <li key={i} className="flex items-center gap-2.5 text-sm">
-                  <Check className="w-4 h-4 text-primary shrink-0" />
+                    <CircleCheck className="w-4 h-4 text-primary shrink-0" />
                   <span className="text-foreground/80">{feature}</span>
                 </li>
               ))}
@@ -88,7 +88,7 @@ export function PricingSection() {
           >
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
-                <Rocket className="w-6 h-6 text-primary" />
+                <Flame className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <h3 className="text-xl font-serif text-foreground">{p.oneTime.title}</h3>
@@ -102,8 +102,8 @@ export function PricingSection() {
             <ul className="space-y-3 mb-5 flex-1">
               {p.oneTime.features.map((feature: string, i: number) => (
                 <li key={i} className="flex items-center gap-2.5 text-sm">
-                  <Check className="w-4 h-4 text-primary shrink-0" />
-                  <span className="text-foreground/80">{feature}</span>
+                    <CircleCheck className="w-4 h-4 text-primary shrink-0" />
+                    <span className="text-foreground/80">{feature}</span>
                 </li>
               ))}
             </ul>
@@ -192,7 +192,7 @@ export function PricingSection() {
                       <ul className="space-y-3 mb-8 flex-1">
                         {pkgData.features.map((feature: string, i: number) => (
                           <li key={i} className="flex items-start gap-2.5 text-sm">
-                            <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                            <CircleCheck className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                             <span className="text-foreground/80">{feature}</span>
                           </li>
                         ))}
