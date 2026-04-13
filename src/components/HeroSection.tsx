@@ -4,6 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import djloboMockupWebp from '@/assets/djlobo-mockup.webp';
 import djloboMockupPng from '@/assets/djlobo-mockup.png';
+import { trackEvent } from '@/lib/analytics';
 
 export function HeroSection() {
   const { t } = useLanguage();
@@ -39,7 +40,7 @@ export function HeroSection() {
           <Button
             size="lg"
             className="glow-button bg-primary text-primary-foreground hover:bg-primary/90 text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 rounded-full font-medium"
-            onClick={() => document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => { trackEvent('hero_cta_click', { location: 'hero' }); document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' }); }}
           >
             {t.hero.cta}
           </Button>
