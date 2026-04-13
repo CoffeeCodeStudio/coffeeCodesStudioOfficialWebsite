@@ -25,6 +25,7 @@ interface Translations {
     planning: string;
     solution: string;
     mockupTagline: string;
+    mockupAlt: string;
   };
   problem: {
     headline: string;
@@ -201,6 +202,7 @@ const translations: Record<Language, Translations> = {
       planning: 'Planering',
       solution: 'Lösning',
       mockupTagline: 'Byggt åt riktiga kunder i Göteborg',
+      mockupAlt: 'djloboproducciones.com — kundprojekt byggt av Coffee Code Studio',
     },
     problem: {
       headline: 'Trött på generiska mallar? Du förtjänar bättre.',
@@ -441,6 +443,7 @@ const translations: Record<Language, Translations> = {
       planning: 'Planning',
       solution: 'Solution',
       mockupTagline: 'Built for real clients in Gothenburg',
+      mockupAlt: 'djloboproducciones.com — client project built by Coffee Code Studio',
     },
     problem: {
       headline: 'Tired of generic templates? You deserve better.',

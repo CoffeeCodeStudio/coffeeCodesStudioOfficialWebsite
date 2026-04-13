@@ -66,7 +66,7 @@ export function HeroSection() {
                 {!imageError ? (
                   <img
                     src={djloboMockup}
-                    alt="djloboproducciones.com — kundprojekt byggt av Coffee Code Studio"
+                    alt={t.hero.mockupAlt}
                     className="w-full h-auto block"
                     loading="eager"
                     width="540"
