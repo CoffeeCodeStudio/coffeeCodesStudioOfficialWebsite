@@ -53,7 +53,7 @@ export function HeroSection() {
         >
           <div className="relative w-11/12 sm:w-10/12 md:w-9/12 lg:w-8/12 mx-auto">
             {/* Laptop bezel */}
-            <div className="bg-[#2a2a2e] rounded-t-xl pt-3 px-3 pb-0 shadow-2xl">
+            <div className="bg-muted rounded-t-xl pt-3 px-3 pb-0 shadow-2xl">
               {/* Browser dots */}
               <div className="flex items-center gap-1.5 mb-2 px-1">
                 <div className="w-2 h-2 rounded-full bg-red-500/60" />
@@ -81,8 +81,8 @@ export function HeroSection() {
               </div>
             </div>
           {/* Laptop base */}
-            <div className="bg-[#2a2a2e] h-3 rounded-b-lg mx-auto overflow-hidden" style={{ width: 'calc(100% + 20px)', marginLeft: '-10px', maxWidth: '110%' }} />
-            <div className="bg-[#222225] h-1.5 rounded-b-xl mx-auto" style={{ width: '40%' }} />
+            <div className="bg-muted h-3 rounded-b-lg mx-auto overflow-hidden" style={{ width: 'calc(100% + 20px)', marginLeft: '-10px', maxWidth: '110%' }} />
+            <div className="bg-muted/80 h-1.5 rounded-b-xl mx-auto" style={{ width: '40%' }} />
           </div>
 
           {/* Tagline under mockup */}
