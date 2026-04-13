@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import djloboMockupWebp from '@/assets/djlobo-mockup.webp';
 import djloboMockupPng from '@/assets/djlobo-mockup.png';
 import { trackEvent } from '@/lib/analytics';
+import { CodeRainBackground } from './CodeRainBackground';
 
 export function HeroSection() {
   const { t } = useLanguage();
