@@ -85,31 +85,18 @@ function SalonPreviewSection() {
                   din-salong.se
                 </span>
               </div>
-              {/* Screen content */}
-              <div
-                className="rounded-t-sm overflow-hidden bg-muted aspect-[16/10] flex flex-col items-center justify-center gap-4 px-6 relative"
-                role="img"
-                aria-label="Exempel på hemsida frisör göteborg – preview av en salongsida"
-              >
-                <span className="absolute top-2 right-2 text-xs bg-primary/20 text-primary px-2 py-1 rounded">
+              <div className="rounded-t-sm overflow-hidden relative">
+                <span className="absolute top-2 right-2 z-10 text-xs bg-primary/20 text-primary px-2 py-1 rounded">
                   Preview – inte en riktig kund
                 </span>
-                <p className="text-xs sm:text-sm font-mono text-primary/70 tracking-widest uppercase">
-                  Exempel: Frisörsalong
-                </p>
-                <h3 className="text-lg sm:text-2xl font-serif text-foreground text-center">
-                  Din Frisörsalong
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground text-center tracking-wide">
-                  Prislista · Boka tid · Galleri
-                </p>
-                <Button
-                  size="sm"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full text-xs px-5 mt-1 pointer-events-none"
-                  tabIndex={-1}
-                >
-                  Boka tid
-                </Button>
+                <img
+                  src={salonPreview}
+                  alt="Exempel på hemsida frisör göteborg – preview av en modern salongsida"
+                  className="w-full h-auto block"
+                  loading="lazy"
+                  width="960"
+                  height="600"
+                />
               </div>
             </div>
             <div
