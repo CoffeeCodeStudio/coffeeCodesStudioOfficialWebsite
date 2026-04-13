@@ -5,14 +5,37 @@ import { Cookie } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const CONSENT_KEY = 'ccs-cookie-consent';
+const GA4_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+
+function loadGoogleAnalytics(measurementId: string) {
+  if (window.gtag || document.getElementById('ga4-script')) return;
+
+  const script = document.createElement('script');
+  script.id = 'ga4-script';
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+  document.head.appendChild(script);
+
+  const inline = document.createElement('script');
+  inline.textContent = `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${measurementId}');
+  `;
+  document.head.appendChild(inline);
+}
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem(CONSENT_KEY);
+    if (consent === 'accepted') {
+      loadGoogleAnalytics(GA4_MEASUREMENT_ID);
+      return;
+    }
     if (!consent) {
-      // Small delay so banner doesn't flash on load
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
     }
@@ -21,6 +44,9 @@ export function CookieConsent() {
   const handleChoice = (choice: 'accepted' | 'declined') => {
     localStorage.setItem(CONSENT_KEY, choice);
     setVisible(false);
+    if (choice === 'accepted') {
+      loadGoogleAnalytics(GA4_MEASUREMENT_ID);
+    }
   };
 
   return (
