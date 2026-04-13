@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import frisorMockup from '@/assets/frisor-mockup.jpg';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -60,6 +61,8 @@ function Hero() {
 
 /* ─── Mockup ─── */
 function MockupSection() {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <section className="pb-14 sm:pb-20 px-4">
       <div className="container mx-auto max-w-2xl">
@@ -80,26 +83,23 @@ function MockupSection() {
                   studiogoteborg.se
                 </span>
               </div>
-              {/* Screen placeholder */}
+              {/* Screen */}
               <div className="rounded-t-sm overflow-hidden">
-                <div className="w-full aspect-[16/10] bg-gradient-to-br from-primary/15 via-primary/5 to-background flex flex-col items-center justify-center gap-3 p-8">
-                  <span className="text-2xl sm:text-3xl font-serif gradient-text">
-                    Studio Göteborg
-                  </span>
-                  <span className="text-xs sm:text-sm text-muted-foreground">
-                    Din salong i centrum · Boka tid online
-                  </span>
-                  <div className="flex gap-6 mt-3">
-                    {['Klippning', 'Färgning', 'Styling'].map((s) => (
-                      <span
-                        key={s}
-                        className="text-[10px] sm:text-xs text-primary/80 font-mono border border-primary/20 rounded-full px-3 py-1"
-                      >
-                        {s}
-                      </span>
-                    ))}
+                {!imageError ? (
+                  <img
+                    src={frisorMockup}
+                    alt="Exempel på en frisörhemsida – Studio Göteborg"
+                    className="w-full h-auto block"
+                    loading="lazy"
+                    width="1080"
+                    height="675"
+                    onError={() => setImageError(true)}
+                  />
+                ) : (
+                  <div className="w-full aspect-[16/10] bg-gradient-to-br from-primary/15 via-primary/5 to-background flex items-center justify-center">
+                    <span className="text-muted-foreground text-sm">studiogoteborg.se</span>
                   </div>
-                </div>
+                )}
               </div>
             </div>
             <div
