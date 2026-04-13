@@ -51,7 +51,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <div className="relative mx-auto" style={{ maxWidth: '540px' }}>
+          <div className="relative w-11/12 sm:w-10/12 md:w-9/12 lg:w-8/12 mx-auto">
             {/* Laptop bezel */}
             <div className="bg-[#2a2a2e] rounded-t-xl pt-3 px-3 pb-0 shadow-2xl">
               {/* Browser dots */}
