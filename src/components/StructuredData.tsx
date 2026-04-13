@@ -13,7 +13,7 @@ const structuredData = {
     "addressCountry": "SE"
   },
   "priceRange": "4900-9900 SEK",
-  "telephone": "+46 XX XXX XX XX",
+  "telephone": "+46 73 876 42 99",
   "sameAs": []
 };
 
