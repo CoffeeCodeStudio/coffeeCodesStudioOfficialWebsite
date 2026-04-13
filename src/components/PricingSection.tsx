@@ -65,10 +65,11 @@ export function PricingSection() {
             </ul>
             <p className="text-xs text-muted-foreground italic mb-5">{p.starter.note}</p>
             <a
-              href="#kontakt"
+              href="#kontakt?plan=starter"
               onClick={(e) => {
                 e.preventDefault();
                 trackEvent('pricing_cta_click', { plan: 'starter' });
+                window.location.hash = 'kontakt?plan=starter';
                 document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
               }}
               className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-muted text-foreground hover:bg-muted/80 border border-border/30"
@@ -108,10 +109,11 @@ export function PricingSection() {
             </ul>
             <p className="text-xs text-muted-foreground italic mb-5">{p.oneTime.note}</p>
             <a
-              href="#kontakt"
+              href="#kontakt?plan=onetime"
               onClick={(e) => {
                 e.preventDefault();
                 trackEvent('pricing_cta_click', { plan: 'onetime' });
+                window.location.hash = 'kontakt?plan=onetime';
                 document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
               }}
               className="block text-center py-3 px-8 rounded-xl font-medium text-sm bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20 transition-all"
@@ -197,10 +199,11 @@ export function PricingSection() {
                       </ul>
 
                       <a
-                        href="#kontakt"
+                        href={`#kontakt?plan=maintenance_${pkg.key}`}
                         onClick={(e) => {
                           e.preventDefault();
                           trackEvent('pricing_cta_click', { plan: `maintenance_${pkg.key}` });
+                          window.location.hash = `kontakt?plan=maintenance_${pkg.key}`;
                           document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
                         }}
                         className={`block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all ${
