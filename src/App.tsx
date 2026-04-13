@@ -15,6 +15,7 @@ import Integritetspolicy from "./pages/Integritetspolicy";
 import Cookiepolicy from "./pages/Cookiepolicy";
 import Anvandardvillkor from "./pages/Anvandardvillkor";
 import Projektfragor from "./pages/Projektfragor";
+import FrisorGoteborg from "./pages/FrisorGoteborg";
 import { CookieConsent } from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
