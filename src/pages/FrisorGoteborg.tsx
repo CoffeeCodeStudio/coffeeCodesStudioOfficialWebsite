@@ -317,10 +317,10 @@ function FinalCTA() {
           </h2>
           <Button
             size="lg"
-            className="glow-button bg-primary text-primary-foreground hover:bg-primary/90 text-base sm:text-lg px-8 py-6 rounded-full font-medium"
+            className="glow-button bg-primary text-primary-foreground hover:bg-primary/90 text-sm sm:text-lg px-6 sm:px-8 py-4 sm:py-6 rounded-full font-medium max-w-full"
             onClick={scrollToContact}
           >
-            Boka gratis konsultation – tar 15 minuter
+            Boka gratis konsultation
           </Button>
         </motion.div>
       </div>
