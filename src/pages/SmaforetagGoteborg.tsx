@@ -439,6 +439,7 @@ function SmaforetagContent() {
       <Navbar />
       <main>
         <Hero />
+        <BusinessPreviewSection />
         <CaseSection />
         <BenefitsSection />
         <ProcessSection />
