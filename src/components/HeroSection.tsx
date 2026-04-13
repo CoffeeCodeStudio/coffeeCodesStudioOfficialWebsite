@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import djloboMockupWebp from '@/assets/djlobo-mockup.webp';
 import djloboMockupPng from '@/assets/djlobo-mockup.png';
 import { trackEvent } from '@/lib/analytics';
+import { CodeRainBackground } from './CodeRainBackground';
 
 export function HeroSection() {
   const { t } = useLanguage();
@@ -12,6 +13,7 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-0 flex-col pt-28 sm:pt-32 pb-0 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
+      <CodeRainBackground />
       <div className="container mx-auto px-5 sm:px-6 relative z-10">
         <motion.h1
           className="text-[1.75rem] sm:text-4xl md:text-6xl lg:text-7xl font-serif text-center max-w-4xl mx-auto leading-tight mb-3 sm:mb-6"
