@@ -127,8 +127,8 @@ export function CodeRainBackground({ columns = 28 }: CodeRainBackgroundProps) {
       className="fixed inset-0 pointer-events-none"
       style={{
         zIndex: 0,
-        maskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 90%)',
-        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 90%)',
+        maskImage: 'linear-gradient(to bottom, black 0%, black 35%, transparent 70%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 35%, transparent 70%)',
       }}
       aria-hidden="true"
     />
