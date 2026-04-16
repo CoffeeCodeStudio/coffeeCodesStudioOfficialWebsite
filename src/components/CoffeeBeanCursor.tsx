@@ -51,11 +51,24 @@ export const CoffeeBeanCursor = () => {
   }, []);
 
   useEffect(() => {
+    const STYLE_ID = "cb-cursor-hide-style";
     if (!enabled) {
       document.body.style.cursor = "";
+      document.getElementById(STYLE_ID)?.remove();
       return;
     }
     document.body.style.cursor = "none";
+
+    // Force-hide native cursor on ALL elements (overrides hover hand, text I-beam, etc.)
+    let styleEl = document.getElementById(STYLE_ID) as HTMLStyleElement | null;
+    if (!styleEl) {
+      styleEl = document.createElement("style");
+      styleEl.id = STYLE_ID;
+      styleEl.textContent = `
+        html, body, *, *::before, *::after { cursor: none !important; }
+      `;
+      document.head.appendChild(styleEl);
+    }
 
     const onMove = (e: MouseEvent) => {
       setPos({ x: e.clientX, y: e.clientY });
