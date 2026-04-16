@@ -169,6 +169,7 @@ export const CoffeeBeanCursor = () => {
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
       document.body.style.cursor = "";
+      document.getElementById(STYLE_ID)?.remove();
     };
   }, [enabled]);
 
