@@ -69,13 +69,17 @@ export const CoffeeBeanCursor = () => {
 
       const dx = e.clientX - lastSpawnRef.current.x;
       const dy = e.clientY - lastSpawnRef.current.y;
-      if (dx * dx + dy * dy > 400) {
+      if (dx * dx + dy * dy > 600) {
         lastSpawnRef.current = { x: e.clientX, y: e.clientY };
         const id = ++idRef.current;
-        setParticles((prev) => [...prev, { id, x: e.clientX, y: e.clientY }].slice(-20));
+        // Slight horizontal jitter for natural drift
+        const jitterX = (Math.random() - 0.5) * 8;
+        setParticles((prev) =>
+          [...prev, { id, x: e.clientX + jitterX, y: e.clientY - 4 }].slice(-15)
+        );
         window.setTimeout(() => {
           setParticles((prev) => prev.filter((p) => p.id !== id));
-        }, 500);
+        }, 900);
       }
     };
 
@@ -163,14 +167,21 @@ export const CoffeeBeanCursor = () => {
 
   return (
     <>
-      {/* Trail particles */}
-      {particles.map((p) => (
-        <span
-          key={p.id}
-          className="cb-cursor-particle"
-          style={{ left: p.x, top: p.y }}
-        />
-      ))}
+      {/* Steam trail */}
+      {particles.map((p) => {
+        const drift = ((p.id % 7) - 3) * 2; // -6..+6 px
+        return (
+          <span
+            key={p.id}
+            className="cb-cursor-particle"
+            style={{
+              left: p.x,
+              top: p.y,
+              ["--cb-drift" as string]: `${drift}px`,
+            }}
+          />
+        );
+      })}
 
       {/* Click burst particles */}
       {bursts.map((b) => (
@@ -237,19 +248,21 @@ export const CoffeeBeanCursor = () => {
       <style>{`
         .cb-cursor-particle {
           position: fixed;
-          width: 6px;
-          height: 6px;
-          margin-left: -3px;
-          margin-top: -3px;
-          background: #D4A373;
+          width: 14px;
+          height: 14px;
+          margin-left: -7px;
+          margin-top: -7px;
+          background: radial-gradient(circle, rgba(255,255,255,0.55) 0%, rgba(220,220,220,0.25) 45%, rgba(200,200,200,0) 75%);
           border-radius: 50%;
+          filter: blur(3px);
           pointer-events: none;
           z-index: 9998;
-          animation: cb-fade 500ms ease-out forwards;
+          animation: cb-steam 900ms ease-out forwards;
         }
-        @keyframes cb-fade {
-          0% { opacity: 0.8; transform: scale(1); }
-          100% { opacity: 0; transform: scale(0.2); }
+        @keyframes cb-steam {
+          0%   { opacity: 0; transform: translate(0, 0) scale(0.6); }
+          20%  { opacity: 0.55; }
+          100% { opacity: 0; transform: translate(var(--cb-drift, -4px), -28px) scale(2.2); }
         }
         .cb-cursor-burst {
           position: fixed;
