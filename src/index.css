@@ -95,8 +95,13 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+    font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1.15;
+  }
+
+  h1, h2 {
+    font-weight: 700;
   }
 
   h1 {
