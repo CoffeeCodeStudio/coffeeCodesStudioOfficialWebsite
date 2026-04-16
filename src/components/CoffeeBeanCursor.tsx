@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 
 interface Particle {
   id: number;
@@ -14,6 +15,8 @@ interface BurstParticle {
   dy: number;
 }
 
+const MUTE_KEY = "cb-cursor-muted";
+
 export const CoffeeBeanCursor = () => {
   const [enabled, setEnabled] = useState(false);
   const [pos, setPos] = useState({ x: -100, y: -100 });
@@ -22,8 +25,21 @@ export const CoffeeBeanCursor = () => {
   const [clicking, setClicking] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
   const [bursts, setBursts] = useState<BurstParticle[]>([]);
+  const [muted, setMuted] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.localStorage.getItem(MUTE_KEY) === "1";
+  });
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const mutedRef = useRef(muted);
   const lastSpawnRef = useRef({ x: 0, y: 0 });
   const idRef = useRef(0);
+
+  useEffect(() => {
+    mutedRef.current = muted;
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(MUTE_KEY, muted ? "1" : "0");
+    }
+  }, [muted]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
