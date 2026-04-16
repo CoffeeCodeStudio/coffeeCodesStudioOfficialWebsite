@@ -223,6 +223,17 @@ export const CoffeeBeanCursor = () => {
         />
       </div>
 
+      {/* Mute toggle (desktop only — component returns null on touch) */}
+      <button
+        type="button"
+        onClick={() => setMuted((m) => !m)}
+        aria-label={muted ? "Slå på cursor-ljud" : "Stäng av cursor-ljud"}
+        title={muted ? "Slå på cursor-ljud" : "Stäng av cursor-ljud"}
+        className="fixed bottom-4 right-4 z-[9997] w-9 h-9 rounded-full flex items-center justify-center bg-card/70 backdrop-blur-md border border-border/50 text-muted-foreground hover:text-foreground hover:bg-card transition-colors shadow-md"
+      >
+        {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+      </button>
+
       <style>{`
         .cb-cursor-particle {
           position: fixed;
