@@ -6,12 +6,22 @@ interface Particle {
   y: number;
 }
 
+interface BurstParticle {
+  id: number;
+  x: number;
+  y: number;
+  dx: number;
+  dy: number;
+}
+
 export const CoffeeBeanCursor = () => {
   const [enabled, setEnabled] = useState(false);
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [hovering, setHovering] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [clicking, setClicking] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
+  const [bursts, setBursts] = useState<BurstParticle[]>([]);
   const lastSpawnRef = useRef({ x: 0, y: 0 });
   const idRef = useRef(0);
 
@@ -35,14 +45,12 @@ export const CoffeeBeanCursor = () => {
       setPos({ x: e.clientX, y: e.clientY });
       setVisible(true);
 
-      // Hover detection
       const el = e.target as HTMLElement | null;
       const interactive = !!el?.closest(
         'a, button, input, textarea, select, [role="button"], [role="link"], label, summary, [tabindex]:not([tabindex="-1"])'
       );
       setHovering(interactive);
 
-      // Distance-based particle spawn (perf)
       const dx = e.clientX - lastSpawnRef.current.x;
       const dy = e.clientY - lastSpawnRef.current.y;
       if (dx * dx + dy * dy > 400) {
@@ -58,12 +66,43 @@ export const CoffeeBeanCursor = () => {
     const onLeave = () => setVisible(false);
     const onEnter = () => setVisible(true);
 
+    const onDown = (e: MouseEvent) => {
+      setClicking(true);
+      // Burst of particles in a radial pattern
+      const count = 10;
+      const newBursts: BurstParticle[] = [];
+      for (let i = 0; i < count; i++) {
+        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
+        const dist = 28 + Math.random() * 18;
+        const id = ++idRef.current;
+        newBursts.push({
+          id,
+          x: e.clientX,
+          y: e.clientY,
+          dx: Math.cos(angle) * dist,
+          dy: Math.sin(angle) * dist,
+        });
+      }
+      setBursts((prev) => [...prev, ...newBursts].slice(-40));
+      const ids = newBursts.map((b) => b.id);
+      window.setTimeout(() => {
+        setBursts((prev) => prev.filter((b) => !ids.includes(b.id)));
+      }, 600);
+    };
+    const onUp = () => {
+      window.setTimeout(() => setClicking(false), 180);
+    };
+
     window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("mouseup", onUp);
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("mouseenter", onEnter);
 
     return () => {
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mousedown", onDown);
+      window.removeEventListener("mouseup", onUp);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
       document.body.style.cursor = "";
@@ -73,18 +112,30 @@ export const CoffeeBeanCursor = () => {
   if (!enabled) return null;
 
   const beanColor = hovering ? "#C8923D" : "#6F4E37";
-  const size = hovering ? 22 : 16;
+  const baseSize = hovering ? 22 : 16;
+  const scale = clicking ? 0.7 : 1;
 
   return (
     <>
-      {/* Particles */}
+      {/* Trail particles */}
       {particles.map((p) => (
         <span
           key={p.id}
           className="cb-cursor-particle"
+          style={{ left: p.x, top: p.y }}
+        />
+      ))}
+
+      {/* Click burst particles */}
+      {bursts.map((b) => (
+        <span
+          key={b.id}
+          className="cb-cursor-burst"
           style={{
-            left: p.x,
-            top: p.y,
+            left: b.x,
+            top: b.y,
+            ["--cb-dx" as string]: `${b.dx}px`,
+            ["--cb-dy" as string]: `${b.dy}px`,
           }}
         />
       ))}
@@ -92,13 +143,14 @@ export const CoffeeBeanCursor = () => {
       {/* Coffee bean */}
       <div
         aria-hidden
+        className={clicking ? "cb-cursor-bean cb-bounce" : "cb-cursor-bean"}
         style={{
           position: "fixed",
           left: pos.x,
           top: pos.y,
-          width: size,
-          height: size * 1.35,
-          transform: "translate(-50%, -50%) rotate(-25deg)",
+          width: baseSize,
+          height: baseSize * 1.35,
+          transform: `translate(-50%, -50%) rotate(-25deg) scale(${scale})`,
           borderRadius: "50%",
           background: beanColor,
           boxShadow: `inset 0 0 0 1px rgba(0,0,0,0.25), 0 2px 6px rgba(0,0,0,0.35)`,
@@ -106,11 +158,10 @@ export const CoffeeBeanCursor = () => {
           zIndex: 9999,
           opacity: visible ? 1 : 0,
           transition:
-            "width 120ms ease, height 120ms ease, background-color 160ms ease, opacity 160ms ease",
+            "width 120ms ease, height 120ms ease, background-color 160ms ease, opacity 160ms ease, transform 140ms cubic-bezier(.34,1.56,.64,1)",
           willChange: "transform, left, top",
         }}
       >
-        {/* Crease */}
         <span
           style={{
             position: "absolute",
@@ -143,8 +194,28 @@ export const CoffeeBeanCursor = () => {
           0% { opacity: 0.8; transform: scale(1); }
           100% { opacity: 0; transform: scale(0.2); }
         }
+        .cb-cursor-burst {
+          position: fixed;
+          width: 5px;
+          height: 7px;
+          margin-left: -2.5px;
+          margin-top: -3.5px;
+          background: #6F4E37;
+          border-radius: 50%;
+          box-shadow: inset 0 0 0 1px rgba(0,0,0,0.3);
+          pointer-events: none;
+          z-index: 9998;
+          animation: cb-burst 600ms cubic-bezier(.22,.61,.36,1) forwards;
+        }
+        @keyframes cb-burst {
+          0% { opacity: 1; transform: translate(0,0) scale(1) rotate(-25deg); }
+          100% {
+            opacity: 0;
+            transform: translate(var(--cb-dx), var(--cb-dy)) scale(0.3) rotate(20deg);
+          }
+        }
         @media (pointer: coarse) {
-          .cb-cursor-particle { display: none; }
+          .cb-cursor-particle, .cb-cursor-burst { display: none; }
         }
       `}</style>
     </>
