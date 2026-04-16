@@ -100,12 +100,28 @@
     line-height: 1.15;
   }
 
-  h1, h2 {
+  h1 {
     font-weight: 700;
+    font-size: clamp(2.25rem, 5vw + 1rem, 4.5rem);
+    letter-spacing: -0.04em;
   }
 
-  h1 {
-    letter-spacing: -0.04em;
+  h2 {
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw + 0.75rem, 3rem);
+  }
+
+  h3 {
+    font-size: clamp(1.375rem, 1.5vw + 0.75rem, 2rem);
+  }
+
+  h4 {
+    font-size: clamp(1.125rem, 0.8vw + 0.75rem, 1.5rem);
+  }
+
+  p {
+    font-size: clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
+    line-height: 1.7;
   }
 
   p {
