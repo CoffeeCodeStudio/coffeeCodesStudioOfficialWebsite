@@ -18,6 +18,7 @@ import Projektfragor from "./pages/Projektfragor";
 import FrisorGoteborg from "./pages/FrisorGoteborg";
 import SmaforetagGoteborg from "./pages/SmaforetagGoteborg";
 import { CookieConsent } from "./components/CookieConsent";
+import { CoffeeBeanCursor } from "./components/CoffeeBeanCursor";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <CookieConsent />
+        <CoffeeBeanCursor />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
