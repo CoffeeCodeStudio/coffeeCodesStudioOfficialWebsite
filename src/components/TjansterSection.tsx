@@ -3,18 +3,9 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Flame, Coffee, Sparkles, MessageCircle, Code, ArrowRight } from 'lucide-react';
-import frameCoffeeFlow from '@/assets/frame-coffee-flow.png';
-import frameCoffeeBranches from '@/assets/frame-coffee-branches.png';
-import frameBronzeFiligree from '@/assets/frame-bronze-filigree.png';
 
 const serviceIcons = [Flame, Coffee, Sparkles];
 const stepIcons = [MessageCircle, Code, Flame];
-const serviceFrames = [frameCoffeeFlow, frameCoffeeBranches, frameBronzeFiligree];
-const serviceFrameAlts = [
-  'Ram av flytande kaffe med kaffebönor',
-  'Ram av kaffegrenar med kaffekvarn',
-  'Ram av brons-filigran med Moka-kanna',
-];
 
 export function TjansterSection() {
   const { t } = useLanguage();
@@ -57,41 +48,25 @@ export function TjansterSection() {
             return (
               <motion.div
                 key={index}
-                className="relative p-6 sm:p-8 rounded-2xl group"
+                className="glass-card cyber-border p-6 sm:p-8 rounded-2xl relative overflow-hidden group"
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
                 whileHover={{ y: -5 }}
               >
-                {/* Inner card surface */}
-                <div className="absolute inset-[18px] rounded-xl bg-card/40 backdrop-blur-sm pointer-events-none" />
-
-                {/* Decorative coffee frame */}
-                <img
-                  src={serviceFrames[index]}
-                  alt={serviceFrameAlts[index]}
-                  loading="lazy"
-                  width={1024}
-                  height={1024}
-                  className="absolute inset-0 w-full h-full pointer-events-none select-none object-fill drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
-                  draggable={false}
-                />
-
-                <div className="relative z-10">
-                  <motion.div
-                    className={`w-12 h-12 mb-4 rounded-xl flex items-center justify-center ${
-                      index === 0 ? 'bg-primary/20 text-primary' :
-                      index === 1 ? 'bg-secondary/20 text-secondary' :
-                      'bg-accent/20 text-accent'
-                    }`}
-                    whileHover={{ rotate: [0, -10, 10, 0] }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <Icon className="w-6 h-6" />
-                  </motion.div>
-                  <h3 className="text-lg font-serif mb-2 text-foreground">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
-                </div>
+                <motion.div
+                  className={`w-12 h-12 mb-4 rounded-xl flex items-center justify-center ${
+                    index === 0 ? 'bg-primary/20 text-primary' :
+                    index === 1 ? 'bg-secondary/20 text-secondary' :
+                    'bg-accent/20 text-accent'
+                  }`}
+                  whileHover={{ rotate: [0, -10, 10, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Icon className="w-6 h-6" />
+                </motion.div>
+                <h3 className="text-lg font-serif mb-2 text-foreground">{service.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
               </motion.div>
             );
           })}
