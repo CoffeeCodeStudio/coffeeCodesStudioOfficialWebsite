@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 
 interface Particle {
   id: number;
@@ -14,6 +15,8 @@ interface BurstParticle {
   dy: number;
 }
 
+const MUTE_KEY = "cb-cursor-muted";
+
 export const CoffeeBeanCursor = () => {
   const [enabled, setEnabled] = useState(false);
   const [pos, setPos] = useState({ x: -100, y: -100 });
@@ -22,8 +25,21 @@ export const CoffeeBeanCursor = () => {
   const [clicking, setClicking] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
   const [bursts, setBursts] = useState<BurstParticle[]>([]);
+  const [muted, setMuted] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.localStorage.getItem(MUTE_KEY) === "1";
+  });
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const mutedRef = useRef(muted);
   const lastSpawnRef = useRef({ x: 0, y: 0 });
   const idRef = useRef(0);
+
+  useEffect(() => {
+    mutedRef.current = muted;
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(MUTE_KEY, muted ? "1" : "0");
+    }
+  }, [muted]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -66,8 +82,38 @@ export const CoffeeBeanCursor = () => {
     const onLeave = () => setVisible(false);
     const onEnter = () => setVisible(true);
 
+    const playClick = () => {
+      if (mutedRef.current) return;
+      try {
+        const Ctx =
+          window.AudioContext ||
+          (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        if (!Ctx) return;
+        if (!audioCtxRef.current) audioCtxRef.current = new Ctx();
+        const ctx = audioCtxRef.current;
+        if (ctx.state === "suspended") ctx.resume();
+        const now = ctx.currentTime;
+
+        // Soft "tock" — short low-mid sine with quick decay
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(420, now);
+        osc.frequency.exponentialRampToValueAtTime(180, now + 0.08);
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(0.06, now + 0.005);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.14);
+      } catch {
+        // ignore audio errors
+      }
+    };
+
     const onDown = (e: MouseEvent) => {
       setClicking(true);
+      playClick();
       // Burst of particles in a radial pattern
       const count = 10;
       const newBursts: BurstParticle[] = [];
@@ -176,6 +222,17 @@ export const CoffeeBeanCursor = () => {
           }}
         />
       </div>
+
+      {/* Mute toggle (desktop only — component returns null on touch) */}
+      <button
+        type="button"
+        onClick={() => setMuted((m) => !m)}
+        aria-label={muted ? "Slå på cursor-ljud" : "Stäng av cursor-ljud"}
+        title={muted ? "Slå på cursor-ljud" : "Stäng av cursor-ljud"}
+        className="fixed bottom-4 right-4 z-[9997] w-9 h-9 rounded-full flex items-center justify-center bg-card/70 backdrop-blur-md border border-border/50 text-muted-foreground hover:text-foreground hover:bg-card transition-colors shadow-md"
+      >
+        {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+      </button>
 
       <style>{`
         .cb-cursor-particle {
