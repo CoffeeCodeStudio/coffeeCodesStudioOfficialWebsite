@@ -82,8 +82,38 @@ export const CoffeeBeanCursor = () => {
     const onLeave = () => setVisible(false);
     const onEnter = () => setVisible(true);
 
+    const playClick = () => {
+      if (mutedRef.current) return;
+      try {
+        const Ctx =
+          window.AudioContext ||
+          (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        if (!Ctx) return;
+        if (!audioCtxRef.current) audioCtxRef.current = new Ctx();
+        const ctx = audioCtxRef.current;
+        if (ctx.state === "suspended") ctx.resume();
+        const now = ctx.currentTime;
+
+        // Soft "tock" — short low-mid sine with quick decay
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(420, now);
+        osc.frequency.exponentialRampToValueAtTime(180, now + 0.08);
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(0.06, now + 0.005);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.14);
+      } catch {
+        // ignore audio errors
+      }
+    };
+
     const onDown = (e: MouseEvent) => {
       setClicking(true);
+      playClick();
       // Burst of particles in a radial pattern
       const count = 10;
       const newBursts: BurstParticle[] = [];
