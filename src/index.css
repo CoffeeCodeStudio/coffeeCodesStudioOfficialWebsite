@@ -89,10 +89,26 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    letter-spacing: -0.01em;
+    line-height: 1.65;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  h1 {
+    letter-spacing: -0.04em;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  button, a {
+    letter-spacing: -0.005em;
   }
 }
 
