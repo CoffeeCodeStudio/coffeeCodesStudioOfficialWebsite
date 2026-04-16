@@ -125,7 +125,11 @@ export function CodeRainBackground({ columns = 28 }: CodeRainBackgroundProps) {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: 0 }}
+      style={{
+        zIndex: 0,
+        maskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 90%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 90%)',
+      }}
       aria-hidden="true"
     />
   );
