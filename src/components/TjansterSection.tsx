@@ -36,7 +36,7 @@ export function TjansterSection() {
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif mb-4 sm:mb-6">
             <span className="gradient-text">{t.services.headline}</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground reading-width">
             {t.services.intro}
           </p>
         </motion.div>

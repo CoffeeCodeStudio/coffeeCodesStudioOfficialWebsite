@@ -158,7 +158,7 @@ export function ContactSection() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-3 sm:mb-4">
             <span className="gradient-text">{t.contact.headline}</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto px-2">
+          <p className="text-base sm:text-lg text-muted-foreground reading-width px-2">
             {t.contact.intro}
           </p>
         </motion.div>
