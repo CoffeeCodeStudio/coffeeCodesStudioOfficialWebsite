@@ -1,4 +1,20 @@
-/* Typography — fluid font scale, headings, body */
+/**
+ * typography.css — Global type scale and reading rules
+ *
+ * Responsibility:
+ *   Base body styles, fluid heading scale (h1–h4 with `clamp()`), paragraph
+ *   sizing and the `.reading-width` utility (max 65ch) for long-form text.
+ *
+ * Adding new rules:
+ *   - Global element styles (e.g. `blockquote`, `code`) → add inside `@layer base`.
+ *   - New text utility (e.g. `.text-display`) → add inside `@layer base` and
+ *     prefer `clamp(min, fluid, max)` so it scales mobile → desktop automatically.
+ *   - Always use design tokens (`text-foreground`, `text-muted-foreground`),
+ *     never hard-coded hex/rgb colors.
+ *
+ * Do NOT put colors, components, or layout spacing here.
+ */
+
 
 @layer base {
   * {

@@ -1,4 +1,23 @@
-/* Animation utilities and keyframes */
+/**
+ * animations.css — Animation utilities, keyframes, and scrollbar styling
+ *
+ * Responsibility:
+ *   Utility classes (`.hover-scale`, `.animate-fade-in`, `.animate-fade-in-up`,
+ *   `.animate-glow-pulse`), the `@keyframes` definitions they reference, and
+ *   global scrollbar styling.
+ *
+ * Adding new rules:
+ *   - New utility → add inside `@layer utilities` and reference a keyframe below.
+ *   - New keyframe → declare at the file root (outside `@layer`) so it's globally
+ *     available; name it descriptively (e.g. `slide-in-right`, not `anim-3`).
+ *   - Prefer compositor-friendly properties (`opacity`, `transform`) over
+ *     `width`/`height`/`top`/`left` for smoother performance.
+ *   - For one-off motion in a component, prefer `framer-motion` instead of
+ *     adding a keyframe here.
+ *
+ * Do NOT put tokens, typography, spacing, or component classes here.
+ */
+
 
 @layer utilities {
   .hover-scale {
