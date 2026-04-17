@@ -59,4 +59,14 @@
   .mb-fluid-block {
     margin-bottom: clamp(2.5rem, 4vw + 1rem, 5rem);
   }
+
+  /* Fluid grid gap — for card grids inside sections (e.g. pricing, services) */
+  .gap-fluid-grid {
+    gap: clamp(1rem, 1.5vw + 0.5rem, 2rem);
+  }
+
+  /* Fluid section gap — wider rhythm for major two-column splits (e.g. about) */
+  .gap-fluid-section {
+    gap: clamp(2rem, 3vw + 1rem, 3.5rem);
+  }
 }
