@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { CircleCheck, Coffee, Crown, Flame, Info, ChevronDown } from 'lucide-react';
+import { Coffee, Crown, Info, ChevronDown } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
@@ -14,6 +14,8 @@ export function PricingSection() {
   const { t } = useLanguage();
   const p = t.pricing;
   const [maintenanceOpen, setMaintenanceOpen] = useState(false);
+
+  const featureLine = (features: string[]) => features.join(' · ');
 
   return (
     <section id="priser" className="relative overflow-hidden">
@@ -34,36 +36,30 @@ export function PricingSection() {
 
         {/* Starter + One-time Project — side by side */}
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-8">
-          {/* Starter Card — clean, simple */}
+          {/* Starter Card */}
           <motion.div
-            className="glass-card rounded-2xl p-8 border border-border/30 hover:border-primary/20 transition-all flex flex-col"
+            className="bg-transparent border border-primary/20 rounded-2xl p-10 hover:border-primary/30 transition-all flex flex-col"
+            style={{ borderWidth: '0.5px' }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center shrink-0">
-                <Coffee className="w-6 h-6 text-muted-foreground" />
-              </div>
-              <div>
-                <h3 className="text-xl font-serif text-foreground">{p.starter.title}</h3>
-                <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-3xl font-bold text-primary">{p.starter.price}</span>
-                  <span className="text-muted-foreground text-sm">kr</span>
-                </div>
-              </div>
+            <h3 className="text-xl font-serif text-foreground mb-3">{p.starter.title}</h3>
+            <div className="flex items-baseline gap-1.5 mb-6">
+              <span className="text-4xl font-light text-foreground">{p.starter.price}</span>
+              <span className="text-xs text-muted-foreground tracking-wider">SEK</span>
             </div>
-            <p className="text-muted-foreground text-sm mb-5">{p.starter.description}</p>
-            <ul className="space-y-3 mb-5 flex-1">
-              {p.starter.features.map((feature: string, i: number) => (
-                <li key={i} className="flex items-center gap-2.5 text-sm">
-                    <CircleCheck className="w-4 h-4 text-primary shrink-0" />
-                  <span className="text-foreground/80">{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-xs text-muted-foreground italic mb-5">{p.starter.note}</p>
+
+            <p className="text-muted-foreground text-sm mb-6">{p.starter.description}</p>
+
+            <div className="border-t border-primary/10 pt-6 mb-6 flex-1">
+              <p className="text-sm text-foreground/70 leading-relaxed">
+                {featureLine(p.starter.features)}
+              </p>
+            </div>
+
+            <p className="text-xs text-muted-foreground italic mb-6">{p.starter.note}</p>
             <a
               href="#kontakt?plan=starter"
               onClick={(e) => {
@@ -72,42 +68,37 @@ export function PricingSection() {
                 window.location.hash = 'kontakt?plan=starter';
                 document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-muted text-foreground hover:bg-muted/80 border border-border/30"
+              className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-transparent text-primary hover:bg-primary/5"
+              style={{ border: '0.5px solid hsl(var(--primary) / 0.3)' }}
             >
               {p.starter.cta}
             </a>
           </motion.div>
 
-          {/* One-time Project Card — prominent */}
+          {/* One-time Project Card — highlighted */}
           <motion.div
-            className="glass-card rounded-2xl p-8 border-2 border-primary/30 shadow-[0_0_50px_-12px_hsl(var(--primary)/0.25)] hover:border-primary/50 transition-all flex flex-col"
+            className="bg-transparent border border-primary/40 rounded-2xl p-10 hover:border-primary/60 transition-all flex flex-col"
+            style={{ borderWidth: '0.5px' }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
-                <Flame className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-xl font-serif text-foreground">{p.oneTime.title}</h3>
-                <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-3xl font-bold text-primary">{p.oneTime.price}</span>
-                  <span className="text-muted-foreground text-sm">kr</span>
-                </div>
-              </div>
+            <h3 className="text-xl font-serif text-foreground mb-3">{p.oneTime.title}</h3>
+            <div className="flex items-baseline gap-1.5 mb-6">
+              <span className="text-4xl font-light text-foreground">{p.oneTime.price}</span>
+              <span className="text-xs text-muted-foreground tracking-wider">SEK</span>
             </div>
-            <p className="text-muted-foreground text-sm mb-5">{p.oneTime.description}</p>
-            <ul className="space-y-3 mb-5 flex-1">
-              {p.oneTime.features.map((feature: string, i: number) => (
-                <li key={i} className="flex items-center gap-2.5 text-sm">
-                    <CircleCheck className="w-4 h-4 text-primary shrink-0" />
-                    <span className="text-foreground/80">{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-xs text-muted-foreground italic mb-5">{p.oneTime.note}</p>
+
+            <p className="text-muted-foreground text-sm mb-6">{p.oneTime.description}</p>
+
+            <div className="border-t border-primary/10 pt-6 mb-6 flex-1">
+              <p className="text-sm text-foreground/70 leading-relaxed">
+                {featureLine(p.oneTime.features)}
+              </p>
+            </div>
+
+            <p className="text-xs text-muted-foreground italic mb-6">{p.oneTime.note}</p>
             <a
               href="#kontakt?plan=onetime"
               onClick={(e) => {
@@ -116,7 +107,8 @@ export function PricingSection() {
                 window.location.hash = 'kontakt?plan=onetime';
                 document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="block text-center py-3 px-8 rounded-xl font-medium text-sm bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20 transition-all"
+              className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-transparent text-primary hover:bg-primary/5"
+              style={{ border: '0.5px solid hsl(var(--primary) / 0.3)' }}
             >
               {p.oneTime.cta}
             </a>
@@ -148,15 +140,15 @@ export function PricingSection() {
               <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                 {packages.map((pkg, index) => {
                   const pkgData = p.packages[pkg.key];
-                  const Icon = pkg.icon;
                   return (
                     <motion.div
                       key={pkg.key}
-                      className={`relative glass-card rounded-2xl p-8 transition-all duration-300 hover:scale-[1.02] flex flex-col ${
+                      className={`relative bg-transparent rounded-2xl p-10 transition-all duration-300 flex flex-col ${
                         pkg.highlighted
-                          ? 'border-2 border-primary/30 shadow-[0_0_50px_-12px_hsl(var(--primary)/0.25)] hover:border-primary/50'
-                          : 'border border-border/30 hover:border-primary/20'
+                          ? 'border border-primary/40 hover:border-primary/60'
+                          : 'border border-primary/20 hover:border-primary/30'
                       }`}
+                      style={{ borderWidth: '0.5px' }}
                       initial={{ opacity: 0, y: 40 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.15 }}
@@ -166,11 +158,8 @@ export function PricingSection() {
                           {p.popular}
                         </div>
                       )}
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${pkg.highlighted ? 'bg-primary/15' : 'bg-muted'}`}>
-                        <Icon className={`w-6 h-6 ${pkg.highlighted ? 'text-primary' : 'text-muted-foreground'}`} />
-                      </div>
 
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-center gap-2 mb-3">
                         <h3 className="text-xl font-serif text-foreground">{pkgData.name}</h3>
                         <TooltipProvider delayDuration={200}>
                           <Tooltip>
@@ -183,20 +172,18 @@ export function PricingSection() {
                           </Tooltip>
                         </TooltipProvider>
                       </div>
-                      <div className="flex items-baseline gap-1 mb-1">
-                        <span className="text-3xl font-bold text-primary">{pkgData.price}</span>
-                        <span className="text-muted-foreground text-sm">{p.perMonth}</span>
+                      <div className="flex items-baseline gap-1.5 mb-6">
+                        <span className="text-4xl font-light text-foreground">{pkgData.price}</span>
+                        <span className="text-xs text-muted-foreground tracking-wider">SEK</span>
+                        <span className="text-muted-foreground text-sm ml-1">{p.perMonth}</span>
                       </div>
                       <p className="text-muted-foreground text-sm mb-6">{pkgData.description}</p>
 
-                      <ul className="space-y-3 mb-8 flex-1">
-                        {pkgData.features.map((feature: string, i: number) => (
-                          <li key={i} className="flex items-start gap-2.5 text-sm">
-                            <CircleCheck className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                            <span className="text-foreground/80">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <div className="border-t border-primary/10 pt-6 mb-8 flex-1">
+                        <p className="text-sm text-foreground/70 leading-relaxed">
+                          {featureLine(pkgData.features)}
+                        </p>
+                      </div>
 
                       <a
                         href={`#kontakt?plan=maintenance_${pkg.key}`}
@@ -206,11 +193,8 @@ export function PricingSection() {
                           window.location.hash = `kontakt?plan=maintenance_${pkg.key}`;
                           document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className={`block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all ${
-                          pkg.highlighted
-                            ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-lg shadow-primary/20'
-                            : 'bg-muted text-foreground hover:bg-muted/80 border border-border/30'
-                        }`}
+                        className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-transparent text-primary hover:bg-primary/5"
+                        style={{ border: '0.5px solid hsl(var(--primary) / 0.3)' }}
                       >
                         {p.cta}
                       </a>
