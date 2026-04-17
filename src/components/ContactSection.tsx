@@ -149,7 +149,7 @@ export function ContactSection() {
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
-          className="text-center mb-8 sm:mb-12"
+          className="text-center mb-fluid-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

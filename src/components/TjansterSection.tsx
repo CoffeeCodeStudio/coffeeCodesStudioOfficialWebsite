@@ -28,7 +28,7 @@ export function TjansterSection() {
     <section id="tjanster" className="relative" ref={ref}>
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-fluid-header"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -42,7 +42,7 @@ export function TjansterSection() {
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto mb-16 sm:mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto mb-fluid-block">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (

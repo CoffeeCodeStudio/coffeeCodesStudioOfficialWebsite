@@ -14,7 +14,7 @@ export function Footer() {
 
   return (
     <footer className="pt-1 pb-12 sm:pb-16" role="contentinfo">
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-12 sm:mb-16" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-fluid-header" />
 
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 items-start">

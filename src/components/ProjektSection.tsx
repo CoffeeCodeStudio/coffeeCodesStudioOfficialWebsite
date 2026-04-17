@@ -32,7 +32,7 @@ export function ProjektSection() {
     <section id="projekt" className="relative">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-fluid-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
