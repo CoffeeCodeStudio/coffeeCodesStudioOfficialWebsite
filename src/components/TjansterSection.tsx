@@ -42,7 +42,7 @@ export function TjansterSection() {
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto mb-fluid-block">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-fluid-grid max-w-5xl mx-auto mb-fluid-block">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (

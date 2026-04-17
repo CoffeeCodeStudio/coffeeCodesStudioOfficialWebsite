@@ -58,7 +58,7 @@ export function ProjektSection() {
             </p>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-fluid-grid max-w-5xl mx-auto">
             {projects.map((project, i) => {
               const override = t.portfolio.projectOverrides[project.id];
               const title = override?.title || project.title;

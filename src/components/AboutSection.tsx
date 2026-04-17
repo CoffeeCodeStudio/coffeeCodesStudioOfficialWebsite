@@ -11,7 +11,7 @@ export function AboutSection() {
   return (
     <section id="about" className="relative" ref={ref}>
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-fluid-section items-center max-w-6xl mx-auto">
           {/* Pull-quote / stats */}
           <motion.div
             className="order-2 md:order-1"
