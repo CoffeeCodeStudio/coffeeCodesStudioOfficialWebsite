@@ -40,7 +40,7 @@ export function AboutSection() {
               <span className="gradient-text">{t.about.headline}</span>
             </h2>
             
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg text-muted-foreground leading-relaxed reading-width ml-0">
               {t.about.body}
             </p>
           </motion.div>

@@ -28,8 +28,8 @@ export function PricingSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">{p.headline}</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">{p.intro}</p>
-          <p className="text-sm text-muted-foreground/70 max-w-2xl mx-auto mt-3">{p.scopeNote}</p>
+          <p className="text-muted-foreground reading-width">{p.intro}</p>
+          <p className="text-sm text-muted-foreground/70 reading-width mt-3">{p.scopeNote}</p>
         </motion.div>
 
         {/* Starter + One-time Project — side by side */}

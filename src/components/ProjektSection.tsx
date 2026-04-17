@@ -40,7 +40,7 @@ export function ProjektSection() {
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif mb-4">
             <span className="gradient-text">{t.portfolio.headline}</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground reading-width">
             {t.portfolio.intro}
           </p>
         </motion.div>
