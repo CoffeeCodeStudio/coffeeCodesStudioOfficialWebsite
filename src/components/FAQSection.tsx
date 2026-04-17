@@ -39,7 +39,7 @@ export function FAQSection() {
   }, [t.faq.items]);
 
   return (
-    <section id="faq" className="py-16 sm:py-24 relative">
+    <section id="faq" className="relative">
       <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
         <h2 className="text-2xl sm:text-3xl font-serif gradient-text text-center mb-10">
           {t.faq.headline}
