@@ -1,4 +1,21 @@
-/* Design tokens — colors, radii, glass effect variables (HSL) */
+/**
+ * tokens.css — Design system tokens (single source of truth for theme values)
+ *
+ * Responsibility:
+ *   Defines all CSS custom properties for colors, radii and glass surfaces.
+ *   Values are stored in HSL channels (e.g. `235 45% 8%`) so Tailwind utilities
+ *   like `bg-primary/40` and `hsl(var(--primary) / 0.5)` work correctly.
+ *
+ * Adding a new token:
+ *   1. Add the variable to BOTH `:root` and `.dark` blocks.
+ *   2. Use HSL channel format: `--my-token: 220 90% 50%;` (no `hsl(...)`).
+ *   3. If it should be a Tailwind class (e.g. `text-my-token`), also register
+ *      it in `tailwind.config.ts` under `theme.extend.colors`.
+ *   4. Reference in CSS as `hsl(var(--my-token))` or `hsl(var(--my-token) / 0.5)`.
+ *
+ * Do NOT put component styles, typography, or spacing rules here.
+ */
+
 
 @layer base {
   :root {

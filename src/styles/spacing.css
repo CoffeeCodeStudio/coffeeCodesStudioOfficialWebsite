@@ -1,4 +1,21 @@
-/* Fluid spacing — sections, containers, vertical rhythm */
+/**
+ * spacing.css — Fluid layout rhythm (sections, containers, vertical spacing)
+ *
+ * Responsibility:
+ *   Section padding, container max-width / horizontal padding, fluid heading
+ *   margins, and helper utilities `.mb-fluid-header` / `.mb-fluid-block`.
+ *
+ * Adding new rules:
+ *   - Always use `clamp(min, preferred, max)` so values scale across breakpoints.
+ *     Pattern: `clamp(<mobile>, <vw + base>, <desktop cap>)`.
+ *   - New utility (e.g. `.gap-fluid-grid`) → add inside `@layer base`, name with
+ *     a `-fluid-` prefix so its intent is obvious in components.
+ *   - Container max-widths use stepped media queries (1280 / 1536) — keep
+ *     increments small (~40px) for a smooth experience on large monitors.
+ *
+ * Do NOT put colors, typography sizes, or component visuals here.
+ */
+
 
 @layer base {
   /* Fluid section spacing - scales smoothly mobile → desktop */

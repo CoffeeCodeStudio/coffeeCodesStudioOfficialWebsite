@@ -1,4 +1,22 @@
-/* Custom component classes — glass card, glow button, gradient text, etc. */
+/**
+ * components.css — Reusable visual component classes
+ *
+ * Responsibility:
+ *   Custom component classes used across the app: `.glass-card`, `.glow-button`,
+ *   `.cyber-border`, `.gradient-text`, `.code-bg`, `.hero-fade-bottom`.
+ *   These are higher-level than utilities — they bundle several declarations
+ *   to express a recurring visual pattern.
+ *
+ * Adding new rules:
+ *   - Add inside `@layer components` so Tailwind utilities can still override.
+ *   - Use `@apply` for Tailwind utilities and `hsl(var(--token))` for raw colors.
+ *   - Keep classes single-purpose (one visual idea per class).
+ *   - If it's a one-off, prefer Tailwind utilities in the component itself —
+ *     only promote to a class here when reused in 3+ places.
+ *
+ * Do NOT put tokens, typography, spacing utilities, or animations here.
+ */
+
 
 @layer components {
   /* Glassmorphism card */
