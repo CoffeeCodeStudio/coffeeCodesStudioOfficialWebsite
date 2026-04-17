@@ -137,7 +137,7 @@ export function PricingSection() {
               transition={{ duration: 0.3 }}
             >
               <p className="text-sm text-muted-foreground text-center mb-8">{p.maintenanceHeadline}</p>
-              <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-fluid-grid max-w-3xl mx-auto">
                 {packages.map((pkg, index) => {
                   const pkgData = p.packages[pkg.key];
                   return (
