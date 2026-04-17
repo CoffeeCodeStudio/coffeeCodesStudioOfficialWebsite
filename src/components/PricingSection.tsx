@@ -164,11 +164,13 @@ export function PricingSection() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.15 }}
                     >
-                      {pkg.highlighted && (
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
-                          {p.popular}
-                        </div>
-                      )}
+                      <div className="h-6 mb-2 flex items-center">
+                        {pkg.highlighted && (
+                          <span className="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full font-medium">
+                            Rekommenderad
+                          </span>
+                        )}
+                      </div>
 
                       <div className="flex items-center gap-2 mb-3">
                         <h3 className="text-xl font-serif text-foreground">{pkgData.name}</h3>
