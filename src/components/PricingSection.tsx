@@ -35,7 +35,7 @@ export function PricingSection() {
         </motion.div>
 
         {/* Starter + One-time Project — side by side */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-8">
+        <div className="grid md:grid-cols-2 gap-fluid-grid max-w-5xl mx-auto mb-8">
           {/* Starter Card */}
           <motion.div
             className="bg-transparent border border-primary/20 rounded-2xl p-10 hover:border-primary/30 transition-all flex flex-col"
@@ -137,7 +137,7 @@ export function PricingSection() {
               transition={{ duration: 0.3 }}
             >
               <p className="text-sm text-muted-foreground text-center mb-8">{p.maintenanceHeadline}</p>
-              <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-fluid-grid max-w-3xl mx-auto">
                 {packages.map((pkg, index) => {
                   const pkgData = p.packages[pkg.key];
                   return (
