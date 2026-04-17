@@ -1,0 +1,75 @@
+/* Design tokens — colors, radii, glass effect variables (HSL) */
+
+@layer base {
+  :root {
+    /* Base dark theme - Midnight blue */
+    --background: 235 45% 8%;
+    --foreground: 45 20% 95%;
+
+    /* Cards with glassmorphism */
+    --card: 235 35% 12%;
+    --card-foreground: 45 20% 95%;
+
+    --popover: 235 35% 12%;
+    --popover-foreground: 45 20% 95%;
+
+    /* Primary - Warm Amber/Gold */
+    --primary: 43 96% 56%;
+    --primary-foreground: 235 45% 8%;
+
+    /* Secondary - Electric Blue */
+    --secondary: 187 100% 42%;
+    --secondary-foreground: 235 45% 8%;
+
+    /* Muted */
+    --muted: 235 25% 18%;
+    --muted-foreground: 220 15% 60%;
+
+    /* Accent - Terminal Green */
+    --accent: 122 39% 49%;
+    --accent-foreground: 235 45% 8%;
+
+    /* Amber variations for gradients */
+    --amber-glow: 35 90% 60%;
+    --amber-soft: 30 80% 70%;
+
+    /* Cyber blue for highlights */
+    --cyber-blue: 187 100% 42%;
+    --cyber-blue-soft: 187 80% 60%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 45 20% 95%;
+
+    --border: 235 25% 20%;
+    --input: 235 25% 15%;
+    --ring: 43 96% 56%;
+
+    --radius: 0.75rem;
+
+    /* Glass effect variables */
+    --glass-bg: 235 35% 12%;
+    --glass-border: 235 25% 25%;
+  }
+
+  .dark {
+    --background: 235 45% 8%;
+    --foreground: 45 20% 95%;
+    --card: 235 35% 12%;
+    --card-foreground: 45 20% 95%;
+    --popover: 235 35% 12%;
+    --popover-foreground: 45 20% 95%;
+    --primary: 43 96% 56%;
+    --primary-foreground: 235 45% 8%;
+    --secondary: 187 100% 42%;
+    --secondary-foreground: 235 45% 8%;
+    --muted: 235 25% 18%;
+    --muted-foreground: 220 15% 60%;
+    --accent: 122 39% 49%;
+    --accent-foreground: 235 45% 8%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 45 20% 95%;
+    --border: 235 25% 20%;
+    --input: 235 25% 15%;
+    --ring: 43 96% 56%;
+  }
+}
