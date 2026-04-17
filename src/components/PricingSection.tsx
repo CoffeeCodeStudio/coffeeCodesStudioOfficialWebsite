@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Coffee, Crown, Info, ChevronDown } from 'lucide-react';
+import { Coffee, Crown, Info, ChevronDown, Check } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
@@ -15,7 +15,16 @@ export function PricingSection() {
   const p = t.pricing;
   const [maintenanceOpen, setMaintenanceOpen] = useState(false);
 
-  const featureLine = (features: string[]) => features.join(' · ');
+  const FeatureList = ({ features }: { features: string[] }) => (
+    <ul className="space-y-2">
+      {features.map((f, i) => (
+        <li key={i} className="flex items-start gap-2 text-sm text-foreground/70 leading-relaxed">
+          <Check className="w-3 h-3 text-muted-foreground mt-1 shrink-0" strokeWidth={2.5} />
+          <span>{f}</span>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <section id="priser" className="relative overflow-hidden">
@@ -35,16 +44,18 @@ export function PricingSection() {
         </motion.div>
 
         {/* Starter + One-time Project — side by side */}
-        <div className="grid md:grid-cols-2 gap-fluid-grid max-w-5xl mx-auto mb-8">
+        <div className="grid md:grid-cols-2 gap-fluid-grid max-w-5xl mx-auto mb-8 items-stretch">
           {/* Starter Card */}
           <motion.div
-            className="bg-transparent border border-primary/20 rounded-2xl p-10 hover:border-primary/30 transition-all flex flex-col"
+            className="relative bg-transparent border border-primary/20 rounded-2xl p-10 hover:border-primary/30 transition-all flex flex-col"
             style={{ borderWidth: '0.5px' }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
+            {/* Spacer to align with badge on highlighted card */}
+            <div className="h-6 mb-2" aria-hidden="true" />
             <h3 className="text-xl font-serif text-foreground mb-3">{p.starter.title}</h3>
             <div className="flex items-baseline gap-1.5 mb-6">
               <span className="text-4xl font-light text-foreground">{p.starter.price}</span>
@@ -54,9 +65,7 @@ export function PricingSection() {
             <p className="text-muted-foreground text-sm mb-6">{p.starter.description}</p>
 
             <div className="border-t border-primary/10 pt-6 mb-6 flex-1">
-              <p className="text-sm text-foreground/70 leading-relaxed">
-                {featureLine(p.starter.features)}
-              </p>
+              <FeatureList features={p.starter.features} />
             </div>
 
             <p className="text-xs text-muted-foreground italic mb-6">{p.starter.note}</p>
@@ -77,13 +86,18 @@ export function PricingSection() {
 
           {/* One-time Project Card — highlighted */}
           <motion.div
-            className="bg-transparent border border-primary/40 rounded-2xl p-10 hover:border-primary/60 transition-all flex flex-col"
+            className="relative bg-transparent border border-primary/40 rounded-2xl p-10 hover:border-primary/60 transition-all flex flex-col"
             style={{ borderWidth: '0.5px' }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
+            <div className="h-6 mb-2 flex items-center">
+              <span className="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full font-medium">
+                Rekommenderad
+              </span>
+            </div>
             <h3 className="text-xl font-serif text-foreground mb-3">{p.oneTime.title}</h3>
             <div className="flex items-baseline gap-1.5 mb-6">
               <span className="text-4xl font-light text-foreground">{p.oneTime.price}</span>
@@ -93,9 +107,7 @@ export function PricingSection() {
             <p className="text-muted-foreground text-sm mb-6">{p.oneTime.description}</p>
 
             <div className="border-t border-primary/10 pt-6 mb-6 flex-1">
-              <p className="text-sm text-foreground/70 leading-relaxed">
-                {featureLine(p.oneTime.features)}
-              </p>
+              <FeatureList features={p.oneTime.features} />
             </div>
 
             <p className="text-xs text-muted-foreground italic mb-6">{p.oneTime.note}</p>
@@ -107,8 +119,7 @@ export function PricingSection() {
                 window.location.hash = 'kontakt?plan=onetime';
                 document.querySelector('#kontakt')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-transparent text-primary hover:bg-primary/5"
-              style={{ border: '0.5px solid hsl(var(--primary) / 0.3)' }}
+              className="block text-center py-3 px-6 rounded-xl font-medium text-sm transition-all bg-primary text-primary-foreground hover:bg-primary/90"
             >
               {p.oneTime.cta}
             </a>
@@ -180,9 +191,7 @@ export function PricingSection() {
                       <p className="text-muted-foreground text-sm mb-6">{pkgData.description}</p>
 
                       <div className="border-t border-primary/10 pt-6 mb-8 flex-1">
-                        <p className="text-sm text-foreground/70 leading-relaxed">
-                          {featureLine(pkgData.features)}
-                        </p>
+                        <FeatureList features={pkgData.features} />
                       </div>
 
                       <a
