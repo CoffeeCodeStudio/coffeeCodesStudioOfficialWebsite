@@ -160,6 +160,15 @@
   h3, h4 {
     margin-bottom: clamp(0.75rem, 1vw + 0.25rem, 1.25rem);
   }
+
+  /* Fluid spacing utilities for in-section rhythm */
+  .mb-fluid-header {
+    margin-bottom: clamp(2rem, 3vw + 1rem, 4rem);
+  }
+
+  .mb-fluid-block {
+    margin-bottom: clamp(2.5rem, 4vw + 1rem, 5rem);
+  }
 }
 
 @layer components {
