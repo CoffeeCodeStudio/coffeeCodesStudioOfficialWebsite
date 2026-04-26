@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /admin/login
+Disallow: /portal
+Disallow: /portal/login
 Disallow: /set-password
 
-Sitemap: https://coffeecodestudio.lovable.app/sitemap.xml
+Sitemap: https://coffeecodestudio.se/sitemap.xml

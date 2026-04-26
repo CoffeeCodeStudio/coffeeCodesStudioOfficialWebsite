@@ -21,8 +21,8 @@ function IndexContent() {
           ? 'Hemsidor för småföretag i Göteborg | Coffee Code Studio'
           : 'Websites for Small Businesses | Coffee Code Studio'}
         description={language === 'sv'
-          ? 'Professionell hemsida på 7 dagar från 4 900 kr. Jag bygger snabba, mobilanpassade hemsidor för småföretag i Göteborg. Boka gratis konsultation.'
-          : 'Professional website in 7 days from 4,900 SEK. Fast, mobile-friendly websites for small businesses. Book a free consultation.'}
+          ? 'Professionell hemsida från 4 900 kr — ofta live inom en vecka. Jag bygger snabba, mobilanpassade hemsidor för småföretag i Göteborg. Boka gratis konsultation.'
+          : 'Professional website from 4,900 SEK — often live within a week. Fast, mobile-friendly websites for small businesses. Book a free consultation.'}
         canonical="https://coffeecodestudio.se/"
         ogImage="https://coffeecodestudio.se/og-image.png"
       />

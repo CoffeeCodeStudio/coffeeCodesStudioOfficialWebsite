@@ -6,6 +6,21 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://coffeecodestudio.se/smaforetag-goteborg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://coffeecodestudio.se/frisor-goteborg</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://coffeecodestudio.se/projektfragor</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://coffeecodestudio.se/anvandarvillkor</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
