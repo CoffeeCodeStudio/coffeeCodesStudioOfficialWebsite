@@ -4,7 +4,7 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Coffee Code Studio",
-  "description": "Professionell hemsida på 7 dagar från 4 900 kr. Jag bygger snabba, mobilanpassade hemsidor för småföretag i Göteborg. Boka gratis konsultation.",
+  "description": "Professionell hemsida från 4 900 kr — ofta live inom en vecka. Jag bygger snabba, mobilanpassade hemsidor för småföretag i Göteborg. Boka gratis konsultation.",
   "url": "https://coffeecodestudio.se",
   "logo": "https://coffeecodestudio.se/logo.png",
   "address": {
