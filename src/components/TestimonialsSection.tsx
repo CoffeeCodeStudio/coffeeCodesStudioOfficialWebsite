@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { MessageSquareQuote, Star } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 import testimonialDjLobo from '@/assets/testimonial-djlobo.webp';
 
 const testimonials = [
@@ -34,6 +35,7 @@ export function TestimonialsSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 mb-8 px-4 py-2.5 rounded-full bg-muted/30 border border-border/40 hover:border-primary/40 hover:bg-muted/50 transition-all group"
             aria-label={language === 'sv' ? 'Se våra recensioner på Google' : 'See our reviews on Google'}
+            onClick={() => trackEvent('google_reviews_click', { location: 'testimonials_badge', link_url: 'https://g.page/r/coffeecodestudio/review' })}
           >
             <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -94,6 +96,7 @@ export function TestimonialsSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors bg-muted/30 px-3 py-1.5 rounded-full border border-border/30 hover:border-primary/30"
                 aria-label="Verifiera recensionen på Google"
+                onClick={() => trackEvent('google_reviews_click', { location: 'testimonial_verify_pill', link_url: 'https://g.page/r/coffeecodestudio/review' })}
               >
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" aria-hidden="true">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
