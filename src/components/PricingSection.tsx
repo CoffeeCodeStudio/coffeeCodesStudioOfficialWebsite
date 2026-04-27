@@ -34,10 +34,10 @@ export function PricingSection() {
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           className="text-center mb-fluid-header"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
         >
           <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">{p.headline}</h2>
           <p className="text-muted-foreground reading-width">{p.intro}</p>
@@ -50,10 +50,10 @@ export function PricingSection() {
           <motion.div
             className="relative bg-transparent border border-primary/20 rounded-2xl p-10 hover:border-primary/30 transition-all flex flex-col"
             style={{ borderWidth: '0.5px' }}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             {/* Spacer to align with badge on highlighted card */}
             <div className="h-6 mb-2" aria-hidden="true" />
@@ -89,10 +89,10 @@ export function PricingSection() {
           <motion.div
             className="relative bg-transparent border border-primary/40 rounded-2xl p-10 hover:border-primary/60 transition-all flex flex-col"
             style={{ borderWidth: '0.5px' }}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, delay: 0.08, ease: 'easeOut' }}
           >
             <div className="h-6 mb-2 flex items-center">
               <span className="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full font-medium">
@@ -161,9 +161,9 @@ export function PricingSection() {
                           : 'border border-primary/20 hover:border-primary/30'
                       }`}
                       style={{ borderWidth: '0.5px' }}
-                      initial={{ opacity: 0, y: 40 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.15 }}
+                      transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
                     >
                       <div className="h-6 mb-2 flex items-center">
                         {pkg.highlighted && (
@@ -222,10 +222,10 @@ export function PricingSection() {
         {/* Payment methods + note */}
         <motion.div
           className="max-w-3xl mx-auto text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45, delay: 0.15, ease: 'easeOut' }}
         >
           <h3 className="text-sm font-medium text-foreground/80 mb-4">{p.paymentTitle}</h3>
           <ul className="flex flex-wrap items-center justify-center gap-3 mb-4" aria-label={p.paymentTitle}>
