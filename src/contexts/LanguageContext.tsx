@@ -155,7 +155,6 @@ interface Translations {
       card: { name: string };
       swish: { name: string };
       paypal: { name: string };
-      crypto: { name: string };
     };
   };
   faq: {
