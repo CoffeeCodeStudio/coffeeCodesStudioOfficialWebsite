@@ -21,7 +21,7 @@ export function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   return (
-    <section className="py-10 relative" ref={ref}>
+    <section className="pt-4 pb-10 sm:pt-6 sm:pb-12 relative" ref={ref}>
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="max-w-2xl mx-auto text-center"
