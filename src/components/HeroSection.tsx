@@ -12,7 +12,7 @@ export function HeroSection() {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <section className="relative min-h-0 flex-col pt-28 sm:pt-32 pb-0 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
+    <section className="relative min-h-0 flex-col pt-8 sm:pt-16 pb-0 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
       <CodeRainBackground />
       <div className="container mx-auto px-5 sm:px-6 relative z-10">
         <motion.h1
