@@ -1,7 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://coffeecodestudio.se",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
@@ -143,7 +143,7 @@ Deno.serve(async (req) => {
     // Invite user
     const { data: inviteData, error: inviteError } = await supabaseAdmin.auth.admin.inviteUserByEmail(email, {
       data: { full_name },
-      redirectTo: 'https://coffeecodestudio.lovable.app/set-password',
+      redirectTo: 'https://coffeecodestudio.se/set-password',
     });
 
     if (inviteError) throw inviteError;
