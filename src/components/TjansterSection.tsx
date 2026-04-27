@@ -10,7 +10,7 @@ const stepIcons = [MessageCircle, Code, Flame];
 export function TjansterSection() {
   const { t } = useLanguage();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const services = [
     { icon: serviceIcons[0], title: t.services.mvpTitle, description: t.services.mvpDescription },
@@ -29,9 +29,9 @@ export function TjansterSection() {
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="text-center mb-fluid-header"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
         >
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif mb-4 sm:mb-6">
             <span className="gradient-text">{t.services.headline}</span>
@@ -49,9 +49,9 @@ export function TjansterSection() {
               <motion.div
                 key={index}
                 className="glass-card cyber-border p-6 sm:p-8 rounded-2xl relative overflow-hidden group"
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
+                transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
                 whileHover={{ y: -5 }}
               >
                 <motion.div
@@ -75,9 +75,9 @@ export function TjansterSection() {
         {/* Process Steps */}
         <motion.div
           className="text-center mb-10"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.45, delay: 0.25, ease: 'easeOut' }}
         >
           <h3 className="text-xl sm:text-2xl md:text-3xl font-serif mb-2">
             <span className="gradient-text">{t.process.headline}</span>
@@ -91,9 +91,9 @@ export function TjansterSection() {
               <div key={index} className="contents">
                 <motion.div
                   className="flex items-start gap-4 p-5 rounded-xl glass-card border border-border/20"
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.15 }}
+                  transition={{ duration: 0.45, delay: 0.3 + index * 0.08, ease: 'easeOut' }}
                 >
                   <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">
                     0{index + 1}
