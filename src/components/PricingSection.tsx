@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Coffee, Crown, Info, ChevronDown, Check, FileText, CreditCard, Smartphone, Wallet } from 'lucide-react';
+import { Coffee, Crown, Info, ChevronDown, Check, FileText } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { filterActivePaymentMethods } from '@/lib/paymentMethods';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -232,9 +232,6 @@ export function PricingSection() {
             {filterActivePaymentMethods(
               [
                 { key: 'invoice', label: p.paymentMethods.invoice.name, Icon: FileText },
-                { key: 'card', label: p.paymentMethods.card.name, Icon: CreditCard },
-                { key: 'swish', label: p.paymentMethods.swish.name, Icon: Smartphone },
-                { key: 'paypal', label: p.paymentMethods.paypal.name, Icon: Wallet },
               ],
               'pricing_section',
             ).map(({ key, label, Icon }) => (
