@@ -18,7 +18,7 @@ const testimonials = [
 export function TestimonialsSection() {
   const { language } = useLanguage();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
     <section className="pt-4 pb-10 sm:pt-6 sm:pb-12 relative" ref={ref}>
