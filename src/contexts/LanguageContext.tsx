@@ -320,7 +320,7 @@ const translations: Record<Language, Translations> = {
       paymentTitle: 'Betalningsmetoder',
       tooltipText: 'Jag rekommenderar detta paket för dig som vill ha snabbare support och mer utrymme för ändringar.',
       disclaimerText: 'Underhållspaketen gäller i första hand projekt byggda av Coffee Code Studio. Har du en befintlig sajt? Hör av dig så ser jag vad jag kan göra.',
-      paymentNote: 'Betalning via faktura. Fler betalningsalternativ kommer snart.',
+      paymentNote: 'Betalning via faktura. Kontakta mig för andra alternativ.',
       maintenanceExtra: 'Behöver du mer? Dedikerade utvecklingstimmar från 1 200 kr/tim — kontakta mig för offert.',
       packages: {
         bas: {
@@ -542,7 +542,7 @@ const translations: Record<Language, Translations> = {
       paymentTitle: 'Payment Methods',
       tooltipText: 'I recommend this package if you want faster support and more room for changes.',
       disclaimerText: 'Maintenance packages primarily apply to projects built by Coffee Code Studio. Have an existing site? Contact me and I\'ll see what I can do.',
-      paymentNote: 'Payment via invoice. More payment options coming soon.',
+      paymentNote: 'Payment via invoice. Contact me for other options.',
       maintenanceExtra: 'Need more? Dedicated development hours from 1 200 kr/hr — contact me for a quote.',
       packages: {
         bas: {
