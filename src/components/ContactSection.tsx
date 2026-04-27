@@ -150,10 +150,10 @@ export function ContactSection() {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           className="text-center mb-fluid-header"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-3 sm:mb-4">
             <span className="gradient-text">{t.contact.headline}</span>
@@ -166,10 +166,10 @@ export function ContactSection() {
         <motion.form
           className="max-w-2xl mx-auto glass-card p-5 sm:p-8 rounded-2xl space-y-4 sm:space-y-6"
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
