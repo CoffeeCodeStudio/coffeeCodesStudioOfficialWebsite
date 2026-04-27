@@ -33,10 +33,10 @@ export function ProjektSection() {
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="text-center mb-fluid-header"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.6 }}>
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}>
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif mb-4">
             <span className="gradient-text">{t.portfolio.headline}</span>
           </h2>
@@ -68,10 +68,10 @@ export function ProjektSection() {
               <motion.div
                 key={project.id}
                 className="glass-card cyber-border rounded-2xl overflow-hidden border border-primary/20 flex flex-col"
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.6, delay: 0.1 + i * 0.15 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: 'easeOut' }}
                 whileHover={{ y: -5 }}>
                 {project.image_url && (
                   <div className="relative">
