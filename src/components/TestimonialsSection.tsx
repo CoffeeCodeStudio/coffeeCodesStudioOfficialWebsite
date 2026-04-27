@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { MessageSquareQuote, Star } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 import testimonialDjLobo from '@/assets/testimonial-djlobo.webp';
 
 const testimonials = [
