@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Coffee, Crown, Info, ChevronDown, Check, FileText, CreditCard, Smartphone, Wallet } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
+import { filterActivePaymentMethods } from '@/lib/paymentMethods';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const packages = [
@@ -228,12 +229,15 @@ export function PricingSection() {
         >
           <h3 className="text-sm font-medium text-foreground/80 mb-4">{p.paymentTitle}</h3>
           <ul className="flex flex-wrap items-center justify-center gap-3 mb-4" aria-label={p.paymentTitle}>
-            {[
-              { key: 'invoice', label: p.paymentMethods.invoice.name, Icon: FileText },
-              { key: 'card', label: p.paymentMethods.card.name, Icon: CreditCard },
-              { key: 'swish', label: p.paymentMethods.swish.name, Icon: Smartphone },
-              { key: 'paypal', label: p.paymentMethods.paypal.name, Icon: Wallet },
-            ].map(({ key, label, Icon }) => (
+            {filterActivePaymentMethods(
+              [
+                { key: 'invoice', label: p.paymentMethods.invoice.name, Icon: FileText },
+                { key: 'card', label: p.paymentMethods.card.name, Icon: CreditCard },
+                { key: 'swish', label: p.paymentMethods.swish.name, Icon: Smartphone },
+                { key: 'paypal', label: p.paymentMethods.paypal.name, Icon: Wallet },
+              ],
+              'pricing_section',
+            ).map(({ key, label, Icon }) => (
               <li
                 key={key}
                 className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-card/40 text-xs text-foreground/80"
