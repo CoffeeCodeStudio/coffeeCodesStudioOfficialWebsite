@@ -64,6 +64,7 @@ export function ProjektSection() {
               const title = override?.title || project.title;
               const category = override?.category || project.category;
               const description = override?.description || project.description;
+              const note = override?.note;
               return (
               <motion.div
                 key={project.id}
@@ -96,9 +97,14 @@ export function ProjektSection() {
                   <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
                     {title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-3 flex-1">
                     {description}
                   </p>
+                  {note && (
+                    <p className="text-xs text-muted-foreground/80 italic border-l-2 border-primary/30 pl-3 mb-5">
+                      {note}
+                    </p>
+                  )}
                   {project.url && (
                     <Button
                       variant="outline"

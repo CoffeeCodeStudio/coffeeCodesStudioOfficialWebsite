@@ -48,7 +48,7 @@ interface Translations {
     project1: { name: string; category: string; description: string };
     project2: { name: string; category: string; description: string };
     project3: { name: string; category: string; description: string };
-    projectOverrides: Record<string, { title: string; category: string; description: string }>;
+    projectOverrides: Record<string, { title: string; category: string; description: string; note?: string }>;
   };
   about: {
     headline: string;
