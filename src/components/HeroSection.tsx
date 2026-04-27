@@ -14,6 +14,11 @@ export function HeroSection() {
   return (
     <section className="relative min-h-0 flex-col pt-8 sm:pt-16 pb-0 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
       <CodeRainBackground />
+      {/* Subtle gradient fade into next section for seamless transition */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 sm:h-24 bg-gradient-to-b from-transparent to-background z-20"
+      />
       <div className="container mx-auto px-5 sm:px-6 relative z-10">
         <motion.h1
           className="text-[1.75rem] sm:text-4xl md:text-6xl lg:text-7xl font-serif text-center max-w-4xl mx-auto leading-tight mb-3 sm:mb-6"
