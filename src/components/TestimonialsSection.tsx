@@ -80,10 +80,19 @@ export function TestimonialsSection() {
 
               <MessageSquareQuote className="w-6 h-6 text-primary/60" />
 
-              <div className="flex items-center gap-1" aria-label="Betyg 5 av 5">
-                {[...Array(5)].map((_, idx) => (
-                  <Star key={idx} className="w-4 h-4 fill-primary text-primary" />
-                ))}
+              <div
+                className="flex flex-col items-center gap-1"
+                role="img"
+                aria-label={language === 'sv' ? `${t.name} gav betyget 5 av 5 stjärnor` : `${t.name} rated 5 out of 5 stars`}
+              >
+                <div className="flex items-center gap-1" aria-hidden="true">
+                  {[...Array(5)].map((_, idx) => (
+                    <Star key={idx} className="w-4 h-4 fill-primary text-primary" />
+                  ))}
+                </div>
+                <span className="text-xs text-muted-foreground" aria-hidden="true">
+                  {language === 'sv' ? '5 av 5 stjärnor' : '5 out of 5 stars'}
+                </span>
               </div>
 
               <blockquote className="text-base sm:text-lg font-serif text-foreground italic leading-relaxed">
