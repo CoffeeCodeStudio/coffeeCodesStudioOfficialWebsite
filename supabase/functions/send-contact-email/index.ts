@@ -4,7 +4,7 @@ const PRIMARY_FROM = "Coffee Code Studio <hej@coffeecodestudio.se>";
 const FALLBACK_FROM = "Coffee Code Studio <onboarding@resend.dev>";
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://coffeecodestudio.se",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
@@ -182,7 +182,7 @@ Deno.serve(async (req: Request) => {
                 <p style="color: #E0E0E0; white-space: pre-wrap;">${safeMessage}</p>
               </div>
               <p style="color: #666; font-size: 12px; text-align: center; margin-top: 24px;">
-                Detta meddelande skickades via kontaktformuläret på coffeecodestudio.lovable.app
+                Detta meddelande skickades via kontaktformuläret på coffeecodestudio.se
               </p>
             </div>
           </body>
