@@ -75,6 +75,7 @@ const CHECKLIST_CATEGORIES: ChecklistCategory[] = [
       { key: 'supabase_dpa_active', label: 'Supabase DPA aktiverad', help: 'Databasens leverantör har ett aktivt databehandlingsavtal med oss.' },
       { key: 'privacy_policy_linked', label: 'Integritetspolicy länkad i footern', help: 'Besökare kan hitta information om hur deras data hanteras längst ner på sidan.' },
       { key: 'cookie_banner_works', label: 'Cookie-banner fungerar på kundens sajt', help: 'En ruta visas för besökare där de kan godkänna eller neka cookies.' },
+      { key: 'sitemap_search_console', label: 'Sitemap.xml skickad till Search Console', help: 'Google kan indexera alla sidor på sajten.' },
     ],
   },
   {
@@ -88,6 +89,8 @@ const CHECKLIST_CATEGORIES: ChecklistCategory[] = [
       { key: 'no_pii_console', label: 'Inga personuppgifter i console.log', help: 'Namn, e-post eller annan känslig data syns inte i webbläsarens utvecklarverktyg.' },
       { key: 'images_licensed', label: 'Alla bilder licensierade eller ägs av kunden', help: 'Vi har rätt att använda alla bilder på sajten – inga stulna bilder.' },
       { key: 'media_licensed', label: 'Musik/media har rätt licens', help: 'Eventuell musik eller video på sajten har rätt tillstånd för användning.' },
+      { key: 'robots_txt_configured', label: 'robots.txt korrekt konfigurerad', help: 'Sökmotorer blockeras inte från viktiga sidor.' },
+      { key: 'meta_unique_per_page', label: 'Meta title och description unik på varje sida', help: 'Varje sida har en unik titel och beskrivning för SEO.' },
     ],
   },
   {
@@ -100,6 +103,8 @@ const CHECKLIST_CATEGORIES: ChecklistCategory[] = [
       { key: 'domain_owned', label: 'Domän och hosting ägs av kunden', help: 'Kunden äger sin webbadress och sitt webbhotell själv.' },
       { key: 'portal_login_sent', label: 'Kunden har fått inlogg till kundportalen', help: 'Kunden kan logga in och följa sitt projekt.' },
       { key: 'review_requested', label: 'Referens och recension efterfrågad', help: 'Vi har bett kunden om en recension eller referens.' },
+      { key: 'gbp_updated', label: 'Google Business Profile uppdaterad', help: 'Relevant för kunder med lokal verksamhet.' },
+      { key: 'og_image_works', label: 'OG-bild finns och fungerar', help: 'En bild visas när sajten delas på sociala medier.' },
     ],
   },
 ];
