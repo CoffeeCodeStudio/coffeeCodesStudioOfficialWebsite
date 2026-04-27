@@ -5,7 +5,7 @@ import { Cookie } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const CONSENT_KEY = 'ccs-cookie-consent';
-const GA4_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+const GA4_MEASUREMENT_ID = 'G-HP11P89C52';
 
 function loadGoogleAnalytics(measurementId: string) {
   if (window.gtag || document.getElementById('ga4-script')) return;
