@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Coffee, Crown, Info, ChevronDown, Check } from 'lucide-react';
+import { Coffee, Crown, Info, ChevronDown, Check, FileText, CreditCard, Smartphone, Wallet } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
@@ -218,7 +218,7 @@ export function PricingSection() {
           )}
         </div>
 
-        {/* Payment note */}
+        {/* Payment methods + note */}
         <motion.div
           className="max-w-3xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -226,6 +226,23 @@ export function PricingSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
+          <h3 className="text-sm font-medium text-foreground/80 mb-4">{p.paymentTitle}</h3>
+          <ul className="flex flex-wrap items-center justify-center gap-3 mb-4" aria-label={p.paymentTitle}>
+            {[
+              { key: 'invoice', label: p.paymentMethods.invoice.name, Icon: FileText },
+              { key: 'card', label: p.paymentMethods.card.name, Icon: CreditCard },
+              { key: 'swish', label: p.paymentMethods.swish.name, Icon: Smartphone },
+              { key: 'paypal', label: p.paymentMethods.paypal.name, Icon: Wallet },
+            ].map(({ key, label, Icon }) => (
+              <li
+                key={key}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-card/40 text-xs text-foreground/80"
+              >
+                <Icon className="w-3.5 h-3.5 text-primary" strokeWidth={2} />
+                <span>{label}</span>
+              </li>
+            ))}
+          </ul>
           <p className="text-sm text-muted-foreground">{p.paymentNote}</p>
         </motion.div>
       </div>
