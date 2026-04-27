@@ -43,29 +43,31 @@ function AuthRedirectHandler() {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AuthRedirectHandler />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/portal/login" element={<ClientLogin />} />
-          <Route path="/portal" element={<ClientPortal />} />
-          <Route path="/set-password" element={<SetPassword />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/integritetspolicy" element={<Integritetspolicy />} />
-          <Route path="/cookiepolicy" element={<Cookiepolicy />} />
-          <Route path="/anvandardvillkor" element={<Anvandardvillkor />} />
-          <Route path="/projektfragor" element={<Projektfragor />} />
-          <Route path="/frisor-goteborg" element={<FrisorGoteborg />} />
-          <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <CookieConsent />
-        <CoffeeBeanCursor />
-      </BrowserRouter>
+      <LanguageProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AuthRedirectHandler />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/portal/login" element={<ClientLogin />} />
+            <Route path="/portal" element={<ClientPortal />} />
+            <Route path="/set-password" element={<SetPassword />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/integritetspolicy" element={<Integritetspolicy />} />
+            <Route path="/cookiepolicy" element={<Cookiepolicy />} />
+            <Route path="/anvandardvillkor" element={<Anvandardvillkor />} />
+            <Route path="/projektfragor" element={<Projektfragor />} />
+            <Route path="/frisor-goteborg" element={<FrisorGoteborg />} />
+            <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <CookieConsent />
+          <CoffeeBeanCursor />
+        </BrowserRouter>
+      </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
