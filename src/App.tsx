@@ -19,6 +19,7 @@ import FrisorGoteborg from "./pages/FrisorGoteborg";
 import SmaforetagGoteborg from "./pages/SmaforetagGoteborg";
 import { CookieConsent } from "./components/CookieConsent";
 import { CoffeeBeanCursor } from "./components/CoffeeBeanCursor";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 const queryClient = new QueryClient();
 
