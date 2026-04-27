@@ -56,7 +56,7 @@ export function TestimonialsSection() {
               </div>
             </div>
             <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors">
-              {language === 'sv' ? 'Baserat på 1 recension' : 'Based on 1 review'}
+              {language === 'sv' ? 'Baserat på 3 recensioner' : 'Based on 3 reviews'}
             </span>
           </a>
 
