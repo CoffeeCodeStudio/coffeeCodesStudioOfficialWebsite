@@ -7,7 +7,7 @@ import { trackEvent } from '@/lib/analytics';
  * To deactivate a method: remove its key here.
  * To activate a new one: add the key here AND add the translation in LanguageContext.
  */
-export const ACTIVE_PAYMENT_METHODS = ['invoice', 'card', 'swish', 'paypal'] as const;
+export const ACTIVE_PAYMENT_METHODS = ['invoice'] as const;
 
 export type ActivePaymentMethod = typeof ACTIVE_PAYMENT_METHODS[number];
 
@@ -16,7 +16,7 @@ export type ActivePaymentMethod = typeof ACTIVE_PAYMENT_METHODS[number];
  * legacy/inactive option leaks into the UI (e.g. stale translation key, bad
  * server response, tampered client state).
  */
-const BLOCKED_PAYMENT_METHODS = new Set<string>(['crypto']);
+const BLOCKED_PAYMENT_METHODS = new Set<string>(['crypto', 'card', 'swish', 'paypal']);
 
 export function isActivePaymentMethod(key: string): key is ActivePaymentMethod {
   return (ACTIVE_PAYMENT_METHODS as readonly string[]).includes(key);
