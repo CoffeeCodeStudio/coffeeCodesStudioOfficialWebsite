@@ -357,7 +357,7 @@ const translations: Record<Language, Translations> = {
         card: { name: 'Kort' },
         swish: { name: 'Swish' },
         paypal: { name: 'PayPal' },
-        crypto: { name: 'Krypto' },
+        
       },
     },
     faq: {
@@ -377,11 +377,11 @@ const translations: Record<Language, Translations> = {
         },
         {
           q: 'Ingår domän och hosting?',
-          a: 'Hosting ingår i priset. Du köper domänen själv (ca 100 kr/år) och jag hjälper dig koppla den.',
+          a: 'Du hanterar domän och hosting själv. Jag hjälper dig att sätta upp allt och rekommenderar prisvärda alternativ.',
         },
         {
           q: 'Hur lång tid tar projektet?',
-          a: '7-10 dagar från godkänd briefing till färdig sajt. Komplexa projekt med e-handel kan ta 2-3 veckor.',
+          a: 'Det beror på projektets storlek. En enkel one-page sajt levereras snabbt — större projekt tar längre tid. Jag ger dig en tydlig tidsplan i vår första konsultation.',
         },
       ],
     },
@@ -518,25 +518,6 @@ const translations: Record<Language, Translations> = {
       iterationDescription: 'Your site grows with you. I help you add features and improve over time.',
       cta: 'Discuss your project',
     },
-    value: {
-      headline: 'Business Value & ROI',
-      intro: 'Concrete results that drive your business forward.',
-      stat1: '3x',
-      stat1Label: 'Faster launch',
-      stat2: '60%',
-      stat2Label: 'Lower development cost',
-      stat3: '95%',
-      stat3Label: 'Customer satisfaction',
-      stat4: '2w',
-      stat4Label: 'To first prototype',
-      benefit1Title: 'Reduced Risk',
-      benefit1Text: 'Test your idea with a first version before investing heavily. Validate the market with minimal effort.',
-      benefit2Title: 'Faster Time-to-Market',
-      benefit2Text: 'Go from idea to launch in weeks instead of months with an efficient process.',
-      benefit3Title: 'Measurable Results',
-      benefit3Text: 'Every project is delivered with clear goals and measurable outcomes.',
-      cta: 'See what I can do for you',
-    },
     partnership: {
       headline: 'Long-Term Partnership',
       intro: 'I\'m with you every step of the way — from first idea to further development.',
@@ -598,7 +579,7 @@ const translations: Record<Language, Translations> = {
         card: { name: 'Card' },
         swish: { name: 'Swish' },
         paypal: { name: 'PayPal' },
-        crypto: { name: 'Crypto' },
+        
       },
     },
     faq: {
@@ -618,11 +599,11 @@ const translations: Record<Language, Translations> = {
         },
         {
           q: 'Is domain and hosting included?',
-          a: 'Hosting is included. You purchase the domain yourself (about 100 SEK/year) and I help you connect it.',
+          a: 'You manage the domain and hosting yourself. I help you set everything up and recommend affordable options.',
         },
         {
           q: 'How long does the project take?',
-          a: '7-10 days from approved briefing to finished site. Complex projects with e-commerce can take 2-3 weeks.',
+          a: 'It depends on the project size. A simple one-page site is delivered quickly — larger projects take longer. I\'ll give you a clear timeline in our first consultation.',
         },
       ],
     },
