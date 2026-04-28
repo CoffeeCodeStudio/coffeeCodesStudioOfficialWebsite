@@ -11,23 +11,25 @@ export function AboutSection() {
   return (
     <section id="about" className="relative" ref={ref}>
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-fluid-section items-center max-w-6xl mx-auto">
+        <div className={`grid ${t.about.pullQuote ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-fluid-section items-center max-w-6xl mx-auto`}>
           {/* Pull-quote / stats */}
-          <motion.div
-            className="order-2 md:order-1"
-            initial={{ opacity: 0, x: -24 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
-            <div className="glass-card cyber-border p-8 rounded-2xl relative overflow-hidden">
-              <div className="relative z-10 text-center">
-                <p className="text-xl sm:text-2xl font-serif gradient-text leading-relaxed">
-                  {t.about.pullQuote}
-                </p>
+          {t.about.pullQuote && (
+            <motion.div
+              className="order-2 md:order-1"
+              initial={{ opacity: 0, x: -24 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+            >
+              <div className="glass-card cyber-border p-8 rounded-2xl relative overflow-hidden">
+                <div className="relative z-10 text-center">
+                  <p className="text-xl sm:text-2xl font-serif gradient-text leading-relaxed">
+                    {t.about.pullQuote}
+                  </p>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
-            </div>
-          </motion.div>
+            </motion.div>
+          )}
 
           {/* Content */}
           <motion.div
