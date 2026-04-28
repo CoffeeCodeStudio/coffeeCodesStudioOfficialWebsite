@@ -436,7 +436,7 @@ const translations: Record<Language, Translations> = {
       },
     },
     portfolio: {
-      headline: 'Latest project',
+      headline: 'Projects',
       intro: 'Real websites I have delivered.',
       viewDemo: 'Visit Site',
       explorePrototype: 'Explore the Prototype',
@@ -462,7 +462,7 @@ const translations: Record<Language, Translations> = {
           title: 'Echo2000',
           category: 'Personal project',
           description: 'A social platform for 25+ inspired by the early 2000s internet. Profiles, real-time chat, guestbook and message wall — from idea to live beta with active users.',
-          note: 'Built to demonstrate technical breadth — not representative of client projects.',
+          note: 'My own project — shows what I can build from scratch.',
         },
         'f3b5fea3-41fd-465b-ae92-141d9e9d42f3': {
           title: 'DJ Lobo Producciones',
@@ -479,7 +479,7 @@ const translations: Record<Language, Translations> = {
     about: {
       headline: 'I Build Faster. You Launch Sooner.',
       body: 'Coffee Code Studio is run by Rami — with a background in sales and client relations, based in Gothenburg. Every project gets personal attention from start to finish. I combine modern web development with smart tools to deliver professional websites in days — not months. Transparent process and a client portal where you follow every step.',
-      pullQuote: 'Latest delivery: DJ Lobo Producciones — live and running. Gothenburg-based. Personal contact from start to finish.',
+      pullQuote: '',
     },
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',
@@ -504,7 +504,7 @@ const translations: Record<Language, Translations> = {
       other: 'Other',
       budget: 'Budget',
       budgetPlaceholder: 'Select approximate budget',
-      budgetOptions: ['Under 5 000 SEK', '5 000 – 15 000 SEK', '15 000 – 30 000 SEK', 'Larger project / Quote'],
+      budgetOptions: ['Under 5,000 SEK', '5,000 – 10,000 SEK', '10,000 – 20,000 SEK', '20,000 SEK+', 'Not sure / need advice'],
       message: 'Message',
       messagePlaceholder: 'Tell me briefly about your vision and challenges...',
       submit: 'Send Request',
@@ -587,7 +587,7 @@ const translations: Record<Language, Translations> = {
         cta: 'Book consultation',
       },
       paymentMethods: {
-        invoice: { name: 'Invoice / Cash' },
+        invoice: { name: 'Invoice' },
         card: { name: 'Card' },
         swish: { name: 'Swish' },
         paypal: { name: 'PayPal' },
