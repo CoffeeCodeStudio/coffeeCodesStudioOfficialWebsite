@@ -208,7 +208,7 @@ const translations: Record<Language, Translations> = {
       },
     },
     portfolio: {
-      headline: 'Senaste projektet',
+      headline: 'Projekt',
       intro: 'Verkliga hemsidor jag har levererat.',
       viewDemo: 'Besök sajten',
       explorePrototype: 'Utforska Prototypen',
@@ -234,7 +234,7 @@ const translations: Record<Language, Translations> = {
           title: 'Echo2000',
           category: 'Personligt projekt',
           description: 'En social plattform för 25+ inspirerad av det tidiga 2000-talets internet. Profiler, realtidschatt, klotterplank och gästbok — från idé till live beta med aktiva användare.',
-          note: 'Byggt för att visa teknisk bredd — inte representativt för kundprojekt.',
+          note: 'Mitt eget projekt — visar vad jag kan bygga från grunden.',
         },
         'f3b5fea3-41fd-465b-ae92-141d9e9d42f3': {
           title: 'DJ Lobo Producciones',
@@ -251,7 +251,7 @@ const translations: Record<Language, Translations> = {
     about: {
       headline: 'Jag bygger snabbare. Du lanserar tidigare.',
       body: 'Coffee Code Studio drivs av Rami — med bakgrund inom försäljning och kundrelationer, baserad i Göteborg. Varje projekt får personlig kontakt från start till slut. Jag kombinerar modern webbutveckling med smarta verktyg för att leverera proffsiga hemsidor på dagar — inte månader. Transparent process och en kundportal där du följer varje steg.',
-      pullQuote: 'Senaste leverans: DJ Lobo Producciones — live och i drift. Göteborg-baserad. Personlig kontakt från start till slut.',
+      pullQuote: '',
     },
     footer: {
       cta: 'Redo att brygga din nästa stora idé?',
@@ -276,7 +276,7 @@ const translations: Record<Language, Translations> = {
       other: 'Annat',
       budget: 'Budget',
       budgetPlaceholder: 'Välj ungefärlig budget',
-      budgetOptions: ['Under 5 000 kr', '5 000 – 15 000 kr', '15 000 – 30 000 kr', 'Större projekt / Offert'],
+      budgetOptions: ['Under 5 000 kr', '5 000 – 10 000 kr', '10 000 – 20 000 kr', '20 000 kr+', 'Vet ej / behöver rådgivning'],
       message: 'Meddelande',
       messagePlaceholder: 'Berätta kort om din vision och dina utmaningar...',
       submit: 'Skicka förfrågan',
@@ -359,7 +359,7 @@ const translations: Record<Language, Translations> = {
         cta: 'Boka konsultation',
       },
       paymentMethods: {
-        invoice: { name: 'Kontant / Faktura' },
+        invoice: { name: 'Faktura' },
         card: { name: 'Kort' },
         swish: { name: 'Swish' },
         paypal: { name: 'PayPal' },
@@ -436,7 +436,7 @@ const translations: Record<Language, Translations> = {
       },
     },
     portfolio: {
-      headline: 'Latest project',
+      headline: 'Projects',
       intro: 'Real websites I have delivered.',
       viewDemo: 'Visit Site',
       explorePrototype: 'Explore the Prototype',
@@ -462,7 +462,7 @@ const translations: Record<Language, Translations> = {
           title: 'Echo2000',
           category: 'Personal project',
           description: 'A social platform for 25+ inspired by the early 2000s internet. Profiles, real-time chat, guestbook and message wall — from idea to live beta with active users.',
-          note: 'Built to demonstrate technical breadth — not representative of client projects.',
+          note: 'My own project — shows what I can build from scratch.',
         },
         'f3b5fea3-41fd-465b-ae92-141d9e9d42f3': {
           title: 'DJ Lobo Producciones',
@@ -479,7 +479,7 @@ const translations: Record<Language, Translations> = {
     about: {
       headline: 'I Build Faster. You Launch Sooner.',
       body: 'Coffee Code Studio is run by Rami — with a background in sales and client relations, based in Gothenburg. Every project gets personal attention from start to finish. I combine modern web development with smart tools to deliver professional websites in days — not months. Transparent process and a client portal where you follow every step.',
-      pullQuote: 'Latest delivery: DJ Lobo Producciones — live and running. Gothenburg-based. Personal contact from start to finish.',
+      pullQuote: '',
     },
     footer: {
       cta: 'Ready to Brew Your Next Big Idea?',
@@ -504,7 +504,7 @@ const translations: Record<Language, Translations> = {
       other: 'Other',
       budget: 'Budget',
       budgetPlaceholder: 'Select approximate budget',
-      budgetOptions: ['Under 5 000 SEK', '5 000 – 15 000 SEK', '15 000 – 30 000 SEK', 'Larger project / Quote'],
+      budgetOptions: ['Under 5,000 SEK', '5,000 – 10,000 SEK', '10,000 – 20,000 SEK', '20,000 SEK+', 'Not sure / need advice'],
       message: 'Message',
       messagePlaceholder: 'Tell me briefly about your vision and challenges...',
       submit: 'Send Request',
@@ -587,7 +587,7 @@ const translations: Record<Language, Translations> = {
         cta: 'Book consultation',
       },
       paymentMethods: {
-        invoice: { name: 'Invoice / Cash' },
+        invoice: { name: 'Invoice' },
         card: { name: 'Card' },
         swish: { name: 'Swish' },
         paypal: { name: 'PayPal' },
