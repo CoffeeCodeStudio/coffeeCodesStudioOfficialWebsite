@@ -1,0 +1,40 @@
+
+<div style="font-family: monospace; background: #1a1a1a; color: #e0e0e0; padding: 24px; border-radius: 8px; white-space: pre-wrap; font-size: 13px; line-height: 1.6;">
+# Coffee Code Studio
+
+> Webbyrå i Göteborg driven av Rami. Bygger professionella hemsidor till småföretag på 5–14 dagar till fast pris.
+
+## Tjänster
+
+- Starter: One-page hemsida för 4 900 kr. Leverans 5–7 dagar. Inkluderar mobilanpassning, kontaktformulär, GDPR, SEO-grund, 14 dagars support.
+- Engångsprojekt: Upp till 7 sidor för från 9 900 kr. Leverans 10–14 dagar. Inkluderar bokningssystem (Calendly), SEO-optimering, 30 dagars support.
+- Underhållspaket: Tillgängligt för befintliga kunder. Kontakta för offert.
+
+## Målgrupp
+
+Småföretag och soloprenörer i Göteborg som behöver en professionell webbnärvaro snabbt och utan krångel.
+
+## Process
+
+1. Kort samtal (Digital Kaffe) för att förstå vision och mål
+2. Bygge med snabb leverans
+3. Kunden godkänner och justeringar görs tills nöjd
+
+## Kontakt
+
+- Webb: https://coffeecodestudio.se
+- E-post: hej@coffeecodestudio.se
+- Telefon: 073 876 42 99
+- WhatsApp: tillgänglig via samma nummer
+- Konsultation: kostnadsfri via bokningsformulär på sajten
+
+## Referenser
+
+- DJ Lobo Producciones (djloboproducciones.com) — webbplats med bokningssystem och live radio
+- Golden Fruit Oasis — e-handelprototyp med WhatsApp-beställning
+- Echo2000 — social plattform byggd från grunden
+
+## Betalning
+
+Faktura. Andra alternativ på begäran.
+</div>
