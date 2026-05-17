@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, type ReactNode } from 'react'; // v2
+import React, { createContext, useContext, type ReactNode } from 'react'; // v2
+import { useLocation, useNavigate } from 'react-router-dom';
+import { detectLang, pathForLang } from '@/lib/i18nRoutes';
 
 type Language = 'sv' | 'en';
 
