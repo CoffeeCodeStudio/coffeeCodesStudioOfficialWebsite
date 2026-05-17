@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { SEOHead } from '@/components/SEOHead';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
@@ -15,10 +15,12 @@ export default function LegalPage({
   children: React.ReactNode;
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const canonical = `https://coffeecodestudio.se${location.pathname}`;
 
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead title={seoTitle} description={seoDescription} />
+      <SEOHead title={seoTitle} description={seoDescription} canonical={canonical} />
       <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 max-w-3xl">
         <Button
           variant="ghost"
