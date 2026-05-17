@@ -182,7 +182,7 @@ const translations: Record<Language, Translations> = {
       planning: 'Planering',
       solution: 'Lösning',
       mockupTagline: 'Byggt åt riktiga kunder i Göteborg',
-      mockupAlt: 'djloboproducciones.com — kundprojekt byggt av Coffee Code Studio',
+      mockupAlt: 'Förhandsvisning av hemsidan djloboproducciones.com i en laptop — ett kundprojekt byggt av Coffee Code Studio, en hemsida för en DJ i Göteborg med mörk design och gulddetaljer',
     },
     problem: {
       headline: 'Trött på generiska mallar? Du förtjänar bättre.',
