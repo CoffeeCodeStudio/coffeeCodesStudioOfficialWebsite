@@ -23,7 +23,7 @@ function IndexContent() {
         description={language === 'sv'
           ? 'Professionell hemsida från 4 900 kr — ofta live inom en vecka. Jag bygger snabba, mobilanpassade hemsidor för småföretag i Göteborg. Boka gratis konsultation.'
           : 'Professional website from 4,900 SEK — often live within a week. Fast, mobile-friendly websites for small businesses. Book a free consultation.'}
-        canonical="https://coffeecodestudio.se/"
+        canonical={`https://coffeecodestudio.se${language === 'en' ? '/en' : '/'}`}
         ogImage="https://coffeecodestudio.se/og-image-v2.png"
       />
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md">
