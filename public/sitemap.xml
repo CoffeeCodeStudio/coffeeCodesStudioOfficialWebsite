@@ -51,17 +51,50 @@
   </url>
   <url>
     <loc>https://coffeecodestudio.se/anvandardvillkor</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/anvandardvillkor" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/anvandardvillkor" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/anvandardvillkor" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://coffeecodestudio.se/en/anvandardvillkor</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/anvandardvillkor" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/anvandardvillkor" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/anvandardvillkor" />
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
   <url>
     <loc>https://coffeecodestudio.se/integritetspolicy</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/integritetspolicy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/integritetspolicy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/integritetspolicy" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://coffeecodestudio.se/en/integritetspolicy</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/integritetspolicy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/integritetspolicy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/integritetspolicy" />
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
     <loc>https://coffeecodestudio.se/cookiepolicy</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/cookiepolicy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/cookiepolicy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/cookiepolicy" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://coffeecodestudio.se/en/cookiepolicy</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/cookiepolicy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/cookiepolicy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/cookiepolicy" />
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 </urlset>
