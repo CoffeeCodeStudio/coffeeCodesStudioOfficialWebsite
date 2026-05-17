@@ -240,6 +240,7 @@ export default function Projektfragor() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Projektfrågor | Coffee Code Studio" description="Frågeformulär för nya projekt hos Coffee Code Studio." noindex />
       {/* Back button */}
       <div className="fixed top-6 left-6 z-50">
         <Button
