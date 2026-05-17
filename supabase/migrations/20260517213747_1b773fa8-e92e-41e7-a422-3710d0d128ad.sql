@@ -1,0 +1,1 @@
+UPDATE public.portfolio_projects SET url='https://echo2000.coffeecodestudio.se', image_url=NULL WHERE id='cc6027f3-83ba-4b60-a197-b1e538e51e90';
