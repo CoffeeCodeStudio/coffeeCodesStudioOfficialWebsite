@@ -631,7 +631,16 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('sv');
+  const location = useLocation();
+  const navigate = useNavigate();
+  const language: Language = detectLang(location.pathname);
+
+  const setLanguage = (lang: Language) => {
+    const next = pathForLang(location.pathname, lang);
+    if (next !== location.pathname) {
+      navigate(next + location.search + location.hash);
+    }
+  };
 
   const value = {
     language,
