@@ -176,7 +176,7 @@ const translations: Record<Language, Translations> = {
     },
     hero: {
       headline: 'Din hemsida live inom en vecka',
-      subheadline: 'Jag bygger en professionell första version av din sajt på sju dagar. Snabbt, enkelt och utan krångel.',
+      subheadline: 'Jag bygger en professionell första version av din sajt inom en vecka . Snabbt, enkelt och utan krångel.',
       cta: 'Boka gratis konsultation',
       promo: 'Jag tar emot nya kunder — boka ett kostnadsfritt samtal idag',
       planning: 'Planering',
