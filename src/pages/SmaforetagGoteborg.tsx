@@ -434,7 +434,7 @@ function SmaforetagContent() {
       <SEOHead
         title="Hemsida för småföretag i Göteborg | Klar på 7 dagar | Coffee Code Studio"
         description="Professionell hemsida för småföretag i Göteborg. Fast pris 4 900 kr, leverans inom 7 dagar. Mobilvänlig, med bokning och SEO. Boka gratis konsultation."
-        canonical="https://coffeecodestudio.se/smaforetag-goteborg"
+        
       />
       <Navbar />
       <main>
