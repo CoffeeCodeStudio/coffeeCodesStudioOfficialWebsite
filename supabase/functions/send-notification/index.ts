@@ -125,9 +125,39 @@ Deno.serve(async (req) => {
       });
     }
 
+    // --- AUTH GATE ---------------------------------------------------------
+    // Require a valid JWT. Internal callers (triggers, other edge functions)
+    // use the service role key, which carries role=service_role.
+    const authHeader = req.headers.get("Authorization") || "";
+    if (!authHeader.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const token = authHeader.slice("Bearer ".length);
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const adminClient = createClient(supabaseUrl, serviceKey);
+
+    // Verify token and read claims
+    const verifier = createClient(supabaseUrl, anonKey);
+    const { data: claimsData, error: claimsErr } = await verifier.auth.getClaims(token);
+    if (claimsErr || !claimsData?.claims) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const callerRole = (claimsData.claims as any).role as string | undefined;
+    const callerId = claimsData.claims.sub as string | undefined;
+    const isService = callerRole === "service_role";
+
     const payload: NotificationPayload = await req.json();
     const { type } = payload;
-    console.log("[send-notification] Incoming payload:", JSON.stringify({ type, project_id: payload.project_id, project_name: payload.project_name }));
+    console.log("[send-notification] Incoming:", JSON.stringify({ type, isService, project_id: payload.project_id }));
 
     if (!type) {
       return new Response(JSON.stringify({ error: "type required" }), {
@@ -136,9 +166,66 @@ Deno.serve(async (req) => {
       });
     }
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    const adminClient = createClient(supabaseUrl, serviceKey);
+    // --- AUTHZ -------------------------------------------------------------
+    // External (non-service) callers are tightly restricted to prevent abuse.
+    if (!isService) {
+      // Block freeform subject/html email crafting from non-service callers.
+      if (payload.subject || payload.html) {
+        return new Response(JSON.stringify({ error: "Forbidden" }), {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      if (type === "test") {
+        // Force test mails to the authenticated caller only.
+        payload.user_id = callerId;
+      } else if (type === "email_new_message") {
+        // Must target a real project the caller belongs to.
+        if (!payload.project_id) {
+          return new Response(JSON.stringify({ error: "project_id required" }), {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+        const { data: proj } = await adminClient
+          .from("projects")
+          .select("client_user_id")
+          .eq("id", payload.project_id)
+          .maybeSingle();
+        if (!proj) {
+          return new Response(JSON.stringify({ error: "Forbidden" }), {
+            status: 403,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+        const isClientOfProject = proj.client_user_id === callerId;
+        const { data: adminRow } = await adminClient
+          .from("user_roles")
+          .select("user_id")
+          .eq("user_id", callerId)
+          .eq("role", "admin")
+          .maybeSingle();
+        const isAdmin = !!adminRow;
+        if (!isClientOfProject && !isAdmin) {
+          return new Response(JSON.stringify({ error: "Forbidden" }), {
+            status: 403,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+        // Derive sender role server-side (do not trust client claim).
+        payload.is_admin_sender = isAdmin;
+        // Strip fields a client must not control.
+        payload.target_user_id = undefined;
+        payload.user_id = undefined;
+      } else {
+        // All other notification types are internal-only.
+        return new Response(JSON.stringify({ error: "Forbidden" }), {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    }
 
     // Look up project info if needed
     if (payload.project_id && !payload.project_name) {
