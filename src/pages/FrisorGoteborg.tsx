@@ -388,7 +388,7 @@ function FrisorContent() {
       <SEOHead
         title="Hemsida för frisörer i Göteborg | Klar på 7 dagar | Coffee Code Studio"
         description="Professionell hemsida för frisörer och salonger i Göteborg. Fast pris 4 900 kr, leverans inom en vecka. Mobilvänlig, bokningssystem och SEO. Boka gratis konsultation."
-        canonical="https://coffeecodestudio.se/frisor-goteborg"
+        
       />
       <Navbar />
       <main>

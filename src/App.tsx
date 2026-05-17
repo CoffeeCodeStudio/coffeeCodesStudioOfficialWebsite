@@ -43,10 +43,10 @@ function AuthRedirectHandler() {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <LanguageProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <LanguageProvider>
           <AuthRedirectHandler />
           <Routes>
             <Route path="/" element={<Index />} />
@@ -61,13 +61,20 @@ const App = () => (
             <Route path="/projektfragor" element={<Projektfragor />} />
             <Route path="/frisor-goteborg" element={<FrisorGoteborg />} />
             <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
+            {/* English /en/* mirrors of every public, indexable page */}
+            <Route path="/en" element={<Index />} />
+            <Route path="/en/frisor-goteborg" element={<FrisorGoteborg />} />
+            <Route path="/en/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
+            <Route path="/en/integritetspolicy" element={<Integritetspolicy />} />
+            <Route path="/en/cookiepolicy" element={<Cookiepolicy />} />
+            <Route path="/en/anvandardvillkor" element={<Anvandardvillkor />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <CookieConsent />
           <CoffeeBeanCursor />
-        </BrowserRouter>
-      </LanguageProvider>
+        </LanguageProvider>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
