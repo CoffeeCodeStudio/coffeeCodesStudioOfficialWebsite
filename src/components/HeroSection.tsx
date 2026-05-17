@@ -68,7 +68,7 @@ export function HeroSection() {
                 <div className="w-2 h-2 rounded-full bg-red-500/60" />
                 <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
                 <div className="w-2 h-2 rounded-full bg-green-500/60" />
-                <span className="ml-3 text-[10px] text-muted-foreground/50 font-mono truncate">djloboproducciones.com</span>
+                <span className="ml-3 text-[10px] text-muted-foreground font-mono truncate" aria-hidden="true">djloboproducciones.com</span>
               </div>
               {/* Screen */}
               <div className="rounded-t-sm overflow-hidden">
