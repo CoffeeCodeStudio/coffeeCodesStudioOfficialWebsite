@@ -3,6 +3,18 @@
 Alla ändringar dokumenteras här.
 Format baserat på [Keep a Changelog](https://keepachangelog.com/).
 
+## [2026-09-06] - Projektdokumentation och full audit
+
+### Lagt till
+
+- `ARCH.md` med full teknisk översikt: stack, routes, SEOHead, i18n-hjälpfunktioner, schema.org-typer, sitemap-struktur och deployment
+- `CHANGELOG.md` skapad och fylld med daterad historik från projektstart
+
+### Ändrat
+
+- `README.md` uppdaterad med nya landningssidor, SEO-uppsättning och Lovable-hosting
+- Full audit genomförd av routes, komponenter, sidor, schema, sitemap, robots.txt och beroenden
+
 ## [2026-09-06] - SEO och GEO-förbättringar
 
 ### Lagt till
@@ -10,11 +22,11 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/).
 - `/webbyra-goteborg` med LocalBusiness- och FAQPage-schema
 - `/hemsida-frisor-goteborg` med FAQ och hreflang
 - `/hemsida-hantverkare-goteborg` med FAQ och hreflang
+- `/vad-kostar-en-hemsida` med prisöversikt, kostnadsjämförelse och FAQPage-schema
 - `/en`-varianter för alla nya sidor
 - GPTBot, ClaudeBot, PerplexityBot och GoogleOther i `robots.txt`
 - LLM-sitemap-länk (`llms.txt`) i `robots.txt`
 - WebSite-schema i det sitewide `@graph` (`StructuredData.tsx`)
-- `/vad-kostar-en-hemsida` med prisöversikt, kostnadsjämförelse och FAQPage-schema
 - Sitemap utökad till 20 URL:er med reciproka hreflang-alternat
 
 ### Ändrat
