@@ -12,6 +12,7 @@ export const LOCALIZED_PUBLIC_PATHS = [
   "/webbyra-goteborg",
   "/hemsida-frisor-goteborg",
   "/hemsida-hantverkare-goteborg",
+  "/vad-kostar-en-hemsida",
 
   "/integritetspolicy",
   "/cookiepolicy",
