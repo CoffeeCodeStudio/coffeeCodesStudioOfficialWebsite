@@ -21,6 +21,7 @@ import WebbyraGoteborg from "./pages/WebbyraGoteborg";
 import HemsidaFrisorGoteborg from "./pages/HemsidaFrisorGoteborg";
 import HemsidaHantverkareGoteborg from "./pages/HemsidaHantverkareGoteborg";
 import VadKostarEnHemsida from "./pages/VadKostarEnHemsida";
+import OmMig from "./pages/OmMig";
 
 import { CookieConsent } from "./components/CookieConsent";
 import { CoffeeBeanCursor } from "./components/CoffeeBeanCursor";
