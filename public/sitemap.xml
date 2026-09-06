@@ -97,4 +97,20 @@
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
+  <url>
+    <loc>https://coffeecodestudio.se/webbyra-goteborg</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/webbyra-goteborg" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/webbyra-goteborg" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/webbyra-goteborg" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://coffeecodestudio.se/en/webbyra-goteborg</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/webbyra-goteborg" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/webbyra-goteborg" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/webbyra-goteborg" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
