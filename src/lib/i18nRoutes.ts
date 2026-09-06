@@ -13,6 +13,7 @@ export const LOCALIZED_PUBLIC_PATHS = [
   "/hemsida-frisor-goteborg",
   "/hemsida-hantverkare-goteborg",
   "/vad-kostar-en-hemsida",
+  "/om-mig",
 
   "/integritetspolicy",
   "/cookiepolicy",
