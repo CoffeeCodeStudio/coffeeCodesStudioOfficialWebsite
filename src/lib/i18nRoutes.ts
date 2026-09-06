@@ -11,6 +11,8 @@ export const LOCALIZED_PUBLIC_PATHS = [
   "/smaforetag-goteborg",
   "/webbyra-goteborg",
   "/hemsida-frisor-goteborg",
+  "/hemsida-hantverkare-goteborg",
+
   "/integritetspolicy",
   "/cookiepolicy",
   "/anvandardvillkor",
