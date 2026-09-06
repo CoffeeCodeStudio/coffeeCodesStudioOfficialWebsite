@@ -18,6 +18,7 @@ import Projektfragor from "./pages/Projektfragor";
 import FrisorGoteborg from "./pages/FrisorGoteborg";
 import SmaforetagGoteborg from "./pages/SmaforetagGoteborg";
 import WebbyraGoteborg from "./pages/WebbyraGoteborg";
+import HemsidaFrisorGoteborg from "./pages/HemsidaFrisorGoteborg";
 import { CookieConsent } from "./components/CookieConsent";
 import { CoffeeBeanCursor } from "./components/CoffeeBeanCursor";
 import { LanguageProvider } from "./contexts/LanguageContext";
@@ -63,11 +64,13 @@ const App = () => (
             <Route path="/frisor-goteborg" element={<FrisorGoteborg />} />
             <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
             <Route path="/webbyra-goteborg" element={<WebbyraGoteborg />} />
+            <Route path="/hemsida-frisor-goteborg" element={<HemsidaFrisorGoteborg />} />
             {/* English /en/* mirrors of every public, indexable page */}
             <Route path="/en" element={<Index />} />
             <Route path="/en/frisor-goteborg" element={<FrisorGoteborg />} />
             <Route path="/en/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
             <Route path="/en/webbyra-goteborg" element={<WebbyraGoteborg />} />
+            <Route path="/en/hemsida-frisor-goteborg" element={<HemsidaFrisorGoteborg />} />
             <Route path="/en/integritetspolicy" element={<Integritetspolicy />} />
             <Route path="/en/cookiepolicy" element={<Cookiepolicy />} />
             <Route path="/en/anvandardvillkor" element={<Anvandardvillkor />} />
