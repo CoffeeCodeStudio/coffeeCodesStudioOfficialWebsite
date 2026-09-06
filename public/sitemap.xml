@@ -113,4 +113,20 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://coffeecodestudio.se/hemsida-frisor-goteborg</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/hemsida-frisor-goteborg" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/hemsida-frisor-goteborg" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/hemsida-frisor-goteborg" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://coffeecodestudio.se/en/hemsida-frisor-goteborg</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/hemsida-frisor-goteborg" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/hemsida-frisor-goteborg" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/hemsida-frisor-goteborg" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
