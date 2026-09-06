@@ -37,6 +37,7 @@ Public Swedish routes (each has an `/en/...` English mirror unless noted):
 | `/webbyra-goteborg` | Landningssida: webbyrå i Göteborg |
 | `/hemsida-frisor-goteborg` | Landningssida: hemsida för frisörsalonger |
 | `/hemsida-hantverkare-goteborg` | Landningssida: hemsida för hantverkare |
+| `/vad-kostar-en-hemsida` | Prisguide: vad en hemsida kostar |
 | `/integritetspolicy`, `/cookiepolicy`, `/anvandardvillkor` | Legal |
 
 Internal routes (no English mirror, excluded from indexing): `/portal`, `/portal/login`, `/admin`, `/admin/login`, `/set-password`, `/projektfragor`.
