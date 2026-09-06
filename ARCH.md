@@ -24,6 +24,7 @@ Alla routes definieras i `src/App.tsx` inuti `<BrowserRouter>` och `<LanguagePro
 | `/webbyra-goteborg` | `WebbyraGoteborg.tsx` | Landningssida webbyrå, LocalBusiness + FAQPage |
 | `/hemsida-frisor-goteborg` | `HemsidaFrisorGoteborg.tsx` | Landningssida frisörsalonger, FAQPage |
 | `/hemsida-hantverkare-goteborg` | `HemsidaHantverkareGoteborg.tsx` | Landningssida hantverkare, FAQPage |
+| `/vad-kostar-en-hemsida` | `VadKostarEnHemsida.tsx` | Prisguide, FAQPage |
 | `/integritetspolicy` | `Integritetspolicy.tsx` | Integritetspolicy |
 | `/cookiepolicy` | `Cookiepolicy.tsx` | Cookiepolicy |
 | `/anvandardvillkor` | `Anvandardvillkor.tsx` | Användarvillkor |
@@ -95,12 +96,12 @@ Grafen byggs om per språk (`sv-SE` / `en`).
 ### Per sida
 
 - `LocalBusiness` + `FAQPage` på `/frisor-goteborg`, `/smaforetag-goteborg`, `/webbyra-goteborg`
-- `FAQPage` på `/hemsida-frisor-goteborg` och `/hemsida-hantverkare-goteborg`
+- `FAQPage` på `/hemsida-frisor-goteborg`, `/hemsida-hantverkare-goteborg` och `/vad-kostar-en-hemsida`
 - `FAQPage` via `src/components/FAQSection.tsx` på startsidan
 
 ## Sitemap och robots
 
-`public/sitemap.xml` underhålls för hand och innehåller 18 URL:er — nio svenska sidor och deras engelska motsvarigheter. Varje `<url>` har `xhtml:link`-alternat för `sv`, `en` och `x-default`, plus `changefreq` och `priority` (startsidan 1.0, landningssidor 0.8/0.7, legal 0.3/0.2). Interna routes ingår inte.
+`public/sitemap.xml` underhålls för hand och innehåller 20 URL:er — tio svenska sidor och deras engelska motsvarigheter. Varje `<url>` har `xhtml:link`-alternat för `sv`, `en` och `x-default`, plus `changefreq` och `priority` (startsidan 1.0, landningssidor 0.8/0.7, legal 0.3/0.2). Interna routes ingår inte.
 
 Vid ny route: lägg till sökvägen i `LOCALIZED_PUBLIC_PATHS`, registrera både svensk och engelsk route i `App.tsx` och lägg in båda URL:erna i sitemapen.
 
