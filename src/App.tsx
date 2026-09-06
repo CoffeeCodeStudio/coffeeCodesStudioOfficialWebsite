@@ -21,6 +21,7 @@ import WebbyraGoteborg from "./pages/WebbyraGoteborg";
 import HemsidaFrisorGoteborg from "./pages/HemsidaFrisorGoteborg";
 import HemsidaHantverkareGoteborg from "./pages/HemsidaHantverkareGoteborg";
 import VadKostarEnHemsida from "./pages/VadKostarEnHemsida";
+import OmMig from "./pages/OmMig";
 
 import { CookieConsent } from "./components/CookieConsent";
 import { CoffeeBeanCursor } from "./components/CoffeeBeanCursor";
@@ -70,7 +71,9 @@ const App = () => (
             <Route path="/hemsida-frisor-goteborg" element={<HemsidaFrisorGoteborg />} />
             <Route path="/hemsida-hantverkare-goteborg" element={<HemsidaHantverkareGoteborg />} />
             <Route path="/vad-kostar-en-hemsida" element={<VadKostarEnHemsida />} />
+            <Route path="/om-mig" element={<OmMig />} />
             {/* English /en/* mirrors of every public, indexable page */}
+            <Route path="/en/om-mig" element={<OmMig />} />
             <Route path="/en" element={<Index />} />
             <Route path="/en/frisor-goteborg" element={<FrisorGoteborg />} />
             <Route path="/en/smaforetag-goteborg" element={<SmaforetagGoteborg />} />

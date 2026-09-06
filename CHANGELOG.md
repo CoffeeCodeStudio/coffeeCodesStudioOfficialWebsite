@@ -22,6 +22,7 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/).
 - `/webbyra-goteborg` med LocalBusiness- och FAQPage-schema
 - `/hemsida-frisor-goteborg` med FAQ och hreflang
 - `/hemsida-hantverkare-goteborg` med FAQ och hreflang
+- `/om-mig` (sv/en) med Person-schema
 - `/vad-kostar-en-hemsida` med prisöversikt, kostnadsjämförelse och FAQPage-schema
 - `/en`-varianter för alla nya sidor
 - GPTBot, ClaudeBot, PerplexityBot och GoogleOther i `robots.txt`

@@ -161,5 +161,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://coffeecodestudio.se/om-mig</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/om-mig" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/om-mig" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/om-mig" />
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeecodestudio.se/en/om-mig</loc>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/om-mig" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/om-mig" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/om-mig" />
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
 

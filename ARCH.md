@@ -25,6 +25,7 @@ Alla routes definieras i `src/App.tsx` inuti `<BrowserRouter>` och `<LanguagePro
 | `/hemsida-frisor-goteborg` | `HemsidaFrisorGoteborg.tsx` | Landningssida frisörsalonger, FAQPage |
 | `/hemsida-hantverkare-goteborg` | `HemsidaHantverkareGoteborg.tsx` | Landningssida hantverkare, FAQPage |
 | `/vad-kostar-en-hemsida` | `VadKostarEnHemsida.tsx` | Prisguide, FAQPage |
+| `/om-mig` | `OmMig.tsx` | Om Coffee Code Studio och Rami, Person-schema |
 | `/integritetspolicy` | `Integritetspolicy.tsx` | Integritetspolicy |
 | `/cookiepolicy` | `Cookiepolicy.tsx` | Cookiepolicy |
 | `/anvandardvillkor` | `Anvandardvillkor.tsx` | Användarvillkor |
@@ -101,7 +102,7 @@ Grafen byggs om per språk (`sv-SE` / `en`).
 
 ## Sitemap och robots
 
-`public/sitemap.xml` underhålls för hand och innehåller 20 URL:er — tio svenska sidor och deras engelska motsvarigheter. Varje `<url>` har `xhtml:link`-alternat för `sv`, `en` och `x-default`, plus `changefreq` och `priority` (startsidan 1.0, landningssidor 0.8/0.7, legal 0.3/0.2). Interna routes ingår inte.
+`public/sitemap.xml` underhålls för hand och innehåller 22 URL:er — elva svenska sidor och deras engelska motsvarigheter. Varje `<url>` har `xhtml:link`-alternat för `sv`, `en` och `x-default`, plus `changefreq` och `priority` (startsidan 1.0, landningssidor 0.8/0.7, legal 0.3/0.2). Interna routes ingår inte.
 
 Vid ny route: lägg till sökvägen i `LOCALIZED_PUBLIC_PATHS`, registrera både svensk och engelsk route i `App.tsx` och lägg in båda URL:erna i sitemapen.
 
