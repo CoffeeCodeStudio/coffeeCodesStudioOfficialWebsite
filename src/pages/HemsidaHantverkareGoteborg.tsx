@@ -404,8 +404,9 @@ function HemsidaHantverkareContent() {
         '@type': 'Question',
         name: item.q,
         acceptedAnswer: { '@type': 'Answer', text: item.a },
-      }),
+      })),
     };
+
 
     const scriptFAQ = document.createElement('script');
     scriptFAQ.id = 'hemsida-hantverkare-faq-jsonld';
