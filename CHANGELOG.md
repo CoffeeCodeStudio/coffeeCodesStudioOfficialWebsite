@@ -14,16 +14,13 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/).
 - GPTBot, ClaudeBot, PerplexityBot och GoogleOther i `robots.txt`
 - LLM-sitemap-länk (`llms.txt`) i `robots.txt`
 - WebSite-schema i det sitewide `@graph` (`StructuredData.tsx`)
-- Sitemap utökad till 18 URL:er med reciproka hreflang-alternat
+- `/vad-kostar-en-hemsida` med prisöversikt, kostnadsjämförelse och FAQPage-schema
+- Sitemap utökad till 20 URL:er med reciproka hreflang-alternat
 
 ### Ändrat
 
 - `/en/frisor-goteborg` översatt till engelska
 - `/en/smaforetag-goteborg` översatt till engelska
-
-### Att göra
-
-- `/vad-kostar-en-hemsida` med prisjämförelse (planerad, ej byggd)
 
 ## [2026-09-05] - Metadata, sitemap och prestanda
 
