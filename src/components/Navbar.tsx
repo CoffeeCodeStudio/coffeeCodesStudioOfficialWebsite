@@ -76,11 +76,9 @@ export function Navbar() {
   const navigate = useNavigate();
 
   const navItems = [
-    { label: t.nav.services, href: '#tjanster' },
-    { label: t.nav.projects, href: '#projekt' },
-    { label: t.nav.pricing, href: '#priser' },
-    { label: t.nav.about, href: '#about' },
-    { label: t.nav.contact, href: '#kontakt' },
+    { label: 'Projects', href: '#projekt' },
+    { label: 'About', href: '#about' },
+    { label: 'Contact', href: '#kontakt' },
   ];
 
   useEffect(() => {
