@@ -47,6 +47,8 @@ Identity: Rami — AI-Leveraged Product Engineer.
 - [x] New HeroSection (EN, Rami, stack pills, Gothenburg badge, 2 CTAs)
 - [x] CaseStudySection / project detail modal (PSAM format per project)
 - [x] AIMethodologySection
+- [x] Navbar Resume link added (placeholder `href="#"`)
+- [x] Supabase: English project texts + Klar added + mockup images uploaded
 - [ ] TechStackMatrix (categorized, no % bars)
 - [x] Updated AboutSection (EN, short, cultural fit)
 - [x] Updated ContactSection (Copy Email CTA, no heavy form)
@@ -56,3 +58,13 @@ Identity: Rami — AI-Leveraged Product Engineer.
 - [ ] sitemap.xml verified
 - [ ] robots.txt verified
 - [ ] a11y audit (axe + Lighthouse 100)
+
+## Backlog — Phase 3
+
+- [ ] Upload PDF CV to Supabase Storage and update Resume href
+- [ ] OG image (1200×630px) created and uploaded
+- [ ] Plausible analytics installed
+- [ ] SEO meta-tags updated (title, description, OG tags)
+- [ ] Echo2000: 1-click guest session built
+- [ ] Modal: URL hash deep-linking (coffeecodestudio.se/#echo2000)
+- [ ] Klar: run Lighthouse on coffeecodestudio.se itself
