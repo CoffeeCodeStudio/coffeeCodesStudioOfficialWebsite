@@ -24,7 +24,7 @@ export function HeroSection() {
     document.getElementById('projekt')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const stackPills = ['React', 'TypeScript', 'Vite', 'Supabase', 'Tailwind CSS', 'PostgreSQL'];
+  const stackPills = ['TypeScript', 'React', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Vite'];
 
   return (
     <section className="relative min-h-0 flex-col pt-8 sm:pt-16 pb-0 px-2 sm:px-0 overflow-hidden flex items-center justify-start" aria-label="Hero">
@@ -70,7 +70,7 @@ export function HeroSection() {
 
         {/* Stack pills */}
         <motion.div
-          className="flex flex-row flex-wrap justify-center gap-2 mb-8"
+          className="flex flex-row flex-wrap justify-center gap-2 mb-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -78,6 +78,26 @@ export function HeroSection() {
           {stackPills.map((pill) => (
             <span key={pill} className="font-mono text-xs border border-primary/20 rounded-full px-3 py-1 text-muted-foreground">
               {pill}
+            </span>
+          ))}
+        </motion.div>
+
+        {/* AI tooling */}
+        <p className="text-center text-xs text-muted-foreground/40 font-mono mb-2 mt-6">
+          AI Tooling
+        </p>
+        <motion.div
+          className="flex justify-center gap-2 flex-wrap mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.52 }}
+        >
+          {['Cursor', 'Claude', 'Lovable', 'Gemini'].map((tool) => (
+            <span
+              key={tool}
+              className="font-mono text-xs border border-muted-foreground/20 rounded-full px-3 py-1 text-muted-foreground/60"
+            >
+              {tool}
             </span>
           ))}
         </motion.div>

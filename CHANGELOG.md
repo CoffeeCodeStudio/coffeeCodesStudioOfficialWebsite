@@ -100,6 +100,11 @@
 - Added languages line: Swedish, English, Arabic
 - Added AI stack line: Claude Code, Lovable, Groq, Gemini
 
+### Phase 2k: HeroSection — reordered stack pills, added AI tooling row
+
+- Reordered stack pills to: TypeScript, React, Supabase, PostgreSQL, Tailwind CSS, Vite
+- Added "AI Tooling" label and second pill row: Cursor, Claude, Lovable, Gemini
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
