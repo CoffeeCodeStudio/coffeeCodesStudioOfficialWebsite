@@ -105,6 +105,11 @@
 - Reordered stack pills to: TypeScript, React, Supabase, PostgreSQL, Tailwind CSS, Vite
 - Added "AI Tooling" label and second pill row: Cursor, Claude, Lovable, Gemini
 
+### Phase 2l: Added MethodologySection — 4-step AI workflow cards
+
+- Created `src/components/MethodologySection.tsx` with four workflow cards
+- Inserted between `ProjektSection` and `AboutSection` on the landing page
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
