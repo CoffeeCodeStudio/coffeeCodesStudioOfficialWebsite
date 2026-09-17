@@ -33,11 +33,11 @@ function IndexContent() {
         <Navbar />
         <main id="main-content">
           <HeroSection />
-          <TestimonialsSection />
-          <TjansterSection />
+          {/* <TestimonialsSection /> */}
+          {/* <TjansterSection /> */}
           <ProjektSection />
-          <FAQSection />
-          <PricingSection />
+          {/* <FAQSection /> */}
+          {/* <PricingSection /> */}
           <AboutSection />
           <ContactSection />
         </main>

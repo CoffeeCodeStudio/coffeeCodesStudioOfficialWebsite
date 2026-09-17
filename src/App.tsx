@@ -24,7 +24,7 @@ import VadKostarEnHemsida from "./pages/VadKostarEnHemsida";
 import OmMig from "./pages/OmMig";
 
 import { CookieConsent } from "./components/CookieConsent";
-import { CoffeeBeanCursor } from "./components/CoffeeBeanCursor";
+// import { CoffeeBeanCursor } from "./components/CoffeeBeanCursor";
 import { LanguageProvider } from "./contexts/LanguageContext";
 
 const queryClient = new QueryClient();
@@ -89,7 +89,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           <CookieConsent />
-          <CoffeeBeanCursor />
+          {/* <CoffeeBeanCursor /> */}
         </LanguageProvider>
       </BrowserRouter>
     </TooltipProvider>
