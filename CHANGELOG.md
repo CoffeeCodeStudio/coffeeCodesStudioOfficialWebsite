@@ -48,6 +48,11 @@
 - Added 2×2 stats grid (Production Apps, Commits, Real Users, timeline)
 - Replaced language context with fixed About Me narrative and location line
 
+### Phase 2b-fix: AboutSection copy and stats corrected per research
+
+- Updated AboutSection copy to emphasize product-engineering bridge, schema-to-users delivery, and AI + structural discipline
+- Updated 2×2 stats grid: Production Apps Shipped, Real-World Users, Strict TypeScript & RLS, Realtime Data Latency
+
 ### Phase 2c: New portfolio ContactSection
 
 - Rewrote `src/components/ContactSection.tsx`
