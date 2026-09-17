@@ -248,7 +248,7 @@ export function ProjektSection() {
                   <div className="glass-card rounded-xl p-4 border border-primary/10">
                     <p className="text-xs font-mono text-primary mb-2">ARCHITECTURE & AI WORKFLOW</p>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Built with React, TypeScript, Vite, Tailwind CSS and Supabase. Features a persistent live radio player (ZenoFM + Mixcloud), automated booking system, Google Calendar sync for upcoming shows, and a 9-tab admin panel for content management. Image upload with built-in cropper. Bilingual (SV/EN). AI tools scaffolded UI components and audio integration — stream
+                      Built with React, TypeScript, Vite, Tailwind CSS and Supabase. Features a persistent live radio player (ZenoFM + Mixcloud), automated booking system, Google Calendar sync for upcoming shows, and a 9-tab admin panel for content management. Image upload with built-in cropper. Bilingual (SV/EN). AI tools scaffolded UI components and audio integration — stream buffering and form sanitization were manually implemented.
                     </p>
                   </div>
                 </div>
