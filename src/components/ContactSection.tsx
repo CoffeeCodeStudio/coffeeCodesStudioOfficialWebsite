@@ -186,7 +186,7 @@ export function ContactSection() {
                 asChild
               >
                 <a
-                  href="https://linkedin.com/in/placeholder"
+                  href="https://www.linkedin.com/in/rami-e-453b77330/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
