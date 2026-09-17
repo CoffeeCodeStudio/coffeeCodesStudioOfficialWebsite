@@ -57,7 +57,7 @@ export function AboutSection() {
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-              Over the past year, I built and deployed three full-stack applications — Echo2000, Klar, and DJ Lobo Producciones — taking them from initial schema design to active, real-world users.
+              Over the past year, I built and deployed three full-stack applications — Echo2000, Klar, and DJ Lobo Producciones — taking them from initial schema design to active, real-world users. When Echo2000 suffered a production crisis, I rebuilt the entire system within 24 hours and reactivated 129 users.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -70,6 +70,14 @@ export function AboutSection() {
                 Based in Gothenburg, Sweden • Open to full-time product engineering roles (hybrid or on-site across Västra Götaland).
               </span>
             </div>
+
+            <p className="text-sm font-mono text-muted-foreground mt-2">
+              🌐 Languages: Swedish (native) · English (fluent) · Arabic (fluent)
+            </p>
+
+            <p className="text-sm font-mono text-muted-foreground mt-1">
+              🤖 AI Stack: Claude Code · Lovable · Groq · Gemini
+            </p>
           </motion.div>
         </div>
       </div>
