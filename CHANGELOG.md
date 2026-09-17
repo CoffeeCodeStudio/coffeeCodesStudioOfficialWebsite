@@ -63,6 +63,14 @@
 - Removed phone, WhatsApp, company, budget, projectType fields
 - Removed language context
 
+### Phase 2d: Footer updated — removed phone/WhatsApp, added GitHub/LinkedIn/CV links
+
+- Removed phone number and WhatsApp buttons from Footer.tsx
+- Kept email button (`hej@coffeecodestudio.se`)
+- Updated tagline to "Rami — Product Engineer. Built with React, TypeScript, Vite, Tailwind & Supabase."
+- Added GitHub, LinkedIn, and Download CV links
+- Changed section label from "KONTAKT" to "CONNECT"
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
