@@ -33,31 +33,42 @@ export function Footer() {
             <div className="absolute -top-8 right-1/2 md:right-0 translate-x-1/2 md:translate-x-1/4 w-40 h-40 rounded-full bg-gradient-to-br from-primary/5 via-primary/3 to-transparent blur-2xl pointer-events-none" />
 
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-1 relative z-10">
-              Kontakt
+              Connect
             </p>
             <div className="flex flex-wrap justify-center md:justify-end gap-3 relative z-10">
-              <a
-                href="tel:+46738764299"
-                className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 px-4 py-2 rounded-full border border-border/30 hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all group"
-              >
-                <Phone className="w-4 h-4 group-hover:text-primary transition-colors" />
-                073 876 42 99
-              </a>
-              <a
-                href="https://wa.me/46738764299"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 px-4 py-2 rounded-full border border-border/30 hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all group"
-              >
-                <MessageCircle className="w-4 h-4 group-hover:text-primary transition-colors" />
-                WhatsApp
-              </a>
               <a
                 href="mailto:hej@coffeecodestudio.se"
                 className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/30 px-4 py-2 rounded-full border border-border/30 hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all group"
               >
                 <Mail className="w-4 h-4 group-hover:text-primary transition-colors" />
                 hej@coffeecodestudio.se
+              </a>
+              <a
+                href="https://github.com/CoffeeCodeStudio"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Github className="w-4 h-4 inline mr-1" />
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/placeholder"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Linkedin className="w-4 h-4 inline mr-1" />
+                LinkedIn
+              </a>
+              <a
+                href="#"
+                aria-label="Download CV"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Download CV
               </a>
             </div>
           </div>
