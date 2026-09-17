@@ -127,6 +127,12 @@
 - Kept DJ Lobo PROBLEM and ARCHITECTURE & AI WORKFLOW sections; removed the METRICS grid
 - Updated action button labels and URLs per project
 
+### Phase 2p: Added Resume link to navbar (placeholder href)
+
+- Added "Resume" link to desktop navigation after Contact
+- Added "Resume" link to mobile menu after Contact
+- Both links use `href="#"` as a placeholder until the PDF is uploaded
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
