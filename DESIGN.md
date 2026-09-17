@@ -44,3 +44,8 @@ Goal: Attract employers in Gothenburg. Show real projects.
 - No skill percentage bars
 - Load time under 1.5 seconds
 - Mobile-first responsive
+
+## What Is Disabled
+
+- ContactSection fields removed: company, projectType, budget, website (business content)
+- ContactSection kept: email, message only
