@@ -1,3 +1,4 @@
+// DISABLED — Business SEO page. Not part of portfolio. Route removed from App.tsx.
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
