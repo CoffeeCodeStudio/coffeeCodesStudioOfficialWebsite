@@ -21,7 +21,7 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-start gap-3">
             <Logo />
             <p className="text-xs text-muted-foreground tracking-wide text-center md:text-left">
-              AI-Leveraged Product Engineer — Gothenburg, Sweden
+              Rami — Product Engineer. Built with React, TypeScript, Vite, Tailwind &amp; Supabase.
             </p>
           </div>
 
