@@ -65,8 +65,8 @@ const App = () => (
             <Route path="/cookiepolicy" element={<Cookiepolicy />} />
             <Route path="/anvandardvillkor" element={<Anvandardvillkor />} />
             <Route path="/projektfragor" element={<Projektfragor />} />
-            <Route path="/frisor-goteborg" element={<FrisorGoteborg />} />
-            <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
+            {/* <Route path="/frisor-goteborg" element={<FrisorGoteborg />} /> */}
+            {/* <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} /> */}
             <Route path="/webbyra-goteborg" element={<WebbyraGoteborg />} />
             <Route path="/hemsida-frisor-goteborg" element={<HemsidaFrisorGoteborg />} />
             <Route path="/hemsida-hantverkare-goteborg" element={<HemsidaHantverkareGoteborg />} />
