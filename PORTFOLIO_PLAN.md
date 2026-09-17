@@ -58,6 +58,7 @@ Identity: Rami — AI-Leveraged Product Engineer.
 - [ ] sitemap.xml verified
 - [ ] robots.txt verified
 - [ ] a11y audit (axe + Lighthouse 100)
+- [x] Responsive layout audit and fixes (mobile stacking, modal metrics, no overflow)
 
 ## Backlog — Phase 3
 
