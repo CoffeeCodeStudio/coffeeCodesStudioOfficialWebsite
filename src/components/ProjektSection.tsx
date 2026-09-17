@@ -256,23 +256,53 @@ export function ProjektSection() {
 
               {/* Action buttons */}
               <div className="flex gap-3 flex-wrap">
-                {selectedProject.url && (
+                {selectedProject.title === 'Echo2000' && (
+                  <>
+                    <Button
+                      className="glow-button bg-primary text-primary-foreground hover:bg-primary/90"
+                      onClick={() => window.open('https://echo2000.se', '_blank')}
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Explore Echo2000 →
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="border-primary/30 text-primary hover:bg-primary/10"
+                      onClick={() => window.open('https://github.com/CoffeeCodeStudio', '_blank')}
+                    >
+                      <Github className="w-4 h-4 mr-2" />
+                      View on GitHub
+                    </Button>
+                  </>
+                )}
+                {selectedProject.title === 'Klar' && (
+                  <>
+                    <Button
+                      className="glow-button bg-primary text-primary-foreground hover:bg-primary/90"
+                      onClick={() => window.open('https://klar-se.lovable.app', '_blank')}
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Try Klar →
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="border-primary/30 text-primary hover:bg-primary/10"
+                      onClick={() => window.open('https://github.com/CoffeeCodeStudio', '_blank')}
+                    >
+                      <Github className="w-4 h-4 mr-2" />
+                      View on GitHub
+                    </Button>
+                  </>
+                )}
+                {selectedProject.title === 'DJ Lobo Producciones' && (
                   <Button
                     className="glow-button bg-primary text-primary-foreground hover:bg-primary/90"
-                    onClick={() => window.open(selectedProject.url!, '_blank')}
+                    onClick={() => window.open('https://djloboproducciones.com', '_blank')}
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
-                    Launch Live App
+                    Visit Live Site →
                   </Button>
                 )}
-                <Button
-                  variant="outline"
-                  className="border-primary/30 text-primary hover:bg-primary/10"
-                  onClick={() => window.open('https://github.com/CoffeeCodeStudio', '_blank')}
-                >
-                  <Github className="w-4 h-4 mr-2" />
-                  View on GitHub
-                </Button>
               </div>
             </motion.div>
           </div>
