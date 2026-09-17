@@ -139,6 +139,13 @@ export function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
+            <a
+              href="#"
+              onClick={(e) => e.preventDefault()}
+              className="text-sm font-medium text-primary border border-primary/30 px-3 py-1 rounded-full hover:bg-primary/10 transition-colors"
+            >
+              Resume
+            </a>
             {/* <button
               onClick={() => navigate('/portal/login')}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -202,6 +209,16 @@ export function Navbar() {
                       {item.label}
                     </motion.a>
                   ))}
+                  <motion.a
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); setIsOpen(false); }}
+                    className="text-base font-medium text-primary border border-primary/30 px-4 py-4 rounded-xl hover:bg-primary/10 transition-colors border-b border-white/5"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: navItems.length * 0.05 }}
+                  >
+                    Resume
+                  </motion.a>
                   {/* <motion.button
                     onClick={() => { setIsOpen(false); navigate('/portal/login'); }}
                     className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-4 px-4 rounded-xl mt-2 text-center"
