@@ -48,12 +48,18 @@
 - Added 2×2 stats grid (Production Apps, Commits, Real Users, timeline)
 - Replaced language context with fixed About Me narrative and location line
 
+### Phase 2c: New portfolio ContactSection
+
+- Rewrote `src/components/ContactSection.tsx`
+- Hardcoded English copy for portfolio contact section
+- Added left column with Copy Email, Download Resume, LinkedIn CTAs + availability badge
+- Simplified right-column form to Work Email + Message + honeypot
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
 - AIMethodologySection
 - TechStackMatrix
-- Updated ContactSection
 - Plausible analytics
 - JSON-LD structured data
 - OG image 1200×630px
