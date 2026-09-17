@@ -75,8 +75,8 @@ const App = () => (
             {/* English /en/* mirrors of every public, indexable page */}
             <Route path="/en/om-mig" element={<OmMig />} />
             <Route path="/en" element={<Index />} />
-            <Route path="/en/frisor-goteborg" element={<FrisorGoteborg />} />
-            <Route path="/en/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
+            {/* <Route path="/en/frisor-goteborg" element={<FrisorGoteborg />} /> */}
+            {/* <Route path="/en/smaforetag-goteborg" element={<SmaforetagGoteborg />} /> */}
             <Route path="/en/webbyra-goteborg" element={<WebbyraGoteborg />} />
             <Route path="/en/hemsida-frisor-goteborg" element={<HemsidaFrisorGoteborg />} />
             <Route path="/en/hemsida-hantverkare-goteborg" element={<HemsidaHantverkareGoteborg />} />
