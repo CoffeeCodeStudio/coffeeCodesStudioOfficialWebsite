@@ -76,6 +76,14 @@
 - Updated section heading to "Shipped Work"
 - Updated intro paragraph to "Production applications built and deployed — real users, real systems."
 
+### Phase 2f: ProjektSection — added project detail modal with PSAM placeholders
+
+- Added clickable project cards that open a slide-over modal
+- Modal includes Problem, Architecture & AI Workflow, and Metrics placeholder sections
+- Added live app launch and GitHub action buttons
+- Added Escape key and backdrop click to close
+- Hardcoded English strings and removed language context
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
