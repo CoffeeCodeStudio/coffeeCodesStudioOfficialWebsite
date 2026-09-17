@@ -53,21 +53,21 @@ export function AboutSection() {
             </h2>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-              I'm Rami — a product engineer based in Gothenburg, Sweden. I build full-stack web applications using React, TypeScript, and Supabase, with AI tools as a core part of my workflow.
+              I bridge the gap between product vision and production-grade engineering.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-              I built three production applications — Echo2000, Klar, and DJ Lobo Producciones — entirely solo, from zero to live users, within a year. No team. No hand-holding. Just shipping.
+              Over the past year, I built and deployed three full-stack applications — Echo2000, Klar, and DJ Lobo Producciones — taking them from initial schema design to active, real-world users.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I treat AI as a force multiplier: faster scaffolding, faster iteration. But every architecture decision, security policy, and data model is mine. I own the code I ship.
+              I leverage modern AI developer workflows as a force multiplier to compress delivery cycles. But fast scaffolding means nothing without structural discipline: every architecture trade-off, PostgreSQL Row-Level Security policy, and type contract is manually designed, vetted, and maintained by me. I take full ownership of the systems I ship.
             </p>
 
             <div className="mt-6 flex items-center gap-2">
               <MapPin className="w-4 h-4 text-primary" aria-hidden="true" />
               <span className="text-sm font-mono text-muted-foreground">
-                Gothenburg, Sweden — Open to hybrid & on-site roles
+                Based in Gothenburg, Sweden • Open to full-time product engineering roles (hybrid or on-site across Västra Götaland).
               </span>
             </div>
           </motion.div>
