@@ -290,7 +290,7 @@ export function ProjektSection() {
                       onClick={() => window.open('https://github.com/CoffeeCodeStudio', '_blank')}
                     >
                       <Github className="w-4 h-4 mr-2" />
-                      View on GitHub
+                      Private repo — I walk through the code in interviews
                     </Button>
                   </>
                 )}

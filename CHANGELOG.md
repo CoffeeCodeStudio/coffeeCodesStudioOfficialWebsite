@@ -155,6 +155,11 @@
 - Footer "Download CV" link updated to the same mailto "Request CV" link
 - Icon changed from Download to Mail in ContactSection
 
+### Phase 3e: Klar GitHub button updated to reflect private repo
+
+- Changed Klar modal GitHub button label from "View on GitHub" to "Private repo — I walk through the code in interviews"
+- Kept href pointing to https://github.com/CoffeeCodeStudio and icon unchanged
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
