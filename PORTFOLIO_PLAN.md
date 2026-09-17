@@ -46,7 +46,7 @@ Identity: Rami — AI-Leveraged Product Engineer.
 
 - [x] New HeroSection (EN, Rami, stack pills, Gothenburg badge, 2 CTAs)
 - [x] CaseStudySection / project detail modal (PSAM format per project)
-- [ ] AIMethodologySection
+- [x] AIMethodologySection
 - [ ] TechStackMatrix (categorized, no % bars)
 - [x] Updated AboutSection (EN, short, cultural fit)
 - [x] Updated ContactSection (Copy Email CTA, no heavy form)
