@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { Logo } from './Navbar';
 
 const legalLinks = [
-  { to: '/integritetspolicy', label: 'Integritetspolicy' },
-  { to: '/cookiepolicy', label: 'Cookiepolicy' },
-  { to: '/anvandardvillkor', label: 'Användarvillkor' },
+  { to: '/integritetspolicy', label: 'Privacy Policy' },
+  { to: '/cookiepolicy', label: 'Cookie Policy' },
+  { to: '/anvandardvillkor', label: 'Terms of Service' },
 ];
 
 export function Footer() {
@@ -88,10 +88,10 @@ export function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-8 pt-6 border-t border-white/5">
           <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-            © <Coffee className="w-3 h-3 text-primary/60" /> {new Date().getFullYear()} Coffee Code Studio. {t.footer.rights}.
+            © <Coffee className="w-3 h-3 text-primary/60" /> {new Date().getFullYear()} Coffee Code Studio. All rights reserved.
           </p>
           <p className="text-xs font-medium text-primary/60 tracking-wide flex items-center gap-1.5">
-            <Coffee className="w-3 h-3" /> Built &amp; designed by Coffee Code Studio
+            <Coffee className="w-3 h-3" /> Designed &amp; engineered by Rami
           </p>
         </div>
       </div>

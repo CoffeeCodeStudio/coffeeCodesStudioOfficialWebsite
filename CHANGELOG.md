@@ -110,10 +110,15 @@
 - Created `src/components/MethodologySection.tsx` with four workflow cards
 - Inserted between `ProjektSection` and `AboutSection` on the landing page
 
+### Phase 2m: Footer localized to English
+
+- Changed rights line to "All rights reserved"
+- Changed legal links to "Privacy Policy", "Cookie Policy", and "Terms of Service"
+- Changed credit line to "Designed & engineered by Rami"
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
-- AIMethodologySection
 - TechStackMatrix
 - Plausible analytics
 - JSON-LD structured data
