@@ -76,11 +76,9 @@ export function Navbar() {
   const navigate = useNavigate();
 
   const navItems = [
-    { label: t.nav.services, href: '#tjanster' },
-    { label: t.nav.projects, href: '#projekt' },
-    { label: t.nav.pricing, href: '#priser' },
-    { label: t.nav.about, href: '#about' },
-    { label: t.nav.contact, href: '#kontakt' },
+    { label: 'Projects', href: '#projekt' },
+    { label: 'About', href: '#about' },
+    { label: 'Contact', href: '#kontakt' },
   ];
 
   useEffect(() => {
@@ -141,12 +139,12 @@ export function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
-            <button
+            {/* <button
               onClick={() => navigate('/portal/login')}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {t.nav.portal}
-            </button>
+            </button> */}
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4">
@@ -204,7 +202,7 @@ export function Navbar() {
                       {item.label}
                     </motion.a>
                   ))}
-                  <motion.button
+                  {/* <motion.button
                     onClick={() => { setIsOpen(false); navigate('/portal/login'); }}
                     className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-4 px-4 rounded-xl mt-2 text-center"
                     initial={{ opacity: 0, x: -20 }}
@@ -212,7 +210,7 @@ export function Navbar() {
                     transition={{ delay: navItems.length * 0.05 }}
                   >
                     {t.nav.portal}
-                  </motion.button>
+                  </motion.button> */}
                 </div>
               </div>
             </motion.div>
