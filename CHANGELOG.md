@@ -94,6 +94,12 @@
 - Commented out `<LanguageToggle />` usage in `Navbar.tsx`
 - Component definition preserved; toggle no longer rendered
 
+### Phase 2j: AboutSection — added production crisis metric, languages and AI stack
+
+- Added Echo2000 production crisis recovery sentence to paragraph 2
+- Added languages line: Swedish, English, Arabic
+- Added AI stack line: Claude Code, Lovable, Groq, Gemini
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
