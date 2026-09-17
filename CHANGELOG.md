@@ -1,70 +1,39 @@
 # Changelog
 
-Alla ändringar dokumenteras här.
-Format baserat på [Keep a Changelog](https://keepachangelog.com/).
+> Coffee Code Studio — coffeecodestudio.se
 
-## [2026-09-06] - Projektdokumentation och full audit
+## 2026-09-17 — Phase 1: Business → Portfolio
 
-### Lagt till
+### Disabled (commented out)
 
-- `ARCH.md` med full teknisk översikt: stack, routes, SEOHead, i18n-hjälpfunktioner, schema.org-typer, sitemap-struktur och deployment
-- `CHANGELOG.md` skapad och fylld med daterad historik från projektstart
+- CoffeeBeanCursor in App.tsx — recruiter bounce-trigger
+- AIAssistant in ClientPortal.tsx — leaking Lovable credits
+- TestimonialsSection in Index.tsx
+- TjansterSection in Index.tsx
+- PricingSection in Index.tsx
+- FAQSection in Index.tsx
+- Portal button in Navbar.tsx
 
-### Ändrat
+### Updated
 
-- `README.md` uppdaterad med nya landningssidor, SEO-uppsättning och Lovable-hosting
-- Full audit genomförd av routes, komponenter, sidor, schema, sitemap, robots.txt och beroenden
+- Navbar.tsx — now shows: Projects, About, Contact
+- Footer.tsx — tagline: "AI-Leveraged Product Engineer — Gothenburg, Sweden"
+- README.md — rewritten as portfolio description
 
-## [2026-09-06] - SEO och GEO-förbättringar
+### Documentation added
 
-### Lagt till
+- RULES.md — project rules
+- DESIGN.md — design system
+- PORTFOLIO_PLAN.md — plan and checklist
+- CHANGELOG.md — this file
 
-- `/webbyra-goteborg` med LocalBusiness- och FAQPage-schema
-- `/hemsida-frisor-goteborg` med FAQ och hreflang
-- `/hemsida-hantverkare-goteborg` med FAQ och hreflang
-- `/om-mig` (sv/en) med Person-schema
-- `/vad-kostar-en-hemsida` med prisöversikt, kostnadsjämförelse och FAQPage-schema
-- `/en`-varianter för alla nya sidor
-- GPTBot, ClaudeBot, PerplexityBot och GoogleOther i `robots.txt`
-- LLM-sitemap-länk (`llms.txt`) i `robots.txt`
-- WebSite-schema i det sitewide `@graph` (`StructuredData.tsx`)
-- Sitemap utökad till 20 URL:er med reciproka hreflang-alternat
+### Waiting for (Phase 2)
 
-### Ändrat
-
-- `/en/frisor-goteborg` översatt till engelska
-- `/en/smaforetag-goteborg` översatt till engelska
-
-## [2026-09-05] - Metadata, sitemap och prestanda
-
-### Lagt till
-
-- `SEOHead`-komponent med per-sida titel, beskrivning, canonical, Open Graph och hreflang
-- `react-helmet-async` som beroende
-- `public/sitemap.xml` med hreflang-alternat och uppdaterad `robots.txt`
-- Programmatisk og-bild (`public/og-image-v2.png`, 1200×630) för stabila delningsförhandsvisningar
-
-### Ändrat
-
-- `noindex` på `/projektfragor`
-- Optimerade bilder (`testimonial-djlobo.webp`, `favicon.png`) efter Lighthouse-granskning
-- GA4-mät-ID uppdaterat i `CookieConsent`
-
-## [2026-09-04] - Innehåll, betalning och säkerhet
-
-### Lagt till
-
-- Validering som blockerar och loggar inaktiva betalningsmetoder i checkout (`src/lib/paymentMethods.ts`)
-- Notering per portföljprojekt (kundprojekt / prototyp / personligt projekt)
-- Mjuk övergång mellan hero och Testimonials
-
-### Ändrat
-
-- Endast Kontant/Faktura visas som betalningsmetod (Kort, Swish och PayPal borttagna)
-- Standardiserade scroll-animationer via `motionPresets.ts`
-- Minskat avstånd mellan hero och nästa sektion
-- Echo2000: uppdaterad länk och skärmbild
-
-### Säkerhet
-
-- Åtgärdade databaspolicyer för lagring, notifieringar, roller och avtal enligt säkerhetsgranskningen
+- New HeroSection
+- New CaseStudySection
+- AIMethodologySection
+- TechStackMatrix
+- Updated ContactSection
+- Plausible analytics
+- JSON-LD structured data
+- OG image 1200×630px
