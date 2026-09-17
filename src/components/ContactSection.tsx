@@ -6,31 +6,31 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from '@/components/ui/select';
 import { Coffee, Send, CheckCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 interface FormData {
   name: string;
-  company: string;
+  // company: string;
   email: string;
-  projectType: string;
-  budget: string;
+  // projectType: string;
+  // budget: string;
   message: string;
-  website: string;
+  // website: string;
 }
 
 interface FormErrors {
   name?: string;
   email?: string;
-  projectType?: string;
+  // projectType?: string;
   message?: string;
 }
 
@@ -47,7 +47,7 @@ export function ContactSection() {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
-    name: '', company: '', email: '', projectType: '', budget: '', message: '', website: '',
+    name: '', email: '', message: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,7 +85,7 @@ export function ContactSection() {
     if (!formData.name.trim()) newErrors.name = t.contact.errorName;
     if (!formData.email.trim()) newErrors.email = t.contact.errorEmail;
     else if (!isValidEmail(formData.email)) newErrors.email = t.contact.errorEmailInvalid;
-    if (!formData.projectType) newErrors.projectType = t.contact.errorProjectType;
+    // if (!formData.projectType) newErrors.projectType = t.contact.errorProjectType;
     if (!formData.message.trim()) newErrors.message = t.contact.errorMessage;
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -107,9 +107,8 @@ export function ContactSection() {
     try {
       const { error } = await supabase.functions.invoke('send-contact-email', {
         body: {
-          name: formData.name, company: formData.company, email: formData.email,
-          projectType: formData.projectType, budget: formData.budget,
-          message: formData.message, website: formData.website,
+          name: formData.name, email: formData.email,
+          message: formData.message,
         },
       });
 
@@ -121,11 +120,11 @@ export function ContactSection() {
 
       setIsSubmitting(false);
       setIsSuccess(true);
-      trackEvent('contact_form_submit', { project_type: formData.projectType, budget: formData.budget });
+      trackEvent('contact_form_submit');
       toast({ title: t.contact.success, description: t.contact.successMessage });
 
       setTimeout(() => {
-        setFormData({ name: '', company: '', email: '', projectType: '', budget: '', message: '', website: '' });
+        setFormData({ name: '', email: '', message: '' });
         setIsSuccess(false);
       }, 3000);
     } catch {
@@ -134,13 +133,13 @@ export function ContactSection() {
     }
   };
 
-  const projectTypes = [
-    { value: 'website', label: t.contact.website },
-    { value: 'webshop', label: t.contact.webshop },
-    { value: 'booking', label: t.contact.booking },
-    { value: 'webapp', label: t.contact.webApp },
-    { value: 'other', label: t.contact.other },
-  ];
+  // const projectTypes = [
+  //   { value: 'website', label: t.contact.website },
+  //   { value: 'webshop', label: t.contact.webshop },
+  //   { value: 'booking', label: t.contact.booking },
+  //   { value: 'webapp', label: t.contact.webApp },
+  //   { value: 'other', label: t.contact.other },
+  // ];
 
   return (
     <section id="kontakt" className="relative overflow-hidden" aria-label="Kontaktformulär">
@@ -179,10 +178,10 @@ export function ContactSection() {
               <Input id="name" type="text" value={formData.name} onChange={(e) => handleInputChange('name', e.target.value)} placeholder={t.contact.namePlaceholder} className="glass-card border-white/10 bg-input/50 focus:border-primary/50 placeholder:text-muted-foreground/60 h-11 sm:h-10 text-base sm:text-sm" maxLength={100} required />
               {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
             </div>
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="company" className="text-foreground font-medium text-sm sm:text-base">{t.contact.company}</Label>
               <Input id="company" type="text" value={formData.company} onChange={(e) => handleInputChange('company', e.target.value)} placeholder={t.contact.companyPlaceholder} className="glass-card border-white/10 bg-input/50 focus:border-primary/50 placeholder:text-muted-foreground/60 h-11 sm:h-10 text-base sm:text-sm" maxLength={100} />
-            </div>
+            </div> */}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -193,7 +192,7 @@ export function ContactSection() {
               <Input id="email" type="email" value={formData.email} onChange={(e) => handleInputChange('email', e.target.value)} placeholder={t.contact.emailPlaceholder} className="glass-card border-white/10 bg-input/50 focus:border-primary/50 placeholder:text-muted-foreground/60 h-11 sm:h-10 text-base sm:text-sm" maxLength={255} required />
               {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
             </div>
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="projectType" className="text-foreground font-medium text-sm sm:text-base">
                 {t.contact.projectType} <span className="text-destructive">*</span>
               </Label>
@@ -208,10 +207,10 @@ export function ContactSection() {
                 </SelectContent>
               </Select>
               {errors.projectType && <p className="text-sm text-destructive">{errors.projectType}</p>}
-            </div>
+            </div> */}
           </div>
 
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label htmlFor="budget" className="text-foreground font-medium text-sm sm:text-base">{t.contact.budget}</Label>
             <Select value={formData.budget} onValueChange={(value) => handleInputChange('budget', value)}>
               <SelectTrigger className="glass-card border-white/10 bg-input/50 focus:border-primary/50 h-11 sm:h-10 text-base sm:text-sm" aria-label={t.contact.budgetPlaceholder}>
@@ -223,14 +222,14 @@ export function ContactSection() {
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
 
           <div className="space-y-2">
             <Label htmlFor="message" className="text-foreground font-medium text-sm sm:text-base">
               {t.contact.message} <span className="text-destructive">*</span>
             </Label>
             <Textarea id="message" value={formData.message} onChange={(e) => handleInputChange('message', e.target.value)} placeholder={t.contact.messagePlaceholder} className="glass-card border-white/10 bg-input/50 focus:border-primary/50 min-h-[100px] sm:min-h-[120px] placeholder:text-muted-foreground/60 text-base sm:text-sm" maxLength={1000} required />
-            <input type="text" name="website" value={formData.website} onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))} autoComplete="off" tabIndex={-1} aria-hidden="true" style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }} />
+            {/* <input type="text" name="website" value={formData.website} onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))} autoComplete="off" tabIndex={-1} aria-hidden="true" style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }} /> */}
             {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
           </div>
 
