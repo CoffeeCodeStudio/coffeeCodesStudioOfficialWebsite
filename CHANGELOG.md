@@ -36,17 +36,19 @@
 
 ### Phase 2a: New portfolio HeroSection
 
-- Rewrote `src/components/HeroSection.tsx`
-- Hardcoded English copy for Rami — Product Engineer
-- Added Gothenburg location badge, stack pills, dual CTAs, scroll indicator
-- Removed language context, laptop mockup, and djlobo image
+- Rewrote HeroSection.tsx with hardcoded English content
+- Added Gothenburg location badge, Product Engineer H1, stack pills
+- Added Copy Email CTA and Download CV secondary button
+- Added scroll indicator
+- Removed language context, djlobo mockup, imageError state
 
 ### Phase 2b: New portfolio AboutSection
 
-- Rewrote `src/components/AboutSection.tsx`
-- Hardcoded English copy for Rami
-- Added 2×2 stats grid (Production Apps, Commits, Real Users, timeline)
-- Replaced language context with fixed About Me narrative and location line
+- Rewrote AboutSection.tsx with hardcoded English content
+- Added 2x2 stats grid: 3 Apps, 18 538 Commits, 340+ Users, < 1 year
+- Added three English paragraphs about Rami
+- Added Gothenburg location line
+- Removed language context
 
 ### Phase 2b-fix: AboutSection copy and stats corrected per research
 
@@ -55,10 +57,11 @@
 
 ### Phase 2c: New portfolio ContactSection
 
-- Rewrote `src/components/ContactSection.tsx`
-- Hardcoded English copy for portfolio contact section
-- Added left column with Copy Email, Download Resume, LinkedIn CTAs + availability badge
-- Simplified right-column form to Work Email + Message + honeypot
+- Rewrote ContactSection.tsx with hardcoded English content
+- Left column: Copy Email, Download Resume, LinkedIn buttons + availability badge
+- Right column: minimal form with Work Email and Message only
+- Removed phone, WhatsApp, company, budget, projectType fields
+- Removed language context
 
 ### Waiting for (Phase 2)
 
