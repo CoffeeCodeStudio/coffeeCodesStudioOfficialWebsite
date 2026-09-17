@@ -148,7 +148,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4">
-            <LanguageToggle />
+            {/* <LanguageToggle /> */}
             
             {/* Mobile Menu Button */}
             <button
