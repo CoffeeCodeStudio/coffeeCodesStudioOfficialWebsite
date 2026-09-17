@@ -185,7 +185,7 @@ export function ProjektSection() {
                   </div>
                   <div className="glass-card rounded-xl p-4 border border-primary/10">
                     <p className="text-xs font-mono text-primary mb-3">METRICS</p>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div className="text-center">
                         <div className="text-xl font-mono font-bold gradient-text">340+</div>
                         <div className="text-xs text-muted-foreground">Registered Users</div>
@@ -219,7 +219,7 @@ export function ProjektSection() {
                   </div>
                   <div className="glass-card rounded-xl p-4 border border-primary/10">
                     <p className="text-xs font-mono text-primary mb-3">METRICS</p>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div className="text-center">
                         <div className="text-xl font-mono font-bold gradient-text">100</div>
                         <div className="text-xs text-muted-foreground">Lighthouse Accessibility</div>

@@ -131,6 +131,13 @@
 
 - Added "Resume" link to desktop and mobile navbar after Contact; uses `href="#"` until the PDF is uploaded
 
+### Phase 2q: Responsive layout audit and fixes
+
+- Audited HeroSection, AboutSection, ProjektSection modal, MethodologySection, ContactSection and Footer for mobile layouts
+- ProjektSection modal METRICS grids: 3 columns on desktop, 1 column on mobile (grid-cols-1 sm:grid-cols-3)
+- ContactSection copy-email button: long email text now truncates safely on narrow screens
+- Verified: hero pills wrap, CTAs stack on mobile, H1 scales down, About/Methodology/Contact/Footer stack to single column, modal is full-width bottom sheet on mobile
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection

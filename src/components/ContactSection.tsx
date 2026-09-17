@@ -158,8 +158,8 @@ export function ContactSection() {
                   </>
                 ) : (
                   <>
-                    <Mail className="w-5 h-5 mr-3" aria-hidden="true" />
-                    Copy Email — hej@coffeecodestudio.se
+                    <Mail className="w-5 h-5 mr-3 shrink-0" aria-hidden="true" />
+                    <span className="truncate">Copy Email — hej@coffeecodestudio.se</span>
                   </>
                 )}
               </Button>
