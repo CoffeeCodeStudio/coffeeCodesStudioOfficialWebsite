@@ -84,6 +84,11 @@
 - Added Escape key and backdrop click to close
 - Hardcoded English strings and removed language context
 
+### Phase 2g: Hidden Golden Fruit Oasis prototype from portfolio
+
+- Set `is_visible = false` on the `Golden Fruit Oasis` row in `portfolio_projects`
+- Row preserved in database; removed from public project grid
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
