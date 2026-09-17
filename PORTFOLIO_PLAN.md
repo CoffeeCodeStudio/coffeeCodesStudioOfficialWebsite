@@ -52,6 +52,7 @@ Identity: Rami — AI-Leveraged Product Engineer.
 - [ ] TechStackMatrix (categorized, no % bars)
 - [x] Updated AboutSection (EN, short, cultural fit)
 - [x] Updated ContactSection (Copy Email CTA, no heavy form)
+- [x] Copy refinements: outcome-first H1, AI qualifier, About collaboration signal
 - [ ] Plausible analytics installed
 - [ ] JSON-LD structured data added
 - [ ] OG image created (1200×630px)

@@ -138,6 +138,12 @@
 - ContactSection copy-email button: long email text now truncates safely on narrow screens
 - Verified: hero pills wrap, CTAs stack on mobile, H1 scales down, About/Methodology/Contact/Footer stack to single column, modal is full-width bottom sheet on mobile
 
+### Phase 3b: H1 outcome-first, AI qualifier added, About collaboration signal added
+
+- HeroSection H1 updated to: "I build production web applications from schema design to real users."
+- Added AI qualifier paragraph below AI Tooling pills: architecture, schema design, and security policies are human-designed; component code is AI-generated and human-reviewed
+- AboutSection closing paragraph updated to signal solo ownership and readiness to join a team
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
