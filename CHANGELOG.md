@@ -116,6 +116,11 @@
 - Changed legal links to "Privacy Policy", "Cookie Policy", and "Terms of Service"
 - Changed credit line to "Designed & engineered by Rami"
 
+### Phase 2n: AboutSection stats updated — removed unverified metrics
+
+- Replaced "100% / Strict TypeScript & RLS" with "100 / Lighthouse Accessibility"
+- Replaced "< 50ms / Realtime Data Latency" with "Jan 2026 / First Live Deploy"
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
