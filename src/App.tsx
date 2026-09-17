@@ -15,8 +15,8 @@ import Integritetspolicy from "./pages/Integritetspolicy";
 import Cookiepolicy from "./pages/Cookiepolicy";
 import Anvandardvillkor from "./pages/Anvandardvillkor";
 import Projektfragor from "./pages/Projektfragor";
-import FrisorGoteborg from "./pages/FrisorGoteborg";
-import SmaforetagGoteborg from "./pages/SmaforetagGoteborg";
+// import FrisorGoteborg from "./pages/FrisorGoteborg";
+// import SmaforetagGoteborg from "./pages/SmaforetagGoteborg";
 import WebbyraGoteborg from "./pages/WebbyraGoteborg";
 import HemsidaFrisorGoteborg from "./pages/HemsidaFrisorGoteborg";
 import HemsidaHantverkareGoteborg from "./pages/HemsidaHantverkareGoteborg";
@@ -65,8 +65,8 @@ const App = () => (
             <Route path="/cookiepolicy" element={<Cookiepolicy />} />
             <Route path="/anvandardvillkor" element={<Anvandardvillkor />} />
             <Route path="/projektfragor" element={<Projektfragor />} />
-            <Route path="/frisor-goteborg" element={<FrisorGoteborg />} />
-            <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
+            {/* <Route path="/frisor-goteborg" element={<FrisorGoteborg />} /> */}
+            {/* <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} /> */}
             <Route path="/webbyra-goteborg" element={<WebbyraGoteborg />} />
             <Route path="/hemsida-frisor-goteborg" element={<HemsidaFrisorGoteborg />} />
             <Route path="/hemsida-hantverkare-goteborg" element={<HemsidaHantverkareGoteborg />} />
@@ -75,8 +75,8 @@ const App = () => (
             {/* English /en/* mirrors of every public, indexable page */}
             <Route path="/en/om-mig" element={<OmMig />} />
             <Route path="/en" element={<Index />} />
-            <Route path="/en/frisor-goteborg" element={<FrisorGoteborg />} />
-            <Route path="/en/smaforetag-goteborg" element={<SmaforetagGoteborg />} />
+            {/* <Route path="/en/frisor-goteborg" element={<FrisorGoteborg />} /> */}
+            {/* <Route path="/en/smaforetag-goteborg" element={<SmaforetagGoteborg />} /> */}
             <Route path="/en/webbyra-goteborg" element={<WebbyraGoteborg />} />
             <Route path="/en/hemsida-frisor-goteborg" element={<HemsidaFrisorGoteborg />} />
             <Route path="/en/hemsida-hantverkare-goteborg" element={<HemsidaHantverkareGoteborg />} />

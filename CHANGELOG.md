@@ -4,6 +4,13 @@
 
 ## 2026-09-17 — Phase 1: Business → Portfolio
 
+### Phase 1b: Removed all business content
+
+- Removed `/smaforetag-goteborg` and `/frisor-goteborg` from `App.tsx` routes and `sitemap.xml`
+- Replaced business structured data with `ProfilePage` / `Person` schema
+- Simplified `ContactSection.tsx` to name, email, message only
+- Added disable comments to `FrisorGoteborg.tsx` and `SmaforetagGoteborg.tsx`
+
 ### Disabled (commented out)
 
 - CoffeeBeanCursor in App.tsx — recruiter bounce-trigger
