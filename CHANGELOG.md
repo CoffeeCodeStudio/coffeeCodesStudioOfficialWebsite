@@ -44,10 +44,11 @@
 
 ### Phase 2b: New portfolio AboutSection
 
-- Rewrote `src/components/AboutSection.tsx`
-- Hardcoded English copy for Rami
-- Added 2×2 stats grid (Production Apps, Commits, Real Users, timeline)
-- Replaced language context with fixed About Me narrative and location line
+- Rewrote AboutSection.tsx with hardcoded English content
+- Added 2x2 stats grid: 3 Apps, 18 538 Commits, 340+ Users, < 1 year
+- Added three English paragraphs about Rami
+- Added Gothenburg location line
+- Removed language context
 
 ### Phase 2b-fix: AboutSection copy and stats corrected per research
 
