@@ -34,9 +34,15 @@
 - PORTFOLIO_PLAN.md — plan and checklist
 - CHANGELOG.md — this file
 
+### Phase 2a: New portfolio HeroSection
+
+- Rewrote `src/components/HeroSection.tsx`
+- Hardcoded English copy for Rami — Product Engineer
+- Added Gothenburg location badge, stack pills, dual CTAs, scroll indicator
+- Removed language context, laptop mockup, and djlobo image
+
 ### Waiting for (Phase 2)
 
-- New HeroSection
 - New CaseStudySection
 - AIMethodologySection
 - TechStackMatrix
