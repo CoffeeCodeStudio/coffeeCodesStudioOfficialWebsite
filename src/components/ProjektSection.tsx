@@ -168,21 +168,91 @@ export function ProjektSection() {
                 {selectedProject.description}
               </p>
 
-              {/* Placeholder sections */}
-              <div className="space-y-4 mb-6">
-                <div className="glass-card rounded-xl p-4 border border-primary/10">
-                  <p className="text-xs font-mono text-primary mb-1">PROBLEM</p>
-                  <p className="text-sm text-muted-foreground">Details coming soon.</p>
+              {/* Project detail sections */}
+              {selectedProject.title === 'Echo2000' && (
+                <div className="space-y-4 mb-6">
+                  <div className="glass-card rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-mono text-primary mb-2">PROBLEM</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Modern social feeds are algorithm-driven, ad-saturated and designed for passive consumption. There was no dedicated space for Swedish adults who grew up on LunarStorm and MSN — people who want real connection without performance pressure.
+                    </p>
+                  </div>
+                  <div className="glass-card rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-mono text-primary mb-2">ARCHITECTURE & AI WORKFLOW</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Built with React 18, TypeScript, Vite, Tailwind CSS and Supabase. Real-time features (chat, guestbooks, live activity) stream via Supabase WebSocket channels. PostgreSQL Row-Level Security enforces strict data isolation per user. Supabase Edge Functions handle email queues, moderation, bot logic and notifications. AI tools (Claude, Lovable) scaffolded boilerplate and migrations — all security policies, state management and real-time logic were manually engineered. When a production crisis hit, the entire system was rebuilt within 24 hours with 100% user data preserved.
+                    </p>
+                  </div>
+                  <div className="glass-card rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-mono text-primary mb-3">METRICS</p>
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="text-center">
+                        <div className="text-xl font-mono font-bold gradient-text">340+</div>
+                        <div className="text-xs text-muted-foreground">Registered Users</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-xl font-mono font-bold gradient-text">10+</div>
+                        <div className="text-xs text-muted-foreground">Edge Functions</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-xl font-mono font-bold gradient-text">24h</div>
+                        <div className="text-xs text-muted-foreground">Disaster Recovery</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="glass-card rounded-xl p-4 border border-primary/10">
-                  <p className="text-xs font-mono text-primary mb-1">ARCHITECTURE & AI WORKFLOW</p>
-                  <p className="text-sm text-muted-foreground">Details coming soon.</p>
+              )}
+
+              {selectedProject.title === 'Klar' && (
+                <div className="space-y-4 mb-6">
+                  <div className="glass-card rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-mono text-primary mb-2">PROBLEM</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      ~700,000 Swedish adults have dyslexia. Authority letters from Arbetsförmedlingen and Försäkringskassan are dense, formal and stressful. Missing a deadline can mean lost income. No existing app handled Swedish authority documents with AI while also supporting the combination of dyslexia and DLD.
+                    </p>
+                  </div>
+                  <div className="glass-card rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-mono text-primary mb-2">ARCHITECTURE & AI WORKFLOW</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Built as a PWA with React, TypeScript, Tailwind CSS and Supabase. Gemini API handles document parsing — photos, PDFs and Word files are simplified into 5 clear bullet points. Documents are deleted immediately after analysis (GDPR Article 9). Push notifications and SMS fallback (46elks) power a 3-stage alarm system. Supabase Edge Functions run cron jobs for reminders and auto-deletion. Achieved 100/100 Lighthouse Accessibility score.
+                    </p>
+                  </div>
+                  <div className="glass-card rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-mono text-primary mb-3">METRICS</p>
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="text-center">
+                        <div className="text-xl font-mono font-bold gradient-text">100</div>
+                        <div className="text-xs text-muted-foreground">Lighthouse Accessibility</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-xl font-mono font-bold gradient-text">10</div>
+                        <div className="text-xs text-muted-foreground">Free docs/month</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-xl font-mono font-bold gradient-text">WCAG AA</div>
+                        <div className="text-xs text-muted-foreground">Compliant</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="glass-card rounded-xl p-4 border border-primary/10">
-                  <p className="text-xs font-mono text-primary mb-1">METRICS</p>
-                  <p className="text-sm text-muted-foreground">Details coming soon.</p>
+              )}
+
+              {selectedProject.title === 'DJ Lobo Producciones' && (
+                <div className="space-y-4 mb-6">
+                  <div className="glass-card rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-mono text-primary mb-2">PROBLEM</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      An established Gothenburg DJ with 20+ years experience and 1,000+ shows had a legacy website from 2015 — no booking system, no admin panel, no live radio integration. Bookings were lost to fragmented inboxes.
+                    </p>
+                  </div>
+                  <div className="glass-card rounded-xl p-4 border border-primary/10">
+                    <p className="text-xs font-mono text-primary mb-2">ARCHITECTURE & AI WORKFLOW</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Built with React, TypeScript, Vite, Tailwind CSS and Supabase. Features a persistent live radio player (ZenoFM + Mixcloud), automated booking system, Google Calendar sync for upcoming shows, and a 9-tab admin panel for content management. Image upload with built-in cropper. Bilingual (SV/EN). AI tools scaffolded UI components and audio integration — stream
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Action buttons */}
               <div className="flex gap-3 flex-wrap">
