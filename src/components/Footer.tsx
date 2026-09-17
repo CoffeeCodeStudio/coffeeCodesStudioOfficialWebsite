@@ -64,11 +64,11 @@ export function Footer() {
                 LinkedIn
               </a>
               <a
-                href="#"
-                aria-label="Download CV"
+                href="mailto:hej@coffeecodestudio.se?subject=CV%20Request&body=Hi%20Rami%2C%20I%20would%20like%20to%20request%20your%20CV."
+                aria-label="Request CV"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Download CV
+                Request CV
               </a>
             </div>
           </div>

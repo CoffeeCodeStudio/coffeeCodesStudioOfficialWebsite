@@ -149,6 +149,12 @@
 - Changed Echo2000 modal GitHub button label from "View on GitHub" to "Private repo — I walk through the code in interviews"
 - Kept href pointing to https://github.com/CoffeeCodeStudio and icon unchanged
 
+### Phase 3d: CV button changed to mailto Request CV
+
+- ContactSection "Download Resume (PDF)" button changed to mailto "Request CV" with pre-filled subject and body
+- Footer "Download CV" link updated to the same mailto "Request CV" link
+- Icon changed from Download to Mail in ContactSection
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
