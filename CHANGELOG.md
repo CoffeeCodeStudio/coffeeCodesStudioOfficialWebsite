@@ -41,6 +41,13 @@
 - Added Gothenburg location badge, stack pills, dual CTAs, scroll indicator
 - Removed language context, laptop mockup, and djlobo image
 
+### Phase 2b: New portfolio AboutSection
+
+- Rewrote `src/components/AboutSection.tsx`
+- Hardcoded English copy for Rami
+- Added 2×2 stats grid (Production Apps, Commits, Real Users, timeline)
+- Replaced language context with fixed About Me narrative and location line
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection

@@ -48,7 +48,7 @@ Identity: Rami — AI-Leveraged Product Engineer.
 - [ ] CaseStudySection (PSAM format per project)
 - [ ] AIMethodologySection
 - [ ] TechStackMatrix (categorized, no % bars)
-- [ ] Updated AboutSection (EN, short, cultural fit)
+- [x] Updated AboutSection (EN, short, cultural fit)
 - [ ] Updated ContactSection (Copy Email CTA, no heavy form)
 - [ ] Plausible analytics installed
 - [ ] JSON-LD structured data added
