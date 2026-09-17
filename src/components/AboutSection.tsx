@@ -61,7 +61,7 @@ export function AboutSection() {
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I leverage modern AI developer workflows as a force multiplier to compress delivery cycles. But fast scaffolding means nothing without structural discipline: every architecture trade-off, PostgreSQL Row-Level Security policy, and type contract is manually designed, vetted, and maintained by me. I take full ownership of the systems I ship.
+              I leverage modern AI developer workflows as a force multiplier to compress delivery cycles. But fast scaffolding means nothing without structural discipline: every architecture trade-off, PostgreSQL Row-Level Security policy, and type contract is manually designed, vetted, and maintained by me. I've worked solo on all three projects — architecture, code, deployment, and production support. That's taught me to be my own reviewer. I'm now looking for a team where I can learn from engineers who've done this at scale.
             </p>
 
             <div className="mt-6 flex items-center gap-2">
