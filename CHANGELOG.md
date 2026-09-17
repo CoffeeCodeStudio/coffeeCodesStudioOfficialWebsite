@@ -89,6 +89,11 @@
 - Set `is_visible = false` on the `Golden Fruit Oasis` row in `portfolio_projects`
 - Row preserved in database; removed from public project grid
 
+### Phase 2h: Removed SV/EN language toggle from navbar
+
+- Commented out `<LanguageToggle />` usage in `Navbar.tsx`
+- Component definition preserved; toggle no longer rendered
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
