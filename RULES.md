@@ -97,3 +97,5 @@ Rule: Personality and professionalism coexist. Coffee is the brand.
 | PricingSection | Index.tsx | Business content |
 | FAQSection | Index.tsx | Business content |
 | Portal button in nav | Navbar.tsx | Hidden from public |
+| Phone number | Footer + ContactSection | Never on site — PDF CV only |
+| WhatsApp | Footer + ContactSection | Not a Swedish hiring channel |
