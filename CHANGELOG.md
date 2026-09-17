@@ -57,10 +57,11 @@
 
 ### Phase 2c: New portfolio ContactSection
 
-- Rewrote `src/components/ContactSection.tsx`
-- Hardcoded English copy for portfolio contact section
-- Added left column with Copy Email, Download Resume, LinkedIn CTAs + availability badge
-- Simplified right-column form to Work Email + Message + honeypot
+- Rewrote ContactSection.tsx with hardcoded English content
+- Left column: Copy Email, Download Resume, LinkedIn buttons + availability badge
+- Right column: minimal form with Work Email and Message only
+- Removed phone, WhatsApp, company, budget, projectType fields
+- Removed language context
 
 ### Waiting for (Phase 2)
 
