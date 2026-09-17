@@ -160,6 +160,11 @@
 - Changed Klar modal GitHub button label from "View on GitHub" to "Private repo — I walk through the code in interviews"
 - Kept href pointing to https://github.com/CoffeeCodeStudio and icon unchanged
 
+### Phase 3f: Removed CV download button — CV shared manually on request
+
+- Commented out the "Request CV" mailto button in ContactSection
+- Commented out the "Request CV" link in Footer
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
