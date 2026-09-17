@@ -167,6 +167,7 @@ export function ContactSection() {
                 )}
               </Button>
 
+              {/* CV shared manually on request
               <Button
                 variant="outline"
                 size="lg"
@@ -181,6 +182,7 @@ export function ContactSection() {
                   Request CV
                 </a>
               </Button>
+              */}
 
               <Button
                 variant="outline"
