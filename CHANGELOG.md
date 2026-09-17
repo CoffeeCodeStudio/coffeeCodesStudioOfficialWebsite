@@ -165,6 +165,11 @@
 - Commented out the "Request CV" mailto button in ContactSection
 - Commented out the "Request CV" link in Footer
 
+### Phase 3g: Removed Resume button from navbar — CV shared on request
+
+- Commented out the Resume link in both desktop and mobile navbar
+- Consistent with Phase 3f: CV is now shared manually on request only
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
