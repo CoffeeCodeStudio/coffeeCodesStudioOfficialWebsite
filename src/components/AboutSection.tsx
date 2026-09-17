@@ -5,8 +5,8 @@ import { MapPin } from 'lucide-react';
 const stats = [
   { number: '3', label: 'Production Apps Shipped' },
   { number: '340+', label: 'Real-World Users' },
-  { number: '100%', label: 'Strict TypeScript & RLS' },
-  { number: '< 50ms', label: 'Realtime Data Latency' },
+  { number: '100', label: 'Lighthouse Accessibility' },
+  { number: 'Jan 2026', label: 'First Live Deploy' },
 ];
 
 export function AboutSection() {
