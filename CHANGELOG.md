@@ -71,6 +71,11 @@
 - Added GitHub, LinkedIn, and Download CV links
 - Changed section label from "KONTAKT" to "CONNECT"
 
+### Phase 2e: ProjektSection heading updated to English
+
+- Updated section heading to "Shipped Work"
+- Updated intro paragraph to "Production applications built and deployed — real users, real systems."
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection

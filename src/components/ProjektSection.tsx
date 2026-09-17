@@ -38,10 +38,10 @@ export function ProjektSection() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.45, ease: 'easeOut' }}>
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif mb-4">
-            <span className="gradient-text">{t.portfolio.headline}</span>
+            <span className="gradient-text">Shipped Work</span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground reading-width">
-            {t.portfolio.intro}
+            Production applications built and deployed — real users, real systems.
           </p>
         </motion.div>
 
