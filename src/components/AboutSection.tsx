@@ -3,10 +3,10 @@ import { useRef } from 'react';
 import { MapPin } from 'lucide-react';
 
 const stats = [
-  { number: '3', label: 'Production Apps' },
-  { number: '18 538', label: 'Commits' },
-  { number: '340+', label: 'Real Users' },
-  { number: '< 1 year', label: 'All of this' },
+  { number: '3', label: 'Production Apps Shipped' },
+  { number: '340+', label: 'Real-World Users' },
+  { number: '100%', label: 'Strict TypeScript & RLS' },
+  { number: '< 50ms', label: 'Realtime Data Latency' },
 ];
 
 export function AboutSection() {
