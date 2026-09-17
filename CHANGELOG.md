@@ -36,10 +36,11 @@
 
 ### Phase 2a: New portfolio HeroSection
 
-- Rewrote `src/components/HeroSection.tsx`
-- Hardcoded English copy for Rami — Product Engineer
-- Added Gothenburg location badge, stack pills, dual CTAs, scroll indicator
-- Removed language context, laptop mockup, and djlobo image
+- Rewrote HeroSection.tsx with hardcoded English content
+- Added Gothenburg location badge, Product Engineer H1, stack pills
+- Added Copy Email CTA and Download CV secondary button
+- Added scroll indicator
+- Removed language context, djlobo mockup, imageError state
 
 ### Phase 2b: New portfolio AboutSection
 
