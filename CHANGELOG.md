@@ -144,6 +144,11 @@
 - Added AI qualifier paragraph below AI Tooling pills: architecture, schema design, and security policies are human-designed; component code is AI-generated and human-reviewed
 - AboutSection closing paragraph updated to signal solo ownership and readiness to join a team
 
+### Phase 3c: Echo2000 GitHub button updated to reflect private repo
+
+- Changed Echo2000 modal GitHub button label from "View on GitHub" to "Private repo — I walk through the code in interviews"
+- Kept href pointing to https://github.com/CoffeeCodeStudio and icon unchanged
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
