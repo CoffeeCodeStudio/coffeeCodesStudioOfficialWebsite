@@ -55,7 +55,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <span className="gradient-text">Product Engineer building resilient web apps with AI-accelerated workflows.</span>
+          <span className="gradient-text">I build production web applications from schema design to real users.</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -87,7 +87,7 @@ export function HeroSection() {
           AI Tooling
         </p>
         <motion.div
-          className="flex justify-center gap-2 flex-wrap mb-8"
+          className="flex justify-center gap-2 flex-wrap mb-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.52 }}
@@ -101,6 +101,10 @@ export function HeroSection() {
             </span>
           ))}
         </motion.div>
+
+        <p className="text-center text-xs text-muted-foreground/60 font-mono mt-3 mb-6 max-w-2xl mx-auto px-4">
+          Architecture, schema design, and security policies are designed by me. Component code is AI-generated and human-reviewed. Final quality is my responsibility.
+        </p>
 
         {/* CTA buttons */}
         <motion.div
