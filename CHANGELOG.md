@@ -121,6 +121,12 @@
 - Replaced "100% / Strict TypeScript & RLS" with "100 / Lighthouse Accessibility"
 - Replaced "< 50ms / Realtime Data Latency" with "Jan 2026 / First Live Deploy"
 
+### Phase 2o-fix: Removed unverified metrics from DJ Lobo modal
+
+- Filled Echo2000 and Klar PSAM sections with real content and verified metrics
+- Kept DJ Lobo PROBLEM and ARCHITECTURE & AI WORKFLOW sections; removed the METRICS grid
+- Updated action button labels and URLs per project
+
 ### Waiting for (Phase 2)
 
 - New CaseStudySection
