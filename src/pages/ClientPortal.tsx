@@ -9,7 +9,7 @@ import { ProjectStatus } from '@/components/portal/ProjectStatus';
 import { ClientRequests } from '@/components/portal/ClientRequests';
 import { ClientMessages } from '@/components/portal/ClientMessages';
 import { StatusLog } from '@/components/portal/StatusLog';
-import { AIAssistant } from '@/components/portal/AIAssistant';
+// import { AIAssistant } from '@/components/portal/AIAssistant';
 import { ClientSettings } from '@/components/portal/ClientSettings';
 import { ClientAgreement } from '@/components/portal/ClientAgreement';
 import { ClientPubAgreement } from '@/components/portal/ClientPubAgreement';
@@ -21,7 +21,7 @@ const tabs: { id: Tab; label: string; icon: typeof LayoutDashboard; prominent?: 
   { id: 'dashboard', label: 'Status', icon: LayoutDashboard, prominent: true },
   { id: 'requests', label: 'Önskemål', icon: MessageCirclePlus, prominent: true },
   { id: 'messages', label: 'Meddelanden', icon: MessageCircle, prominent: true },
-  { id: 'ai', label: 'AI-hjälp', icon: Sparkles, prominent: true },
+  // { id: 'ai', label: 'AI-hjälp', icon: Sparkles, prominent: true },
   { id: 'log', label: 'Aktivitet', icon: History, prominent: false },
   { id: 'settings', label: 'Inställningar', icon: Settings, prominent: false },
 ];
@@ -369,14 +369,7 @@ export default function ClientPortal() {
           )}
           {activeTab === 'requests' && <ClientRequests />}
           {activeTab === 'messages' && <ClientMessages />}
-          {activeTab === 'ai' && (
-            projectId
-              ? <AIAssistant projectId={projectId} projectStatus={projectStatus} />
-              : <div className="glass-card p-12 rounded-2xl text-center">
-                  <Sparkles className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-                  <p className="text-muted-foreground">AI-assistenten är tillgänglig när ditt projekt har startats.</p>
-                </div>
-          )}
+          {/* AI-tab disabled – consuming Lovable credits */}
           {activeTab === 'log' && <StatusLog />}
           {activeTab === 'settings' && <ClientSettings user={user} profile={profile} onProfileUpdate={setProfile} />}
         </motion.div>
