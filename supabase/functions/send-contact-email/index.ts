@@ -44,8 +44,6 @@ interface ContactEmailRequest {
   name: string;
   company?: string;
   email: string;
-  projectType: string;
-  budget?: string;
   message: string;
   website?: string; // honeypot field — should always be empty
 }
@@ -56,12 +54,6 @@ interface ResendResult {
   data: Record<string, unknown>;
 }
 
-const projectTypeLabels: Record<string, string> = {
-  webapp: "Webbapplikation",
-  internal: "Internt verktyg",
-  saas: "SaaS-plattform",
-  other: "Annat",
-};
 
 async function sendEmailViaResend(
   payload: {
