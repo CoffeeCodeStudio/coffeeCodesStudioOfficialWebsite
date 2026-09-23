@@ -1,8 +1,18 @@
 <!doctype html>
-<html lang="sv" class="dark" style="background-color: #0B0D1E;">
+<html lang="sv" class="dark" style="background-color: #0B0D1E; color-scheme: dark;">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B0D1E" />
+    <style>
+      html,
+      body,
+      #root {
+        min-height: 100vh;
+        margin: 0;
+        background-color: #0B0D1E;
+      }
+    </style>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Hemsidor för småföretag i Göteborg | Coffee Code Studio</title>
     <meta name="description" content="Professionell hemsida från 4 900 kr — ofta live inom en vecka. Jag bygger snabba, mobilanpassade hemsidor för småföretag i Göteborg. Boka gratis konsultation." />
@@ -42,7 +52,7 @@
   </head>
 
   <body style="background-color: #0B0D1E;">
-    <div id="root"></div>
+    <div id="root" style="min-height: 100vh; background-color: #0B0D1E;"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
