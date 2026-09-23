@@ -401,14 +401,18 @@ function renderPage(baseHtml, page) {
     );
 
   // Replace the empty shell (or any "Laddar..." placeholder) with real content.
-  const rootRe = /<div id="root">[\s\S]*?<\/div>/;
-  if (rootRe.test(out)) {
-    out = out.replace(rootRe, renderRootHtml(page));
+  // Replace the empty shell (or any placeholder) with real content, keeping
+  // whatever attributes the built #root element carries (inline styles etc).
+  const rootRe = /<div([^>]*\bid="root"[^>]*)>[\s\S]*?<\/div>/;
+  const match = out.match(rootRe);
+  if (match) {
+    out = out.replace(rootRe, renderRootHtml(page, match[1]));
   } else {
     out = out.replace('<body>', `<body>${renderRootHtml(page)}`);
   }
   return out;
 }
+
 
 async function main() {
   const baseHtml = await readFile(join(DIST, 'index.html'), 'utf8');
