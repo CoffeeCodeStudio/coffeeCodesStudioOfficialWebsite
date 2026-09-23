@@ -2,7 +2,13 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-09-23 — Phase 3i: Prerender fix
+
+- Fix: `scripts/prerender-static.mjs` matchade inte längre `<div id="root">` sedan inline-stilar lades till i index.html, vilket gjorde att fel/statiskt innehåll (startsidans h1) visades på undersidor som `/hemsida-hantverkare-goteborg`. Regex matchar nu root oavsett attribut och bevarar dem.
+- Prerenderad SEO-fallback får nu textfärg `#0B0D1E` (samma som bakgrunden) — läsbar för sökmotorer och skärmläsare, osynlig för besökare innan React laddat.
+
 ## 2026-09-23 — Phase 3h: Bug fixes
+
 
 ### Phase 3h: Kontaktformulär, redirects och menylänkar
 
