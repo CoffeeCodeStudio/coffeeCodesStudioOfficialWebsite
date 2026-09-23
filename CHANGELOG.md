@@ -2,10 +2,10 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
-## 2026-09-23 — Phase 3i: Prerender fix
+## 2026-09-23 — Phase 3i: Prerender fix + white-flash fix
 
-- Fix: `scripts/prerender-static.mjs` matchade inte längre `<div id="root">` sedan inline-stilar lades till i index.html, vilket gjorde att fel/statiskt innehåll (startsidans h1) visades på undersidor som `/hemsida-hantverkare-goteborg`. Regex matchar nu root oavsett attribut och bevarar dem.
-- Prerenderad SEO-fallback får nu textfärg `#0B0D1E` (samma som bakgrunden) — läsbar för sökmotorer och skärmläsare, osynlig för besökare innan React laddat.
+- Fix: `scripts/prerender-static.mjs` matchade inte längre `<div id="root">` sedan inline-stilar lades till i index.html, vilket gjorde att fel pre-renderat innehåll (startsidans h1) visades på undersidor som `/hemsida-hantverkare-goteborg`. Regex matchar nu root oavsett attribut och bevarar dem — varje route renderar sin egen pre-renderade text igen.
+- Fix: den korta vita blinkningen vid sidladdning är löst genom att `html`, `body` och `#root` har samma mörka bakgrundsfärg (`#0B0D1E`, `min-height: 100vh`) redan inline i index.html, plus `color-scheme: dark` och `<meta name="theme-color">`. INTE löst genom att dölja text med samma färg som bakgrunden — det hade varit cloaking och SEO-farligt. Fallback-texten ligger kvar i DOM:en och är fullt läsbar för sökmotorer.
 
 ## 2026-09-23 — Phase 3h: Bug fixes
 
