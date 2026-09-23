@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ClientLogin from "./pages/ClientLogin";
@@ -65,8 +65,9 @@ const App = () => (
             <Route path="/cookiepolicy" element={<Cookiepolicy />} />
             <Route path="/anvandardvillkor" element={<Anvandardvillkor />} />
             <Route path="/projektfragor" element={<Projektfragor />} />
-            {/* <Route path="/frisor-goteborg" element={<FrisorGoteborg />} /> */}
-            {/* <Route path="/smaforetag-goteborg" element={<SmaforetagGoteborg />} /> */}
+            {/* Legacy URLs permanently redirected to their /hemsida-* replacements */}
+            <Route path="/frisor-goteborg" element={<Navigate to="/hemsida-frisor-goteborg" replace />} />
+            <Route path="/smaforetag-goteborg" element={<Navigate to="/hemsida-hantverkare-goteborg" replace />} />
             <Route path="/webbyra-goteborg" element={<WebbyraGoteborg />} />
             <Route path="/hemsida-frisor-goteborg" element={<HemsidaFrisorGoteborg />} />
             <Route path="/hemsida-hantverkare-goteborg" element={<HemsidaHantverkareGoteborg />} />
