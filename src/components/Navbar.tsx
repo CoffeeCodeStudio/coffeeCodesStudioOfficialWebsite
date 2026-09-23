@@ -115,6 +115,9 @@ export function Navbar() {
     setIsOpen(false);
     if (item.isRoute) {
       navigate(item.href);
+    } else if (location.pathname !== '/') {
+      // On subpages: navigate to homepage with anchor — scroll handled by effect above
+      navigate('/' + item.href);
     } else {
       const element = document.querySelector(item.href);
       if (element) {
