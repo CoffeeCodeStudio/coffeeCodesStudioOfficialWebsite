@@ -44,8 +44,6 @@ interface ContactEmailRequest {
   name: string;
   company?: string;
   email: string;
-  projectType: string;
-  budget?: string;
   message: string;
   website?: string; // honeypot field — should always be empty
 }
@@ -56,12 +54,6 @@ interface ResendResult {
   data: Record<string, unknown>;
 }
 
-const projectTypeLabels: Record<string, string> = {
-  webapp: "Webbapplikation",
-  internal: "Internt verktyg",
-  saas: "SaaS-plattform",
-  other: "Annat",
-};
 
 async function sendEmailViaResend(
   payload: {
@@ -115,7 +107,7 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const { name, company, email, projectType, budget, message, website }: ContactEmailRequest = await req.json();
+    const { name, company, email, message, website }: ContactEmailRequest = await req.json();
 
     // --- Honeypot check: if filled, silently succeed ---
     if (website) {
@@ -125,7 +117,7 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    if (!name || !email || !projectType || !message) {
+    if (!name || !email || !message) {
       return new Response(JSON.stringify({ error: "Alla obligatoriska fält måste fyllas i" }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -150,9 +142,7 @@ Deno.serve(async (req: Request) => {
     const safeName = escapeHtml(name);
     const safeCompany = escapeHtml(company || "Ej angivet");
     const safeEmail = escapeHtml(email);
-    const safeBudget = escapeHtml(budget || "Ej angivet");
     const safeMessage = escapeHtml(message);
-    const projectTypeLabel = projectTypeLabels[projectType] || escapeHtml(projectType);
 
     const payload = {
       to: ["coffeecodestudios@gmail.com"],
@@ -174,8 +164,6 @@ Deno.serve(async (req: Request) => {
                 <p style="color: #E0E0E0; margin: 8px 0;"><strong style="color: #FFC107;">Namn:</strong> ${safeName}</p>
                 <p style="color: #E0E0E0; margin: 8px 0;"><strong style="color: #FFC107;">Företag:</strong> ${safeCompany}</p>
                 <p style="color: #E0E0E0; margin: 8px 0;"><strong style="color: #FFC107;">E-post:</strong> ${safeEmail}</p>
-                <p style="color: #E0E0E0; margin: 8px 0;"><strong style="color: #FFC107;">Projekttyp:</strong> ${projectTypeLabel}</p>
-                <p style="color: #E0E0E0; margin: 8px 0;"><strong style="color: #FFC107;">Budget:</strong> ${safeBudget}</p>
               </div>
               <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 24px;">
                 <h2 style="color: #FFC107; font-size: 18px; margin-top: 0;">Meddelande</h2>
