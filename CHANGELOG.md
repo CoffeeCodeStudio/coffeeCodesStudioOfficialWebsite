@@ -2,6 +2,14 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-09-23 — Phase 3h: Bug fixes
+
+### Phase 3h: Kontaktformulär, redirects och menylänkar
+
+- Fix: kontaktformulär — `projectType` (och `budget`) borttaget från edge function `send-contact-email`; kräver nu bara name, email, message. Tidigare 400 Bad Request på alla submits. Verifierat med testanrop: 200 OK, "E-post skickad!"
+- Fix: 301-redirects för `/frisor-goteborg` → `/hemsida-frisor-goteborg` och `/smaforetag-goteborg` → `/hemsida-hantverkare-goteborg` (permanenta omdirigeringar i App.tsx, gamla route-kommentarer ersatta)
+- Fix: menylänkar på undersidor — Navbar-ankarlänkar (`#projekt`, `#about`, `#kontakt`) navigerar nu till `/#ankare` från undersidor och skrollar till rätt sektion på startsidan via useLocation + useEffect. Verifierat med Playwright från /om-mig
+
 ## 2026-09-17 — Phase 1: Business → Portfolio
 
 ### Phase 1b: Removed all business content
