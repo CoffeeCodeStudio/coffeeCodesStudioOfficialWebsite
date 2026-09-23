@@ -107,7 +107,7 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const { name, company, email, projectType, budget, message, website }: ContactEmailRequest = await req.json();
+    const { name, company, email, message, website }: ContactEmailRequest = await req.json();
 
     // --- Honeypot check: if filled, silently succeed ---
     if (website) {
@@ -117,7 +117,7 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    if (!name || !email || !projectType || !message) {
+    if (!name || !email || !message) {
       return new Response(JSON.stringify({ error: "Alla obligatoriska fält måste fyllas i" }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
