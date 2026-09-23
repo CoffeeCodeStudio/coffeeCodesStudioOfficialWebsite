@@ -65,7 +65,11 @@ Begränsning: eftersom appen är en klientrenderad SPA läser sociala förhandsv
 
 ### `index.html`
 
-Innehåller basrubrik, basbeskrivning, Open Graph-fallback och delningsbilden `og-image-v2.png`.
+Innehåller basrubrik, basbeskrivning, Open Graph-fallback och delningsbilden `og-image-v2.png`. `html`, `body` och `#root` har inline-stilar med bakgrundsfärg `#0B0D1E` och `min-height: 100vh` så att ingen vit blinkning syns innan React/CSS laddat; `color-scheme: dark` och `<meta name="theme-color">` är också satta.
+
+### `scripts/prerender-static.mjs` (byggsteg)
+
+Körs som postbuild efter `vite build`. För varje publik route läser skriptet `dist/index.html` och skriver en statisk `dist/<route>/index.html` med sidans rubrik, brödtext, meny och footer injicerade som riktig HTML inuti `#root`. Syfte: sökmotorer och AI-bottar ska se komplett innehåll utan att köra JavaScript (appens övriga SEO-taggar sätts klient-side av SEOHead och är osynliga för crawlers utan JS). När React laddat hydrerar/ersätter det `#root`-innehållet. Viktigt: regexen som letar upp `<div id="root">` måste matcha oavsett attribut/inline-stilar — en strikt matchning gjorde att alla undersidor tidigare fick startsidans pre-renderade innehåll.
 
 ## Språkhantering (sv/en)
 
