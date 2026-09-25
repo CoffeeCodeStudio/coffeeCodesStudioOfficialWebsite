@@ -1,7 +1,7 @@
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
-const PRIMARY_FROM = "Coffee Code Studio <hej@coffeecodestudio.se>";
-const FALLBACK_FROM = "Coffee Code Studio <onboarding@resend.dev>";
+const PRIMARY_FROM = "Rami Portfolio <hej@coffeecodestudio.se>";
+const FALLBACK_FROM = "Rami Portfolio <onboarding@resend.dev>";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "https://coffeecodestudio.se",
@@ -157,7 +157,7 @@ Deno.serve(async (req: Request) => {
               <div style="text-align: center; margin-bottom: 24px;">
                 <span style="font-size: 48px;">☕</span>
                 <h1 style="color: #FFC107; margin: 16px 0 8px; font-size: 24px;">Ny Kontaktförfrågan</h1>
-                <p style="color: #8B8B9E; margin: 0;">Coffee Code Studio</p>
+                <p style="color: #8B8B9E; margin: 0;">Rami — Portfolio</p>
               </div>
               <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
                 <h2 style="color: #FFC107; font-size: 18px; margin-top: 0;">Kontaktuppgifter</h2>

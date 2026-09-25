@@ -6,7 +6,6 @@ const structuredData = {
   "mainEntity": {
     "@type": "Person",
     "name": "Rami",
-    "alternateName": "CoffeeCodeStudio",
     "jobTitle": "Product Engineer",
     "url": "https://coffeecodestudio.se",
     "address": {
