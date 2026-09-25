@@ -71,7 +71,6 @@ export function LanguageToggle() {
 }
 
 export function Navbar() {
-  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();

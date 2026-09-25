@@ -9,7 +9,6 @@ const legalLinks = [
 ];
 
 export function Footer() {
-  const { t } = useLanguage();
 
   return (
     <footer className="pt-1 pb-12 sm:pb-16" role="contentinfo">
