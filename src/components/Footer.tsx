@@ -6,7 +6,6 @@ import { Logo } from './Navbar';
 const legalLinks = [
   { to: '/integritetspolicy', label: 'Privacy Policy' },
   { to: '/cookiepolicy', label: 'Cookie Policy' },
-  { to: '/anvandardvillkor', label: 'Terms of Service' },
 ];
 
 export function Footer() {
@@ -63,15 +62,6 @@ export function Footer() {
                 <Linkedin className="w-4 h-4 inline mr-1" />
                 LinkedIn
               </a>
-              {/* CV shared manually on request
-              <a
-                href="mailto:hej@coffeecodestudio.se?subject=CV%20Request&body=Hi%20Rami%2C%20I%20would%20like%20to%20request%20your%20CV."
-                aria-label="Request CV"
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                Request CV
-              </a>
-              */}
             </div>
           </div>
         </div>

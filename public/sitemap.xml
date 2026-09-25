@@ -18,22 +18,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://coffeecodestudio.se/anvandardvillkor</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/anvandardvillkor" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/anvandardvillkor" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/anvandardvillkor" />
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/en/anvandardvillkor</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/anvandardvillkor" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/anvandardvillkor" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/anvandardvillkor" />
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
     <loc>https://coffeecodestudio.se/integritetspolicy</loc>
     <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/integritetspolicy" />
     <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/integritetspolicy" />
@@ -64,85 +48,5 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/cookiepolicy" />
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/webbyra-goteborg</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/webbyra-goteborg" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/webbyra-goteborg" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/webbyra-goteborg" />
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/en/webbyra-goteborg</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/webbyra-goteborg" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/webbyra-goteborg" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/webbyra-goteborg" />
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/hemsida-frisor-goteborg</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/hemsida-frisor-goteborg" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/hemsida-frisor-goteborg" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/hemsida-frisor-goteborg" />
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/en/hemsida-frisor-goteborg</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/hemsida-frisor-goteborg" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/hemsida-frisor-goteborg" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/hemsida-frisor-goteborg" />
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/hemsida-hantverkare-goteborg</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/hemsida-hantverkare-goteborg" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/hemsida-hantverkare-goteborg" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/hemsida-hantverkare-goteborg" />
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/en/hemsida-hantverkare-goteborg</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/hemsida-hantverkare-goteborg" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/hemsida-hantverkare-goteborg" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/hemsida-hantverkare-goteborg" />
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/vad-kostar-en-hemsida</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/vad-kostar-en-hemsida" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/vad-kostar-en-hemsida" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/vad-kostar-en-hemsida" />
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/en/vad-kostar-en-hemsida</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/vad-kostar-en-hemsida" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/vad-kostar-en-hemsida" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/vad-kostar-en-hemsida" />
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/om-mig</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/om-mig" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/om-mig" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/om-mig" />
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://coffeecodestudio.se/en/om-mig</loc>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://coffeecodestudio.se/om-mig" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://coffeecodestudio.se/en/om-mig" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeecodestudio.se/om-mig" />
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
 </urlset>

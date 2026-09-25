@@ -1,24 +1,10 @@
 // Helpers for /en URL-prefix language strategy. Public, indexable routes
-// have both a Swedish (default) and an English variant. Admin/portal/legal
-// internal routes stay Swedish-only.
+// have both a Swedish (default) and an English variant. 
 
 export const SITE_URL = "https://coffeecodestudio.se";
 
 // Routes that have an English /en/* equivalent and emit hreflang.
-export const LOCALIZED_PUBLIC_PATHS = [
-  "/",
-  "/frisor-goteborg",
-  "/smaforetag-goteborg",
-  "/webbyra-goteborg",
-  "/hemsida-frisor-goteborg",
-  "/hemsida-hantverkare-goteborg",
-  "/vad-kostar-en-hemsida",
-  "/om-mig",
-
-  "/integritetspolicy",
-  "/cookiepolicy",
-  "/anvandardvillkor",
-];
+export const LOCALIZED_PUBLIC_PATHS = ["/", "/integritetspolicy", "/cookiepolicy"];
 
 export type Lang = "sv" | "en";
 
