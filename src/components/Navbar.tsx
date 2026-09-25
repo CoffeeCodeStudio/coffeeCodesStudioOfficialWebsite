@@ -71,7 +71,6 @@ export function LanguageToggle() {
 }
 
 export function Navbar() {
-  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -161,12 +160,6 @@ export function Navbar() {
             >
               Resume
             </a> */}
-            {/* <button
-              onClick={() => navigate('/portal/login')}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {t.nav.portal}
-            </button> */}
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4">
@@ -234,15 +227,6 @@ export function Navbar() {
                   >
                     Resume
                   </motion.a> */}
-                  {/* <motion.button
-                    onClick={() => { setIsOpen(false); navigate('/portal/login'); }}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-4 px-4 rounded-xl mt-2 text-center"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: navItems.length * 0.05 }}
-                  >
-                    {t.nav.portal}
-                  </motion.button> */}
                 </div>
               </div>
             </motion.div>

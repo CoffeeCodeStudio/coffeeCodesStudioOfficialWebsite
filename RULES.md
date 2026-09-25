@@ -20,7 +20,7 @@
 
 ## Architecture Rules
 
-- /portal and /admin always hidden — no links in navbar or footer
+- No client portal or admin area exists — do not re-add login routes
 - Direct URL still works
 - CodeRainBackground stays in hero
 - CoffeeBeanCursor is DISABLED (recruiter bounce-trigger)

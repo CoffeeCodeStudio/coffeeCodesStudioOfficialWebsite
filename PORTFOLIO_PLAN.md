@@ -42,6 +42,15 @@ Identity: Rami — AI-Leveraged Product Engineer.
 - [x] Documentation created
 - [x] Business content removed (routes, sitemap, structured data, contact form)
 
+## Phase 3j — Business cleanup Complete ✅
+
+- [x] Sales pages, /om-mig and terms page deleted (files + routes)
+- [x] Client portal, admin, set-password, project questionnaire and chat deleted
+- [x] 10 client/agreement edge functions deleted; only send-contact-email remains
+- [x] Disabled sections (Tjanster, Pricing, FAQ, Testimonials, CoffeeBeanCursor) deleted
+- [x] Metadata, sitemap, robots, llms.txt, prerender copy rewritten for portfolio
+- [x] Old business translation strings removed
+
 ## Phase 2 — In Progress 🔄
 
 - [x] New HeroSection (EN, Rami, stack pills, Gothenburg badge, 2 CTAs)

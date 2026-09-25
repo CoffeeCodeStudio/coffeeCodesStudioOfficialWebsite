@@ -1,18 +1,13 @@
-# Coffee Code Studio
+# Rami — Product Engineer (Portfolio)
 
-> Solo webbyrå i Göteborg som bygger hemsidor åt små företag. Din hemsida live inom en vecka.
-
-Coffee Code Studio drivs av Rami (Jag) och hjälper svenska småföretag att snabbt komma igång med en professionell hemsida. Fokus på enkel process, fast pris och tydlig leverans.
+> Personal portfolio of Rami, a product engineer based in Gothenburg, Sweden. Builds full-stack web products with React, TypeScript, Vite, Tailwind CSS and Supabase.
 
 ## Pages
 
-- [Startsida](/): Översikt över tjänster, portfolio och kontakt.
-- [Hemsida för småföretag i Göteborg](/smaforetag-goteborg): Landningssida för småföretag som behöver en hemsida.
-- [Hemsida för frisörer i Göteborg](/frisor-goteborg): Landningssida för frisörsalonger.
-- [Projektfrågor](/projektfragor): Frågeformulär som hjälper kunder beskriva sitt hemsideprojekt.
+- [Home](/): Hero, case studies (Echo2000, Klar, DJ Lobo Producciones), working methodology, about and contact.
+- [English version](/en)
 
 ## Optional
 
-- [Integritetspolicy](/integritetspolicy): Hur personuppgifter hanteras.
-- [Cookiepolicy](/cookiepolicy): Användning av cookies.
-- [Användarvillkor](/anvandardvillkor): Villkor för tjänsterna.
+- [Privacy policy](/integritetspolicy)
+- [Cookie policy](/cookiepolicy)

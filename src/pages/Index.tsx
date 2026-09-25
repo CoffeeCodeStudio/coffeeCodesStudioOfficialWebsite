@@ -1,14 +1,10 @@
 import { LanguageProvider, useLanguage } from '@/contexts/LanguageContext';
 import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/HeroSection';
-import { TjansterSection } from '@/components/TjansterSection';
 import { ProjektSection } from '@/components/ProjektSection';
 import { MethodologySection } from '@/components/MethodologySection';
-import { TestimonialsSection } from '@/components/TestimonialsSection';
-import { PricingSection } from '@/components/PricingSection';
 import { AboutSection } from '@/components/AboutSection';
 import { ContactSection } from '@/components/ContactSection';
-import { FAQSection } from '@/components/FAQSection';
 import { Footer } from '@/components/Footer';
 import { SEOHead } from '@/components/SEOHead';
 
@@ -19,11 +15,11 @@ function IndexContent() {
     <div key={language}>
       <SEOHead
         title={language === 'sv'
-          ? 'Hemsidor för småföretag i Göteborg | Coffee Code Studio'
-          : 'Websites for Small Businesses | Coffee Code Studio'}
+          ? 'Rami — Product Engineer | Portfolio'
+          : 'Rami — Product Engineer | Portfolio'}
         description={language === 'sv'
-          ? 'Professionell hemsida från 4 900 kr — ofta live inom en vecka. Jag bygger snabba, mobilanpassade hemsidor för småföretag i Göteborg. Boka gratis konsultation.'
-          : 'Professional website from 4,900 SEK — often live within a week. Fast, mobile-friendly websites for small businesses. Book a free consultation.'}
+          ? 'Portfolio för Rami, product engineer i Göteborg. Case studies: Echo2000, Klar och DJ Lobo Producciones — byggda med React, TypeScript och Supabase.'
+          : 'Portfolio of Rami, product engineer in Gothenburg. Case studies: Echo2000, Klar and DJ Lobo Producciones — built with React, TypeScript and Supabase.'}
         canonical={`https://coffeecodestudio.se${language === 'en' ? '/en' : '/'}`}
         ogImage="https://coffeecodestudio.se/og-image-v2.png"
       />
@@ -34,12 +30,8 @@ function IndexContent() {
         <Navbar />
         <main id="main-content">
           <HeroSection />
-          {/* <TestimonialsSection /> */}
-          {/* <TjansterSection /> */}
           <ProjektSection />
           <MethodologySection />
-          {/* <FAQSection /> */}
-          {/* <PricingSection /> */}
           <AboutSection />
           <ContactSection />
         </main>
