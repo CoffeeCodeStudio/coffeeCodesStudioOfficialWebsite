@@ -2,6 +2,15 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-09-25 — Phase 3j: Business content removed
+
+- Borttagna sidor: WebbyraGoteborg, HemsidaFrisorGoteborg, HemsidaHantverkareGoteborg, VadKostarEnHemsida, SmaforetagGoteborg, FrisorGoteborg, OmMig, Anvandardvillkor.
+- Borttaget kundsystem: ClientLogin, ClientPortal, Projektfragor, AdminDashboard, AdminLogin, SetPassword, components/admin, components/portal, components/chat, hooks/useAdmin, lib/paymentMethods, lib/projectStatuses.
+- Borttagna edge functions (kod + deployade): create-client, delete-client, sign-agreement, sign-pub-agreement, submit-client-request, notify-admin-request, notify-checklist-complete, questionnaire-reminder, send-notification, project-ai-chat. send-contact-email behålls med avsändare "Rami Portfolio".
+- Borttagna komponenter: TjansterSection, PricingSection, FAQSection, TestimonialsSection, CoffeeBeanCursor.
+- Borttagna bilder: smaforetag-preview, salon-preview, hantverkare-preview, frisor-mockup, logo.svg, logo-pdf.png.
+- Omskrivet: index.html- och startsidans titel/beskrivning, sitemap (6 URL:er), robots.txt, llms.txt, prerender-static.mjs, StructuredData (alternateName borttagen), integritets- och cookiepolicy, LanguageContext (all gammal copy borttagen).
+
 ## 2026-09-23 — Phase 3i: Prerender fix + white-flash fix
 
 - Fix: `scripts/prerender-static.mjs` matchade inte längre `<div id="root">` sedan inline-stilar lades till i index.html, vilket gjorde att fel pre-renderat innehåll (startsidans h1) visades på undersidor som `/hemsida-hantverkare-goteborg`. Regex matchar nu root oavsett attribut och bevarar dem — varje route renderar sin egen pre-renderade text igen.

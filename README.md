@@ -2,7 +2,7 @@
 
 Personal portfolio of Rami, an AI-Leveraged Product Engineer based in Gothenburg, Sweden.
 
-> **Project Status:** Live at [coffeecodestudio.se](https://coffeecodestudio.se) — currently transitioning from a small-business agency site to a developer portfolio.
+> **Project Status:** Live at [coffeecodestudio.se](https://coffeecodestudio.se) — a pure developer portfolio (no client system).
 
 ## About
 
@@ -13,7 +13,7 @@ This site showcases selected projects, skills, and ways to get in touch. It is b
 - **Framework**: React 18 + Vite 5 + TypeScript
 - **Styling**: Tailwind CSS, shadcn/ui, framer-motion
 - **Routing**: react-router-dom
-- **Backend**: Lovable Cloud (database, auth, storage, edge functions)
+- **Backend**: Lovable Cloud (storage for project images, contact-form edge function)
 - **Platform**: Developed and hosted via Lovable
 
 ## Public Pages
@@ -21,12 +21,10 @@ This site showcases selected projects, skills, and ways to get in touch. It is b
 | Route | Purpose |
 | --- | --- |
 | `/` | Portfolio landing — hero, projects, about, contact |
-| `/om-mig` / `/en/om-mig` | About page |
 | `/integritetspolicy` | Privacy policy |
 | `/cookiepolicy` | Cookie policy |
-| `/anvandardvillkor` | Terms of use |
 
-Internal/auth routes: `/portal`, `/admin`, `/set-password`.
+No internal, login or admin routes. The only backend function is `send-contact-email` for the contact form.
 
 ## SEO & Performance
 

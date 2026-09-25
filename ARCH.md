@@ -1,6 +1,6 @@
 # Arkitektur
 
-Teknisk översikt av Coffee Code Studio: routes, SEO, språkhantering, schema och sitemap.
+Teknisk översikt av portfolion (coffeecodestudio.se): routes, SEO, språkhantering, schema och sitemap.
 
 ## Stack
 
@@ -12,39 +12,16 @@ Teknisk översikt av Coffee Code Studio: routes, SEO, språkhantering, schema oc
 
 ## Routes
 
-Alla routes definieras i `src/App.tsx` inuti `<BrowserRouter>` och `<LanguageProvider>`.
-
-### Publika, indexerbara sidor (svensk standard)
+Alla routes definieras i `src/App.tsx`. Sajten är en ren portfolio — inget kundsystem, ingen inloggning.
 
 | Route | Komponent | Innehåll |
 | --- | --- | --- |
-| `/` | `pages/Index.tsx` | Startsida: hero, tjänster, portfölj, priser, testimonials, FAQ, kontakt |
-| `/smaforetag-goteborg` | `SmaforetagGoteborg.tsx` | Landningssida för småföretag, LocalBusiness + FAQPage |
-| `/frisor-goteborg` | `FrisorGoteborg.tsx` | Landningssida frisörer, LocalBusiness + FAQPage |
-| `/webbyra-goteborg` | `WebbyraGoteborg.tsx` | Landningssida webbyrå, LocalBusiness + FAQPage |
-| `/hemsida-frisor-goteborg` | `HemsidaFrisorGoteborg.tsx` | Landningssida frisörsalonger, FAQPage |
-| `/hemsida-hantverkare-goteborg` | `HemsidaHantverkareGoteborg.tsx` | Landningssida hantverkare, FAQPage |
-| `/vad-kostar-en-hemsida` | `VadKostarEnHemsida.tsx` | Prisguide, FAQPage |
-| `/om-mig` | `OmMig.tsx` | Om Coffee Code Studio och Rami, Person-schema |
-| `/integritetspolicy` | `Integritetspolicy.tsx` | Integritetspolicy |
-| `/cookiepolicy` | `Cookiepolicy.tsx` | Cookiepolicy |
-| `/anvandardvillkor` | `Anvandardvillkor.tsx` | Användarvillkor |
-
-Varje route ovan har en engelsk spegling på `/en/...` (startsidan på `/en`) som renderar samma komponent med engelsk text.
-
-### Interna routes (ej indexerade, ingen engelsk spegling)
-
-| Route | Komponent | Innehåll |
-| --- | --- | --- |
-| `/portal/login` | `ClientLogin.tsx` | Kundinloggning |
-| `/portal` | `ClientPortal.tsx` | Kundportal: projekt, filer, meddelanden, avtal |
-| `/set-password` | `SetPassword.tsx` | Sätt lösenord efter inbjudan |
-| `/admin/login` | `AdminLogin.tsx` | Admininloggning |
-| `/admin` | `AdminDashboard.tsx` | Adminpanel |
-| `/projektfragor` | `Projektfragor.tsx` | Projektformulär (`noindex`) |
+| `/` och `/en` | `pages/Index.tsx` | Hero, projekt (Echo2000, Klar, DJ Lobo), metodik, om mig, kontakt |
+| `/integritetspolicy` (+ `/en/...`) | `Integritetspolicy.tsx` | Integritetspolicy (kontaktformulär, analys) |
+| `/cookiepolicy` (+ `/en/...`) | `Cookiepolicy.tsx` | Cookiepolicy |
 | `*` | `NotFound.tsx` | 404 |
 
-`AuthRedirectHandler` i `App.tsx` fångar inbjudnings-, recovery- och signup-tokens i URL-hashen och skickar användaren till `/set-password`.
+Edge function i bruk: `send-contact-email` (kontaktformuläret).
 
 ## SEO-uppsättning
 
@@ -82,38 +59,24 @@ Hjälpfunktioner i `src/lib/i18nRoutes.ts`:
 - `pathForLang(pathname, lang)` — bygger motsvarande sökväg i valt språk
 - `isLocalizedPath(pathname)` — avgör om hreflang ska skrivas ut
 
-`src/contexts/LanguageContext.tsx` håller allt gränssnittsspråk och all copy. Landningssidorna väljer svensk eller engelsk text utifrån URL-prefixet.
+`src/contexts/LanguageContext.tsx` exponerar bara aktuellt språk (från URL-prefixet). All sidcopy är hårdkodad engelska i komponenterna.
 
 Strategi: svenska är standard utan prefix, engelska ligger under `/en/`. Varje par pekar på varandra med reciproka hreflang, och `x-default` pekar alltid på den svenska versionen.
 
 ## Schema.org
 
-### Sitewide — `src/components/StructuredData.tsx`
-
-Injicerar ett `@graph` (script-id `ld-json-site-graph`) med:
-
-- `Organization` (`#organization`) — namn, logotyp, beskrivning, `ContactPoint`
-- `LocalBusiness` (`#localbusiness`) — adress, `GeoCoordinates`, `areaServed`, öppettider, `priceRange`, betalsätt och `hasOfferCatalog` med `Offer` → `Service`
-- `WebSite` (`#website`) — url, namn, språk, publisher
-
-Grafen byggs om per språk (`sv-SE` / `en`).
-
-### Per sida
-
-- `LocalBusiness` + `FAQPage` på `/frisor-goteborg`, `/smaforetag-goteborg`, `/webbyra-goteborg`
-- `FAQPage` på `/hemsida-frisor-goteborg`, `/hemsida-hantverkare-goteborg` och `/vad-kostar-en-hemsida`
-- `FAQPage` via `src/components/FAQSection.tsx` på startsidan
+`src/components/StructuredData.tsx` injicerar `ProfilePage` med `Person` (Rami, Product Engineer, Göteborg, knowsAbout-stack). Inga LocalBusiness-, Offer- eller FAQ-scheman finns kvar.
 
 ## Sitemap och robots
 
-`public/sitemap.xml` underhålls för hand och innehåller 22 URL:er — elva svenska sidor och deras engelska motsvarigheter. Varje `<url>` har `xhtml:link`-alternat för `sv`, `en` och `x-default`, plus `changefreq` och `priority` (startsidan 1.0, landningssidor 0.8/0.7, legal 0.3/0.2). Interna routes ingår inte.
+`public/sitemap.xml` underhålls för hand och innehåller 6 URL:er: `/`, `/en`, integritets- och cookiepolicy på båda språken.
 
 Vid ny route: lägg till sökvägen i `LOCALIZED_PUBLIC_PATHS`, registrera både svensk och engelsk route i `App.tsx` och lägg in båda URL:erna i sitemapen.
 
 `public/robots.txt`:
 
 - Explicita `Allow`-block för AI-crawlers (GPTBot, ClaudeBot, PerplexityBot, GoogleOther) och sociala crawlers (Facebook, Twitter, LinkedIn, Slack, WhatsApp, Discord, Telegram)
-- `User-agent: *` tillåter allt utom `/admin`, `/admin/login`, `/portal`, `/portal/login`, `/set-password`
+- `User-agent: *` tillåter allt
 - `Sitemap:` pekar på `sitemap.xml`, `LLM-sitemap:` pekar på `llms.txt`
 
 ## Deployment
