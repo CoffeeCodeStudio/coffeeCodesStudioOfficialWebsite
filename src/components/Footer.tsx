@@ -1,4 +1,3 @@
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Coffee, Github, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Navbar';
