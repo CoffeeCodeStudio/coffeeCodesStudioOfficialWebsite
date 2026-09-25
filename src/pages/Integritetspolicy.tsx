@@ -5,34 +5,28 @@ export default function Integritetspolicy() {
     <LegalPage
       title="Integritetspolicy"
       seoTitle="Integritetspolicy | Coffee Code Studio"
-      seoDescription="Så hanterar Coffee Code Studio dina personuppgifter enligt GDPR."
+      seoDescription="Så hanteras dina personuppgifter enligt GDPR."
     >
       <p className="text-xs text-muted-foreground italic">Senast uppdaterad: 2 april 2026</p>
 
       <p>
-        Coffee Code Studio, enskild firma med säte i Göteborg, är personuppgiftsansvarig för behandlingen av dina personuppgifter. Vi värnar om din integritet och behandlar alltid dina uppgifter i enlighet med EU:s dataskyddsförordning (GDPR).
+        Rami (Coffee Code Studio), Göteborg, är personuppgiftsansvarig för behandlingen av dina personuppgifter. Vi värnar om din integritet och behandlar alltid dina uppgifter i enlighet med EU:s dataskyddsförordning (GDPR).
       </p>
 
       <h2>1. Vilka uppgifter samlar vi in?</h2>
       <p>Vi samlar in uppgifter som du frivilligt lämnar till oss:</p>
       <ul>
-        <li><strong>Kontaktuppgifter</strong> — namn, e-postadress, företagsnamn (via kontaktformuläret)</li>
-        <li><strong>Projektinformation</strong> — beskrivning av ditt projekt och dina behov</li>
-        <li><strong>Kontouppgifter</strong> — e-post och lösenord (för kunder med kundportal)</li>
-        <li><strong>IP-adress</strong> — registreras vid digital signering av projektavtal och publiceringsavtal för att säkerställa avtalets giltighet</li>
+        <li><strong>Kontaktuppgifter</strong> — namn, e-postadress och meddelande (via kontaktformuläret)</li>
       </ul>
 
       <h2>2. Varför behandlar vi dina uppgifter?</h2>
       <ul>
         <li>För att besvara förfrågningar via kontaktformuläret (rättslig grund: berättigat intresse)</li>
-        <li>För att leverera tjänster och projekt (rättslig grund: fullgörande av avtal)</li>
-        <li>För att ge dig tillgång till kundportalen (rättslig grund: fullgörande av avtal)</li>
-        <li>För att dokumentera digital signering av avtal, inklusive IP-adress (rättslig grund: berättigat intresse — att kunna verifiera avtalets äkthet)</li>
       </ul>
 
       <h2>3. Hur länge sparar vi uppgifterna?</h2>
       <p>
-        Kontaktförfrågningar sparas i högst 12 månader. Kunduppgifter sparas under avtalets löptid samt i 36 månader därefter för eventuella reklamationsärenden. Bokföringsmaterial sparas i 7 år enligt bokföringslagen. IP-adresser kopplade till signerade avtal sparas under avtalets lagringstid.
+        Kontaktförfrågningar sparas i högst 12 månader och raderas därefter.
       </p>
 
       <h2>4. Delning med tredje part</h2>
@@ -42,7 +36,7 @@ export default function Integritetspolicy() {
       <ul>
         <li><strong>Databasplattform</strong> — vi använder Supabase som databasplattform för att lagra och hantera data. Dataskyddsavtal (DPA) med Supabase aktiveras via deras officiella inställningar under Legal i kontopanelen, i enlighet med GDPR artikel 28.</li>
         <li><strong>Hosting</strong> — Lovable för hosting och driftsättning av webbplatsen</li>
-        <li><strong>E-posttjänster</strong> — Resend (resend.com) används för att skicka transaktionella e-postmeddelanden som bekräftelser, avtalsinbjudningar och kundkommunikation</li>
+        <li><strong>E-posttjänster</strong> — Resend (resend.com) används för att skicka transaktionella e-postmeddelanden som vidarebefordran av meddelanden från kontaktformuläret</li>
       </ul>
       <p>Alla leverantörer är bundna av dataskyddsavtal (DPA).</p>
 
