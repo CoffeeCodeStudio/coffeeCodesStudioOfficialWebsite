@@ -22,8 +22,6 @@ function corsHeadersFor(origin: string | null): Record<string, string> {
   };
 }
 
-const corsHeaders = corsHeadersFor(null);
-
 // --- In-memory IP rate limiting ---
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 const RATE_LIMIT_MAX = 3; // max 3 emails per IP per hour
