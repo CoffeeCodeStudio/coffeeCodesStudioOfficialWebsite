@@ -55,7 +55,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <span className="gradient-text">I build production web applications from schema design to real users.</span>
+          <span className="text-foreground">I build <span className="gradient-text">production</span> web applications from schema design to <span className="gradient-text">real users</span>.</span>
         </motion.h1>
 
         {/* Subheadline */}

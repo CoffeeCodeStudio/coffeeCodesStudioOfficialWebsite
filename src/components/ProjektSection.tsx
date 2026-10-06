@@ -14,6 +14,12 @@ interface PortfolioProject {
   sort_order: number;
 }
 
+const CARD_STACK: Record<string, string[]> = {
+  Echo2000: ['React', 'TypeScript', 'Vite', 'Tailwind', 'Supabase'],
+  Klar: ['React', 'TypeScript', 'PWA', 'Supabase', 'Gemini'],
+  'DJ Lobo Producciones': ['React', 'TypeScript', 'Vite', 'Tailwind', 'Supabase'],
+};
+
 export function ProjektSection() {
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
@@ -108,6 +114,15 @@ export function ProjektSection() {
                   <p className="text-muted-foreground text-sm leading-relaxed mb-3 flex-1">
                     {project.description}
                   </p>
+                  {CARD_STACK[project.title] && (
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {CARD_STACK[project.title].map((tech) => (
+                        <span key={tech} className="text-[11px] font-mono text-muted-foreground border border-border px-2 py-0.5 rounded">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   {project.title === 'Echo2000' && (
                     <p className="text-xs font-mono text-primary mb-3">
                       340+ Registered Users · 73+ Edge Functions · 24h Disaster Recovery

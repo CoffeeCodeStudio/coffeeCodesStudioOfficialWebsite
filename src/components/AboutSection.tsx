@@ -1,12 +1,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { MapPin } from 'lucide-react';
+import { MapPin, User } from 'lucide-react';
 
 const stats = [
   { number: '3', label: 'Production Apps Shipped' },
   { number: '340+', label: 'Real-World Users' },
   { number: '100', label: 'Lighthouse Accessibility' },
-  { number: 'Jan 2026', label: 'First Live Deploy' },
+  { number: '100%', label: 'TypeScript' },
 ];
 
 export function AboutSection() {
@@ -48,6 +48,10 @@ export function AboutSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
           >
+            {/* TODO: replace with real headshot */}
+            <div className="w-24 h-24 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mb-6" aria-hidden="true">
+              <User className="w-12 h-12 text-primary/70" />
+            </div>
             <h2 className="text-3xl md:text-5xl font-serif mb-6">
               <span className="gradient-text">About Me</span>
             </h2>
