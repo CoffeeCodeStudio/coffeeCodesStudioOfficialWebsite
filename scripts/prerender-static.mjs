@@ -35,20 +35,20 @@ const ROUTES = [
   {
     path: '/',
     sv: {
-      title: 'Rami — Product Engineer | Portfolio',
+      title: 'Rami — AI-native Fullstack-utvecklare | Portfolio',
       description:
-        'Portfolio för Rami, product engineer i Göteborg. Case studies: Echo2000, Klar och DJ Lobo Producciones — byggda med React, TypeScript och Supabase.',
-      h1: 'Rami — Product Engineer',
+        'Portfolio för Rami, AI-native fullstack-utvecklare i Göteborg. Case studies: Echo2000, Klar och DJ Lobo Producciones — byggda med React, TypeScript och Supabase.',
+      h1: 'Rami — AI-native Fullstack-utvecklare',
       body: [
         'Jag bygger fullstack-webbprodukter med React, TypeScript, Vite, Tailwind CSS och Supabase.',
         'Utvalda projekt: Echo2000, Klar och DJ Lobo Producciones.',
       ],
     },
     en: {
-      title: 'Rami — Product Engineer | Portfolio',
+      title: 'Rami — AI-native Fullstack-utvecklare | Portfolio',
       description:
-        'Portfolio of Rami, product engineer in Gothenburg. Case studies: Echo2000, Klar and DJ Lobo Producciones — built with React, TypeScript and Supabase.',
-      h1: 'Rami — Product Engineer',
+        'Portfolio of Rami, AI-native fullstack developer in Gothenburg. Case studies: Echo2000, Klar and DJ Lobo Producciones — built with React, TypeScript and Supabase.',
+      h1: 'Rami — AI-native Fullstack-utvecklare',
       body: [
         'I build full-stack web products with React, TypeScript, Vite, Tailwind CSS and Supabase.',
         'Selected work: Echo2000, Klar and DJ Lobo Producciones.',
