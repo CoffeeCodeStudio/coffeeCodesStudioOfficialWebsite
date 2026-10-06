@@ -2,6 +2,28 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-06 — Phase 3p: Session documentation and decisions
+
+### Kodändringar (genomförda under dagen, sammanfattade)
+- Metrics-rad: "Jan 2026 — First Live Deploy" → "100% TypeScript".
+- Hero H1: amber-andel minskad till ~10 % — endast "production" och "real users" är amber, resten vit.
+- About: rund placeholder-avatar tillagd (TODO: ersätt med riktigt foto).
+- Projektkort: stack-pills tillagda direkt på alla tre korten (tidigare bara i modal).
+- Echo2000: "10+ Edge Functions" → "73+ Edge Functions" (verifierat i Supabase dashboard).
+- Echo2000: förtydligat att data var intakt men 129 konton krävde manuell återaktivering — löser motsägelsen mellan "100% preserved" och "129 reactivated" (kolumn `description` i `portfolio_projects` + ProjektSection/AboutSection).
+- Echo2000: kulturreferens breddad från "LunarStorm and MSN" till "early-2000s internet culture — forums, guestbooks, platforms like LunarStorm and MySpace".
+- Klar: "DLD" utskriven första gången ("developmental language disorder").
+- Klar: "GDPR Article 9" kompletterad med "(special category data, e.g. health-related information)".
+- Klar: dyslexi-siffra korrigerad "~700,000" → "ca 400,000 Swedish adults" (verifierad mot Dyslexiförbundet).
+- Se Phase 3n och 3o för detaljerna per ändring.
+
+### Beslut tagna (dokumenterade, ingen kodändring)
+- SEO meta-tags per sida: låg prioritet — sajten fungerar som CV/portfolio-länk, inte för organisk sökning. Ingen ytterligare åtgärd.
+- Plausible analytics: låg prioritet, förblir oinstallerat (samma skäl som SEO).
+- Ljud/dynamiska effekter: läggs INTE till — motverkar research-rekommendationen om nedtonad, professionell ton för svenska tech-arbetsgivare.
+- Extra "feedback"-fält i kontaktformuläret: läggs INTE till — formuläret hålls till max 2 fält enligt tidigare research-beslut.
+- About-foto: kandidatbilderna godkändes inte (olämplig vinkel/bakgrund/synlig logga). Placeholder-avatar används tills ett nytt foto tas eller redigeras.
+
 ## 2026-10-06 — Phase 3o: Portfolio polish
 - About stats: "Jan 2026 — First Live Deploy" replaced with "100% TypeScript".
 - Hero H1: now white text with amber only on "production" and "real users".

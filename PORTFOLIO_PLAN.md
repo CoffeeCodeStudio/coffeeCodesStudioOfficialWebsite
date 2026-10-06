@@ -62,7 +62,7 @@ Identity: Rami — AI-native Fullstack-utvecklare (changed 2026-10-06, was "AI-L
 - [x] Updated AboutSection (EN, short, cultural fit)
 - [x] Updated ContactSection (Copy Email CTA, no heavy form)
 - [x] Copy refinements: outcome-first H1, AI qualifier, About collaboration signal
-- [ ] Plausible analytics installed
+- [ ] Plausible analytics installed — DECIDED 2026-10-06: low priority, site is a CV/portfolio link, not for organic search
 - [ ] JSON-LD structured data added
 - [ ] OG image created (1200×630px)
 - [ ] sitemap.xml verified
@@ -74,8 +74,8 @@ Identity: Rami — AI-native Fullstack-utvecklare (changed 2026-10-06, was "AI-L
 
 - [ ] Upload PDF CV to Supabase Storage and update Resume href
 - [ ] OG image (1200×630px) created and uploaded
-- [ ] Plausible analytics installed
-- [ ] SEO meta-tags updated (title, description, OG tags)
+- [ ] Plausible analytics installed — DECIDED 2026-10-06: low priority, same rationale as SEO
+- [ ] SEO meta-tags updated (title, description, OG tags) — DECIDED 2026-10-06: low priority, no further action
 - [ ] Echo2000: 1-click guest session built
 - [ ] Modal: URL hash deep-linking (coffeecodestudio.se/#echo2000)
 - [ ] Klar: run Lighthouse on coffeecodestudio.se itself
