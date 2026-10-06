@@ -6,6 +6,7 @@
 
 - AboutSection: "taking them from initial schema design to active, real-world users" → "...to real-world registered users" (340+ och 129 oförändrade).
 - Genomsökning av hela koden (StructuredData.tsx, prerender-static.mjs, llms.txt, HeroSection m.fl.): ingen annan förekomst av "active users" kopplad till Echo2000. Echo2000-modalen visade redan korrekt "340+ Registered Users" i METRICS-sektionen — orörd.
+- Tillägg (samma dag): Echo2000-projektkortets beskrivningstext ("From idea to live production with 340+ active users") fanns INTE i koden — den ligger i databastabellen portfolio_projects och kom därför undan kodsökningen. Beskrivningen uppdaterad i databasen: "340+ active users" → "340+ registered users" (id cc6027f3-83ba-4b60-a197-b1e538e51e90). Sista breddsökning bekräftar: "active users" finns inte kvar i projektet (endast i denna logg).
 
 ## 2026-10-06 — Phase 3k: Contact form regression fix (CORS)
 
