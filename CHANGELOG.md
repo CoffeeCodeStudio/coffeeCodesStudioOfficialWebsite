@@ -2,6 +2,11 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-06 — Phase 3l: Copy — "active users" → "registered users"
+
+- AboutSection: "taking them from initial schema design to active, real-world users" → "...to real-world registered users" (340+ och 129 oförändrade).
+- Genomsökning av hela koden (StructuredData.tsx, prerender-static.mjs, llms.txt, HeroSection m.fl.): ingen annan förekomst av "active users" kopplad till Echo2000. Echo2000-modalen visade redan korrekt "340+ Registered Users" i METRICS-sektionen — orörd.
+
 ## 2026-10-06 — Phase 3k: Contact form regression fix (CORS)
 
 - Regression: kontaktformuläret misslyckades igen ("Could not send message. Please try again.") — inga mejl kom fram.
