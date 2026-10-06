@@ -2,6 +2,15 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-06 — Phase 3n: Echo2000 and Klar case copy updates
+
+- Echo2000-kortets och modalens målgrupp: "people who grew up with early-2000s internet culture — forums, guestbooks, platforms like LunarStorm and MySpace." Kortets beskrivning uppdaterad i `portfolio_projects.description`; modalens PROBLEM-text uppdaterad i `ProjektSection.tsx`.
+- Echo2000: "10+ Edge Functions" → "73+ Edge Functions" i modalens METRICS, enligt ägarens verifierade uppgift. Kortet saknade en metrics-rad i aktuell kod; en rad med 73+ Edge Functions har lagts till. 340+ Registered Users oförändrat.
+- Echo2000-modalen, kortbeskrivningen och About: all användardata var intakt, utan dataförlust; kontoåtkomst påverkades tillfälligt och 129 konton återaktiverades manuellt för att återställa åtkomst. Återuppbyggnad inom 24 timmar kvarstår.
+- Klar: första DLD-omnämnandet i modalens beskrivning (hämtad från `portfolio_projects`) utvecklat till "DLD (developmental language disorder)"; samma förklaring i PROBLEM-texten.
+- Klar: "GDPR Article 9" kompletterat med "(special category data, e.g. health-related information)".
+- Klar: "~700,000 Swedish adults have dyslexia" → "ca 400,000 Swedish adults have dyslexia", enligt ägarens uppgift från Dyslexiförbundet.
+
 ## 2026-10-06 — Phase 3m: Title change — "Product Engineer" → "AI-native Fullstack-utvecklare"
 
 - Ny titel: "AI-native Fullstack-utvecklare — Gothenburg, Sweden" (i engelska meningar: "AI-native fullstack developer").
