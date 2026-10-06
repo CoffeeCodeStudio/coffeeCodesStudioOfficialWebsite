@@ -2,6 +2,15 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-06 — Phase 3k: Contact form regression fix (CORS)
+
+- Regression: kontaktformuläret misslyckades igen ("Could not send message. Please try again.") — inga mejl kom fram.
+- Rotorsak: INTE samma fel som 2026-09-23 (projectType/budget-valideringen kom aldrig tillbaka och finns fortfarande inte). Denna gång satt felet i CORS-headern i `supabase/functions/send-contact-email/index.ts` — `Access-Control-Allow-Origin: https://coffeecodestudio.se` var hårdkodad. Anrop från preview-domänen (localhost:8080 / lovable.app / www) blockerades i webbläsaren innan funktionen ens kördes, därför fanns inga funktionsloggar.
+- Fix: `Access-Control-Allow-Origin` ekar nu requestens origin från en allowlist (coffeecodestudio.se, www, coffeecodestudio.lovable.app, localhost:8080) via `corsHeadersFor(origin)`, med coffeecodestudio.se som fallback. Lade även till `Access-Control-Allow-Methods` och `Vary: Origin`.
+- E-postmallen och valideringen granskade: inga referenser till projectType/budget; formuläret skickar bara name, email, message (plus honeypot `website`).
+- Verifierat: OPTIONS-preflight 200 OK för localhost:8080 och https://www.coffeecodestudio.se (rätt ACAO-echo), test-POST → 200 OK `{"success":true,"sender":"primary"}` — mejlet gick ut via Resend.
+
+
 ## 2026-09-25 — Phase 3j: Business content removed
 
 - Borttagna sidor: WebbyraGoteborg, HemsidaFrisorGoteborg, HemsidaHantverkareGoteborg, VadKostarEnHemsida, SmaforetagGoteborg, FrisorGoteborg, OmMig, Anvandardvillkor.
