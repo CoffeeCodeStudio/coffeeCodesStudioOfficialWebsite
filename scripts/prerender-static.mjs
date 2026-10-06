@@ -150,7 +150,7 @@ function renderRootHtml(page, rootAttrs = ' id="root"') {
     // Same colour as the page background: readable for crawlers and screen
     // readers, but no white flash of text before React hydrates.
     `<div data-prerendered="true" style="color:#0B0D1E">` +
-    `<header><a href="${page.lang === 'en' ? '/en' : '/'}">Rami — Product Engineer</a></header>` +
+    `<header><a href="${page.lang === 'en' ? '/en' : '/'}">Rami — AI-native Fullstack-utvecklare</a></header>` +
     `<main><h1>${esc(page.h1)}</h1>${paragraphs}` +
     `<p><a href="${page.cta.href}">${esc(page.cta.label)}</a></p></main>` +
     `<nav>${nav}</nav>` +
