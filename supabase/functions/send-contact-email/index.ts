@@ -3,10 +3,26 @@ const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const PRIMARY_FROM = "Rami Portfolio <hej@coffeecodestudio.se>";
 const FALLBACK_FROM = "Rami Portfolio <onboarding@resend.dev>";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://coffeecodestudio.se",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+// Echo the request origin (with a safe default) so the form works from the
+// published domain, the lovable.app preview and localhost alike.
+const allowedOrigins = new Set([
+  "https://coffeecodestudio.se",
+  "https://www.coffeecodestudio.se",
+  "https://coffeecodestudio.lovable.app",
+  "http://localhost:8080",
+]);
+
+function corsHeadersFor(origin: string | null): Record<string, string> {
+  const allow = origin && allowedOrigins.has(origin) ? origin : "https://coffeecodestudio.se";
+  return {
+    "Access-Control-Allow-Origin": allow,
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    Vary: "Origin",
+  };
+}
+
+const corsHeaders = corsHeadersFor(null);
 
 // --- In-memory IP rate limiting ---
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
