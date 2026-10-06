@@ -1,6 +1,6 @@
-# Rami — AI-Leveraged Product Engineer
+# Rami — AI-native Fullstack-utvecklare
 
-Personal portfolio of Rami, an AI-Leveraged Product Engineer based in Gothenburg, Sweden.
+Personal portfolio of Rami, an AI-native fullstack developer based in Gothenburg, Sweden.
 
 > **Project Status:** Live at [coffeecodestudio.se](https://coffeecodestudio.se) — a pure developer portfolio (no client system).
 

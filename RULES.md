@@ -48,7 +48,7 @@ Rule: Personality and professionalism coexist. Coffee is the brand.
 
 ## Positioning Rules
 
-- Title: "Product Engineer" or "AI-Leveraged Product Engineer"
+- Title: "AI-native Fullstack-utvecklare" (English sentences: "AI-native fullstack developer")
 - Never: "no-code developer", "vibe coder", "prompt engineer"
 - Always visible in hero: "Based in Gothenburg, Sweden"
 - Lagom principle: no hype, no superlatives — only facts and numbers
@@ -62,7 +62,7 @@ Rule: Personality and professionalism coexist. Coffee is the brand.
 
 ## SEO Rules
 
-- Meta title: max 60 chars — "Rami | Product Engineer (React, TypeScript) — Gothenburg"
+- Meta title: max 60 chars — "AI-native Fullstack-utvecklare — Gothenburg, Sweden"
 - Meta description: 145–155 chars
 - OG image: 1200×630px PNG — name + role + Gothenburg + app screenshot
 - sitemap.xml and robots.txt must exist

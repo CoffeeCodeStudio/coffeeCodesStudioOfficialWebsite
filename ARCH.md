@@ -65,7 +65,7 @@ Strategi: svenska är standard utan prefix, engelska ligger under `/en/`. Varje 
 
 ## Schema.org
 
-`src/components/StructuredData.tsx` injicerar `ProfilePage` med `Person` (Rami, Product Engineer, Göteborg, knowsAbout-stack). Inga LocalBusiness-, Offer- eller FAQ-scheman finns kvar.
+`src/components/StructuredData.tsx` injicerar `ProfilePage` med `Person` (Rami, AI-native Fullstack-utvecklare, Göteborg, knowsAbout-stack). Inga LocalBusiness-, Offer- eller FAQ-scheman finns kvar.
 
 ## Sitemap och robots
 
