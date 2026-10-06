@@ -4,7 +4,7 @@
 
 ## Purpose
 
-Portfolio site for Rami — AI-Leveraged Product Engineer.
+Portfolio site for Rami — AI-native Fullstack-utvecklare.
 
 Goal: Attract employers in Gothenburg. Show real projects.
 

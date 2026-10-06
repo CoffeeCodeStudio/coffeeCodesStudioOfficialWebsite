@@ -8,7 +8,7 @@ Rebuild coffeecodestudio.se from business site to portfolio.
 
 Target: Tech employers in Gothenburg.
 
-Identity: Rami — AI-Leveraged Product Engineer.
+Identity: Rami — AI-native Fullstack-utvecklare (changed 2026-10-06, was "AI-Leveraged Product Engineer").
 
 ## Research Summary
 
@@ -26,7 +26,7 @@ Identity: Rami — AI-Leveraged Product Engineer.
 ### Positioning
 
 - NEVER: "no-code developer", "vibe coder", "prompt engineer"
-- ALWAYS: "AI-Leveraged Product Engineer"
+- ALWAYS: "AI-native Fullstack-utvecklare"
 - AI = force multiplier, not crutch
 
 ## Phase 1 — Complete ✅

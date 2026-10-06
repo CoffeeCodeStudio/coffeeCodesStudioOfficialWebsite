@@ -38,6 +38,8 @@
 
 - Decision: keep for now, monitor interview feedback
 
+- **Update 2026-10-06:** Title changed to "AI-native Fullstack-utvecklare". "Product Engineer" reads as mechanical/hardware engineering in Sweden, and "vibe coding" framing hurt credibility.
+
 ## What Swedish Employers Trust (ranked)
 
 1. Live apps with real users
