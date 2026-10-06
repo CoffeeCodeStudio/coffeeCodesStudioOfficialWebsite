@@ -2,6 +2,13 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-06 — Phase 3o: Portfolio polish
+- About stats: "Jan 2026 — First Live Deploy" replaced with "100% TypeScript".
+- Hero H1: now white text with amber only on "production" and "real users".
+- About: neutral avatar placeholder added (TODO: replace with real headshot).
+- Project cards: tech-stack tags shown directly on cards.
+- Items 5–10 (73+ Edge Functions, data-vs-access wording, culture reference, DLD, GDPR Art. 9, 400,000 dyslexia) were already applied in Phase 3n — verified unchanged.
+
 ## 2026-10-06 — Phase 3n: Echo2000 and Klar case copy updates
 
 - Echo2000-kortets och modalens målgrupp: "people who grew up with early-2000s internet culture — forums, guestbooks, platforms like LunarStorm and MySpace." Kortets beskrivning uppdaterad i `portfolio_projects.description`; modalens PROBLEM-text uppdaterad i `ProjektSection.tsx`.
@@ -231,10 +238,3 @@
 - Plausible analytics
 - JSON-LD structured data
 - OG image 1200×630px
-
-## 2026-10-06 — Phase 3o: Portfolio polish
-- About stats: "Jan 2026 — First Live Deploy" replaced with "100% TypeScript".
-- Hero H1: now white text with amber only on "production" and "real users".
-- About: neutral avatar placeholder added (TODO: replace with real headshot).
-- Project cards: tech-stack tags shown directly on cards.
-- Items 5–10 (73+ Edge Functions, data-vs-access wording, culture reference, DLD, GDPR Art. 9, 400,000 dyslexia) were already applied in Phase 3n — verified unchanged.
