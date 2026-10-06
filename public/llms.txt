@@ -1,6 +1,6 @@
-# Rami — Product Engineer (Portfolio)
+# Rami — AI-native Fullstack-utvecklare (Portfolio)
 
-> Personal portfolio of Rami, a product engineer based in Gothenburg, Sweden. Builds full-stack web products with React, TypeScript, Vite, Tailwind CSS and Supabase.
+> Personal portfolio of Rami, an AI-native fullstack developer based in Gothenburg, Sweden. Builds full-stack web products with React, TypeScript, Vite, Tailwind CSS and Supabase.
 
 ## Pages
 

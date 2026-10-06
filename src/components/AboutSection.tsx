@@ -67,7 +67,7 @@ export function AboutSection() {
             <div className="mt-6 flex items-center gap-2">
               <MapPin className="w-4 h-4 text-primary" aria-hidden="true" />
               <span className="text-sm font-mono text-muted-foreground">
-                Based in Gothenburg, Sweden • Open to full-time product engineering roles (hybrid or on-site across Västra Götaland).
+                Based in Gothenburg, Sweden • Open to full-time AI-native fullstack developer roles (hybrid or on-site across Västra Götaland).
               </span>
             </div>
 
