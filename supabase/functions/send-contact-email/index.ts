@@ -100,6 +100,8 @@ async function sendEmailViaResend(
 }
 
 Deno.serve(async (req: Request) => {
+  const corsHeaders = corsHeadersFor(req.headers.get("origin"));
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
