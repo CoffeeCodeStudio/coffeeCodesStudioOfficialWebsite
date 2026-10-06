@@ -2,6 +2,13 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-06 — Phase 3m: Title change — "Product Engineer" → "AI-native Fullstack-utvecklare"
+
+- Ny titel: "AI-native Fullstack-utvecklare — Gothenburg, Sweden" (i engelska meningar: "AI-native fullstack developer").
+- Skäl: "Product Engineer" tolkas som mekanik/hårdvara i Sverige, och vibe coding-framingen hade dåligt rykte.
+- 8 kodfiler ändrade: Footer.tsx, StructuredData.tsx (Person-schema jobTitle), index.html (titel + og:title + meta), Index.tsx (SEOHead), scripts/prerender-static.mjs, public/llms.txt, ContactSection.tsx, AboutSection.tsx.
+- Dokumentation uppdaterad samma dag: README.md, RULES.md, DESIGN.md, PORTFOLIO_PLAN.md, ARCH.md, RESEARCH_SUMMARY.md.
+
 ## 2026-10-06 — Phase 3l: Copy — "active users" → "registered users"
 
 - AboutSection: "taking them from initial schema design to active, real-world users" → "...to real-world registered users" (340+ och 129 oförändrade).
