@@ -85,6 +85,13 @@ Rule: Personality and professionalism coexist. Coffee is the brand.
 - Track: cv_download, copy_email, project_demo_clicked, github_repo_clicked
 - UTM tags on ALL job applications e.g. ?utm_source=cv&utm_campaign=volvo
 - Vanity slugs for specific recruiters: /v/volvo, /v/nexer
+- DECIDED 2026-10-06: Plausible stays uninstalled for now — low priority; site works as a CV/portfolio link, not for organic search
+
+## Interaction & Form Rules (decided 2026-10-06)
+
+- No sound or dynamic effects — against the research recommendation of a subdued, professional tone for Swedish tech employers
+- Contact form keeps a maximum of 2 fields — never add extra fields (e.g. "feedback")
+- About photo: placeholder avatar until a new approved photo is taken or edited (rejected candidates had wrong angle/background/visible logo)
 
 ## What Is Disabled (not deleted)
 

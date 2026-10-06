@@ -74,8 +74,8 @@ Identity: Rami — AI-native Fullstack-utvecklare (changed 2026-10-06, was "AI-L
 
 - [ ] Upload PDF CV to Supabase Storage and update Resume href
 - [ ] OG image (1200×630px) created and uploaded
-- [ ] Plausible analytics installed
-- [ ] SEO meta-tags updated (title, description, OG tags)
+- [ ] Plausible analytics installed — DECIDED 2026-10-06: low priority, same rationale as SEO
+- [ ] SEO meta-tags updated (title, description, OG tags) — DECIDED 2026-10-06: low priority, no further action
 - [ ] Echo2000: 1-click guest session built
 - [ ] Modal: URL hash deep-linking (coffeecodestudio.se/#echo2000)
 - [ ] Klar: run Lighthouse on coffeecodestudio.se itself
