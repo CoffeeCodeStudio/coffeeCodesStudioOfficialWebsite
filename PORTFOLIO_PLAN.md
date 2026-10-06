@@ -62,7 +62,7 @@ Identity: Rami — AI-native Fullstack-utvecklare (changed 2026-10-06, was "AI-L
 - [x] Updated AboutSection (EN, short, cultural fit)
 - [x] Updated ContactSection (Copy Email CTA, no heavy form)
 - [x] Copy refinements: outcome-first H1, AI qualifier, About collaboration signal
-- [ ] Plausible analytics installed
+- [ ] Plausible analytics installed — DECIDED 2026-10-06: low priority, site is a CV/portfolio link, not for organic search
 - [ ] JSON-LD structured data added
 - [ ] OG image created (1200×630px)
 - [ ] sitemap.xml verified
