@@ -2,6 +2,24 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-10 — Phase 3q: Klar case copy corrections
+
+### Textändringar (endast Klar — övriga projekt och layout orörda)
+- Dyslexi-uppgift: "ca 400,000 Swedish adults have dyslexia" → "500,000 Swedish adults have dyslexia (Dyslexiförbundet), and at least 7% have DLD". Förklaringen "DLD (developmental language disorder)" flyttades till första omnämnandet; andra omnämnandet står nu som bara "DLD".
+- AI-leverantör: "Gemini API handles document parsing" → "Document analysis runs through the Lovable AI Gateway".
+- Filformat: "photos, PDFs and Word files" → "photos and PDFs" — Word stöds inte och togs bort helt.
+- Lagring: "Documents are deleted immediately after analysis" → "The letter's text is deleted immediately after analysis; the file itself can remain in storage up to 24 hours before cleanup". GDPR Article 9-förklaringen kvarstår.
+- Mätvärde: "10 / Free docs/month" → "10 / Documents total, no monthly reset".
+- Badgen "WCAG AA / Compliant" borttagen ur METRICS — ej verifierad. METRICS-rutorna gick från tre till två kolumner (`sm:grid-cols-3` → `sm:grid-cols-2`) så att de två värdena fyller raden.
+- Tekniktaggen på Klar-kortet: "Gemini" → "Lovable AI" (`CARD_STACK` i ProjektSection).
+
+### Filer
+- `src/components/ProjektSection.tsx` — Klar-modalen (PROBLEM, ARCHITECTURE & AI WORKFLOW, METRICS) och Klar-kortets tekniktaggar.
+- `portfolio_projects` (kolumn `description`, id aca47720-e63b-4871-9d59-538385eeb974) — beskrivningen innehöll en hel kopia av detaljvyn (rubrik, taggar, Problem/Arkitektur/Mätvärden, knappar — 1 252 tecken) och visades som en textvägg på kortet och i modalens ingress. Ersatt av en kort ingress (223 tecken) med samma korrigerade fakta.
+
+### Kontrollerat i förhandsvisningen
+- Klar-kortet: "React · TypeScript · PWA · Supabase · Lovable AI" plus en kort ingress. Modalen: ny PROBLEM- och ARCHITECTURE-text, METRICS med 100 Lighthouse Accessibility och 10 Documents total — inget "WCAG AA". Echo2000- och DJ Lobo-modalerna oförändrade.
+
 ## 2026-10-06 — Phase 3p: Session documentation and decisions
 
 ### Kodändringar (genomförda under dagen, sammanfattade)
