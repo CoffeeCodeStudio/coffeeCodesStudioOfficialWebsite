@@ -23,7 +23,6 @@ export default function Cookiepolicy() {
       <h3>Nödvändiga cookies</h3>
       <p>Dessa cookies krävs för att webbplatsen ska fungera och kan inte stängas av. De inkluderar:</p>
       <ul>
-        <li><strong>Sessionscookies</strong> — hanterar inloggning i kundportalen</li>
         <li><strong>Cookie-samtycke</strong> — sparar ditt val gällande cookies</li>
       </ul>
 
@@ -38,11 +37,10 @@ export default function Cookiepolicy() {
       </p>
       <ul>
         <li><strong>ccs-cookie-consent</strong> — ditt val gällande cookies (accepterat/avböjt)</li>
-        <li><strong>Autentiseringstoken</strong> — sessionsinformation för inloggade användare i kundportalen (hanteras av vår autentiseringsleverantör)</li>
         <li><strong>Språkval</strong> — ditt val av språk på webbplatsen</li>
       </ul>
       <p>
-        Du kan rensa localStorage via din webbläsares utvecklarverktyg eller inställningar. Observera att rensning av autentiseringsdata loggar ut dig från kundportalen.
+        Du kan rensa localStorage via din webbläsares utvecklarverktyg eller inställningar.
       </p>
 
       <h2>4. Tredjepartscookies</h2>

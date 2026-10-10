@@ -1,37 +1,45 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Coffee Code Studio",
-  "description": "Professionell hemsida från 4 900 kr — ofta live inom en vecka. Jag bygger snabba, mobilanpassade hemsidor för småföretag i Göteborg. Boka gratis konsultation.",
-  "url": "https://coffeecodestudio.se",
-  "logo": "https://coffeecodestudio.se/logo.png",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Göteborg",
-    "addressCountry": "SE"
-  },
-  "priceRange": "4900-9900 SEK",
-  "telephone": "+46 73 876 42 99",
-  "sameAs": []
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Rami",
+    "jobTitle": "AI-native Fullstack-utvecklare",
+    "url": "https://coffeecodestudio.se",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Gothenburg",
+      "addressRegion": "Västra Götaland",
+      "addressCountry": "SE"
+    },
+    "sameAs": [],
+    "knowsAbout": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "Software Engineering"
+    ]
+  }
 };
 
 export function StructuredData() {
-  const scriptRef = useRef<HTMLScriptElement | null>(null);
-
   useEffect(() => {
-    if (scriptRef.current) return;
+    const SCRIPT_ID = 'ld-json-site-graph';
+    document.getElementById(SCRIPT_ID)?.remove();
 
     const script = document.createElement('script');
+    script.id = SCRIPT_ID;
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify(structuredData);
     document.head.appendChild(script);
-    scriptRef.current = script;
 
     return () => {
       script.remove();
-      scriptRef.current = null;
     };
   }, []);
 

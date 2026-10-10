@@ -1,3 +1,15 @@
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
 User-agent: facebookexternalhit
 Allow: /
 
@@ -30,10 +42,6 @@ Allow: /
 
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /admin/login
-Disallow: /portal
-Disallow: /portal/login
-Disallow: /set-password
 
 Sitemap: https://coffeecodestudio.se/sitemap.xml
+LLM-sitemap: https://coffeecodestudio.se/llms.txt

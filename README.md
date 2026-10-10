@@ -1,39 +1,42 @@
-Coffee Code Studio ☕️💻
-Coffee Code Studio is a modern digital agency specializing in building high-quality, custom web applications with a focus on speed, aesthetics, and user experience.
+# Rami — AI-native Fullstack-utvecklare
 
-⚠️ Project Status: Prototype / Under Development > This site is currently a live prototype. I am actively working on new features and refining the experience. Stay tuned for updates!
+Personal portfolio of Rami, an AI-native fullstack developer based in Gothenburg, Sweden.
 
-🚀 Project Overview
-This application serves as the digital storefront for Coffee Code Studio. It is designed to showcase our expertise in rapid web development and modern design patterns.
+> **Project Status:** Live at [coffeecodestudio.se](https://coffeecodestudio.se) — a pure developer portfolio (no client system).
 
-✨ Key Features
-Modern UI/UX: A clean, minimalist aesthetic designed for clarity and engagement.
+## About
 
-Fully Responsive: Optimized performance across all devices.
+This site showcases selected projects, skills, and ways to get in touch. It is built as a fast, modern React single-page application with smooth interactions and SEO-friendly prerendering.
 
-Service Catalog: Clear breakdown of custom web development offerings.
+## Tech Stack
 
-Rapid Iteration: Built using AI-assisted development for lightning-fast delivery.
+- **Framework**: React 18 + Vite 5 + TypeScript
+- **Styling**: Tailwind CSS, shadcn/ui, framer-motion
+- **Routing**: react-router-dom
+- **Backend**: Lovable Cloud (storage for project images, contact-form edge function)
+- **Platform**: Developed and hosted via Lovable
 
-🛠 Tech Stack
-Framework: React + Vite
+## Public Pages
 
-Styling: Tailwind CSS
+| Route | Purpose |
+| --- | --- |
+| `/` | Portfolio landing — hero, projects, about, contact |
+| `/integritetspolicy` | Privacy policy |
+| `/cookiepolicy` | Cookie policy |
 
-UI Components: shadcn/ui
+No internal, login or admin routes. The only backend function is `send-contact-email` for the contact form.
 
-Platform: Developed and hosted via Lovable
+## SEO & Performance
 
-🗺 Roadmap (Upcoming Features)
-[ ] Portfolio showcase of previous work.
+- Per-page titles, descriptions, canonical and Open Graph tags via `src/components/SEOHead.tsx`.
+- Static prerendering via `scripts/prerender-static.mjs` so crawlers receive real HTML.
+- Sitemap at `public/sitemap.xml` and `public/robots.txt` with AI-crawler allowances.
 
-[ ] Integrated contact form for client inquiries.
+## Live Site
 
-[ ] Interactive service packages and pricing.
+👉 [coffeecodestudio.se](https://coffeecodestudio.se)
 
-[ ] Blog/Insights section about modern web tech.
+## Docs
 
-⚡️ Live Demo
-Visit the current prototype here:
-
-👉 coffeecodestudio.lovable.app
+- [CHANGELOG.md](./CHANGELOG.md) — change history
+- [ARCH.md](./ARCH.md) — architecture, routes, SEO and i18n details

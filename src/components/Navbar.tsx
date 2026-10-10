@@ -1,5 +1,5 @@
 import { useState, useEffect, forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Menu, X } from 'lucide-react';
@@ -71,17 +71,26 @@ export function LanguageToggle() {
 }
 
 export function Navbar() {
-  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
-    { label: t.nav.services, href: '#tjanster' },
-    { label: t.nav.projects, href: '#projekt' },
-    { label: t.nav.pricing, href: '#priser' },
-    { label: t.nav.about, href: '#about' },
-    { label: t.nav.contact, href: '#kontakt' },
+    { label: 'Projects', href: '#projekt' },
+    { label: 'About', href: '#about' },
+    { label: 'Contact', href: '#kontakt' },
   ];
+
+  // Scroll to anchor after navigating to the homepage from a subpage
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      const timer = setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -105,6 +114,9 @@ export function Navbar() {
     setIsOpen(false);
     if (item.isRoute) {
       navigate(item.href);
+    } else if (location.pathname !== '/') {
+      // On subpages: navigate to homepage with anchor — scroll handled by effect above
+      navigate('/' + item.href);
     } else {
       const element = document.querySelector(item.href);
       if (element) {
@@ -141,16 +153,17 @@ export function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
-            <button
-              onClick={() => navigate('/portal/login')}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            {/* <a
+              href="#"
+              onClick={(e) => e.preventDefault()}
+              className="text-sm font-medium text-primary border border-primary/30 px-3 py-1 rounded-full hover:bg-primary/10 transition-colors"
             >
-              {t.nav.portal}
-            </button>
+              Resume
+            </a> */}
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4">
-            <LanguageToggle />
+            {/* <LanguageToggle /> */}
             
             {/* Mobile Menu Button */}
             <button
@@ -204,15 +217,16 @@ export function Navbar() {
                       {item.label}
                     </motion.a>
                   ))}
-                  <motion.button
-                    onClick={() => { setIsOpen(false); navigate('/portal/login'); }}
-                    className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-4 px-4 rounded-xl mt-2 text-center"
+                  {/* <motion.a
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); setIsOpen(false); }}
+                    className="text-base font-medium text-primary border border-primary/30 px-4 py-4 rounded-xl hover:bg-primary/10 transition-colors border-b border-white/5"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: navItems.length * 0.05 }}
                   >
-                    {t.nav.portal}
-                  </motion.button>
+                    Resume
+                  </motion.a> */}
                 </div>
               </div>
             </motion.div>
