@@ -2,6 +2,12 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-10 — Phase 3r: GitHub branch "kundportal-arkiv" created
+
+- Ny branch `kundportal-arkiv` skapad och pushad i repositoryt `CoffeeCodeStudio/coffeeCodesStudioOfficialWebsite`, med utgångspunkt från commit `98eae0702eebe3d73499045d459413671dbcc5bc` ("Rename llms_txt_coffee_code_studio.txt to llms.txt", 2026-05-09) — den gamla kundportal-versionen är alltså bevarad som ett arkiv.
+- `main` rördes inte: den pekar fortfarande på `b8b3ae7a314f7cdae335213e59d0c7cf4a9626e0` ("Merge lovable-sync into main", 2026-10-10). Inga filer i arbetskopian ändrades i denna omgång.
+- Krävde en GitHub-anslutning till projektet, som nu är länkad (endast för sucha repo-åtgärder; sajten själv använder den inte).
+
 ## 2026-10-10 — Phase 3q: Klar case copy corrections
 
 ### Textändringar (endast Klar — övriga projekt och layout orörda)
