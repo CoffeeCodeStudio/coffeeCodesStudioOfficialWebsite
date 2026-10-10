@@ -16,7 +16,7 @@ interface PortfolioProject {
 
 const CARD_STACK: Record<string, string[]> = {
   Echo2000: ['React', 'TypeScript', 'Vite', 'Tailwind', 'Supabase'],
-  Klar: ['React', 'TypeScript', 'PWA', 'Supabase', 'Gemini'],
+  Klar: ['React', 'TypeScript', 'PWA', 'Supabase', 'Lovable AI'],
   'DJ Lobo Producciones': ['React', 'TypeScript', 'Vite', 'Tailwind', 'Supabase'],
 };
 
@@ -228,29 +228,25 @@ export function ProjektSection() {
                   <div className="glass-card rounded-xl p-4 border border-primary/10">
                     <p className="text-xs font-mono text-primary mb-2">PROBLEM</p>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      ca 400,000 Swedish adults have dyslexia. Authority letters from Arbetsförmedlingen and Försäkringskassan are dense, formal and stressful. Missing a deadline can mean lost income. No existing app handled Swedish authority documents with AI while also supporting the combination of dyslexia and DLD (developmental language disorder).
+                      500,000 Swedish adults have dyslexia (Dyslexiförbundet), and at least 7% have DLD (developmental language disorder). Authority letters from Arbetsförmedlingen and Försäkringskassan are dense, formal and stressful. Missing a deadline can mean lost income. No existing app handled Swedish authority documents with AI while also supporting the combination of dyslexia and DLD.
                     </p>
                   </div>
                   <div className="glass-card rounded-xl p-4 border border-primary/10">
                     <p className="text-xs font-mono text-primary mb-2">ARCHITECTURE & AI WORKFLOW</p>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Built as a PWA with React, TypeScript, Tailwind CSS and Supabase. Gemini API handles document parsing — photos, PDFs and Word files are simplified into 5 clear bullet points. Documents are deleted immediately after analysis — GDPR Article 9 (special category data, e.g. health-related information). Push notifications and SMS fallback (46elks) power a 3-stage alarm system. Supabase Edge Functions run cron jobs for reminders and auto-deletion. Achieved 100/100 Lighthouse Accessibility score.
+                      Built as a PWA with React, TypeScript, Tailwind CSS and Supabase. Document analysis runs through the Lovable AI Gateway — photos and PDFs are simplified into 5 clear bullet points. The letter's text is deleted immediately after analysis; the file itself can remain in storage up to 24 hours before cleanup — GDPR Article 9 (special category data, e.g. health-related information). Push notifications and SMS fallback (46elks) power a 3-stage alarm system. Supabase Edge Functions run cron jobs for reminders and auto-deletion. Achieved 100/100 Lighthouse Accessibility score.
                     </p>
                   </div>
                   <div className="glass-card rounded-xl p-4 border border-primary/10">
                     <p className="text-xs font-mono text-primary mb-3">METRICS</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="text-center">
                         <div className="text-xl font-mono font-bold gradient-text">100</div>
                         <div className="text-xs text-muted-foreground">Lighthouse Accessibility</div>
                       </div>
                       <div className="text-center">
                         <div className="text-xl font-mono font-bold gradient-text">10</div>
-                        <div className="text-xs text-muted-foreground">Free docs/month</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-xl font-mono font-bold gradient-text">WCAG AA</div>
-                        <div className="text-xs text-muted-foreground">Compliant</div>
+                        <div className="text-xs text-muted-foreground">Documents total, no monthly reset</div>
                       </div>
                     </div>
                   </div>
