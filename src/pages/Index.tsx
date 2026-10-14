@@ -15,11 +15,11 @@ function IndexContent() {
     <div key={language}>
       <SEOHead
         title={language === 'sv'
-          ? 'Rami — AI-native Fullstack-utvecklare | Portfolio'
-          : 'Rami — AI-native Fullstack-utvecklare | Portfolio'}
+          ? 'Rami — AI-Assisted Developer | Portfolio'
+          : 'Rami — AI-Assisted Developer | Portfolio'}
         description={language === 'sv'
-          ? 'Portfolio för Rami, AI-native fullstack-utvecklare i Göteborg. Case studies: Echo2000, Klar och DJ Lobo Producciones — byggda med React, TypeScript och Supabase.'
-          : 'Portfolio of Rami, AI-native fullstack developer in Gothenburg. Case studies: Echo2000, Klar and DJ Lobo Producciones — built with React, TypeScript and Supabase.'}
+          ? 'Portfolio för Rami, AI-Assisted Developer i Göteborg. Case studies: Echo2000, Klar och DJ Lobo Producciones — byggda med React, TypeScript och Supabase.'
+          : 'Portfolio of Rami, AI-Assisted Developer in Gothenburg. Case studies: Echo2000, Klar and DJ Lobo Producciones — built with React, TypeScript and Supabase.'}
         canonical={`https://coffeecodestudio.se${language === 'en' ? '/en' : '/'}`}
         ogImage="https://coffeecodestudio.se/og-image-v2.png"
       />

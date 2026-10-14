@@ -142,7 +142,7 @@ export function ContactSection() {
             </h2>
 
             <p className="text-base sm:text-lg text-muted-foreground mb-8">
-              Currently exploring full-time AI-native fullstack developer roles in Gothenburg (hybrid/on-site). If you need an engineer who pairs rapid AI workflows with strict TypeScript and resilient Supabase backends — let's connect.
+              Currently exploring full-time AI-Assisted Developer roles in Gothenburg (hybrid/on-site). If you need an engineer who pairs rapid AI workflows with strict TypeScript and resilient Supabase backends — let's connect.
             </p>
 
             <div className="flex flex-col gap-3">
