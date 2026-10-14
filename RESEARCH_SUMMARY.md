@@ -66,7 +66,7 @@
 
 ## Strongest Portfolio Elements (confirmed)
 
-- Echo2000 production crisis story (24h rebuild, 129 users)
+- Echo2000 production crisis story (rebuilt from the ground up; a subset of accounts manually reactivated)
 
 - Klar 100/100 Lighthouse Accessibility
 
