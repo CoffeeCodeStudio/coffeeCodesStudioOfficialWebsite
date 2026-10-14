@@ -125,7 +125,7 @@ export function ProjektSection() {
                   )}
                   {project.title === 'Echo2000' && (
                     <p className="text-xs font-mono text-primary mb-3">
-                      340+ Registered Users · 73+ Edge Functions · 24h Disaster Recovery
+                      340+ Registered Users · 73+ Edge Functions
                     </p>
                   )}
                   <div className="flex items-center gap-2 mt-auto pt-3">
@@ -200,7 +200,7 @@ export function ProjektSection() {
                   <div className="glass-card rounded-xl p-4 border border-primary/10">
                     <p className="text-xs font-mono text-primary mb-2">ARCHITECTURE & AI WORKFLOW</p>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Built with React 18, TypeScript, Vite, Tailwind CSS and Supabase. Real-time features (chat, guestbooks, live activity) stream via Supabase WebSocket channels. PostgreSQL Row-Level Security enforces strict data isolation per user. Supabase Edge Functions handle email queues, moderation, bot logic and notifications. AI tools (Claude, Lovable) scaffolded boilerplate and migrations — all security policies, state management and real-time logic were manually engineered. When a production crisis hit, the entire system was rebuilt within 24 hours. All user data remained intact with no data loss, but account access was temporarily disrupted; 129 accounts required manual reactivation to restore access.
+                      Built with React 18, TypeScript, Vite, Tailwind CSS and Supabase. Real-time features (chat, guestbooks, live activity) stream via Supabase WebSocket channels. PostgreSQL Row-Level Security enforces strict data isolation per user. Supabase Edge Functions handle email queues, moderation, bot logic and notifications. AI tools (Claude, Lovable) scaffolded boilerplate and migrations — all security policies, state management and real-time logic were manually engineered. Echo2000 suffered a production crisis; I rebuilt the system from the ground up.
                     </p>
                   </div>
                   <div className="glass-card rounded-xl p-4 border border-primary/10">
@@ -213,10 +213,6 @@ export function ProjektSection() {
                       <div className="text-center">
                         <div className="text-xl font-mono font-bold gradient-text">73+</div>
                         <div className="text-xs text-muted-foreground">Edge Functions</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-xl font-mono font-bold gradient-text">24h</div>
-                        <div className="text-xs text-muted-foreground">Disaster Recovery</div>
                       </div>
                     </div>
                   </div>
@@ -298,7 +294,7 @@ export function ProjektSection() {
                       onClick={() => window.open('https://klar-se.lovable.app', '_blank')}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Try Klar →
+                      Preview Klar (beta) →
                     </Button>
                     <Button
                       variant="outline"

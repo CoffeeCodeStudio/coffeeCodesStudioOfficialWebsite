@@ -35,20 +35,20 @@ const ROUTES = [
   {
     path: '/',
     sv: {
-      title: 'Rami — AI-native Fullstack-utvecklare | Portfolio',
+      title: 'Rami — AI-Assisted Developer | Portfolio',
       description:
-        'Portfolio för Rami, AI-native fullstack-utvecklare i Göteborg. Case studies: Echo2000, Klar och DJ Lobo Producciones — byggda med React, TypeScript och Supabase.',
-      h1: 'Rami — AI-native Fullstack-utvecklare',
+        'Portfolio för Rami, AI-Assisted Developer i Göteborg. Case studies: Echo2000, Klar och DJ Lobo Producciones — byggda med React, TypeScript och Supabase.',
+      h1: 'Rami — AI-Assisted Developer',
       body: [
         'Jag bygger fullstack-webbprodukter med React, TypeScript, Vite, Tailwind CSS och Supabase.',
         'Utvalda projekt: Echo2000, Klar och DJ Lobo Producciones.',
       ],
     },
     en: {
-      title: 'Rami — AI-native Fullstack-utvecklare | Portfolio',
+      title: 'Rami — AI-Assisted Developer | Portfolio',
       description:
-        'Portfolio of Rami, AI-native fullstack developer in Gothenburg. Case studies: Echo2000, Klar and DJ Lobo Producciones — built with React, TypeScript and Supabase.',
-      h1: 'Rami — AI-native Fullstack-utvecklare',
+        'Portfolio of Rami, AI-Assisted Developer in Gothenburg. Case studies: Echo2000, Klar and DJ Lobo Producciones — built with React, TypeScript and Supabase.',
+      h1: 'Rami — AI-Assisted Developer',
       body: [
         'I build full-stack web products with React, TypeScript, Vite, Tailwind CSS and Supabase.',
         'Selected work: Echo2000, Klar and DJ Lobo Producciones.',
@@ -150,7 +150,7 @@ function renderRootHtml(page, rootAttrs = ' id="root"') {
     // Same colour as the page background: readable for crawlers and screen
     // readers, but no white flash of text before React hydrates.
     `<div data-prerendered="true" style="color:#0B0D1E">` +
-    `<header><a href="${page.lang === 'en' ? '/en' : '/'}">Rami — AI-native Fullstack-utvecklare</a></header>` +
+    `<header><a href="${page.lang === 'en' ? '/en' : '/'}">Rami — AI-Assisted Developer</a></header>` +
     `<main><h1>${esc(page.h1)}</h1>${paragraphs}` +
     `<p><a href="${page.cta.href}">${esc(page.cta.label)}</a></p></main>` +
     `<nav>${nav}</nav>` +

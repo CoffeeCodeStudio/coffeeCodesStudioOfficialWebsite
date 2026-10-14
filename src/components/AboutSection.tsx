@@ -61,7 +61,7 @@ export function AboutSection() {
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-              Over the past year, I built and deployed three full-stack applications — Echo2000, Klar, and DJ Lobo Producciones — taking them from initial schema design to real-world registered users. When Echo2000 suffered a production crisis, I rebuilt the entire system within 24 hours. All user data remained intact with no data loss, but account access was temporarily disrupted; I manually reactivated 129 accounts to restore access.
+              Over the past several months, I built and deployed three full-stack applications — Echo2000, Klar, and DJ Lobo Producciones — taking them from initial schema design to real-world registered users. Echo2000 suffered a production crisis; I rebuilt the system from the ground up.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -71,7 +71,7 @@ export function AboutSection() {
             <div className="mt-6 flex items-center gap-2">
               <MapPin className="w-4 h-4 text-primary" aria-hidden="true" />
               <span className="text-sm font-mono text-muted-foreground">
-                Based in Gothenburg, Sweden • Open to full-time AI-native fullstack developer roles (hybrid or on-site across Västra Götaland).
+                Based in Gothenburg, Sweden • Open to full-time AI-Assisted Developer roles (hybrid or on-site across Västra Götaland).
               </span>
             </div>
 
