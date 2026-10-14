@@ -2,6 +2,18 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-14 — Phase 3s: Credibility fixes + title change to "AI-Assisted Developer"
+
+### Trovärdighetsfixar
+- Echo2000-kortets metrics-rad: "340+ Registered Users · 73+ Edge Functions · 24h Disaster Recovery" → "340+ Registered Users · 73+ Edge Functions" (DR-påståendet borttaget). Även modalens METRICS-block "24h / Disaster Recovery" borttaget (ProjektSection).
+- "No data loss"-påståendet borttaget på båda ställena (AboutSection + Echo2000-modalens ARCHITECTURE-ruta): ersatt med "Echo2000 suffered a production crisis; I rebuilt the system from the ground up."
+- About Me: "Over the past year" → "Over the past several months".
+- Klar-knappen: "Try Klar →" → "Preview Klar (beta) →" (samma länk).
+
+### Titelbyte (överallt, exakt samma sträng)
+- "AI-native Fullstack-utvecklare" / "AI-native fullstack developer" → **"AI-Assisted Developer"** i: index.html (title, meta description, og:title, og:description), scripts/prerender-static.mjs (title, description, h1, header — båda språkversionerna), public/llms.txt, src/pages/Index.tsx (SEOHead), src/components/Footer.tsx, src/components/AboutSection.tsx, src/components/ContactSection.tsx, src/components/StructuredData.tsx (Person jobTitle).
+- Ersätter titeln från 2026-10-06 (Phase 3m). Minnesregel uppdaterad: mem://identity/title.
+
 ## 2026-10-10 — Phase 3r: GitHub branch "kundportal-arkiv" created
 
 - Ny branch `kundportal-arkiv` skapad och pushad i repositoryt `CoffeeCodeStudio/coffeeCodesStudioOfficialWebsite`, med utgångspunkt från commit `98eae0702eebe3d73499045d459413671dbcc5bc` ("Rename llms_txt_coffee_code_studio.txt to llms.txt", 2026-05-09) — den gamla kundportal-versionen är alltså bevarad som ett arkiv.
