@@ -2,6 +2,17 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-10-14 — Phase 3t: Echo2000 description — "129 accounts" figure removed
+
+### Textändring (endast Echo2000)
+- Projektdatabasen (`portfolio_projects`, id `cc6027f3-83ba-4b60-a197-b1e538e51e90`, kolumn `description`) innehöll fortfarande den gamla meningen: "All user data remained intact with no data loss during recovery; account access was temporarily disrupted, and 129 accounts required manual reactivation to restore access." Den är nu ersatt med: **"Echo2000 suffered a production crisis; I rebuilt the system from the ground up. A subset of accounts required manual reactivation to restore access."**
+- Koden behövde ingen ändring: AboutSection och modalens ARCHITECTURE-ruta innehåller redan kris-meningen utan siffran. Beskrivningstexten på kortet och överst i modalen hämtas från databasen, vilket varför den gamla meningen syntes där.
+- Verifierat med färsk query mot databasen och med webbläsarkontroll av både kort och modal: "129" och "no data loss" förekommer inte längre, och den nya formuleringen visas.
+
+### Dokumentation
+- `mem://features/case-copy` uppdaterad: godkänd Echo2000-formulering är nu exakt den ovanstående; "no data loss", 129-siffran och 24h-påståendet får aldrig återinföras.
+- `RESEARCH_SUMMARY.md`: "Echo2000 production crisis story (24h rebuild, 129 users)" → "(rebuilt from the ground up; a subset of accounts manually reactivated)".
+
 ## 2026-10-14 — Phase 3s: Credibility fixes + title change to "AI-Assisted Developer"
 
 ### Trovärdighetsfixar
