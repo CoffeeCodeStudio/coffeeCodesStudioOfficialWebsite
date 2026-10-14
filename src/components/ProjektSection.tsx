@@ -125,7 +125,7 @@ export function ProjektSection() {
                   )}
                   {project.title === 'Echo2000' && (
                     <p className="text-xs font-mono text-primary mb-3">
-                      340+ Registered Users · 73+ Edge Functions · 24h Disaster Recovery
+                      340+ Registered Users · 73+ Edge Functions
                     </p>
                   )}
                   <div className="flex items-center gap-2 mt-auto pt-3">
@@ -298,7 +298,7 @@ export function ProjektSection() {
                       onClick={() => window.open('https://klar-se.lovable.app', '_blank')}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Try Klar →
+                      Preview Klar (beta) →
                     </Button>
                     <Button
                       variant="outline"
