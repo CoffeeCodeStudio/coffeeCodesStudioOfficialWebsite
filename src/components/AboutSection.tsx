@@ -61,7 +61,7 @@ export function AboutSection() {
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-              Over the past several months, I built and deployed three full-stack applications — Echo2000, Klar, and DJ Lobo Producciones — taking them from initial schema design to real-world registered users. When Echo2000 suffered a production crisis, I rebuilt the entire system within 24 hours. All user data remained intact with no data loss, but account access was temporarily disrupted; I manually reactivated 129 accounts to restore access.
+              Over the past several months, I built and deployed three full-stack applications — Echo2000, Klar, and DJ Lobo Producciones — taking them from initial schema design to real-world registered users. Echo2000 suffered a production crisis; I rebuilt the system from the ground up.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
