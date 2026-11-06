@@ -2,6 +2,13 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-11-06 — Phase 3v: Vercel security headers
+
+- Added root `vercel.json` with the requested `/(.*)` rule: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, and `Referrer-Policy: strict-origin-when-cross-origin`.
+- Existing `public/_headers` and application code are unchanged. These three headers do not restrict fonts or API connections.
+- Configuration applies after deployment to Vercel; live delivery and an A+ rating are not established by adding this file.
+- Updated `roadmap.md` and recorded the hosting configuration convention in `AGENTS.md`.
+
 ## 2026-10-14 — Phase 3t: Echo2000 description — "129 accounts" figure removed
 
 ### Textändring (endast Echo2000)
