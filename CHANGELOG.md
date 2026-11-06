@@ -2,6 +2,14 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-11-06 — Phase 3w: New Open Graph and social preview
+
+- Created `public/og-image.png` (1200×630): dark portfolio theme, Rami — AI-Assisted Developer, approved outcome-first subtitle, React/TypeScript/Supabase/Tailwind CSS/Vite tags, white coffee cup and coffeecodestudio.se.
+- Updated `index.html` OG type, URL, title, description and image; added Twitter title/description and updated Twitter image.
+- Updated `src/pages/Index.tsx` to prevent React restoring the old image or description; `SEOHead.tsx` and `scripts/prerender-static.mjs` keep Twitter titles/descriptions consistent per route.
+- Updated `ARCH.md`, `README.md`, `PORTFOLIO_PLAN.md` and `roadmap.md`. Live social previews require a new publish.
+- New workspace: previous GitHub API connection is no longer applicable; fresh connection requested separately from repository Git sync.
+
 ## 2026-11-06 — Phase 3v: Vercel security headers
 
 - Added root `vercel.json` with the requested `/(.*)` rule: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, and `Referrer-Policy: strict-origin-when-cross-origin`.

@@ -37,7 +37,7 @@ const ROUTES = [
     sv: {
       title: 'Rami — AI-Assisted Developer | Portfolio',
       description:
-        'Portfolio för Rami, AI-Assisted Developer i Göteborg. Case studies: Echo2000, Klar och DJ Lobo Producciones — byggda med React, TypeScript och Supabase.',
+        'I build production web applications from schema design to real users. React, TypeScript, and Supabase.',
       h1: 'Rami — AI-Assisted Developer',
       body: [
         'Jag bygger fullstack-webbprodukter med React, TypeScript, Vite, Tailwind CSS och Supabase.',
@@ -47,7 +47,7 @@ const ROUTES = [
     en: {
       title: 'Rami — AI-Assisted Developer | Portfolio',
       description:
-        'Portfolio of Rami, AI-Assisted Developer in Gothenburg. Case studies: Echo2000, Klar and DJ Lobo Producciones — built with React, TypeScript and Supabase.',
+        'I build production web applications from schema design to real users. React, TypeScript, and Supabase.',
       h1: 'Rami — AI-Assisted Developer',
       body: [
         'I build full-stack web products with React, TypeScript, Vite, Tailwind CSS and Supabase.',
@@ -185,6 +185,12 @@ function renderPage(baseHtml, page) {
       /<meta\s+property="og:url"[^>]*>/,
       `<meta property="og:url" content="${url}" />`,
     );
+
+  out = out
+    .replace(/<meta\s+name="twitter:title"[^>]*>/,
+      `<meta name="twitter:title" content="${esc(page.title)}" />`)
+    .replace(/<meta\s+name="twitter:description"[^>]*>/,
+      `<meta name="twitter:description" content="${esc(page.description)}" />`);
 
   // Replace the empty shell (or any "Laddar..." placeholder) with real content.
   // Replace the empty shell (or any placeholder) with real content, keeping
