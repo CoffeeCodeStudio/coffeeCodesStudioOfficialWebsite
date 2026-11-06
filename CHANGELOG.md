@@ -318,3 +318,10 @@
 ## 2026-11-06 — Phase 3u: Security headers
 - `public/_headers`: HSTS 2 years + preload, Permissions-Policy adds usb=(), CSP tightened (no 'unsafe-eval', object-src 'none', img/connect allow https:, font-src data:). Added https://www.googletagmanager.com to script-src so Google Analytics still loads after cookie consent.
 - Note: live check showed the current host does not serve `_headers` (no CSP/X-Frame-Options in responses); headers must also be set at the hosting/CDN layer for an A+ grade.
+
+## 2026-11-06 — Phase 3v: Favicon replaced with the coffee-cup logo
+- `public/favicon.png` — replaced the 128×128 artwork with a new 180×180 PNG of the coffee-cup logo (white cup, gold `</>` + steam, dark navy disc), corners transparent.
+- `public/favicon.ico` — replaced the Lovable default mark with a multi-size ICO (16 / 32 / 48 px) of the same logo, so the browser's default `/favicon.ico` request no longer serves the Lovable heart.
+- Source artwork: `Gemini_Generated_Image_qh6q4lqh6q4lqh6q.png` (1024×1024). The white-cup variant was chosen over the black-cup variant after side-by-side 16 px and 32 px tab tests — the black cup dissolved into the navy disc, the white cup stayed legible on both light and dark tab bars.
+- `index.html` head: kept `<link rel="icon" type="image/png" href="/favicon.png" />` and added `<link rel="apple-touch-icon" href="/favicon.png" />`.
+- Verified: dev server serves both files 200 (`image/png`, `image/x-icon`); `vite build` + `node scripts/prerender-static.mjs` carry both tags into all 6 prerendered pages; rendered shipped icons confirmed as the coffee cup with no clipping or white fringe.
