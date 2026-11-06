@@ -2,6 +2,12 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-11-06 — Phase 3x: Expanded Vercel security headers
+
+- Updated root `vercel.json` exactly as requested: retained nosniff, DENY and strict-origin-when-cross-origin; added Permissions-Policy disabling camera, microphone and geolocation, plus the supplied Content-Security-Policy.
+- `public/_headers` remains unchanged for other hosting platforms. The Vercel configuration applies after a Vercel deployment; a securityheaders.com grade A is not verified by the configuration alone.
+- JSON configuration validated against all five requested header values; documentation updated in `roadmap.md`.
+
 ## 2026-11-06 — Phase 3w: New Open Graph and social preview
 
 - Created `public/og-image.png` (1200×630): dark portfolio theme, Rami — AI-Assisted Developer, approved outcome-first subtitle, React/TypeScript/Supabase/Tailwind CSS/Vite tags, white coffee cup and coffeecodestudio.se.
