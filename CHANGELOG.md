@@ -8,7 +8,8 @@
 - Updated `index.html` OG type, URL, title, description and image; added Twitter title/description and updated Twitter image.
 - Updated `src/pages/Index.tsx` to prevent React restoring the old image or description; `SEOHead.tsx` and `scripts/prerender-static.mjs` keep Twitter titles/descriptions consistent per route.
 - Updated `ARCH.md`, `README.md`, `PORTFOLIO_PLAN.md` and `roadmap.md`. Live social previews require a new publish.
-- New workspace: previous GitHub API connection is no longer applicable; fresh connection requested separately from repository Git sync.
+- Verified in Chromium: all nine requested metadata values appear once, and `/og-image.png` serves HTTP 200 at exactly 1200×630.
+- New workspace: GitHub API connected successfully afresh after the repeated workspace move; previous connection references are obsolete. This is separate from repository Git sync.
 
 ## 2026-11-06 — Phase 3v: Vercel security headers
 
