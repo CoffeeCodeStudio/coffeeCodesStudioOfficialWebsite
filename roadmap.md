@@ -1,4 +1,5 @@
 # Current tasks
+- [x] Expand root vercel.json to the five exact requested security headers; validate JSON and document that a live grade requires Vercel deployment.
 - [x] Create the 1200×630 social preview, update OG/Twitter metadata and document verification (nine tags checked in browser; image 200).
 - [x] Connect GitHub API afresh in the new workspace; repeated workspace move handled with a fresh successful connection. Previous workspace connection IDs no longer apply.
 - [x] Add root vercel.json with the three requested security headers and document the hosting configuration.
