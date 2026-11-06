@@ -307,3 +307,7 @@
 - Plausible analytics
 - JSON-LD structured data
 - OG image 1200×630px
+
+## 2026-11-06 — Phase 3u: Security headers
+- `public/_headers`: HSTS 2 years + preload, Permissions-Policy adds usb=(), CSP tightened (no 'unsafe-eval', object-src 'none', img/connect allow https:, font-src data:). Added https://www.googletagmanager.com to script-src so Google Analytics still loads after cookie consent.
+- Note: live check showed the current host does not serve `_headers` (no CSP/X-Frame-Options in responses); headers must also be set at the hosting/CDN layer for an A+ grade.
