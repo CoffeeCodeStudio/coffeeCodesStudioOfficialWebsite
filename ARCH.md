@@ -42,7 +42,7 @@ Begränsning: eftersom appen är en klientrenderad SPA läser sociala förhandsv
 
 ### `index.html`
 
-Innehåller basrubrik, basbeskrivning, Open Graph-fallback och delningsbilden `og-image-v2.png`. `html`, `body` och `#root` har inline-stilar med bakgrundsfärg `#0B0D1E` och `min-height: 100vh` så att ingen vit blinkning syns innan React/CSS laddat; `color-scheme: dark` och `<meta name="theme-color">` är också satta.
+Innehåller basrubrik, basbeskrivning, Open Graph-fallback och delningsbilden `og-image-v2.png`. `html`, `body` och `#root` har inline-stilar med bakgrundsfärg `#0B0D1E` och `min-height: 100vh` så att ingen vit blinkning syns innan React/CSS laddat; `color-scheme: dark` och `<meta name="theme-color">` är också satta. Favicon: `<link rel="icon" type="image/png" href="/favicon.png" />` och `<link rel="apple-touch-icon" href="/favicon.png" />` pekar på `public/favicon.png` (180×180, kaffekoppsloggan med transparenta hörn); `public/favicon.ico` innehåller samma logga i 16/32/48 px så att webbläsarens automatiska `/favicon.ico`-förfrågan inte serverar Lovables standardmärke.
 
 ### `scripts/prerender-static.mjs` (byggsteg)
 
