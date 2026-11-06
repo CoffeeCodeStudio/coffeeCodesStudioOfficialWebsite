@@ -1,4 +1,6 @@
 # Current tasks
+- [ ] Create the 1200×630 social preview, update OG/Twitter metadata and document verification.
+- [ ] Connect GitHub API afresh in the new workspace; previous workspace connection IDs no longer apply.
 - [x] Add root vercel.json with the three requested security headers and document the hosting configuration.
 - [x] Update Echo2000 and Klar case text, card metrics, and About clarification.
 - [x] Record this round in CHANGELOG and verify saved descriptions and displayed text.

@@ -46,6 +46,8 @@ export function SEOHead({ title, description, canonical, ogImage, noindex }: SEO
     ensureMeta('property', 'og:title', title);
     ensureMeta('property', 'og:description', description);
     ensureMeta('property', 'og:type', 'website');
+    ensureMeta('name', 'twitter:title', title);
+    ensureMeta('name', 'twitter:description', description);
     ensureMeta('property', 'og:locale', lang === 'en' ? 'en_US' : 'sv_SE');
     if (ogImage) {
       ensureMeta('property', 'og:image', ogImage);

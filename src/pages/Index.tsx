@@ -17,11 +17,9 @@ function IndexContent() {
         title={language === 'sv'
           ? 'Rami — AI-Assisted Developer | Portfolio'
           : 'Rami — AI-Assisted Developer | Portfolio'}
-        description={language === 'sv'
-          ? 'Portfolio för Rami, AI-Assisted Developer i Göteborg. Case studies: Echo2000, Klar och DJ Lobo Producciones — byggda med React, TypeScript och Supabase.'
-          : 'Portfolio of Rami, AI-Assisted Developer in Gothenburg. Case studies: Echo2000, Klar and DJ Lobo Producciones — built with React, TypeScript and Supabase.'}
+        description="I build production web applications from schema design to real users. React, TypeScript, and Supabase."
         canonical={`https://coffeecodestudio.se${language === 'en' ? '/en' : '/'}`}
-        ogImage="https://coffeecodestudio.se/og-image-v2.png"
+        ogImage="https://coffeecodestudio.se/og-image.png"
       />
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md">
         Hoppa till innehåll

@@ -64,7 +64,7 @@ Identity: Rami — AI-native Fullstack-utvecklare (changed 2026-10-06, was "AI-L
 - [x] Copy refinements: outcome-first H1, AI qualifier, About collaboration signal
 - [ ] Plausible analytics installed — DECIDED 2026-10-06: low priority, site is a CV/portfolio link, not for organic search
 - [ ] JSON-LD structured data added
-- [ ] OG image created (1200×630px)
+- [x] OG image created (1200×630px) — 2026-11-06: `public/og-image.png` and OG/Twitter metadata updated
 - [ ] sitemap.xml verified
 - [ ] robots.txt verified
 - [ ] a11y audit (axe + Lighthouse 100)
@@ -73,7 +73,7 @@ Identity: Rami — AI-native Fullstack-utvecklare (changed 2026-10-06, was "AI-L
 ## Backlog — Phase 3
 
 - [ ] Upload PDF CV to Supabase Storage and update Resume href
-- [ ] OG image (1200×630px) created and uploaded
+- [x] OG image (1200×630px) created — 2026-11-06; live URL updates on publish
 - [ ] Plausible analytics installed — DECIDED 2026-10-06: low priority, same rationale as SEO
 - [ ] SEO meta-tags updated (title, description, OG tags) — DECIDED 2026-10-06: low priority, no further action
 - [ ] Echo2000: 1-click guest session built

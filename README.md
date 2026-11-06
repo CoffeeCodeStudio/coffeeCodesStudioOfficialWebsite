@@ -1,6 +1,6 @@
-# Rami — AI-native Fullstack-utvecklare
+# Rami — AI-Assisted Developer
 
-Personal portfolio of Rami, an AI-native fullstack developer based in Gothenburg, Sweden.
+Personal portfolio of Rami, an AI-Assisted Developer based in Gothenburg, Sweden.
 
 > **Project Status:** Live at [coffeecodestudio.se](https://coffeecodestudio.se) — a pure developer portfolio (no client system).
 
@@ -30,6 +30,7 @@ No internal, login or admin routes. The only backend function is `send-contact-e
 
 - Per-page titles, descriptions, canonical and Open Graph tags via `src/components/SEOHead.tsx`.
 - Static prerendering via `scripts/prerender-static.mjs` so crawlers receive real HTML.
+- Social preview: `public/og-image.png` (1200×630), with matching OG and Twitter metadata in the static head, React and prerendered routes. Publish to update the live preview.
 - Sitemap at `public/sitemap.xml` and `public/robots.txt` with AI-crawler allowances.
 
 ## Live Site
