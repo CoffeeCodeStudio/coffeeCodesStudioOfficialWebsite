@@ -201,7 +201,7 @@ export function ProjektSection() {
                   <div className="glass-card rounded-xl p-4 border border-primary/10">
                     <p className="text-xs font-mono text-primary mb-2">ARCHITECTURE & AI WORKFLOW</p>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Built with React 18, TypeScript, Vite, Tailwind CSS and Supabase. Real-time features (chat, guestbooks, live activity) stream via Supabase WebSocket channels. PostgreSQL Row-Level Security enforces strict data isolation per user. Supabase Edge Functions handle email queues, moderation, bot logic and notifications. AI tools (Claude, Lovable) scaffolded boilerplate and migrations — all security policies, state management and real-time logic were manually engineered. Echo2000 suffered a production crisis; I rebuilt the system from the ground up.
+                      Built with React 18, TypeScript, Vite, Tailwind CSS and Supabase. Real-time features (chat, guestbooks, live activity) stream via Supabase WebSocket channels. PostgreSQL Row-Level Security enforces data isolation per user. Supabase Edge Functions handle email queues, moderation, bot logic and notifications. AI tools (Claude, Lovable) scaffolded boilerplate and migrations — all security policies, state management and real-time logic were manually engineered. Echo2000 suffered a production crisis; I rebuilt the system from the ground up.
                     </p>
                   </div>
                   <div className="glass-card rounded-xl p-4 border border-primary/10">

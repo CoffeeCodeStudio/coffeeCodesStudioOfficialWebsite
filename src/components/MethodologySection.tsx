@@ -15,15 +15,9 @@ const steps = [
   },
   {
     number: '03',
-    title: 'Rigorous Hardening',
+    title: 'Review and Testing',
     label: 'Human-Led',
     description: 'I review and test what AI builds against the features, flows and rules I defined.',
-  },
-  {
-    number: '04',
-    title: 'Deterministic Deployment',
-    label: 'Verified',
-    description: 'Automated verification through ESLint, strict TypeScript compiler checks (tsc --noEmit), and edge deployment on Vercel and Supabase.',
   },
 ];
 
@@ -42,11 +36,11 @@ export function MethodologySection() {
             Engineering Methodology
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-            How I combine modern AI acceleration with strict production standards.
+            How I combine modern AI acceleration with clear production habits.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}

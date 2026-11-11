@@ -2,6 +2,15 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+
+## 2026-11-11 — Phase 3z: Remove unprovable methodology claims
+
+- MethodologySection: step 04 "Deterministic Deployment" removed; grid now 3 columns; step 03 renamed "Review and Testing"; subtitle "strict production standards" → "clear production habits".
+- AboutSection: "100% TypeScript" stat removed; last of 3 tiles spans full width.
+- ContactSection: "strict TypeScript and resilient Supabase backends" → "TypeScript and Supabase".
+- ProjektSection (Echo2000 modal): "strict data isolation" → "data isolation".
+- RULES.md: removed "strict mode always on".
+
 ## 2026-11-11 — GitHub API connected in the new workspace
 
 - Successfully created and linked a fresh GitHub API connection after the workspace move; earlier workspace connection references were not reused.

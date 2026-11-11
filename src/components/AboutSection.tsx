@@ -6,7 +6,6 @@ const stats = [
   { number: '3', label: 'Production Apps Shipped' },
   { number: '340+', label: 'Real-World Users' },
   { number: '100', label: 'Lighthouse Accessibility' },
-  { number: '100%', label: 'TypeScript' },
 ];
 
 export function AboutSection() {
@@ -25,10 +24,10 @@ export function AboutSection() {
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat) => (
+              {stats.map((stat, i) => (
                 <div
                   key={stat.label}
-                  className="glass-card cyber-border rounded-xl p-6 text-center"
+                  className={`glass-card cyber-border rounded-xl p-6 text-center ${i === stats.length - 1 ? 'col-span-2' : ''}`}
                 >
                   <div className="text-3xl font-mono font-bold gradient-text mb-1">
                     {stat.number}

@@ -5,7 +5,7 @@
 ## Code Rules
 
 - Never delete code — comment out instead using // or {/* */}
-- No TypeScript `any` — strict mode always on
+- No TypeScript `any`
 - Supabase only — never Firebase, MongoDB or external DBs
 - RLS (Row-Level Security) required on all tables
 - Comment WHY not HOW in code
