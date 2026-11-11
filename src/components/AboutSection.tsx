@@ -76,7 +76,7 @@ export function AboutSection() {
             </div>
 
             <p className="text-sm font-mono text-muted-foreground mt-2">
-              🌐 Languages: Swedish (native) · English (fluent) · Arabic (fluent)
+              🌐 Languages: Swedish (native) · English (fluent) · Arabic (fluent spoken, not written)
             </p>
 
             <p className="text-sm font-mono text-muted-foreground mt-1">

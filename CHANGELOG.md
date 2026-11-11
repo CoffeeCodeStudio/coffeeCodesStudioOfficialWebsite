@@ -4,6 +4,7 @@
 
 ## 2026-11-11 — Phase 3y: Honest AI-assisted portfolio copy
 
+- Follow-up: About languages line changed from “Arabic (fluent)” to “Arabic (fluent spoken, not written)”; other languages and styling unchanged.
 - Hero headline: “I design how web apps work and build them with AI tools, from idea to real users.” Supporting copy: “I build web applications with AI tools, from idea to real users.”
 - Hero qualifier now reads: “I decide what the app should do and how it works. AI writes the code. I test and review the result.”
 - Methodology steps 01 and 03 describe defining features, flows and rules, then reviewing/testing what AI builds; removed claims of personally modelling schemas/types and hardening security policies.
