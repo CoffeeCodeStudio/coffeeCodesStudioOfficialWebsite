@@ -1,4 +1,5 @@
 # Current tasks
+- [x] Remove every LinkedIn link and button (contact button, footer link, meta/structured-data/README check); keep design, adjust layout for remaining buttons; verified in Chromium.
 - [x] Apply seven requested overclaim corrections to project status, Hero, About, contact and footer; preserve design and shipped-app statistic; verified in Chromium without runtime errors.
 - [x] Connect GitHub API afresh after the new workspace move (2026-11-11); new connection successfully linked; earlier workspace references not reused.
 - [x] Update Hero, Methodology, About and metadata to describe AI-directed work honestly; preserve design, projects, numbers and contact information; verified displayed copy and metadata in Chromium, with no runtime errors.

@@ -3,6 +3,14 @@
 > Coffee Code Studio — coffeecodestudio.se
 
 
+## 2026-11-11 — Phase 3aa: All LinkedIn links removed
+
+- ContactSection: "Connect on LinkedIn" button deleted; left column now holds the full-width "Copy Email" button only, with the availability badge below. Unused `ExternalLink` import removed.
+- Footer: LinkedIn text link deleted; the Connect row now shows the email pill and GitHub link. Unused `Linkedin` import removed.
+- Meta tags, structured data and README checked: no LinkedIn reference existed (`sameAs: []` in the Person schema, nothing in index.html, prerender script or README).
+- Docs updated: RULES.md contact rule and DESIGN.md section list no longer mention LinkedIn.
+- Unchanged by design: `robots.txt` crawler rules and ARCH.md crawler notes mention the LinkedIn *bot*, not a link to a profile.
+
 ## 2026-11-11 — Phase 3z: Remove unprovable methodology claims
 
 - MethodologySection: step 04 "Deterministic Deployment" removed; grid now 3 columns; step 03 renamed "Review and Testing"; subtitle "strict production standards" → "clear production habits".

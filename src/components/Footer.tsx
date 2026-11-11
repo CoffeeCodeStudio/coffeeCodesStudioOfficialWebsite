@@ -1,4 +1,4 @@
-import { Coffee, Github, Linkedin, Mail } from 'lucide-react';
+import { Coffee, Github, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Navbar';
 
@@ -49,16 +49,6 @@ export function Footer() {
               >
                 <Github className="w-4 h-4 inline mr-1" />
                 GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/rami-e-453b77330/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Linkedin className="w-4 h-4 inline mr-1" />
-                LinkedIn
               </a>
             </div>
           </div>

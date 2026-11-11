@@ -59,7 +59,7 @@ Rule: Personality and professionalism coexist. Coffee is the brand.
 - Primary CTA: large "Copy Email" button
 - No heavy form as primary contact
 - Calendly: secondary, discreet link only
-- Show: GitHub + LinkedIn + PDF CV download
+- Show: GitHub + PDF CV download (LinkedIn removed 2026-11-11)
 
 ## SEO Rules
 

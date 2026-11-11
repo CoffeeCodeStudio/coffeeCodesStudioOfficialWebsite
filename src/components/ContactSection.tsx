@@ -8,7 +8,6 @@ import { Label } from '@/components/ui/label';
 import {
   Mail,
   Download,
-  ExternalLink,
   Check,
   Send,
   CheckCircle,
@@ -184,24 +183,6 @@ export function ContactSection() {
               </Button>
               */}
 
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full border-primary/30 text-base sm:text-lg py-5 sm:py-6 rounded-xl font-medium justify-start"
-                asChild
-              >
-                <a
-                  href="https://www.linkedin.com/in/rami-e-453b77330/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() =>
-                    trackEvent('social_click', { platform: 'linkedin', location: 'contact' })
-                  }
-                >
-                  <ExternalLink className="w-5 h-5 mr-3" aria-hidden="true" />
-                  Connect on LinkedIn
-                </a>
-              </Button>
             </div>
 
             <div className="mt-6 flex items-center gap-2">

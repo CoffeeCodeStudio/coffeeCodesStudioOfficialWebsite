@@ -34,7 +34,7 @@ Goal: Attract employers in Gothenburg. Show real projects.
 3. AI Methodology — How AI is used and verified
 4. Tech Stack — Categorized matrix, no percentage bars
 5. About — Short, honest, Swedish culture fit
-6. Contact — Copy Email + GitHub + LinkedIn + CV
+6. Contact — Copy Email + GitHub + CV
 
 ## Design Rules
 
