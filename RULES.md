@@ -48,6 +48,7 @@ Rule: Personality and professionalism coexist. Coffee is the brand.
 
 ## Positioning Rules
 
+- Current positioning (2026-11-11): Rami defines features, user flows and rules; AI writes the code; Rami tests and reviews. Keep wording short and honest, without claims of manually designing schemas, types or security policies.
 - Title: "AI-native Fullstack-utvecklare" (English sentences: "AI-native fullstack developer")
 - Never: "no-code developer", "vibe coder", "prompt engineer"
 - Always visible in hero: "Based in Gothenburg, Sweden"

@@ -55,7 +55,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <span className="text-foreground">I build <span className="gradient-text">production</span> web applications from schema design to <span className="gradient-text">real users</span>.</span>
+          <span className="text-foreground">I design how web apps work and build them with <span className="gradient-text">AI tools</span>, from idea to <span className="gradient-text">real users</span>.</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -65,7 +65,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          I ship full-stack applications from 0 to 1 — fast. React, TypeScript, and Supabase with strict type safety and verified architectures.
+          I build web applications with AI tools, from idea to real users.
         </motion.p>
 
         {/* Stack pills */}
@@ -103,7 +103,7 @@ export function HeroSection() {
         </motion.div>
 
         <p className="text-center text-xs text-muted-foreground/60 font-mono mt-3 mb-6 max-w-2xl mx-auto px-4">
-          Architecture, schema design, and security policies are designed by me. Component code is AI-generated and human-reviewed. Final quality is my responsibility.
+          I decide what the app should do and how it works. AI writes the code. I test and review the result.
         </p>
 
         {/* CTA buttons */}

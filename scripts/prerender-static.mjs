@@ -37,20 +37,20 @@ const ROUTES = [
     sv: {
       title: 'Rami — AI-Assisted Developer | Portfolio',
       description:
-        'I build production web applications from schema design to real users. React, TypeScript, and Supabase.',
+        'I design how web apps work and build them with AI tools, from idea to real users.',
       h1: 'Rami — AI-Assisted Developer',
       body: [
-        'Jag bygger fullstack-webbprodukter med React, TypeScript, Vite, Tailwind CSS och Supabase.',
+        'I decide what the app should do and how it works. AI writes the code. I test and review the result.',
         'Utvalda projekt: Echo2000, Klar och DJ Lobo Producciones.',
       ],
     },
     en: {
       title: 'Rami — AI-Assisted Developer | Portfolio',
       description:
-        'I build production web applications from schema design to real users. React, TypeScript, and Supabase.',
+        'I design how web apps work and build them with AI tools, from idea to real users.',
       h1: 'Rami — AI-Assisted Developer',
       body: [
-        'I build full-stack web products with React, TypeScript, Vite, Tailwind CSS and Supabase.',
+        'I decide what the app should do and how it works. AI writes the code. I test and review the result.',
         'Selected work: Echo2000, Klar and DJ Lobo Producciones.',
       ],
     },

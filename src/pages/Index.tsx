@@ -17,7 +17,7 @@ function IndexContent() {
         title={language === 'sv'
           ? 'Rami — AI-Assisted Developer | Portfolio'
           : 'Rami — AI-Assisted Developer | Portfolio'}
-        description="I build production web applications from schema design to real users. React, TypeScript, and Supabase."
+        description="I design how web apps work and build them with AI tools, from idea to real users."
         canonical={`https://coffeecodestudio.se${language === 'en' ? '/en' : '/'}`}
         ogImage="https://coffeecodestudio.se/og-image.png"
       />

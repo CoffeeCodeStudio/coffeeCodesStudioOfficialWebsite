@@ -2,6 +2,17 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-11-11 — Phase 3y: Honest AI-assisted portfolio copy
+
+- Hero headline: “I design how web apps work and build them with AI tools, from idea to real users.” Supporting copy: “I build web applications with AI tools, from idea to real users.”
+- Hero qualifier now reads: “I decide what the app should do and how it works. AI writes the code. I test and review the result.”
+- Methodology steps 01 and 03 describe defining features, flows and rules, then reviewing/testing what AI builds; removed claims of personally modelling schemas/types and hardening security policies.
+- About copy describes directing AI and reviewing/testing results, without manual architecture/RLS/type-contract claims. Existing project names, numbers and production-crisis wording are retained.
+- Updated descriptions in `index.html`, `src/pages/Index.tsx`, both home variants in `scripts/prerender-static.mjs`, and `public/llms.txt`. Title remains “Rami — AI-Assisted Developer | Portfolio”.
+- No layout, styles, project cards/modals/data, metrics, contact details or image files changed. The existing OG image was deliberately not redesigned; its embedded previous subtitle remains.
+- Documentation: `README.md`, `RULES.md`, `PORTFOLIO_PLAN.md`, `RESEARCH_SUMMARY.md`, `ARCH.md`, `CHANGELOG.md` and `roadmap.md`; owner’s actual-work clarification saved in project memory. Design and architecture rules are unchanged.
+- Verified displayed Hero, Methodology and About copy and all three description tags in Chromium; no runtime errors. Preview build reports OK and diff whitespace checks pass.
+
 ## 2026-11-06 — Phase 3x: Expanded Vercel security headers
 
 - Updated root `vercel.json` exactly as requested: retained nosniff, DENY and strict-origin-when-cross-origin; added Permissions-Policy disabling camera, microphone and geolocation, plus the supplied Content-Security-Policy.

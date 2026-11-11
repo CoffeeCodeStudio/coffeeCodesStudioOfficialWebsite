@@ -29,6 +29,7 @@
 - Gemini: remove AI tooling, Lovable = red flag
 
 - Decision: keep but add qualifier explaining human oversight
+- Owner clarification (2026-11-11): Rami defines features, flows and rules. AI tools write the code; Rami directs the AI, tests and reviews the result. This replaces claims of manually designing schemas, type contracts or security policies in the personal positioning copy.
 
 ## Title — "Product Engineer"
 

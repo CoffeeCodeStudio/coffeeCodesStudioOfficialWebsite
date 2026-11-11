@@ -57,15 +57,15 @@ export function AboutSection() {
             </h2>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-              I bridge the gap between product vision and production-grade engineering.
+              I decide what an app should do and how it works, then build it with AI tools.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-              Over the past several months, I built and deployed three full-stack applications — Echo2000, Klar, and DJ Lobo Producciones — taking them from initial schema design to real-world registered users. Echo2000 suffered a production crisis; I rebuilt the system from the ground up.
+              Over the past several months, I built and deployed three web applications with AI tools — Echo2000, Klar, and DJ Lobo Producciones — from idea to real-world registered users. Echo2000 suffered a production crisis; I rebuilt the system from the ground up.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I leverage modern AI developer workflows as a force multiplier to compress delivery cycles. But fast scaffolding means nothing without structural discipline: every architecture trade-off, PostgreSQL Row-Level Security policy, and type contract is manually designed, vetted, and maintained by me. I've worked solo on all three projects — architecture, code, deployment, and production support. That's taught me to be my own reviewer. I'm now looking for a team where I can learn from engineers who've done this at scale.
+              I direct the AI, test what it builds and review the result. I'm now looking for a team where I can learn from other developers.
             </p>
 
             <div className="mt-6 flex items-center gap-2">

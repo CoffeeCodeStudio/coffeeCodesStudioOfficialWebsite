@@ -62,6 +62,7 @@ Identity: Rami — AI-native Fullstack-utvecklare (changed 2026-10-06, was "AI-L
 - [x] Updated AboutSection (EN, short, cultural fit)
 - [x] Updated ContactSection (Copy Email CTA, no heavy form)
 - [x] Copy refinements: outcome-first H1, AI qualifier, About collaboration signal
+- [x] 2026-11-11: Hero, Methodology 01/03, About and metadata clarified to describe defining app behavior, directing AI and testing/reviewing results; no design, project, metric or contact changes.
 - [ ] Plausible analytics installed — DECIDED 2026-10-06: low priority, site is a CV/portfolio link, not for organic search
 - [ ] JSON-LD structured data added
 - [x] OG image created (1200×630px) — 2026-11-06: `public/og-image.png` and OG/Twitter metadata updated

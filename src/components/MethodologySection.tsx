@@ -5,7 +5,7 @@ const steps = [
     number: '01',
     title: 'Architectural Scoping',
     label: 'Human-Led',
-    description: 'Before generating a single line of code, I model PostgreSQL schemas, define TypeScript domain types, and map authentication and security boundaries.',
+    description: 'I define what the app should do: its features, user flows and rules.',
   },
   {
     number: '02',
@@ -17,7 +17,7 @@ const steps = [
     number: '03',
     title: 'Rigorous Hardening',
     label: 'Human-Led',
-    description: 'All machine-generated code is audited, stripped of redundant dependencies, typed strictly without any, and secured with granular PostgreSQL Row-Level Security policies.',
+    description: 'I review and test what AI builds against the features, flows and rules I defined.',
   },
   {
     number: '04',
