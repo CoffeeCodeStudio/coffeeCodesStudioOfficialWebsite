@@ -2,6 +2,12 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-11-11 — GitHub API connected in the new workspace
+
+- Successfully created and linked a fresh GitHub API connection after the workspace move; earlier workspace connection references were not reused.
+- This connection is separate from Git sync. No repository actions or app-runtime GitHub features were added.
+- Updated `CHANGELOG.md` and `roadmap.md`.
+
 ## 2026-11-11 — Phase 3z: Project-status and overclaim corrections
 
 - Klar card now includes “Live. No users yet.” in its existing description paragraph; project data and modal copy remain unchanged.
