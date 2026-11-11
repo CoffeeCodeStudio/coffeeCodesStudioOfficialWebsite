@@ -11,6 +11,7 @@
 - Kept the first Hero sentence; replaced the similar supporting sentence with “Built with React, TypeScript and Supabase.”
 - Contact: “If you need an engineer” → “If you need a developer”. Footer: “Designed & engineered by Rami” → “Designed & built by Rami”.
 - Text-only changes: no styling, layout, contact details, numbers, project URLs or database changes. Updated `README.md`, `CHANGELOG.md`, `roadmap.md` and approved project-status memory.
+- Verified all requested text and unchanged shipped-app statistic in Chromium with current project data; no runtime errors, preview build OK and diff whitespace check passed.
 
 ## 2026-11-11 — Phase 3y: Honest AI-assisted portfolio copy
 
