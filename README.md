@@ -8,6 +8,8 @@ Personal portfolio of Rami, an AI-Assisted Developer based in Gothenburg, Sweden
 
 Rami defines app features, user flows and rules. AI tools write the code; Rami directs the AI, tests and reviews the result (copy clarified 2026-11-11).
 
+Project status (2026-11-11): Echo2000 has 340+ registered users. DJ Lobo is live. Klar is live, with no users yet. “3 Production Apps Shipped” counts shipped applications, not applications with users.
+
 This site showcases selected projects, skills, and ways to get in touch. It is built as a fast, modern React single-page application with smooth interactions and SEO-friendly prerendering.
 
 ## Tech Stack

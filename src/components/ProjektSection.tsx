@@ -58,7 +58,7 @@ export function ProjektSection() {
             <span className="gradient-text">Shipped Work</span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground reading-width">
-            Production applications built and deployed — real users, real systems.
+            Web applications I have built with AI tools and put live.
           </p>
         </motion.div>
 
@@ -113,6 +113,7 @@ export function ProjektSection() {
                   </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-3 flex-1">
                     {project.description}
+                    {project.title === 'Klar' && ' Live. No users yet.'}
                   </p>
                   {CARD_STACK[project.title] && (
                     <div className="flex flex-wrap gap-1.5 mb-3">

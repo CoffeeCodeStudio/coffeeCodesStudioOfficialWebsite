@@ -2,6 +2,16 @@
 
 > Coffee Code Studio — coffeecodestudio.se
 
+## 2026-11-11 — Phase 3z: Project-status and overclaim corrections
+
+- Klar card now includes “Live. No users yet.” in its existing description paragraph; project data and modal copy remain unchanged.
+- Kept the existing 3 / Production Apps Shipped statistic unchanged.
+- Shipped Work subtitle: “Web applications I have built with AI tools and put live.”
+- About distinguishes actual status: “Echo2000 has 340+ registered users. DJ Lobo is live. Klar is live, with no users yet.”
+- Kept the first Hero sentence; replaced the similar supporting sentence with “Built with React, TypeScript and Supabase.”
+- Contact: “If you need an engineer” → “If you need a developer”. Footer: “Designed & engineered by Rami” → “Designed & built by Rami”.
+- Text-only changes: no styling, layout, contact details, numbers, project URLs or database changes. Updated `README.md`, `CHANGELOG.md`, `roadmap.md` and approved project-status memory.
+
 ## 2026-11-11 — Phase 3y: Honest AI-assisted portfolio copy
 
 - Follow-up: About languages line changed from “Arabic (fluent)” to “Arabic (fluent spoken, not written)”; other languages and styling unchanged.

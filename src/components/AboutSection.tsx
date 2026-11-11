@@ -61,7 +61,7 @@ export function AboutSection() {
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-              Over the past several months, I built and deployed three web applications with AI tools — Echo2000, Klar, and DJ Lobo Producciones — from idea to real-world registered users. Echo2000 suffered a production crisis; I rebuilt the system from the ground up.
+              Over the past several months, I built and deployed three web applications with AI tools — Echo2000, Klar, and DJ Lobo Producciones. Echo2000 has 340+ registered users. DJ Lobo is live. Klar is live, with no users yet. Echo2000 suffered a production crisis; I rebuilt the system from the ground up.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">

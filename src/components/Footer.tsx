@@ -81,7 +81,7 @@ export function Footer() {
             © <Coffee className="w-3 h-3 text-primary/60" /> {new Date().getFullYear()} Coffee Code Studio. All rights reserved.
           </p>
           <p className="text-xs font-medium text-primary/60 tracking-wide flex items-center gap-1.5">
-            <Coffee className="w-3 h-3" /> Designed &amp; engineered by Rami
+            <Coffee className="w-3 h-3" /> Designed &amp; built by Rami
           </p>
         </div>
       </div>

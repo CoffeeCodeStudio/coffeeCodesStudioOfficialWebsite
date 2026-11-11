@@ -65,7 +65,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          I build web applications with AI tools, from idea to real users.
+          Built with React, TypeScript and Supabase.
         </motion.p>
 
         {/* Stack pills */}
